@@ -112,6 +112,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\future\core\debug\debug.h" />
+    <ClInclude Include="..\..\include\future\core\debug\error\assert.h" />
+    <ClInclude Include="..\..\include\future\core\debug\log.h" />
+    <ClInclude Include="..\..\include\future\core\memory\allocators\allocator.h" />
+    <ClInclude Include="..\..\include\future\core\memory\allocators\heapallocator.h" />
+    <ClInclude Include="..\..\include\future\core\memory\allocators\listfreeallocator.h" />
+    <ClInclude Include="..\..\include\future\core\memory\allocators\mallocallocator.h" />
+    <ClInclude Include="..\..\include\future\core\memory\allocators\microheapallocator.h" />
+    <ClInclude Include="..\..\include\future\core\memory\memory.h" />
+    <ClInclude Include="..\..\include\future\core\memory\memoryStatistics.h" />
+    <ClInclude Include="..\..\include\future\core\memory\tracker\memorytracker.h" />
+    <ClInclude Include="..\..\include\future\core\tests\debugtests.h" />
+    <ClInclude Include="..\..\include\future\core\tests\mallocallocatortests.h" />
+    <ClInclude Include="..\..\include\future\core\tests\memorysystemnotrackingtests.h" />
+    <ClInclude Include="..\..\include\future\core\tests\memorysystemtrackingtests.h" />
+    <ClInclude Include="..\..\include\future\core\tests\timertests.h" />
+    <ClInclude Include="..\..\include\future\core\thread\criticalsection\criticalsection.h" />
+    <ClInclude Include="..\..\include\future\core\type\platform.h" />
+    <ClInclude Include="..\..\include\future\core\type\type.h" />
+    <ClInclude Include="..\..\include\future\core\utils\timer\timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\core\debug\assert.cpp" />
+    <ClCompile Include="..\..\src\core\debug\log.cpp" />
+    <ClCompile Include="..\..\src\core\memory\allocators\heapallocator.cpp" />
+    <ClCompile Include="..\..\src\core\memory\allocators\listfreeallocator.cpp" />
+    <ClCompile Include="..\..\src\core\memory\allocators\mallocallocator.cpp" />
+    <ClCompile Include="..\..\src\core\memory\allocators\microheapallocator.cpp" />
+    <ClCompile Include="..\..\src\core\memory\memory.cpp" />
+    <ClCompile Include="..\..\src\core\memory\tracker\memorytracker.cpp" />
+    <ClCompile Include="..\..\src\core\thread\criticalsection\criticalsection.cpp" />
+    <ClCompile Include="..\..\src\core\utils\timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

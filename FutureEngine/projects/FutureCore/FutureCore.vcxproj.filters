@@ -1,2 +1,123 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Memory">
+      <UniqueIdentifier>{2654d9d0-087b-41d8-adac-67b174837943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Type">
+      <UniqueIdentifier>{5748b6fd-70af-42a1-b5db-9a1b272d233f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{3ce8e389-c702-4c6e-a4c1-48ca20b7b6d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{7067f63b-d392-403b-a359-512cc6ab3c06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Memory\allocators">
+      <UniqueIdentifier>{4fb6f471-18ab-46dd-91b7-0e60f8c501b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{c5aad3fd-f8fc-4034-909e-421c3a9ab132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Timer">
+      <UniqueIdentifier>{ba6c364b-fcde-4dc9-ba2f-2bbf3870a19f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnitTests">
+      <UniqueIdentifier>{236833aa-8e34-4730-8e86-8faf0e36d579}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\future\core\memory\tracker\memorytracker.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\thread\criticalsection\criticalsection.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\type\type.h">
+      <Filter>Type</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\type\platform.h">
+      <Filter>Type</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\debug\debug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\debug\error\assert.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\debug\log.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\memory\allocators\allocator.h">
+      <Filter>Memory\allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\memory\memory.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\memory\allocators\heapallocator.h">
+      <Filter>Memory\allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\memory\allocators\listfreeallocator.h">
+      <Filter>Memory\allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\memory\allocators\mallocallocator.h">
+      <Filter>Memory\allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\memory\allocators\microheapallocator.h">
+      <Filter>Memory\allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\memory\memoryStatistics.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\utils\timer\timer.h">
+      <Filter>Utils\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\tests\debugtests.h">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\tests\mallocallocatortests.h">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\tests\memorysystemnotrackingtests.h">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\tests\memorysystemtrackingtests.h">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\tests\timertests.h">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\core\memory\tracker\memorytracker.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\debug\log.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\memory\memory.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\memory\allocators\heapallocator.cpp">
+      <Filter>Memory\allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\memory\allocators\listfreeallocator.cpp">
+      <Filter>Memory\allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\memory\allocators\mallocallocator.cpp">
+      <Filter>Memory\allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\memory\allocators\microheapallocator.cpp">
+      <Filter>Memory\allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\utils\timer.cpp">
+      <Filter>Utils\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\debug\assert.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\thread\criticalsection\criticalsection.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
