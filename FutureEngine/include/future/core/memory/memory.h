@@ -60,7 +60,7 @@ class IFutureAllocator;
 class FutureMemory
 {
 public:
-	static void CreateMemory();
+	static void CreateMemory(u8 globalAlignment = 16);
 	static void DestroyMemory();
 
 	// Chooses the best allocator for the param and returns the newly allocated memory location
@@ -69,40 +69,50 @@ public:
 	static void		Free(void * p);
 	static void *	ReAlloc(void * p, FutureMemoryParam memParam);
 
+	static u8		GetGlobalAlignment();
+
 	// The total bytes needed for an allocation
 	static u32		BytesForAllocation(FutureMemoryParam memParam);
 
 	// Allocators can be added but cannot be removed as they may be needed
 	// to free memory. The allocator with the lowest priority that returns
 	// true for ShouldAllocate will be used for each allocation.
-	static void					EnsureAllocator(IFutureAllocator * allocator);
+	static void					AddAllocator(IFutureAllocator * allocator);
 	static IFutureAllocator *	GetAllocator(int i);
 
 	// Debugging functions, can be called from non debug/profile builds but will do nothing
 	static FutureMemoryStatistics	GetStatistics();
-	static FutureMemoryStatistics	GetStatisticsForAllocator(IFutureAllocator * allocator);
 
+	static void						LogStatistics();
 	static void						LogAllocations();
 	static void						LogAllocation(void *);
-	static void						LogAllocator(IFutureAllocator * allocator);
+
+	/*******************************************************************/
+	// helper functions
+
+	static u32 HeaderSize(); // return the size of the header added to each allocation in bytes
 };
-	
+
+
 // this parameter tells the memory tracker how is should store allocation request
 // NOTE: mainly used to make memory tracking easier
 #if FUTURE_TRACK_MEMORY
 struct FutureMemoryParam
 {	
-	FutureMemoryParam(u32 bytes, string type = 0, string file = 0, u32 line = 0)
+	FutureMemoryParam(u32 bytes, string type = 0, string file = 0, u32 line = 0, IFutureAllocator * allocator = 0)
 		: m_bytes(bytes),
 		  m_type(type),
 		  m_file(file),
-		  m_line(line)
+		  m_line(line),
+		  m_allocator(allocator)
 	{ ; }
 
 	u32 	m_bytes;	// bytes needed in allocation
 	string	m_type;		// the type of object being allocated
 	string 	m_file;		// file allocation was requested from
 	u32		m_line;		// file line on which allocation was requested
+
+	IFutureAllocator *	m_allocator; // forces the use of a specific allocator
 };
 
 // returns a pointer to the new allocation
@@ -145,6 +155,6 @@ public:																\
 		FUTURE_ASSERT(p);											\
 		FUTURE_FREE(p);												\
 	}																\
-	inline void*  operator new(hk_size_t, void* p)	{ return p; }
+	inline void*  operator new(size_t, void* p)	{ return p; }
 
 #endif

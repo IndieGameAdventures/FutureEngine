@@ -38,6 +38,8 @@ static void FutureLogFunctionDefault(u8 severness, string file, u32 line, string
 		break;
 	}
 
+	file = wcsrchr(file, '\\' );
+	file = (string)((u32)file + sizeof(wchar_t));
 	wprintf_s(L"%ls: [%ls:%d] %ls\n", se, file, line, buffer);
 }
 

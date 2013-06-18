@@ -57,13 +57,7 @@
     <ClInclude Include="..\..\include\future\core\memory\allocators\heapallocator.h">
       <Filter>Memory\allocators</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\core\memory\allocators\listfreeallocator.h">
-      <Filter>Memory\allocators</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\future\core\memory\allocators\mallocallocator.h">
-      <Filter>Memory\allocators</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\core\memory\allocators\microheapallocator.h">
       <Filter>Memory\allocators</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\future\core\memory\memoryStatistics.h">
@@ -75,16 +69,19 @@
     <ClInclude Include="..\..\include\future\core\tests\debugtests.h">
       <Filter>UnitTests</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\core\tests\mallocallocatortests.h">
-      <Filter>UnitTests</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\core\tests\memorysystemnotrackingtests.h">
-      <Filter>UnitTests</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\core\tests\memorysystemtrackingtests.h">
-      <Filter>UnitTests</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\future\core\tests\timertests.h">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\memory\allocators\poolallocator.h">
+      <Filter>Memory\allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\tests\allocatortests.h">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\memory\allocators\stackallocator.h">
+      <Filter>Memory\allocators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\tests\memorysystemtests.h">
       <Filter>UnitTests</Filter>
     </ClInclude>
   </ItemGroup>
@@ -101,13 +98,7 @@
     <ClCompile Include="..\..\src\core\memory\allocators\heapallocator.cpp">
       <Filter>Memory\allocators</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\memory\allocators\listfreeallocator.cpp">
-      <Filter>Memory\allocators</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\core\memory\allocators\mallocallocator.cpp">
-      <Filter>Memory\allocators</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\core\memory\allocators\microheapallocator.cpp">
       <Filter>Memory\allocators</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\core\utils\timer.cpp">
@@ -118,6 +109,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\core\thread\criticalsection\criticalsection.cpp">
       <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\memory\allocators\poolallocator.cpp">
+      <Filter>Memory\allocators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\memory\allocators\stackallocator.cpp">
+      <Filter>Memory\allocators</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

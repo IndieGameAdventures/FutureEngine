@@ -60,21 +60,21 @@ public:
 	void *					ReAlloc(void * p, FutureMemoryParam memParam);
 
 	u32						BytesForAllocation(FutureMemoryParam memParam);
-	void					EnsureAllocator(IFutureAllocator * allocator);
+	void					AddAllocator(IFutureAllocator * allocator);
 	IFutureAllocator *		GetAllocator(int i);
 
 	IFutureAllocator *		GetBestAllocator(FutureMemoryParam memParam);
 	IFutureAllocator *		GetPreviousAllocator(void * p);
 	
 	FutureMemoryStatistics	GetStatistics();
-	FutureMemoryStatistics	GetStatisticsForAllocator(IFutureAllocator * allocator);
 	
+	void					LogStatistics();
 	void					LogAllocations();
 	void					LogAllocation(void *);
-	void					LogAllocator(IFutureAllocator * allocator);
 
 	FutureCriticalSection	m_criticalsection;
 	AllocatorList *			m_allocators;
+	u8						m_globalAlign;
 };
 
 MemorySystem * memory;
@@ -82,12 +82,26 @@ MemorySystem * memory;
 /*******************************************************************/
 // FutureMemory implementation
 
-void FutureMemory::CreateMemory()
+static u32 futureHeaderSize = 0;
+void FutureMemory::CreateMemory(u8 globalAlign)
 {
 	FUTURE_ASSERT(memory == NULL);
 	memory = new MemorySystem();
+	memory->m_globalAlign = globalAlign;
+
+	// make the header size a multiple of the global alignment for
+	// easier and quicker allocations.
+	futureHeaderSize = globalAlign;
+	if(sizeof(FutureAllocHeader) > globalAlign)
+	{
+		while(futureHeaderSize < sizeof(FutureAllocHeader))
+		{
+			futureHeaderSize += globalAlign;
+		}
+	}
+	((FutureMallocAllocator*)(memory->m_allocators->m_allocator))->SetAlign(globalAlign);
 	FutureMemoryTracker::CreateInstance();
-};
+}
 
 void FutureMemory::DestroyMemory()
 {
@@ -95,64 +109,63 @@ void FutureMemory::DestroyMemory()
 	FutureMemoryTracker::DestroyInstance();
 	delete memory;
 	memory = NULL;
-};
+}
 
 void * FutureMemory::Alloc(FutureMemoryParam memParam)
 {
 	return memory->Alloc(memParam);
-};
+}
 void FutureMemory::Free(void * p)
 {
 	memory->Free(p);
-};
+}
 void * FutureMemory::ReAlloc(void * p, FutureMemoryParam memParam)
 {
 	return memory->ReAlloc(p, memParam);
-};
+}
 u32	FutureMemory::BytesForAllocation(FutureMemoryParam memParam)
 {
 	return memory->BytesForAllocation(memParam);
-};
-void FutureMemory::EnsureAllocator(IFutureAllocator * allocator)
+}
+void FutureMemory::AddAllocator(IFutureAllocator * allocator)
 {
-	memory->EnsureAllocator(allocator);
-};
+	memory->AddAllocator(allocator);
+}
 IFutureAllocator * FutureMemory::GetAllocator(int i)
 {
 	return memory->GetAllocator(i);
-};
+}
 FutureMemoryStatistics FutureMemory::GetStatistics()
 {
 	return memory->GetStatistics();
-};
-FutureMemoryStatistics	FutureMemory::GetStatisticsForAllocator(IFutureAllocator * allocator)
+}
+void FutureMemory::LogStatistics()
 {
-	return memory->GetStatisticsForAllocator(allocator);
-};
+	return memory->LogStatistics();
+}
 void FutureMemory::LogAllocations()
 {
 	return memory->LogAllocations();
-};
+}
 void FutureMemory::LogAllocation(void * p)
 {
 	return memory->LogAllocation(p);
-};
-void FutureMemory::LogAllocator(IFutureAllocator * allocator)
+}
+u8 FutureMemory::GetGlobalAlignment()
 {
-	return memory->LogAllocator(allocator);
-};
+	return memory->m_globalAlign;
+}
 
 
+inline u32 FutureMemory::HeaderSize()
+{
+	return futureHeaderSize; 
+}
 
-/*******************************************************************/
-// helper functions
-
-inline u32 HeaderSize()
-	{ return sizeof(FutureAllocHeader); }
-inline void * DataFromHeader(FutureAllocHeader * header)
-	{ return (void *)(reinterpret_cast< u32 >(header) + HeaderSize()); }
-inline FutureAllocHeader * HeaderFromData(void * p)
-	{ return reinterpret_cast<FutureAllocHeader *>(reinterpret_cast< u32 >(p) - HeaderSize()); }
+inline static void * DataFromHeader(FutureAllocHeader * header)
+	{ return (void *)(reinterpret_cast< u32 >(header) + FutureMemory::HeaderSize()); }
+inline static FutureAllocHeader * HeaderFromData(void * p)
+	{ return reinterpret_cast<FutureAllocHeader *>(reinterpret_cast<u32>(p) - FutureMemory::HeaderSize()); }
 
 
 /*******************************************************************/
@@ -187,14 +200,15 @@ void MemorySystem::Free(void * p)
 
 void * MemorySystem::ReAlloc(void * p, FutureMemoryParam memParam)
 {
-	IFutureAllocator * allocator = GetPreviousAllocator(p);
 #if FUTURE_TRACK_MEMORY
 	f32 time = FutureTimer::CurrentTime();
-	FutureMemoryTracker::GetInstance()->Untrack(HeaderFromData(p));
 #endif
-	void * data = allocator->ReAlloc(HeaderFromData(p), BytesForAllocation(memParam));
+	IFutureAllocator * allocator = GetBestAllocator(memParam);
+	void * data = allocator->Alloc(BytesForAllocation(memParam));
 	FutureAllocHeader * header = reinterpret_cast<FutureAllocHeader *>(data);
+	memcpy(DataFromHeader(header), p, memParam.m_bytes);
 	header->m_allocator = allocator;
+	Free(HeaderFromData(p));
 #if FUTURE_TRACK_MEMORY
 	FutureMemoryTracker::GetInstance()->Track(memParam, header, time);
 #endif
@@ -233,7 +247,7 @@ IFutureAllocator * MemorySystem::GetPreviousAllocator(void * p)
 	return header->m_allocator;
 }
 
-void MemorySystem::EnsureAllocator(IFutureAllocator * allocator)
+void MemorySystem::AddAllocator(IFutureAllocator * allocator)
 {
 	if(!m_allocators)
 	{
@@ -288,12 +302,11 @@ IFutureAllocator * MemorySystem::GetAllocator(int i)
 	
 // Create the memory tracker
 MemorySystem::MemorySystem( )
-	: m_criticalsection()
+	: m_criticalsection(),
+	  m_allocators(NULL)
 {
 	// create a default allocator 
-	m_allocators = new AllocatorList();
-	m_allocators->m_allocator = new FutureMallocAllocator();
-	m_allocators->m_next = NULL;
+	AddAllocator(new FutureMallocAllocator());
 }
 
 // destroy the tracker
@@ -306,9 +319,10 @@ MemorySystem::~MemorySystem()
 		if(allocator->m_allocator)
 		{
 			allocator->m_allocator->Release();
+			delete allocator->m_allocator;
 			allocator->m_allocator = NULL;
 		}
-		::free(allocator);
+		delete allocator;
 		allocator = next;
 	}
 }
@@ -329,24 +343,19 @@ inline u32 MemorySystem::BytesForAllocation(FutureMemoryParam memParam)
 FutureMemoryStatistics MemorySystem::GetStatistics()
 {
 	return FutureMemoryTracker::GetInstance()->GetStatistics();
-};
+}
 
-FutureMemoryStatistics MemorySystem::GetStatisticsForAllocator(IFutureAllocator * allocator)
+void MemorySystem::LogStatistics()
 {
-	return FutureMemoryTracker::GetInstance()->GetStatisticsForAllocator(allocator);
-};
+	FutureMemoryTracker::GetInstance()->LogStatistics();
+}
 
 void MemorySystem::LogAllocations()
 {
 	FutureMemoryTracker::GetInstance()->LogAllocations();
-};
+}
 
 void MemorySystem::LogAllocation(void * p)
 {
 	FutureMemoryTracker::GetInstance()->LogAllocation(HeaderFromData(p));
-};
-
-void MemorySystem::LogAllocator(IFutureAllocator * allocator)
-{
-	FutureMemoryTracker::GetInstance()->LogAllocator(allocator);
-};
+}

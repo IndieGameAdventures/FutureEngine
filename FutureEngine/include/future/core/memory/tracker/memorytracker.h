@@ -36,6 +36,7 @@
 #define FUTURE_CORE_MEMORY_TRACKER_H
 
 #include <future/core/type/type.h>
+#include <future/core/thread/criticalsection/criticalsection.h>
 
 struct FutureMemoryParam;
 struct FutureMemoryStatistics;
@@ -47,15 +48,13 @@ class IFutureAllocator;
 struct FutureAllocHeader
 {
 	IFutureAllocator *	m_allocator;
+	u32					m_allocatorData;
 
-	u32 				m_bytes;
-		
-	f32					m_timeCreated;
-	f32					m_timeForAllocation;
+	u16 				m_bytes;
 
 	string 				m_type;
 	string 				m_file;
-	u32 				m_line;
+	u16 				m_line;
 
 	FutureAllocHeader *	m_next;
 	FutureAllocHeader *	m_previous;
@@ -69,6 +68,7 @@ struct FutureAllocHeader
 struct FutureAllocHeader
 {
 	IFutureAllocator *	m_allocator;
+	u32					m_allocatorData;
 };
 #endif
 
@@ -85,21 +85,15 @@ public:
 	// Functions used for tracking purposes, if data is allocated through a direct
 	// call to malloc or through a system that does not use this allocator, these
 	// functions can be called to track the memory. Make sure that enough memory is
-	// allocated before hand by using BytesForAllocation or the memory returned by 
-	// these functions will be smaller than the requested size.
+	// allocated before hand by using BytesForAllocation.
 	void	Track(FutureMemoryParam memParam, FutureAllocHeader * header, f32 timeCreated);
 	void	Untrack(FutureAllocHeader * header);
 
-	// The total bytes needed for an allocation
-	u32		BytesForAllocation(FutureMemoryParam memParam);
-
-
 	// Debugging functions, can be called from non debug/profile builds but will do nothing
 	FutureMemoryStatistics	GetStatistics();
-	FutureMemoryStatistics	GetStatisticsForAllocator(IFutureAllocator * allocator);
+	void					LogStatistics();
 	void					LogAllocations();
 	void					LogAllocation(FutureAllocHeader * header);
-	void					LogAllocator(IFutureAllocator * allocator);
 
 private:
 	FutureMemoryTracker();
@@ -113,12 +107,12 @@ private:
 	void	VerifyChecksum(FutureAllocHeader * header);
 
 	FutureAllocHeader		m_headerRoot;
+	FutureAllocHeader *		m_headerTail;
 	FutureCriticalSection	m_criticalsection;
 
 	u32						m_totalBytesAllocated;
 	u32						m_totalAllocations;
 	f32						m_totalAllocationTime;
-	f32						m_totalAllocationLife;
 };
 
 #endif

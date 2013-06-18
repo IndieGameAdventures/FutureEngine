@@ -38,7 +38,6 @@ public:
 		f32			m_totalTimeForAllocations;
 
 		u32			m_averageAllocationSize;
-		f32			m_averageAllocationLife;
 		f32			m_averageTimeForAllocation;
 };
 	

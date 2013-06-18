@@ -19,11 +19,20 @@
 */
 
 #include <future/core/tests/debugtests.h>
+#include <future/core/tests/allocatortests.h>
+#include <future/core/tests/memorysystemtests.h>
 
 void main(char ** args)
 {
-	FutureDebugTests::TestLog();
-	FutureDebugTests::TestBreakPoint();
-	FutureDebugTests::TestAssert();
-	FutureDebugTests::TestAssertCrit();
+	//FutureDebugTests::TestLog();
+	//FutureDebugTests::TestBreakPoint();
+	//FutureDebugTests::TestAssert();
+	//FutureDebugTests::TestAssertCrit();
+
+	FutureAllocatorTests::TestMallocAllocator();
+	FutureAllocatorTests::TestPoolAllocator();
+	FutureAllocatorTests::TestHeapAllocator();
+	FutureAllocatorTests::TestStackAllocator();
+
+	//FutureMemoryTests::TestDefaultTracking();
 }

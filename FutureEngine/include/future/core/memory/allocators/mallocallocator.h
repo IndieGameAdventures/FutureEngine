@@ -33,16 +33,16 @@ class FutureMallocAllocator : public IFutureAllocator
 public:
 	virtual void *	Alloc(u32 bytes);
 	virtual void	Free(void * p);
-	virtual void *	ReAlloc(void * p, u32 bytes);
 
 	virtual u8		Priority();
 	virtual bool	ShouldAllocate(FutureMemoryParam memParam);
 
-	// The memory tracker will be unable to detect if this allocator
-	// was created using another allocator or with a direct call to
-	// malloc, this function must release all resources being used
-	// by the allocator and free the allocator itself.
+			void	SetAlign(u8 align);
+
 	virtual void	Release();
+
+private:
+	u8 m_align;
 };
 
 #endif
