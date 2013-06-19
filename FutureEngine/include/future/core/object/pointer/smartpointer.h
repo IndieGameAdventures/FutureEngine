@@ -70,7 +70,7 @@ public:
     FutureSmartPointer<MANAGED>& operator=(FutureSmartPointer<MANAGED>& pointer);
     FutureSmartPointer<MANAGED>& operator=(MANAGED * managed);
 
-    FutureProxy<MANAGED> *	() const;
+    FutureProxy<MANAGED> *	Proxy() const;
 	MANAGED *				GetManaged() const;
 	
 protected:
@@ -93,7 +93,7 @@ class FutureStrongPointer : public FutureSmartPointer<MANAGED>
 {
 protected:
 	virtual void AddToProxy();
-	virtual void RemoveProxy();
+	virtual void RemoveFromProxy();
 };
 
 // weak pointers will auto set to NULL when object is deleted
@@ -102,7 +102,7 @@ class FutureWeakPointer : public FutureSmartPointer<MANAGED>
 {
 protected:
 	virtual void AddToProxy();
-	virtual void RemoveProxy();
+	virtual void RemoveFromProxy();
 };
 
 #include <future/core/object/pointer/smartpointer.inl>

@@ -212,15 +212,13 @@ inline void FutureStrongPointer<MANAGED>::AddToProxy()
 	}
 }
 template<class MANAGED> 
-inline void FutureStrongPointer<MANAGED>::RemoveProxy()
+inline void FutureStrongPointer<MANAGED>::RemoveFromProxy()
 {
 	if(Proxy())
 	{
 		Proxy()->RemoveStrongPointer(this);
 	}
 }
-};
-
 
 template<class MANAGED> 
 inline void FutureWeakPointer<MANAGED>::AddToProxy()
@@ -231,7 +229,7 @@ inline void FutureWeakPointer<MANAGED>::AddToProxy()
 	}
 }
 template<class MANAGED> 
-inline void FutureWeakPointer<MANAGED>::RemoveProxy()
+inline void FutureWeakPointer<MANAGED>::RemoveFromProxy()
 {
 	if(Proxy())
 	{

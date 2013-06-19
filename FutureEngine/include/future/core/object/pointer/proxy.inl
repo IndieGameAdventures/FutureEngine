@@ -161,7 +161,7 @@ void FutureProxy<MANAGED>::AddWeakPointer(FutureSmartPointerBase * pointer)
 // simply decrement the pointer count. If there are no strong pointers left, this will
 // automatically delete managed
 template<class MANAGED>
-void FutureProxy<MANAGED>::RemoveStrongPointer(FuturePointerBase * pointer = NULL) 
+void FutureProxy<MANAGED>::RemoveStrongPointer(FutureSmartPointerBase * pointer = NULL) 
 { 
 	Lock();
 #if FUTURE_TRACK_STRONG_POINTERS
@@ -208,7 +208,7 @@ void FutureProxy<MANAGED>::RemoveStrongPointer(FuturePointerBase * pointer = NUL
 // Removes a weak pointer from this proxy. This happens even in release so we can
 // handle the weak pointers when managed is deleted.
 template<class MANAGED>
-void FutureProxy<MANAGED>::RemoveWeakPointer(FuturePointerBase * pointer) 
+void FutureProxy<MANAGED>::RemoveWeakPointer(FutureSmartPointerBase * pointer) 
 { 
 	Lock();
 	FUTURE_ASSERT(pointer);
@@ -251,7 +251,7 @@ void FutureProxy<MANAGED>::PrintReferences()
 	FUTURE_LOG_DEBUG( L"Printing Weak Pointers" );
 	for(PointerReference * ref = m_weak; ref; ref = ref->m_next )
 	{
-		FUTURE_LOG_DEBUG( L"\t0x%x,", *ref );
+		FUTURE_LOG_DEBUG( L"\t0x%x,", ref->m_pointer );
 	}
 
 	// Print all the strong pointers
@@ -260,7 +260,7 @@ void FutureProxy<MANAGED>::PrintReferences()
 	FUTURE_LOG_DEBUG( L"Printing Strong Pointers" );
 	for(PointerReference * ref = m_strong; ref; ref = ref->m_next )
 	{
-		FUTURE_LOG_DEBUG( L"\t0x%x,", *ref );
+		FUTURE_LOG_DEBUG( L"\t0x%x,", ref->m_pointer );
 	}
 #endif
 }
