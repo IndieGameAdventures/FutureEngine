@@ -123,6 +123,11 @@
     <ClInclude Include="..\..\include\future\core\memory\memory.h" />
     <ClInclude Include="..\..\include\future\core\memory\memoryStatistics.h" />
     <ClInclude Include="..\..\include\future\core\memory\tracker\memorytracker.h" />
+    <ClInclude Include="..\..\include\future\core\object\managedobject.h" />
+    <ClInclude Include="..\..\include\future\core\object\threadsafeobject.h" />
+    <ClInclude Include="..\..\include\future\core\object\pointer\proxy.h" />
+    <ClInclude Include="..\..\include\future\core\object\pointer\smartpointer.h" />
+    <ClInclude Include="..\..\include\future\core\object\singleton.h" />
     <ClInclude Include="..\..\include\future\core\tests\debugtests.h" />
     <ClInclude Include="..\..\include\future\core\tests\allocatortests.h" />
     <ClInclude Include="..\..\include\future\core\tests\memorysystemtests.h" />
@@ -143,6 +148,11 @@
     <ClCompile Include="..\..\src\core\memory\tracker\memorytracker.cpp" />
     <ClCompile Include="..\..\src\core\thread\criticalsection\criticalsection.cpp" />
     <ClCompile Include="..\..\src\core\utils\timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\include\future\core\object\managedobject.inl" />
+    <None Include="..\..\include\future\core\object\pointer\proxy.inl" />
+    <None Include="..\..\include\future\core\object\pointer\smartpointer.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

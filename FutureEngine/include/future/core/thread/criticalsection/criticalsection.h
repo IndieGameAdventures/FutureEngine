@@ -33,12 +33,14 @@
 
 #include <future/core/type/type.h>
 
-#if FUTURE_PLATFORM_WINDOWS
-#	include <windows.h>
-#elif defined(FUTURE_USES_PTHREAD)
-#	include <pthread.h>
-#else
-#	error Platform thread type is not defined!
+#if FUTURE_ENABLE_MULTITHREADED
+#	if FUTURE_PLATFORM_WINDOWS
+#		include <windows.h>
+#	elif defined(FUTURE_USES_PTHREAD)
+#		include <pthread.h>
+#	else
+#		error Platform thread type is not defined!
+#	endif
 #endif
 
 class FutureCriticalSection
@@ -64,11 +66,29 @@ public:
 	bool TryLock();
 
 private:
-#if FUTURE_PLATFORM_WINDOWS
+#if FUTURE_ENABLE_MULTITHREADED
+#	if FUTURE_PLATFORM_WINDOWS
 	CRITICAL_SECTION m_mutex;
-#elif defined(FUTURE_USES_PTHREAD)
+#	elif defined(FUTURE_USES_PTHREAD)
 	pthread_mutex_t  m_mutex;
+#	endif
 #endif
 };
+
+// If we aren't using multiple threads then we should define empty critical section
+// functions here so they can be inlined to improve performance
+#if !FUTURE_ENABLE_MULTITHREADED
+inline FutureCriticalSection::FutureCriticalSection()
+{}
+inline FutureCriticalSection::~FutureCriticalSection()
+{}
+inline void FutureCriticalSection::Lock()
+{}
+inline void FutureCriticalSection::Unlock()
+{}
+inline bool FutureCriticalSection::TryLock()
+{return true;}
+
+#endif
 
 #endif

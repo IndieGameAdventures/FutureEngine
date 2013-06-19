@@ -25,6 +25,9 @@
 #include <future/core/debug/debug.h>
 #include <future/core/thread/criticalsection/criticalsection.h>
 
+// we only want to define these functions is we are using multiple threads
+#if FUTURE_ENABLE_MULTITHREADED
+
 /*
 *	Initialize the critical section or initialize a new pthread mutex
 */
@@ -32,7 +35,7 @@ FutureCriticalSection::FutureCriticalSection()
 {
 #if FUTURE_PLATFORM_WINDOWS
 	InitializeCriticalSection(&m_mutex);
-#elif defined(__APPLE__) || defined(LINUX)
+#elif defined(FUTURE_USES_PTHREAD)
 	pthread_mutexattr_t mta;
 	pthread_mutexattr_init(&mta);
 	pthread_mutexattr_settype(&mta, PTHREAD_MUTEX_RECURSIVE);
@@ -90,3 +93,5 @@ bool FutureCriticalSection::TryLock()
 	return pthread_mutex_trylock(&m_Mutex) == 0;
 #endif
 }
+
+#endif

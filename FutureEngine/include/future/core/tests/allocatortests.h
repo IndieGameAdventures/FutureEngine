@@ -101,7 +101,7 @@ public:
 		TestAllocator(allocator);
 		allocator->Release();
 		f32 runtime = FutureTimer::TimeSince(start);
-		FUTURE_LOG_DEBUG(L"Heap Allocator took %f seconds to allocate and free %u elements", runtime, TEST_OBJECTS);
+		FUTURE_LOG_DEBUG(L"Stack Allocator took %f seconds to allocate and free %u elements", runtime, TEST_OBJECTS);
 	};
 };
 	

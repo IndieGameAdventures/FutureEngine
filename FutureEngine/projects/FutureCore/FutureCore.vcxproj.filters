@@ -25,6 +25,12 @@
     <Filter Include="UnitTests">
       <UniqueIdentifier>{236833aa-8e34-4730-8e86-8faf0e36d579}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{7a382b2c-997b-40c0-afb9-aeae53daec65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Pointers">
+      <UniqueIdentifier>{b8bed559-d485-4051-b605-13a3ca522222}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\future\core\memory\tracker\memorytracker.h">
@@ -84,6 +90,21 @@
     <ClInclude Include="..\..\include\future\core\tests\memorysystemtests.h">
       <Filter>UnitTests</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\future\core\object\pointer\proxy.h">
+      <Filter>Objects\Pointers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\object\pointer\smartpointer.h">
+      <Filter>Objects\Pointers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\object\managedobject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\object\singleton.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\object\threadsafeobject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\core\memory\tracker\memorytracker.cpp">
@@ -116,5 +137,16 @@
     <ClCompile Include="..\..\src\core\memory\allocators\stackallocator.cpp">
       <Filter>Memory\allocators</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\include\future\core\object\pointer\proxy.inl">
+      <Filter>Objects\Pointers</Filter>
+    </None>
+    <None Include="..\..\include\future\core\object\pointer\smartpointer.inl">
+      <Filter>Objects\Pointers</Filter>
+    </None>
+    <None Include="..\..\include\future\core\object\managedobject.inl">
+      <Filter>Objects</Filter>
+    </None>
   </ItemGroup>
 </Project>

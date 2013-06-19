@@ -53,7 +53,7 @@ FutureStackAllocator::FutureStackAllocator(u8 align, u32 stackSize, bool usingHe
 		}
 	}
 
-	m_poolAllocator = new FuturePoolAllocator(4, sizeof(Block), 1024 * 64, false);
+	m_poolAllocator = new FuturePoolAllocator(4, sizeof(Block), 1024 * 256, false);
 	AddStack();
 }
 

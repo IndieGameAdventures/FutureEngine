@@ -145,7 +145,7 @@ void FuturePoolAllocator::Release()
 		{
 			if(((Pool*)(group->m_data))->m_data)
 			{
-			_aligned_free(((Pool*)(group->m_data))->m_data);
+				_aligned_free(((Pool*)(group->m_data))->m_data);
 			}
 			_aligned_free(group->m_data);
 		}

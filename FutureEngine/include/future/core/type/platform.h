@@ -30,29 +30,56 @@
 
 // start them all at 0 then redefine the correct one
 #define FUTURE_PLATFORM_WINDOWS			0
-//#define FUTURE_PLATFORM_WINDOWS_APP	0
-//#define FUTURE_PLATFORM_WINDOWS_PHONE	0
+#define FUTURE_PLATFORM_WINDOWS_APP		0
+#define FUTURE_PLATFORM_WINDOWS_PHONE	0
 #define FUTURE_PLATFORM_LINUX			0
 #define FUTURE_PLATFORM_MAC				0
-//#define FUTURE_PLATFORM_ANDROID		0
-//#define FUTURE_PLATFORM_IPHONE		0
-//#define FUTURE_PLATFORM_OUYA			0
+#define FUTURE_PLATFORM_ANDROID			0
+#define FUTURE_PLATFORM_IPHONE			0
+#define FUTURE_PLATFORM_OUYA			0
 
 // predefine the most likely endian, big endian platforms will redefine these
 #define FUTURE_ENDIAN_LITTLE 1
 #define FUTURE_ENDIAN_BIG	0
 
-#if defined(__linux__) || defined(__unix__)
+#if defined(__ANDROID__) || defined(ANDROID)
+#	undef  FUTURE_PLATFORM_ANDROID
+#	define FUTURE_PLATFORM_ANDROID 1
+#	if defined(_OUYA)
+#		undef  FUTURE_PLATFORM_OUYA
+#		define FUTURE_PLATFORM_OUYA 1
+#	endif
+#	define FUTURE_USES_PTHREAD
+#elif defined(__linux__) || defined(__unix__)
 #	undef  FUTURE_PLATFORM_LINUX
 #	define FUTURE_PLATFORM_LINUX 1
 #	define FUTURE_USES_PTHREAD
 #elif defined(__APPLE__) || defined(Macintosh) || defined(macintosh)
-#	undef  FUTURE_PLATFORM_MAC
-#	define FUTURE_PLATFORM_MAC 1
+    #include "TargetConditionals.h"
+    #if TARGET_OS_IPHONE   
+#		undef  FUTURE_PLATFORM_IPHONE
+#		define FUTURE_PLATFORM_IPHONE 1
+    #elif TARGET_IPHONE_SIMULATOR
+#		undef  FUTURE_PLATFORM_IPHONE
+#		define FUTURE_PLATFORM_IPHONE 1
+#		define FUTURE_IPHONE_SIMULATOR
+#	elif TARGET_OS_MAC
+#		undef  FUTURE_PLATFORM_MAC
+#		define FUTURE_PLATFORM_MAC 1
+#	else
+#		error Found an unsupported Apple product!
+#	endif
 #	define FUTURE_USES_PTHREAD
 #elif defined(_WIN32)
 #	undef FUTURE_PLATFORM_WINDOWS
 #	define FUTURE_PLATFORM_WINDOWS 1
+#	if defined(_WINDOWS_8_METRO)
+#		undef FUTURE_PLATFORM_WINDOWS_APP
+#		define FUTURE_PLATFORM_WINDOWS_APP 1
+#	elif defined(_WINDOWS_PHONE)
+#		undef FUTURE_PLATFORM_WINDOWS_PHONE
+#		define FUTURE_PLATFORM_WINDOWS_PHONE 1
+#	endif
 #	if defined(_WIN64)
 #		define FUTURE_X64
 #   endif
