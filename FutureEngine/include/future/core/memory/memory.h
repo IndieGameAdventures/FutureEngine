@@ -52,6 +52,7 @@
 #define FUTURE_CORE_MEMORY_H
 
 #include <future/core/type/type.h>
+#include <new>
 
 struct FutureMemoryParam;
 struct FutureMemoryStatistics;

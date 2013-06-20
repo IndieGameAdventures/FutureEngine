@@ -22,14 +22,20 @@
     <Filter Include="Utils\Timer">
       <UniqueIdentifier>{ba6c364b-fcde-4dc9-ba2f-2bbf3870a19f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UnitTests">
-      <UniqueIdentifier>{236833aa-8e34-4730-8e86-8faf0e36d579}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Objects">
       <UniqueIdentifier>{7a382b2c-997b-40c0-afb9-aeae53daec65}</UniqueIdentifier>
     </Filter>
     <Filter Include="Objects\Pointers">
       <UniqueIdentifier>{b8bed559-d485-4051-b605-13a3ca522222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread\thread">
+      <UniqueIdentifier>{0af9efa0-97a7-4b7e-9235-2d0b5ff80f63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{236833aa-8e34-4730-8e86-8faf0e36d579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread\Job">
+      <UniqueIdentifier>{7cc5a635-6966-4984-a508-61839f16d63f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,23 +78,11 @@
     <ClInclude Include="..\..\include\future\core\utils\timer\timer.h">
       <Filter>Utils\Timer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\core\tests\debugtests.h">
-      <Filter>UnitTests</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\core\tests\timertests.h">
-      <Filter>UnitTests</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\future\core\memory\allocators\poolallocator.h">
       <Filter>Memory\allocators</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\core\tests\allocatortests.h">
-      <Filter>UnitTests</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\future\core\memory\allocators\stackallocator.h">
       <Filter>Memory\allocators</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\core\tests\memorysystemtests.h">
-      <Filter>UnitTests</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\future\core\object\pointer\proxy.h">
       <Filter>Objects\Pointers</Filter>
@@ -104,6 +98,36 @@
     </ClInclude>
     <ClInclude Include="..\..\include\future\core\object\threadsafeobject.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\thread\thread\thread.h">
+      <Filter>Thread\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\thread\thread\posix_thread.h">
+      <Filter>Thread\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\thread\thread\win_thread.h">
+      <Filter>Thread\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\thread\pool\job.h">
+      <Filter>Thread\Job</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\thread\pool\jobqueue.h">
+      <Filter>Thread\Job</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\thread\pool\threadpool.h">
+      <Filter>Thread\Job</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\tests\allocatortests.hpp">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\tests\debugtests.hpp">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\tests\memorysystemtests.hpp">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\tests\threadtests.hpp">
+      <Filter>Tests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +161,18 @@
     <ClCompile Include="..\..\src\core\memory\allocators\stackallocator.cpp">
       <Filter>Memory\allocators</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\core\thread\thread\posix_thread.cpp">
+      <Filter>Thread\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\thread\thread\thread.cpp">
+      <Filter>Thread\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\thread\thread\win_thread.cpp">
+      <Filter>Thread\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\object\managedobject.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\future\core\object\pointer\proxy.inl">
@@ -144,9 +180,6 @@
     </None>
     <None Include="..\..\include\future\core\object\pointer\smartpointer.inl">
       <Filter>Objects\Pointers</Filter>
-    </None>
-    <None Include="..\..\include\future\core\object\managedobject.inl">
-      <Filter>Objects</Filter>
     </None>
   </ItemGroup>
 </Project>

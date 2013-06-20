@@ -52,6 +52,9 @@ public:
 
     virtual ~FutureManagedObject();
 
+	virtual void Release()
+	{}
+
     FutureManagedObject& operator=(const FutureManagedObject& managed);
 
     FutureProxyBase * Proxy() const;
@@ -63,14 +66,12 @@ protected:
     FutureProxyBase *	m_proxy;
 };
 
-#include <future/core/object/managedobject.inl>
-
 // strong and weak pointer defines
-#ifndef Sptr
-#	define Sptr	FutureStrongPointer
+#ifndef SPtr
+#	define SPtr	FutureStrongPointer
 #endif
-#ifndef Wptr
-#	define Wptr FutureWeakPointer
+#ifndef WPtr
+#	define WPtr FutureWeakPointer
 #endif
 
 #endif

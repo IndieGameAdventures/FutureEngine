@@ -18,9 +18,10 @@
 *
 */
 
-#include <future/core/tests/debugtests.h>
-#include <future/core/tests/allocatortests.h>
-#include <future/core/tests/memorysystemtests.h>
+#include <future/core/tests/debugtests.hpp>
+#include <future/core/tests/allocatortests.hpp>
+#include <future/core/tests/memorysystemtests.hpp>
+#include <future/core/tests/threadtests.hpp>
 
 void main(char ** args)
 {
@@ -29,10 +30,10 @@ void main(char ** args)
 	//FutureDebugTests::TestAssert();
 	//FutureDebugTests::TestAssertCrit();
 
-	FutureAllocatorTests::TestMallocAllocator();
-	FutureAllocatorTests::TestPoolAllocator();
-	FutureAllocatorTests::TestHeapAllocator();
-	FutureAllocatorTests::TestStackAllocator();
+	//FutureAllocatorTests::TestMallocAllocator();
+	//FutureAllocatorTests::TestPoolAllocator();
+	//FutureAllocatorTests::TestHeapAllocator();
+	//FutureAllocatorTests::TestStackAllocator();
 
-	//FutureMemoryTests::TestDefaultTracking();
+	FutureThreadTests::TestThreads();
 }

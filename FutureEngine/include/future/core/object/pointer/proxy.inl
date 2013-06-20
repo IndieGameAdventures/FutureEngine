@@ -48,7 +48,7 @@ FutureProxy<MANAGED>::FutureProxy(MANAGED * managed)
 	m_weak(NULL)
 {
 	// make sure the object extends FutureManaged
-	FUTURE_ASSERT(dynamic_cast<FutureManaged*>(managed) != NULL);
+	FUTURE_ASSERT(dynamic_cast<FutureManagedObject*>(managed) != NULL);
 	if(!ms_poolAllocator)
 	{
 		ms_poolAllocator = new FuturePoolAllocator(0, sizeof(PointerReference), 1024, false);
@@ -79,7 +79,7 @@ FutureProxy<MANAGED>::~FutureProxy()
 
 // Casting to a MANAGED should return the managed object
 template<class MANAGED>
-inline operator FutureProxy<MANAGED>::MANAGED*() const 
+inline FutureProxy<MANAGED>::operator MANAGED*() const 
 {
     return m_managed; 
 }
@@ -119,12 +119,13 @@ void FutureProxy<MANAGED>::AddStrongPointer(FutureSmartPointerBase * pointer = N
 	{
 		// Create a new reference to the pointer and push it on top of the reference list
 		PointerReference * ref = new (ms_poolAllocator->Alloc(sizeof(PointerReference))) PointerReference();
+		FUTURE_ASSERT(ref);
 		if(m_strong)
 		{
 			m_strong->m_prev = ref;
 		}
 		ref->m_next = m_strong;
-		ref->m_pPrev = NULL;
+		ref->m_prev = NULL;
 		m_strong = ref;
 		m_strong->m_pointer = pointer;
 	}
@@ -247,7 +248,7 @@ template<class MANAGED>
 void FutureProxy<MANAGED>::PrintReferences()
 {
 	// Print all the weak pointers
-	FUTURE_LOG_DEBUG( L"\n%u weak pointers", m_NumWeak );
+	FUTURE_LOG_DEBUG( L"\n%u weak pointers", m_numWeak );
 	FUTURE_LOG_DEBUG( L"Printing Weak Pointers" );
 	for(PointerReference * ref = m_weak; ref; ref = ref->m_next )
 	{

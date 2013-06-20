@@ -29,6 +29,8 @@
 #include <future/core/thread/criticalsection/criticalsection.h>
 #include <future/core/memory/allocators/allocator.h>
 #include <future/core/memory/allocators/mallocallocator.h>
+#include <future/core/memory/allocators/heapallocator.h>
+#include <future/core/memory/allocators/poolallocator.h>
 #include <future/core/memory/memorystatistics.h>
 #include <future/core/memory/tracker/memorytracker.h>
 #include <future/core/utils/timer/timer.h>
@@ -101,6 +103,9 @@ void FutureMemory::CreateMemory(u8 globalAlign)
 	}
 	((FutureMallocAllocator*)(memory->m_allocators->m_allocator))->SetAlign(globalAlign);
 	FutureMemoryTracker::CreateInstance();
+
+	memory->AddAllocator(new FuturePoolAllocator(globalAlign, 32, 1024));
+	memory->AddAllocator(new FutureHeapAllocator(globalAlign));
 }
 
 void FutureMemory::DestroyMemory()
@@ -256,7 +261,7 @@ void MemorySystem::AddAllocator(IFutureAllocator * allocator)
 		m_allocators->m_next = NULL;
 		return;
 	}
-	AllocatorList * last = m_allocators;
+	AllocatorList * last = NULL;
 	for(AllocatorList* a = m_allocators; a; a = a->m_next)
 	{
 		// check for duplicates
@@ -278,11 +283,16 @@ void MemorySystem::AddAllocator(IFutureAllocator * allocator)
 	AllocatorList * link = new AllocatorList;
 	link->m_allocator = allocator;
 	link->m_next = NULL;
-	if(last && last->m_next != NULL)
+	if(last)
 	{
 		link->m_next = last->m_next;
+		last->m_next = link;
 	}
-	last->m_next = link;
+	else
+	{
+		link->m_next = m_allocators;
+		m_allocators = link;
+	}
 }
 
 IFutureAllocator * MemorySystem::GetAllocator(int i)

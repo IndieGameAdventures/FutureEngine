@@ -46,6 +46,7 @@
 
 	typedef const wchar_t *		string;
 
+	typedef const u32			FutureResult;
 #	define FUTURE_PRIMITIVE_DEFINITIONS
 #endif
 
@@ -118,7 +119,14 @@
 #	define FUTURE_CHECKSUM	0xF07012E9
 #endif
 
-	
+// FutureResult defines
+#define FR_OK ((FutureResult)0)
+#define FR_ERROR ((FutureResult)-1)
+#define FR_INVALID_ARG ((FutureResult)-2)
+#define FR_INVALID_PLATFORM ((FutureResult)-4)
+#define FR_INDEX_OUT_OF_BOUNDS ((FutureResult)-8)
+#define FR_TIMEOUT ((FutureResult)-16)
+
 // Convert the argument into a string
 #ifndef TOSTRING
 #	define STRINGIFY(x)	#x

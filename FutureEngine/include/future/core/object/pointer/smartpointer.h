@@ -50,7 +50,7 @@ class FutureSmartPointerBase
 {};
 
 template<class MANAGED> 
-class FutureSmartPointer
+class FutureSmartPointer : public FutureSmartPointerBase
 {
 public:
 	// constructor
@@ -75,8 +75,8 @@ public:
 	
 protected:
 	// virtual functions, different for strong and weak pointers
-	virtual void	AddToProxy() = 0;
-	virtual void	RemoveFromProxy() = 0;
+	virtual void	AddToProxy(){};
+	virtual void	RemoveFromProxy(){};
 	
 // If using smart pointers then FutureSmartPointer will interact with a proxy
 #if FUTURE_USE_SMART_POINTERS
@@ -91,6 +91,11 @@ protected:
 template<class MANAGED>
 class FutureStrongPointer : public FutureSmartPointer<MANAGED>
 {
+public:
+    FutureStrongPointer();
+    FutureStrongPointer(MANAGED * managed);
+    FutureStrongPointer(const FutureSmartPointer<MANAGED>& pointer);
+
 protected:
 	virtual void AddToProxy();
 	virtual void RemoveFromProxy();
@@ -100,6 +105,11 @@ protected:
 template<class MANAGED>
 class FutureWeakPointer : public FutureSmartPointer<MANAGED>
 {
+public:
+    FutureWeakPointer();
+    FutureWeakPointer(MANAGED * managed);
+    FutureWeakPointer(const FutureSmartPointer<MANAGED>& pointer);
+
 protected:
 	virtual void AddToProxy();
 	virtual void RemoveFromProxy();

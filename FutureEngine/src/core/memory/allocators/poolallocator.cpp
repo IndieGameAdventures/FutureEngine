@@ -28,8 +28,8 @@
 #include <future/core/memory/tracker/memorytracker.h>
 #include <new>
 
-#ifndef FUTURE_POOL_GROUP_SIZE
-#	define FUTURE_POOL_GROUP_SIZE	1024
+#ifndef FUTURE_MAX_POOL_GROUP_SIZE
+#	define FUTURE_MAX_POOL_GROUP_SIZE	1024
 #endif
 
 /*******************************************************************/
@@ -41,14 +41,27 @@ FuturePoolAllocator::FuturePoolAllocator(u8 align, u8 poolSize, u32 numPools, bo
 	  m_freeList(NULL),
 	  m_pools(0),
 	  m_groupList(NULL),
-	  m_usingHeaders(accountForHeaders)
+	  m_usingHeaders(accountForHeaders),
+	  m_groupSize(numPools)
 {
 	FUTURE_ASSERT(poolSize > 0 && numPools > 0);
 	
-	while(m_poolSize < poolSize + (accountForHeaders ? FutureMemory::HeaderSize() : 4))
+	if(align > 1)
 	{
-		m_poolSize += align;
-	};
+		while(m_poolSize < poolSize + (accountForHeaders ? FutureMemory::HeaderSize() : 4))
+		{
+			m_poolSize += align;
+		}
+	}
+	else
+	{
+		m_poolSize = poolSize + (accountForHeaders ? FutureMemory::HeaderSize() : 4);
+	}
+
+	if(m_groupSize > FUTURE_MAX_POOL_GROUP_SIZE)
+	{
+		m_groupSize = FUTURE_MAX_POOL_GROUP_SIZE;
+	}
 
 	while(m_pools < numPools)
 	{
@@ -60,33 +73,22 @@ void * FuturePoolAllocator::Alloc(u32 bytes)
 {
 	FUTURE_ASSERT_CRIT(bytes <= m_poolSize, 9865);
 
-	m_criticalSection.Lock();
 
 	if(m_freeList == NULL)
 	{
-		FUTURE_LOG_INFO(L"Pool Allocator is full, expanding");
+		//FUTURE_LOG_INFO(L"Pool Allocator is full, expanding");
 		AddPoolGroup();
 	}
 	FUTURE_ASSERT_CRIT(m_freeList != NULL, 9864);
 
+	Lock();
 
 	Pool * pool = m_freeList;
 	m_freeList = m_freeList->m_next;
 	
-	m_criticalSection.Unlock();
+	Unlock();
 
-	if(m_usingHeaders)
-	{
-		FutureAllocHeader * header = reinterpret_cast<FutureAllocHeader *>(pool->m_data);
-		header->m_allocatorData = (u32)pool;
-		return pool->m_data;
-	}
-	else
-	{
-		u32 * header = (u32*)pool->m_data;
-		*header = (u32)pool;
-		return (void*)(header + 1);
-	}
+	return pool->m_data;
 }
 
 void FuturePoolAllocator::Free(void * p)
@@ -101,12 +103,11 @@ void FuturePoolAllocator::Free(void * p)
 	{
 		u32 * header = ((u32*)p) - 1;
 		pool = (Pool*)(*header);
-		p = (void*)header;
 	}
 
 	FUTURE_ASSERT(pool->m_data == p);
 
-	m_criticalSection.Lock();
+	Lock();
 
 	if(m_freeList == NULL)
 	{
@@ -118,7 +119,7 @@ void FuturePoolAllocator::Free(void * p)
 		m_freeList = pool;
 	}
 
-	m_criticalSection.Unlock();
+	Unlock();
 }
 
 // set to 100 + the pool size, this way smaller pool sizes are checked first
@@ -130,7 +131,7 @@ u8 FuturePoolAllocator::Priority()
 // Make sure we have room to spare, if we do and the requested bytes is the right size, return true
 bool FuturePoolAllocator::ShouldAllocate(FutureMemoryParam memParam)
 {
-	if(memParam.m_bytes + (m_usingHeaders ? FutureMemory::HeaderSize() : 4) < m_poolSize)
+	if(memParam.m_bytes + (m_usingHeaders ? FutureMemory::HeaderSize() : 4) <= m_poolSize)
 	{
 		return true;
 	}
@@ -139,13 +140,23 @@ bool FuturePoolAllocator::ShouldAllocate(FutureMemoryParam memParam)
 
 void FuturePoolAllocator::Release()
 {
+	Lock();
 	for(Pool * group = m_groupList; group; )
 	{
 		if(group->m_data)
 		{
 			if(((Pool*)(group->m_data))->m_data)
 			{
-				_aligned_free(((Pool*)(group->m_data))->m_data);
+				if(m_usingHeaders)
+				{
+					_aligned_free(((Pool*)(group->m_data))->m_data);
+				}
+				else
+				{
+					void * data = ((Pool*)(group->m_data))->m_data;
+					data = (void*)(((u32*)data) - 1);
+					_aligned_free(data);
+				}
 			}
 			_aligned_free(group->m_data);
 		}
@@ -156,12 +167,13 @@ void FuturePoolAllocator::Release()
 	m_groupList = NULL;
 	m_freeList = NULL;
 	m_pools = 0;
+	Unlock();
 }
 
 void FuturePoolAllocator::AddPoolGroup()
 {
-	Pool * pools = (Pool*)_aligned_malloc((sizeof(Pool) * FUTURE_POOL_GROUP_SIZE), m_align);
-	void * data = _aligned_malloc(m_poolSize * FUTURE_POOL_GROUP_SIZE, m_align);
+	Pool * pools = (Pool*)_aligned_malloc((sizeof(Pool) * m_groupSize), m_align);
+	void * data = _aligned_malloc(m_poolSize * m_groupSize, m_align);
 
 	Pool * group = new Pool();
 	group->m_data = pools;
@@ -171,13 +183,29 @@ void FuturePoolAllocator::AddPoolGroup()
 		m_groupList = group;
 	}
 
-	for(u16 i = 0; i < FUTURE_POOL_GROUP_SIZE && pools != NULL; ++i)
+	for(u16 i = 0; i < m_groupSize && pools != NULL; ++i)
 	{
-		pools->m_next = (i < FUTURE_POOL_GROUP_SIZE - 1 ? pools + 1 : m_freeList);
-		pools->m_data = data;
+		pools->m_next = (i < m_groupSize - 1 ? pools + 1 : m_freeList);
+		if(m_usingHeaders)
+		{
+			FutureAllocHeader * header = reinterpret_cast<FutureAllocHeader *>(data);
+			header->m_allocatorData = (u32)pools;
+			pools->m_data = data;
+		}
+		else
+		{
+			u32 * header = (u32*)data;
+			*header = (u32)pools;
+			pools->m_data = (void*)(header + 1);
+		}
 		++pools;
 		data = (void*)((u32)data + m_poolSize);
 	}
+
+	Lock();
+
 	m_freeList = (Pool*)(group->m_data);
-	m_pools += FUTURE_POOL_GROUP_SIZE;
+	m_pools += m_groupSize;
+
+	Unlock();
 }

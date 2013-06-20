@@ -28,11 +28,11 @@
 #define FUTURE_CORE_MEMORY_ALLOCATOR_POOL_H
 
 #include <future/core/memory/allocators/allocator.h>
-#include <future/core/thread/criticalsection/criticalsection.h>
+#include <future/core/object/threadsafeobject.h>
 
 struct FutureMemoryParam;
 
-class FuturePoolAllocator : public IFutureAllocator
+class FuturePoolAllocator : public IFutureAllocator, public FutureThreadSafeObject
 {
 public:
 	FuturePoolAllocator(u8 align, u8 poolSize, u32 startingPools = 4096, bool accountForHeaders = true);
@@ -56,13 +56,12 @@ private:
 	Pool *	m_freeList;
 
 	u32		m_pools;
-	u16		m_poolSize;
+	u32		m_poolSize;
+	u16		m_groupSize;
 	u8		m_align;
 	bool	m_usingHeaders;
 
 	Pool *	m_groupList;
-
-	FutureCriticalSection m_criticalSection;
 
 	void	AddPoolGroup();
 };

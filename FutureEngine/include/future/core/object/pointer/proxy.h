@@ -41,6 +41,11 @@ class FutureProxyBase
 {
 public:
 	virtual void PrintReferences() = 0;
+
+protected:
+	// static pool allocator to be used by all proxies
+	static FuturePoolAllocator *	ms_poolAllocator;
+	static u32						ms_proxyCount;
 };
 
 // MANAGED must be derived from FutureManaged or there will be problems
@@ -122,9 +127,6 @@ protected:
     u32			m_numStrong; // The number of strong pointers
 	u32			m_numWeak;	// the number of weak pointers
 
-	// static pool allocator to be used by all proxies
-	static FuturePoolAllocator *	ms_poolAllocator = NULL;
-	static u32						ms_proxyCount = 0;
 private:
 	// proxies cannot be set equal to each other, that means the object has been
 	// destroyed and recreated without the proxy or any smart pointers knowing

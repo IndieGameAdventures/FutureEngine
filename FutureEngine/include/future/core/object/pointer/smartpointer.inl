@@ -68,7 +68,7 @@ FutureSmartPointer<MANAGED>::~FutureSmartPointer()
 }
 
 template<class MANAGED> 
-inline operator FutureSmartPointer<MANAGED>::MANAGED*() const 
+inline FutureSmartPointer<MANAGED>::operator MANAGED*() const 
 {
     return m_proxy->operator MANAGED*();
 }
@@ -82,7 +82,7 @@ inline MANAGED& FutureSmartPointer<MANAGED>::operator*() const
 template<class MANAGED> 
 inline MANAGED* FutureSmartPointer<MANAGED>::operator->() const 
 { 
-    return m_Proxy->operator->(); 
+    return m_proxy->operator->(); 
 }
 
 template<class MANAGED> 
@@ -204,6 +204,21 @@ inline MANAGED * FutureSmartPointer<MANAGED>::GetManaged() const
 #endif
 
 template<class MANAGED> 
+FutureStrongPointer<MANAGED>::FutureStrongPointer() 
+	: FutureSmartPointer<MANAGED>() 
+{}
+
+template<class MANAGED> 
+FutureStrongPointer<MANAGED>::FutureStrongPointer(MANAGED * managed) 
+	: FutureSmartPointer<MANAGED>(managed) 
+{}
+
+template<class MANAGED> 
+FutureStrongPointer<MANAGED>::FutureStrongPointer(const FutureSmartPointer<MANAGED>& pointer) 
+	: FutureSmartPointer<MANAGED>(pointer) 
+{}
+
+template<class MANAGED> 
 inline void FutureStrongPointer<MANAGED>::AddToProxy()
 {
 	if(Proxy())
@@ -220,6 +235,20 @@ inline void FutureStrongPointer<MANAGED>::RemoveFromProxy()
 	}
 }
 
+template<class MANAGED> 
+FutureWeakPointer<MANAGED>::FutureWeakPointer() 
+	: FutureSmartPointer<MANAGED>() 
+{}
+
+template<class MANAGED> 
+FutureWeakPointer<MANAGED>::FutureWeakPointer(MANAGED * managed) 
+	: FutureSmartPointer<MANAGED>(managed) 
+{}
+
+template<class MANAGED> 
+FutureWeakPointer<MANAGED>::FutureWeakPointer(const FutureSmartPointer<MANAGED>& pointer) 
+	: FutureSmartPointer<MANAGED>(pointer) 
+{}
 template<class MANAGED> 
 inline void FutureWeakPointer<MANAGED>::AddToProxy()
 {
