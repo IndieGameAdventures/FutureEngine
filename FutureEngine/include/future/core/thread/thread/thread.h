@@ -48,7 +48,7 @@ public:
 	typedef void (*ThreadFunction)(void*);
 	typedef void (*FinishedCallbackFunction)(void*);
 
-	virtual FutureResult	Start(ThreadFunction function, string name = L"", FinishedCallbackFunction onFinished = NULL) = 0;
+	virtual FutureResult	Start(ThreadFunction function, void * data = NULL, FinishedCallbackFunction onFinished = NULL) = 0;
 	virtual void			Join() = 0;
 	virtual FutureResult	Join(u32 milliTimeOut) = 0;
 	virtual FutureResult	Join(f32 secondsTimeOut);
@@ -66,15 +66,12 @@ public:
 	bool					IsRunning();
 	bool					IsFinished();
 
-	string					Name();
-
 	static u64				CurrentThreadId();
  
 protected:
 
 	u32				m_priority;
 	u64				m_id;
-	string			m_name;
 	bool			m_started;
 	bool			m_finished;
 	void *			m_data;

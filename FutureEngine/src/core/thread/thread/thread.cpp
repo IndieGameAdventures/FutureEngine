@@ -48,11 +48,6 @@ bool IFutureThread::IsFinished()
 	return m_finished;
 }
 
-string IFutureThread::Name()
-{
-	return m_name;
-}
-
 void IFutureThread::OnFinished()
 {
 	m_finished = true;
@@ -75,7 +70,6 @@ IFutureThread::IFutureThread()
 	: m_data(NULL),
 	  m_finished(false),
 	  m_id(-1),
-	  m_name(NULL),
 	  m_started(false),
 	  m_priority(0),
 	  m_function(NULL),

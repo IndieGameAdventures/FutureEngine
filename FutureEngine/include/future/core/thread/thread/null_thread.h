@@ -19,24 +19,24 @@
 */
 
 /*
-*	This implementation of FutureThread uses pthread for all operations
-*
+*	Implementation of IFutureThread for systems that do not
+*	support threads or for single threaded builds. Executes
+*	jobs immediately.
 */
 
-#ifndef FUTURE_CORE_THREAD_THREAD_POSIX_H
-#define FUTURE_CORE_THREAD_THREAD_POSIX_H
+#ifndef FUTURE_CORE_THREAD_THREAD_NULL_H
+#define FUTURE_CORE_THREAD_THREAD_NULL_H
 
 #include <future/core/thread/thread/thread.h>
 
-#ifndef FUTURE_USES_PTHREAD
-#	error This file should only be included when using pthreads
+#if (FUTURE_PLATFORM_WINDOWS || defined(FUTURE_USES_PTHREAD)) && FUTURE_ENABLE_MULTITHREADED
+#	error This file should only be included in single thread builds
 #endif
-
-#include <pthread.h>
 
 class FutureThread : public IFutureThread
 {
 public:
+	FUTURE_DECLARE_MEMORY_OPERATORS(FutureThread);
 
     FutureThread();
 	virtual ~FutureThread();
@@ -52,13 +52,8 @@ public:
 
 	virtual FutureThreadPriority	GetPriority();
 	virtual void					SetPriority(FutureThreadPriority priority);
-
+ 
 protected:
-
-	static void * RunThreadInternal(void * data);
-	pthread_t m_thread;
 };
-
-extern FutureStrongPointer<IFutureThread>	FutureCreateThread();
 
 #endif

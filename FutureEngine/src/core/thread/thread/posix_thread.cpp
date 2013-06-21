@@ -19,47 +19,129 @@
 */
 
 /*
-*	This implementation of FutureThread uses pthread for all operations
+*	Implementation of FutureThread using posix threads
 *
 */
+#include <future/core/thread/thread/posix_thread.h>
+#include <unistd.h>
 
-/*#ifndef FUTURE_CORE_THREAD_THREAD_POSIX_H
-#define FUTURE_CORE_THREAD_THREAD_POSIX_H
-
-#include <future/core/thread/thread/thread.h>
-
-#ifndef FUTURE_USES_PTHREAD
-#	error This file should only be included when using pthreads
-#endif
-
-#include <pthread.h>
-
-class FutureThread : public IFutureThread
+void * FutureThread::RunThreadInternal(void * param)
 {
-public:
+	((FutureThread*)param)->OnRunThread();
+	((FutureThread*)param)->OnFinished();
+	return NULL;
+}
 
-    FutureThread();
-	virtual ~FutureThread();
+FutureThread::FutureThread()
+	: IFutureThread(),
+	  m_thread(0)
+{}
 
-	virtual FutureResult	Start(ThreadFunction function, string name = L"", FinishedCallbackFunction onFinished = NULL);
-	virtual void			Join();
-	virtual FutureResult	Join(u32 milliTimeOut);
-	virtual FutureResult	Join(f32 secondsTimeOut);
+FutureThread::~FutureThread()
+{
+	if(IsRunning())
+	{
+		pthread_kill(m_thread);
+	}
+}
 
-	virtual void			Wait(u32 millis);
-	virtual void			Wait(f32 seconds);
+FutureResult FutureThread::Start(ThreadFunction function, void * data, FinishedCallbackFunction onFinished)
+{
+	if(!function)
+	{
+		return FR_INVALID_ARG;
+	}
+	// Make sure we aren't already started
+	FUTURE_ASSERT(!m_started || m_finished);
 
-	virtual u64				ThreadId();
-	virtual void*			GetHandle();
+	Lock();
 
-	virtual u32				GetPriority();
-	virtual void			SetPriority();
+	m_finished = false;
+	m_onFinished = onFinished;
+	m_function = function;
+	m_data = data;
 
-protected:
+	pthread_attr_t attr;
+	pthread_attr_init(&attr);
+	__sched_param priority;
+	priority.sched_priority = m_priority;
+	pthread_attr_setschedparam(&attr, &priority);
 
-	pthread_t m_thread;
-};
+	u32 result = pthread_create(&m_thread, &attr, &FutureThread::RunThreadInternal, (void *)this);
+	m_id = (u64)m_thread;
+	m_started = true;
+	Unlock();
 
-extern FutureStrongPointer<IFutureThread>	FutureCreateThread();
+    switch (errno) 
+	{
+    case EINVAL:
+		m_started = false;
+		return FR_INVALID_ARG;
+    case EAGAIN:
+    case EPERM:
+    default:
+		m_started = false;
+		return FR_ERROR;
+    }
 
-#endif*/
+	return FR_OK;
+}
+
+void FutureThread::Join()
+{
+	FUTURE_ASSERT(m_thread);
+	pthread_join(m_thread);
+}
+
+FutureResult FutureThread::Join(u32 milliTimeOut)
+{
+	FUTURE_ASSERT(m_thread);
+	f32 timeToWait = (f32)milliTimeOut * 1000.f;
+	f32 curTime = FutureTimer::CurrentTime();
+	
+	while(!m_finished && FutureTimer::TimeSince(curTime) < timeToWait)
+	{
+		Wait(5);
+	}
+	if(!m_finished)
+	{
+		return FR_TIMEOUT;
+	}
+	return FR_OK;
+}
+
+void FutureThread::Wait(u32 millis)
+{
+	sleep(millis);
+}
+
+u64 FutureThread::ThreadId()
+{
+	return m_id;
+}
+void* FutureThread::GetHandle()
+{
+	return (void*)&m_thread;
+}
+
+IFutureThread::FutureThreadPriority FutureThread::GetPriority()
+{
+	return (IFutureThread::FutureThreadPriority)m_priority;
+}
+void FutureThread::SetPriority(FutureThreadPriority priority)
+{
+	m_priority = priority;
+	if(m_thread)
+	{
+		__sched_param priority;
+		priority.sched_priority = m_priority;
+		u32 policy;
+		pthread_attr_getschedpolicy(&m_thread, &policy);
+		pthread_setschedparam(&m_thread, policy, &priority);
+	}
+}
+
+u64 IFutureThread::CurrentThreadId()
+{
+	return (u64)pthread_self();
+}

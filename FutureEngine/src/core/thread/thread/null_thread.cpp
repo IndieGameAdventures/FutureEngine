@@ -19,29 +19,18 @@
 */
 
 /*
-*	Implementation of FutureThread using windows threads
+*	Implementation of FutureThread for single threaded builds
 *
 */
 
-#include <future/core/thread/thread/win_thread.h>
+#include <future/core/thread/thread/null_thread.h>
 
-#include <windows.h>
-
-DWORD WINAPI FutureThread::RunThreadInternal(LPVOID param)
-{
-	((FutureThread*)param)->OnRunThread();
-	((FutureThread*)param)->OnFinished();
-	return 0;
-}
 
 FutureThread::FutureThread()
-	: IFutureThread(),
-	  m_thread(NULL)
+	: IFutureThread()
 {}
 FutureThread::~FutureThread()
-{
-
-}
+{}
 
 FutureResult FutureThread::Start(ThreadFunction function, void * data, FinishedCallbackFunction onFinished)
 {
@@ -49,48 +38,24 @@ FutureResult FutureThread::Start(ThreadFunction function, void * data, FinishedC
 	{
 		return FR_INVALID_ARG;
 	}
-	Lock();
 
-	// Make sure we aren't already started
-	FUTURE_ASSERT(!m_started || m_finished);
-
-	m_finished = false;
 	m_onFinished = onFinished;
 	m_function = function;
 	m_data = data;
 
-	DWORD id = 0;
-	m_thread = CreateThread(NULL, 0, &FutureThread::RunThreadInternal, this, 0, &id);
-	m_id = id;
-	m_started = true;
-	Unlock();
-
-	if(m_thread == NULL)
-	{
-		m_started = false;
-		return FR_ERROR;
-	}
+	OnRunThread();
+	OnFinished();
 
 	return FR_OK;
 }
 
 void FutureThread::Join()
 {
-	Join(INFINITE);
+	return;
 }
 
 FutureResult FutureThread::Join(u32 milliTimeOut)
 {
-	FUTURE_ASSERT(m_thread);
-	DWORD result = WaitForSingleObject(m_thread, milliTimeOut);
-	if(result == WAIT_TIMEOUT)
-	{
-		return FR_TIMEOUT;
-	}
-	else if(result == WAIT_FAILED || result == WAIT_ABANDONED)
-	{
-		return FR_ERROR;
-	}
 	return FR_OK;
 }
 
@@ -101,34 +66,23 @@ void FutureThread::Wait(u32 millis)
 
 u64 FutureThread::ThreadId()
 {
-	return m_id;
+	return 0;
 }
 void* FutureThread::GetHandle()
 {
-	return m_thread;
+	return NULL;
 }
 
 IFutureThread::FutureThreadPriority FutureThread::GetPriority()
 {
-	if(m_thread)
-	{
-		return (IFutureThread::FutureThreadPriority)GetThreadPriority(m_thread);
-	}
-	else
-	{
-		return (IFutureThread::FutureThreadPriority)m_priority;
-	}
+	return (IFutureThread::FutureThreadPriority)m_priority;
 }
 void FutureThread::SetPriority(FutureThreadPriority priority)
 {
 	m_priority = priority;
-	if(m_thread)
-	{
-		SetThreadPriority(m_thread, priority);
-	}
 }
 
 u64 IFutureThread::CurrentThreadId()
 {
-	return (u64)GetCurrentThreadId();
+	return (u64)0;
 }

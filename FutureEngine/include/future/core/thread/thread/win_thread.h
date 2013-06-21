@@ -42,7 +42,7 @@ public:
     FutureThread();
 	virtual ~FutureThread();
 
-	virtual FutureResult	Start(ThreadFunction function, string name = L"", FinishedCallbackFunction onFinished = NULL);
+	virtual FutureResult	Start(ThreadFunction function, void * data = NULL, FinishedCallbackFunction onFinished = NULL);
 	virtual void			Join();
 	virtual FutureResult	Join(u32 milliTimeOut);
 
