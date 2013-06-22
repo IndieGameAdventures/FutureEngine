@@ -45,12 +45,7 @@ FutureThread::~FutureThread()
 
 FutureResult FutureThread::Start(ThreadFunction function, void * data, FinishedCallbackFunction onFinished)
 {
-	if(!function)
-	{
-		return FR_INVALID_ARG;
-	}
 	Lock();
-
 	// Make sure we aren't already started
 	FUTURE_ASSERT(!m_started || m_finished);
 
@@ -97,6 +92,13 @@ FutureResult FutureThread::Join(u32 milliTimeOut)
 void FutureThread::Wait(u32 millis)
 {
 	Sleep(millis);
+}
+
+void FutureThread::Kill()
+{
+	FUTURE_ASSERT(m_thread);
+#pragma warning(suppress: 6258)
+	TerminateThread(m_thread, 0);
 }
 
 u64 FutureThread::ThreadId()

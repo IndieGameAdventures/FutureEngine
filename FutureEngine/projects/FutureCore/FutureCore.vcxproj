@@ -131,14 +131,16 @@
     <ClInclude Include="..\..\include\future\core\tests\debugtests.hpp" />
     <ClInclude Include="..\..\include\future\core\tests\allocatortests.hpp" />
     <ClInclude Include="..\..\include\future\core\tests\memorysystemtests.hpp" />
+    <ClInclude Include="..\..\include\future\core\tests\threadpooltests.hpp" />
     <ClInclude Include="..\..\include\future\core\tests\threadtests.hpp" />
     <ClInclude Include="..\..\include\future\core\thread\criticalsection\criticalsection.h" />
     <ClInclude Include="..\..\include\future\core\thread\pool\job.h" />
-    <ClInclude Include="..\..\include\future\core\thread\pool\jobqueue.h" />
     <ClInclude Include="..\..\include\future\core\thread\pool\threadpool.h" />
+    <ClInclude Include="..\..\include\future\core\thread\thread\null_thread.h" />
     <ClInclude Include="..\..\include\future\core\thread\thread\posix_thread.h" />
     <ClInclude Include="..\..\include\future\core\thread\thread\thread.h" />
     <ClInclude Include="..\..\include\future\core\thread\thread\win_thread.h" />
+    <ClInclude Include="..\..\include\future\core\thread\thread\workerthread.h" />
     <ClInclude Include="..\..\include\future\core\type\platform.h" />
     <ClInclude Include="..\..\include\future\core\type\type.h" />
     <ClInclude Include="..\..\include\future\core\utils\timer\timer.h" />
@@ -154,9 +156,13 @@
     <ClCompile Include="..\..\src\core\memory\tracker\memorytracker.cpp" />
     <ClCompile Include="..\..\src\core\object\managedobject.cpp" />
     <ClCompile Include="..\..\src\core\thread\criticalsection\criticalsection.cpp" />
+    <ClCompile Include="..\..\src\core\thread\pool\job.cpp" />
+    <ClCompile Include="..\..\src\core\thread\pool\threadpool.cpp" />
+    <ClCompile Include="..\..\src\core\thread\thread\null_thread.cpp" />
     <ClCompile Include="..\..\src\core\thread\thread\posix_thread.cpp" />
     <ClCompile Include="..\..\src\core\thread\thread\thread.cpp" />
     <ClCompile Include="..\..\src\core\thread\thread\win_thread.cpp" />
+    <ClCompile Include="..\..\src\core\thread\thread\workerthread.cpp" />
     <ClCompile Include="..\..\src\core\utils\timer.cpp" />
   </ItemGroup>
   <ItemGroup>

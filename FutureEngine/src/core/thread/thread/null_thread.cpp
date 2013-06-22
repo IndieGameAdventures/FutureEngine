@@ -23,6 +23,9 @@
 *
 */
 
+#include <future/core/type/type.h>
+
+#if !(FUTURE_PLATFORM_WINDOWS || defined(FUTURE_USES_PTHREAD)) || !FUTURE_ENABLE_MULTITHREADED
 #include <future/core/thread/thread/null_thread.h>
 
 
@@ -64,6 +67,11 @@ void FutureThread::Wait(u32 millis)
 	Sleep(millis);
 }
 
+void FutureThread::Kill()
+{
+}
+
+
 u64 FutureThread::ThreadId()
 {
 	return 0;
@@ -86,3 +94,5 @@ u64 IFutureThread::CurrentThreadId()
 {
 	return (u64)0;
 }
+
+#endif

@@ -56,6 +56,8 @@ public:
 	virtual void			Wait(u32 millis) = 0;
 	virtual void			Wait(f32 seconds);
 
+	virtual void			Kill() = 0;
+
 	virtual u64				ThreadId() = 0;
 	virtual void*			GetHandle() = 0;
 

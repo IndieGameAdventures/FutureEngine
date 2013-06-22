@@ -347,7 +347,7 @@ inline u32 MemorySystem::BytesForAllocation(FutureMemoryParam memParam)
 	{
 		return 0;
 	}
-	return sizeof(FutureAllocHeader) + memParam.m_bytes;
+	return FutureMemory::HeaderSize() + memParam.m_bytes;
 }
 
 FutureMemoryStatistics MemorySystem::GetStatistics()

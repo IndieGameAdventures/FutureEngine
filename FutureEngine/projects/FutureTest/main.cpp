@@ -22,6 +22,7 @@
 #include <future/core/tests/allocatortests.hpp>
 #include <future/core/tests/memorysystemtests.hpp>
 #include <future/core/tests/threadtests.hpp>
+#include <future/core/tests/threadpooltests.hpp>
 
 void main(char ** args)
 {
@@ -35,5 +36,7 @@ void main(char ** args)
 	//FutureAllocatorTests::TestHeapAllocator();
 	//FutureAllocatorTests::TestStackAllocator();
 
-	FutureThreadTests::TestThreads();
+	//FutureThreadTests::TestThreads();
+
+	FutureThreadPoolTests::TestThreadPool();
 }

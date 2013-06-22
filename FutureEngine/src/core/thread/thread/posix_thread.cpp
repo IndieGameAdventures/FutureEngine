@@ -22,7 +22,13 @@
 *	Implementation of FutureThread using posix threads
 *
 */
+
+#include <future/core/type/type.h>
+
+#ifdef FUTURE_USES_PTHREAD
+
 #include <future/core/thread/thread/posix_thread.h>
+#include <future/core/utils/timer/timer.h>
 #include <unistd.h>
 
 void * FutureThread::RunThreadInternal(void * param)
@@ -47,10 +53,6 @@ FutureThread::~FutureThread()
 
 FutureResult FutureThread::Start(ThreadFunction function, void * data, FinishedCallbackFunction onFinished)
 {
-	if(!function)
-	{
-		return FR_INVALID_ARG;
-	}
 	// Make sure we aren't already started
 	FUTURE_ASSERT(!m_started || m_finished);
 
@@ -99,9 +101,9 @@ FutureResult FutureThread::Join(u32 milliTimeOut)
 	f32 timeToWait = (f32)milliTimeOut * 1000.f;
 	f32 curTime = FutureTimer::CurrentTime();
 	
-	while(!m_finished && FutureTimer::TimeSince(curTime) < timeToWait)
+	while(!m_finished && (milliTimeOut <= 0 || FutureTimer::TimeSince(curTime) < timeToWait))
 	{
-		Wait(5);
+		sleep(5);
 	}
 	if(!m_finished)
 	{
@@ -113,6 +115,12 @@ FutureResult FutureThread::Join(u32 milliTimeOut)
 void FutureThread::Wait(u32 millis)
 {
 	sleep(millis);
+}
+
+void FutureThread::Kill()
+{
+	FUTURE_ASSERT(m_thread);
+	pthread_kill(m_thread, 0);
 }
 
 u64 FutureThread::ThreadId()
@@ -145,3 +153,5 @@ u64 IFutureThread::CurrentThreadId()
 {
 	return (u64)pthread_self();
 }
+
+#endif

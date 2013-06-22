@@ -19,80 +19,118 @@
 */
 
 /*
-*	IFutureThread interface contains a system thread. IFutureThread cannot
-*	be instantiated but must be created through CreateFutureThread which
-*	will ensure the newly created thread is compatible with the current
-*	platform and type settings.
+*	A job is something to be executed by a thread. Jobs are added to
+*	the ThreaPool JobQueue where they will be given to the next available
+*	thread. Jobs with higher priority will be executed first.
 *
 */
 
-#ifndef FUTURE_CORE_THREAD_THREAD_H
-#define FUTURE_CORE_THREAD_THREAD_H
+#ifndef FUTURE_CORE_THREAD_JOB_H
+#define FUTURE_CORE_THREAD_JOB_H
 
-#include <future/core/object/managedobject.h>
+#include <future/core/type/type.h>
+#include <future/core/object/threadsafeobject.h>
 
-class IFutureThread : public FutureManagedObject
+class IFutureThread;
+class FutureThreadPool;
+
+class FutureThreadJob : public FutureThreadSafeObject
 {
 public:
-	enum FutureThreadPriority
+	FUTURE_DECLARE_MEMORY_OPERATORS(FutureThreadJob);
+
+	// Enum to determine the job's priority. Priority can be any u32 but
+	// these are the suggested values.
+	// Idle will only execute when there is a free thread with nothing else to do
+	// Critical will execute on the next available thread
+	enum FutureThreadJobPriority
 	{
-		FutureThreadPriority_Idle = -15,
-		FutureThreadPriority_Lowest = -2,
-		FutureThreadPriority_Low = -1,
-		FutureThreadPriority_Normal = 0,
-		FutureThreadPriority_High = 1,
-		FutureThreadPriority_Highest = 2,
-		FutureThreadPriority_Critical = 15
+		JobPriority_Idle		= 0x00000,
+		JobPriority_VeryLow		= 0x00010,
+		JobPriority_Low			= 0x00020,
+		JobPriority_Normal		= 0x00100,
+		JobPriority_High		= 0x01000,
+		JobPriority_VeryHigh	= 0x02000,
+		JobPriority_Critical	= 0x10000,
+	};
+	
+	// Job State. The state is changed internally and is useful for
+	// tracking jobs and debugging
+	enum FutureThreadJobState
+	{
+		JobState_Created,
+		JobState_ToBeAdded,
+		JobState_InQueue,
+		JobState_Executing,
+		JobState_Finished,
 	};
 
-	typedef u32 (*ThreadFunction)(void*);
-	typedef void (*FinishedCallbackFunction)(void*);
+	typedef void (*JobFunction)(void*); // Prototype for the function this job should call
+	typedef void (*FinishedCallbackFunction)(void*); // Prototype for this this job's callback function
 
-	virtual ~IFutureThread() = 0;
+	// Constructors
+	FutureThreadJob();
+	FutureThreadJob(JobFunction function, void * data = NULL, FutureThreadJobPriority priority = JobPriority_Normal);
+	FutureThreadJob(const FutureThreadJob& job);
+	
+	virtual ~FutureThreadJob();
 
-	virtual FutureResult	Start(ThreadFunction function, string name = L"", FinishedCallbackFunction onFinished = NULL) = 0;
-	virtual void			Join() = 0;
-	virtual FutureResult	Join(u32 milliTimeOut) = 0;
-	virtual FutureResult	Join(f32 secondsTimeOut);
+	// Returns the job's state
+	FutureThreadJobState	GetState();
 
-	virtual void			Wait(u32 millis) = 0;
-	virtual void			Wait(f32 seconds);
+	/* Note that all set functions must be called before adding this job to the
+	*  ThreadPool. Set Functions will assert if called when state != created
+	*/
 
-	virtual u64				ThreadId() = 0;
-	virtual void*			GetHandle() = 0;
+	// Gets or sets the job's priority. Higher priority jobs are performed first
+	FutureThreadJobPriority	GetPriority();
+	void					SetPriority(FutureThreadJobPriority priority);
 
-	virtual FutureThreadPriority	GetPriority() = 0;
-	virtual void					SetPriority(FutureThreadPriority priority) = 0;
- 
-	bool					IsStarted();
-	bool					IsRunning();
-	bool					IsFinished();
+	// The data to be sent to the job function
+	void *					GetData();
+	void					SetData(void * data);
 
-	string					Name();
+	// Set the functions this job should call
+	void					SetJobFunction(JobFunction function);
+	void					SetOnFinishedCallback(FinishedCallbackFunction callback);
 
-	static u64				CurrentThreadId();
- 
+	// sets if this job should automatically be deleted when it has finished;
+	void					SetAutoDelete(bool autoDelete);
+
+	// The job's id, only valid after being added to the ThreadPool
+	u32						GetId();
+
+	// The thread that is executing this job, only valid during state = executing
+	IFutureThread *			GetThread();
+
 protected:
+	friend class FutureWorkerThread;
+	friend class FutureThreadPool;
 
-	u32				m_priority;
-	u64				m_id;
-	string			m_name;
-	bool			m_started;
-	bool			m_finished;
-	void *			m_data;
+	// executes this job
+	void		Execute(IFutureThread * thread);
 
-	ThreadFunction				m_function;
+	FutureThreadJobState	m_state;
+	IFutureThread *			m_thread;
+	u32						m_id;
+	FutureThreadJobPriority	m_priority;
+	bool					m_autoDelete;
+
+	// keeps track of where this job is in the job queue
+	// Much cheaper than using a FutureLinkedList
+	FutureThreadJob *		m_next;
+
+#if FUTURE_PROFILE_THREAD_POOL
+	f32						m_timeAdded;
+	f32						m_timeStarted;
+	f32						m_timeCompleted;
+#endif
+
+private:
+	JobFunction					m_function;
 	FinishedCallbackFunction	m_onFinished;
-
-	virtual void	OnFinished();
-	virtual void	OnRunThread();
-
-    IFutureThread();
-	IFutureThread(const IFutureThread& thread);
+	void *						m_data;
+	
 };
-
-extern FutureStrongPointer<IFutureThread>	FutureCreateThread();
-
-#define FR_THREAD_ENDED_UNUSUALLY ((FutureResult)-254590)
 
 #endif

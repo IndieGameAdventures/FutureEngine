@@ -67,11 +67,28 @@
 #	define FUTURE_PROFILE 0
 #endif
 
+/****************************************************************************************************/
+	// DEBUGGING DEFINES
 
 // determines if memory should be tracked for debugging
 #ifndef FUTURE_TRACK_MEMORY
 #	define FUTURE_TRACK_MEMORY (FUTURE_DEBUG || (defined(_PROFILE_MEMORY)) || FUTURE_PROFILE)
 #endif
+	
+// determines if FutureProxy should keep track of strong pointer, good for debugging but
+// but slightly slower to disabled in release
+#ifndef FUTURE_TRACK_STRONG_POINTERS
+#	define FUTURE_TRACK_STRONG_POINTERS (FUTURE_DEBUG || (defined(_TRACK_STRONG_POINTERS)) || FUTURE_PROFILE)
+#endif
+	
+// if true the FutureThreadPool will profile the time spent performing jobs
+#ifndef FUTURE_PROFILE_THREAD_POOL
+#	define FUTURE_PROFILE_THREAD_POOL (FUTURE_DEBUG || (defined(_PROFILE_THREAD_POOL)) || FUTURE_PROFILE)
+#endif
+	
+
+/****************************************************************************************************/
+	// CONFIG DEFINES
 
 // determines if FutureManaged should use smart pointers
 // Without this, strong and weak pointer do not perform any debugging, have very little error checking
@@ -84,18 +101,18 @@
 #	endif
 #endif
 
-// determines if FutureProxy should keep track of strong pointer, good for debugging but
-// but slightly slower to disabled in release
-#ifndef FUTURE_TRACK_STRONG_POINTERS
-#	define FUTURE_TRACK_STRONG_POINTERS (FUTURE_DEBUG || (defined(_TRACK_STRONG_POINTERS)) || FUTURE_PROFILE)
-#endif
-
 // Enables of disables multithreaded support. If disabled, FutureThread will throw errors if a second
 // thread is created and no multithread checks are done. Greatly increases performance if only using
 // one thread but should always be enabled if using more than one
 #ifndef FUTURE_ENABLE_MULTITHREADED
 #	define FUTURE_ENABLE_MULTITHREADED (FUTURE_PLATFORM_WINDOWS || defined(FUTURE_USES_PTHREAD))
 #endif
+
+	
+
+/****************************************************************************************************/
+	// UTILITY DEFINES
+
 
 // Returns the number of elements in an array
 #ifndef FUTURE_ARRAY_LENGTH

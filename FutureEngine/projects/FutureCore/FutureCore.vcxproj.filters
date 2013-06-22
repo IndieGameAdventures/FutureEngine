@@ -111,9 +111,6 @@
     <ClInclude Include="..\..\include\future\core\thread\pool\job.h">
       <Filter>Thread\Job</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\core\thread\pool\jobqueue.h">
-      <Filter>Thread\Job</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\future\core\thread\pool\threadpool.h">
       <Filter>Thread\Job</Filter>
     </ClInclude>
@@ -127,6 +124,15 @@
       <Filter>Tests</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\future\core\tests\threadtests.hpp">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\thread\thread\null_thread.h">
+      <Filter>Thread\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\thread\thread\workerthread.h">
+      <Filter>Thread\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\tests\threadpooltests.hpp">
       <Filter>Tests</Filter>
     </ClInclude>
   </ItemGroup>
@@ -172,6 +178,18 @@
     </ClCompile>
     <ClCompile Include="..\..\src\core\object\managedobject.cpp">
       <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\thread\pool\job.cpp">
+      <Filter>Thread\Job</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\thread\pool\threadpool.cpp">
+      <Filter>Thread\Job</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\thread\thread\null_thread.cpp">
+      <Filter>Thread\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\thread\thread\workerthread.cpp">
+      <Filter>Thread\thread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

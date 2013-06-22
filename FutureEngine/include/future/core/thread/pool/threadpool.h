@@ -19,80 +19,85 @@
 */
 
 /*
-*	IFutureThread interface contains a system thread. IFutureThread cannot
-*	be instantiated but must be created through CreateFutureThread which
-*	will ensure the newly created thread is compatible with the current
-*	platform and type settings.
+*	ThreadPool keeps a pool of threads available for performing Jobs. Threadpool
+*	keeps a list of jobs in a Priority Queue and pulls jobs off the queue whenever
+*	a thread becomes available. Jobs with higher priority are executed first.
 *
+*	When running in a single threaded application, ThreadPool executes each job
+*	on the main thread, when WaitForCompletion is called. If a timeout is specified
+*	then ThreadPool will execute as many jobs as possible within the allotted time
+*	then exit, leaving unfinished jobs in the queue.
 */
 
-#ifndef FUTURE_CORE_THREAD_THREAD_H
-#define FUTURE_CORE_THREAD_THREAD_H
+#ifndef FUTURE_CORE_THREAD_THREADPOOL_H
+#define FUTURE_CORE_THREAD_THREADPOOL_H
 
-#include <future/core/object/managedobject.h>
+#include <future/core/object/threadsafeobject.h>
+#include <future/core/object/singleton.h>
+#include <future/core/thread/thread/thread.h>
+#include <future/core/thread/pool/job.h>
 
-class IFutureThread : public FutureManagedObject
+#undef AddJob
+#undef GetJob
+
+class FutureWorkerThread;
+
+class FutureThreadPool : public FutureThreadSafeObject, public FutureSingleton<FutureThreadPool>
 {
 public:
-	enum FutureThreadPriority
-	{
-		FutureThreadPriority_Idle = -15,
-		FutureThreadPriority_Lowest = -2,
-		FutureThreadPriority_Low = -1,
-		FutureThreadPriority_Normal = 0,
-		FutureThreadPriority_High = 1,
-		FutureThreadPriority_Highest = 2,
-		FutureThreadPriority_Critical = 15
-	};
+	FUTURE_DECLARE_MEMORY_OPERATORS(FutureThreadPool);
 
-	typedef u32 (*ThreadFunction)(void*);
-	typedef void (*FinishedCallbackFunction)(void*);
+	// Returns the id of the newly added job
+	u32					AddJob(FutureThreadJob * job);
+	u32					AddJobAtPriority(FutureThreadJob * job, FutureThreadJob::FutureThreadJobPriority priority);
 
-	virtual ~IFutureThread() = 0;
+	// Removes all jobs from the queue, jobs currently executing will not be stopped
+	void				ClearJobQueue();
 
-	virtual FutureResult	Start(ThreadFunction function, string name = L"", FinishedCallbackFunction onFinished = NULL) = 0;
-	virtual void			Join() = 0;
-	virtual FutureResult	Join(u32 milliTimeOut) = 0;
-	virtual FutureResult	Join(f32 secondsTimeOut);
+	// Gets the job with the provided id
+	FutureThreadJob *	GetJob(u32 id);
+	// returns the number of jobs in the queue
+	u32					ActiveJobs();
 
-	virtual void			Wait(u32 millis) = 0;
-	virtual void			Wait(f32 seconds);
+	// Checks if there are any active jobs
+	bool				IsProcessing();
 
-	virtual u64				ThreadId() = 0;
-	virtual void*			GetHandle() = 0;
+	// Waits until the job queue is empty and all jobs are finished before returning
+	// In a single threaded environment, this must be called before any jobs are executed
+	void				WaitForCompletion(f32 secondsTimeOut = -1);
+	void				WaitForCompletion(u32 millisTimeOut);
 
-	virtual FutureThreadPriority	GetPriority() = 0;
-	virtual void					SetPriority(FutureThreadPriority priority) = 0;
- 
-	bool					IsStarted();
-	bool					IsRunning();
-	bool					IsFinished();
+	// functions for getting and setting the number of active threads
+	u32					GetNumThreads();
+	void				SetNumThreads(u32 thread);
 
-	string					Name();
+	// Profiling information
+	u32					TotalJobsExecuted();
+	f32					AverageWaitTime();
+	f32					TimeOnMainThread();
+	f32					TimeSpentExecutingJobs();
 
-	static u64				CurrentThreadId();
- 
 protected:
+	friend class FutureWorkerThread;
+	friend class FutureSingleton<FutureThreadPool>;
 
-	u32				m_priority;
-	u64				m_id;
-	string			m_name;
-	bool			m_started;
-	bool			m_finished;
-	void *			m_data;
+	FutureThreadPool();
+	~FutureThreadPool();
 
-	ThreadFunction				m_function;
-	FinishedCallbackFunction	m_onFinished;
+	FutureThreadJob *	GetNextJob();
+	void				JobFinished(FutureThreadJob * job);
 
-	virtual void	OnFinished();
-	virtual void	OnRunThread();
+#if FUTURE_ENABLE_MULTITHREADED
+	FutureWorkerThread *	m_threads;
+#endif
+	FutureThreadJob *		m_jobs;
+	u32						m_totalJobs;
 
-    IFutureThread();
-	IFutureThread(const IFutureThread& thread);
+#if FUTURE_PROFILE_THREAD_POOL
+	f32						m_threadTime;
+	f32						m_jobTime;
+	f32						m_waitTime;
+#endif
 };
-
-extern FutureStrongPointer<IFutureThread>	FutureCreateThread();
-
-#define FR_THREAD_ENDED_UNUSUALLY ((FutureResult)-254590)
 
 #endif

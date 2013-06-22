@@ -48,6 +48,8 @@ public:
 
 	virtual void			Wait(u32 millis);
 
+	virtual void			Kill();
+
 	virtual u64				ThreadId();
 	virtual void*			GetHandle();
 

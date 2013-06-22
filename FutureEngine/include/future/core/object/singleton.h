@@ -39,21 +39,25 @@ protected:
 	FutureSingleton()
 	{
 		FUTURE_ASSERT(ms_instance == NULL);
-		ms_instance = this;
+		ms_instance = reinterpret_cast<CLASS*>(this);
 	}
 	~FutureSingleton()
 	{
 		ms_instance = NULL;
 	}
-	static SPtr<CLASS> ms_instance;
+
+	static CLASS * ms_instance;
 
 public:
-	inline static SPtr<CLASS> GetInstance()
+	inline static CLASS* GetInstance()
 	{
+		static FutureCriticalSection fs_criticalSection;
+		fs_criticalSection.Lock();
 		if(ms_instance == NULL)
 		{
 			ms_instance = new CLASS();
 		}
+		fs_criticalSection.Unlock();
 		return ms_instance;
 	}
 
@@ -66,6 +70,7 @@ public:
 	inline static void DestroyInstance()
 	{
 		FUTURE_ASSERT(ms_instance != NULL);
+		delete ms_instance;
 		ms_instance = NULL;
 	}
 };
