@@ -42,7 +42,7 @@
 #define FUTURE_ENDIAN_LITTLE 1
 #define FUTURE_ENDIAN_BIG	0
 
-#if defined(__ANDROID__) || defined(ANDROID)
+#if defined(_ANDROID) || defined(_OUYA)
 #	undef  FUTURE_PLATFORM_ANDROID
 #	define FUTURE_PLATFORM_ANDROID 1
 #	if defined(_OUYA)
@@ -50,7 +50,7 @@
 #		define FUTURE_PLATFORM_OUYA 1
 #	endif
 #	define FUTURE_USES_PTHREAD
-#elif defined(__linux__) || defined(__unix__)
+#elif defined(_LINUX)
 #	undef  FUTURE_PLATFORM_LINUX
 #	define FUTURE_PLATFORM_LINUX 1
 #	define FUTURE_USES_PTHREAD

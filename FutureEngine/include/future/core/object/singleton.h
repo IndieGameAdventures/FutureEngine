@@ -51,13 +51,6 @@ protected:
 public:
 	inline static CLASS* GetInstance()
 	{
-		static FutureCriticalSection fs_criticalSection;
-		fs_criticalSection.Lock();
-		if(ms_instance == NULL)
-		{
-			ms_instance = new CLASS();
-		}
-		fs_criticalSection.Unlock();
 		return ms_instance;
 	}
 

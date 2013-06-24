@@ -108,7 +108,10 @@
 #	define FUTURE_ENABLE_MULTITHREADED (FUTURE_PLATFORM_WINDOWS || defined(FUTURE_USES_PTHREAD))
 #endif
 
-	
+// The number of default threads to the thread pool should create
+#ifndef FUTURE_DEFAULT_THREAD_COUNT
+#	define FUTURE_DEFAULT_THREAD_COUNT 6
+#endif
 
 /****************************************************************************************************/
 	// UTILITY DEFINES

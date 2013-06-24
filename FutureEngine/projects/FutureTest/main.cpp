@@ -24,7 +24,7 @@
 #include <future/core/tests/threadtests.hpp>
 #include <future/core/tests/threadpooltests.hpp>
 
-void main(char ** args)
+void FutureMain()
 {
 	//FutureDebugTests::TestLog();
 	//FutureDebugTests::TestBreakPoint();

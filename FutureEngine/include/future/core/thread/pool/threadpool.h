@@ -40,6 +40,7 @@
 #undef AddJob
 #undef GetJob
 
+// TODO: add multiple job queues so threads don't have to wait on each other to get a new job
 class FutureWorkerThread;
 
 class FutureThreadPool : public FutureThreadSafeObject, public FutureSingleton<FutureThreadPool>
