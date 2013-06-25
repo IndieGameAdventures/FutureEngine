@@ -87,4 +87,23 @@
 #	error Failed to define a supported platform!
 #endif
 
+
+#if defined(__i386__) || defined(_M_IX86) || defined(_M_AMD64) || defined(_M_IA64) ||| defined(_M_X64)
+#	if defined(_M_IX86_FP)
+#		if _M_IX86_FP != 0 && _M_IX86_FP != 1
+#			define FUTURE_USES_SSE
+#		endif
+#	else
+#		define FUTURE_USES_SSE
+#	endif
+#elif defined(arm) || defined(__arm__) || defined(_M_ARM) || defined(_M_ARM_FP)
+#	if defined(__ARM_ARCH_7A__) || defined(__ARM_ARCH_7__) || defined(__ARM_ARCH_7R__) || defined (__ARM_ARCH_7M__) || ( defined(_M_ARM) && (_M_ARM >= 7) )
+#		define FUTURE_USES_NEON 1
+#   endif
+#elif defined(__PPC) || defined(__PPC__) || defined(_ARCH_PPC) || defined(__POWERPC__)
+#	if defined(__ALTIVEC__) || defined(__VEC__)
+#		defined FUTURE_USES_ALTIVEC
+#	endif
+#endif
+
 #endif
