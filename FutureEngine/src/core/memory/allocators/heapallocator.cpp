@@ -26,7 +26,6 @@
 #include <future/core/memory/allocators/heapallocator.h>
 #include <future/core/memory/memory.h>
 #include <future/core/memory/tracker/memorytracker.h>
-#include <new>
 
 /*******************************************************************/
 // Heap Allocator

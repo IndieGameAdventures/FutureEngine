@@ -221,17 +221,17 @@ FutureStrongPointer<MANAGED>::FutureStrongPointer(const FutureSmartPointer<MANAG
 template<class MANAGED> 
 inline void FutureStrongPointer<MANAGED>::AddToProxy()
 {
-	if(Proxy())
+	if(FutureSmartPointer<MANAGED>::Proxy())
 	{
-		Proxy()->AddStrongPointer(this);
+		FutureSmartPointer<MANAGED>::Proxy()->AddStrongPointer(this);
 	}
 }
 template<class MANAGED> 
 inline void FutureStrongPointer<MANAGED>::RemoveFromProxy()
 {
-	if(Proxy())
+	if(FutureSmartPointer<MANAGED>::Proxy())
 	{
-		Proxy()->RemoveStrongPointer(this);
+		FutureSmartPointer<MANAGED>::Proxy()->RemoveStrongPointer(this);
 	}
 }
 
@@ -252,16 +252,16 @@ FutureWeakPointer<MANAGED>::FutureWeakPointer(const FutureSmartPointer<MANAGED>&
 template<class MANAGED> 
 inline void FutureWeakPointer<MANAGED>::AddToProxy()
 {
-	if(Proxy())
+	if(FutureSmartPointer<MANAGED>::Proxy())
 	{
-		Proxy()->AddWeakPointer(this);
+		FutureSmartPointer<MANAGED>::Proxy()->AddWeakPointer(this);
 	}
 }
 template<class MANAGED> 
 inline void FutureWeakPointer<MANAGED>::RemoveFromProxy()
 {
-	if(Proxy())
+	if(FutureSmartPointer<MANAGED>::Proxy())
 	{
-		Proxy()->RemoveWeakPointer(this);
+		FutureSmartPointer<MANAGED>::Proxy()->RemoveWeakPointer(this);
 	}
 }

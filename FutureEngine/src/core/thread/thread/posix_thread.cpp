@@ -30,6 +30,7 @@
 #include <future/core/thread/thread/posix_thread.h>
 #include <future/core/utils/timer/timer.h>
 #include <unistd.h>
+#include <asm-generic/errno-base.h>
 
 void * FutureThread::RunThreadInternal(void * param)
 {
@@ -47,7 +48,7 @@ FutureThread::~FutureThread()
 {
 	if(IsRunning())
 	{
-		pthread_kill(m_thread);
+		pthread_kill(m_thread, 0);
 	}
 }
 
@@ -65,7 +66,7 @@ FutureResult FutureThread::Start(ThreadFunction function, void * data, FinishedC
 
 	pthread_attr_t attr;
 	pthread_attr_init(&attr);
-	__sched_param priority;
+	sched_param priority;
 	priority.sched_priority = m_priority;
 	pthread_attr_setschedparam(&attr, &priority);
 
@@ -74,7 +75,7 @@ FutureResult FutureThread::Start(ThreadFunction function, void * data, FinishedC
 	m_started = true;
 	Unlock();
 
-    switch (errno) 
+    switch (result) 
 	{
     case EINVAL:
 		m_started = false;
@@ -92,7 +93,7 @@ FutureResult FutureThread::Start(ThreadFunction function, void * data, FinishedC
 void FutureThread::Join()
 {
 	FUTURE_ASSERT(m_thread);
-	pthread_join(m_thread);
+	pthread_join(m_thread, NULL);
 }
 
 FutureResult FutureThread::Join(u32 milliTimeOut)
@@ -141,11 +142,11 @@ void FutureThread::SetPriority(FutureThreadPriority priority)
 	m_priority = priority;
 	if(m_thread)
 	{
-		__sched_param priority;
+		sched_param priority;
+		int policy;
+		pthread_getschedparam(m_thread, &policy, &priority);
 		priority.sched_priority = m_priority;
-		u32 policy;
-		pthread_attr_getschedpolicy(&m_thread, &policy);
-		pthread_setschedparam(&m_thread, policy, &priority);
+		pthread_setschedparam(m_thread, policy, &priority);
 	}
 }
 

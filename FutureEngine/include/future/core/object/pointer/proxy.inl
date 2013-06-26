@@ -111,7 +111,7 @@ inline MANAGED * FutureProxy<MANAGED>::GetManaged()
 // function will not keep track of the strong pointer but just keep track
 // of how many there are.
 template<class MANAGED>
-void FutureProxy<MANAGED>::AddStrongPointer(FutureSmartPointerBase * pointer = NULL) 
+void FutureProxy<MANAGED>::AddStrongPointer(FutureSmartPointerBase * pointer) 
 { 
 	Lock();
 #if FUTURE_TRACK_STRONG_POINTERS
@@ -162,7 +162,7 @@ void FutureProxy<MANAGED>::AddWeakPointer(FutureSmartPointerBase * pointer)
 // simply decrement the pointer count. If there are no strong pointers left, this will
 // automatically delete managed
 template<class MANAGED>
-void FutureProxy<MANAGED>::RemoveStrongPointer(FutureSmartPointerBase * pointer = NULL) 
+void FutureProxy<MANAGED>::RemoveStrongPointer(FutureSmartPointerBase * pointer) 
 { 
 	Lock();
 #if FUTURE_TRACK_STRONG_POINTERS

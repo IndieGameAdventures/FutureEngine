@@ -1,3 +1,5 @@
 FutureEngine/tmp/
 *.lastcodeanalysissucceeded
 *.opensdf
+objs/
+*Fake*.so

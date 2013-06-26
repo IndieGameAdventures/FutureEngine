@@ -33,14 +33,14 @@ FutureArray<T>::FutureArray()
 template<typename T>
 FutureArray<T>::~FutureArray()
 {	
-	for(u32 i = 0; i < m_size; ++t_i)
+	for(u32 i = 0; i < m_size; ++i)
 	{
 		m_a[i].~T();
 	}
 
 	if(m_a)
 	{
-		FREE(m_a);
+		FUTURE_FREE(m_a);
 	}
 }
 
@@ -135,11 +135,11 @@ void FutureArray<T>::Clear()
 
 	if(m_a)
 	{
-		FREE(m_a);
+		FUTURE_FREE(m_a);
 	}
 
 	m_allocated = 0;
-	m_c = 0;
+	m_size = 0;
 	m_a = NULL;
 	Unlock();
 }
@@ -261,7 +261,7 @@ void FutureArray< T >::EnsureSizeNoLock(u32 size)
 	}
 
 	u32 bytes = m_allocated * sizeof(T);
-	T * aNew = static_cast<T *>(ALLOC(bytes));
+	T * aNew = static_cast<T *>(FUTURE_ALLOC(bytes, L"FutureArray"));
 	FUTURE_ASSERT(aNew);
 
 	for(u32 i = 0; i < m_size; ++i)
@@ -272,7 +272,7 @@ void FutureArray< T >::EnsureSizeNoLock(u32 size)
 
 	if(m_a)
 	{
-		FREE(m_a);
+		FUTURE_FREE(m_a);
 	}
 
 	m_a = aNew;

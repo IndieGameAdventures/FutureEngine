@@ -33,8 +33,6 @@
 #include <future/core/thread/thread/workerthread.h>
 #include <future/core/utils/timer/timer.h>
 
-FutureThreadPool * FutureSingleton<FutureThreadPool>::ms_instance;
-
 FutureThreadPool::FutureThreadPool()
 	: m_jobs(NULL)
 #if FUTURE_ENABLE_MULTITHREADED

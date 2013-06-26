@@ -60,8 +60,8 @@ public:
 	// not change this one, otherwise this string will be changed
 	FutureString &	ToUppercase(bool createNew = false);
 	FutureString &	ToLowercase(bool createNew = false);
-	FutureString &	ToUppercase() const;
-	FutureString &	ToLowercase() const;
+	FutureString	ToUppercase() const;
+	FutureString	ToLowercase() const;
 
 	// compares with the given string
 	// returns -1 if this string comes before the other alphabetically
@@ -78,16 +78,16 @@ public:
 	u32			LastIndexOf(const FutureString & str) const;
 
 	// finds all occurrences of the given string and returns a new string using replace in those locations
-	FutureString &	Replace(const FutureString & find, const FutureString & replace) const;
+	FutureString	Replace(const FutureString & find, const FutureString & replace) const;
 
 	// splits the string around the given string and places the sections in ary
 	void			Split(const FutureString & str, FutureArray<FutureString> * ary) const;
 	
 	// Returns the requested substring of this string, if count is < 0 this will go to the end of the string
-	FutureString &	SubString(u32 start, u32 count = -1) const;
+	FutureString	SubString(u32 start, u32 count = -1) const;
 
 	// Returns a new string the is equal to this + str
-	FutureString &	Concat(const FutureString & str) const;
+	FutureString	Concat(const FutureString & str) const;
 
 	// returns the actual array of chars in this string
 	// be very careful using this because a buffer size has already been
@@ -108,9 +108,9 @@ public:
 	FutureString &	operator+=(const char * str);
 	FutureString &	operator+=(const FutureString & str);
 
-	FutureString &	operator+(const wchar_t * str) const;
-	FutureString &	operator+(const char * str) const;
-	FutureString &	operator+(const FutureString & str) const;
+	FutureString	operator+(const wchar_t * str) const;
+	FutureString	operator+(const char * str) const;
+	FutureString	operator+(const FutureString & str) const;
 
 	operator bool() const
 	{ return !IsEmpty(); }

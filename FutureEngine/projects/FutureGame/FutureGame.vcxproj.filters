@@ -17,12 +17,6 @@
     <ClCompile Include="..\..\src\game\system\system.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\game\system\platform\system_android.c">
-      <Filter>Systems\Platforms</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\game\system\platform\system_linux.c">
-      <Filter>Systems\Platforms</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\game\system\platform\system_win32.cpp">
       <Filter>Systems\Platforms</Filter>
     </ClCompile>

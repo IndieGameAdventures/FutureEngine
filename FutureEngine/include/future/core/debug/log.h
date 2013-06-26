@@ -35,7 +35,7 @@ public:
 	static const u8 MESSAGE_ERROR = 4;
 };
 
-typedef void (*FutureLogFunction)(u8 severness, string file, u32 line, string message, ...);
+typedef void (*FutureLogFunction)(u8 severness, string file, u32 line, ...);
 extern FutureLogFunction futureLogFunction;
 
 // Set the global logging handler
@@ -43,19 +43,19 @@ void FutureSetLogFunction(FutureLogFunction logFunction);
 
 #if FUTURE_DEBUG || FUTURE_PROFILE
 
-#	define FUTURE_LOG_VERBOSE(message, ...)	futureLogFunction(FutureMessageSeverness::MESSAGE_VERBOSE, WFILE, __LINE__, message, __VA_ARGS__);
-#	define FUTURE_LOG_INFO(message, ...)	futureLogFunction(FutureMessageSeverness::MESSAGE_INFO, WFILE, __LINE__, message, __VA_ARGS__);
-#	define FUTURE_LOG_DEBUG(message, ...)	futureLogFunction(FutureMessageSeverness::MESSAGE_DEBUG, WFILE, __LINE__, message, __VA_ARGS__);
-#	define FUTURE_LOG_WARNING(message, ...)	futureLogFunction(FutureMessageSeverness::MESSAGE_WARNING, WFILE, __LINE__, message, __VA_ARGS__);
-#	define FUTURE_LOG_ERROR(message, ...)	futureLogFunction(FutureMessageSeverness::MESSAGE_ERROR, WFILE, __LINE__, message, __VA_ARGS__);
+#	define FUTURE_LOG_VERBOSE(...)	futureLogFunction(FutureMessageSeverness::MESSAGE_VERBOSE, WFILE, __LINE__, __VA_ARGS__);
+#	define FUTURE_LOG_INFO(...)	futureLogFunction(FutureMessageSeverness::MESSAGE_INFO, WFILE, __LINE__, __VA_ARGS__);
+#	define FUTURE_LOG_DEBUG(...)	futureLogFunction(FutureMessageSeverness::MESSAGE_DEBUG, WFILE, __LINE__, __VA_ARGS__);
+#	define FUTURE_LOG_WARNING(...)	futureLogFunction(FutureMessageSeverness::MESSAGE_WARNING, WFILE, __LINE__, __VA_ARGS__);
+#	define FUTURE_LOG_ERROR(...)	futureLogFunction(FutureMessageSeverness::MESSAGE_ERROR, WFILE, __LINE__, __VA_ARGS__);
 
 #else
 
-#	define FUTURE_LOG_VERBOSE(message, ...)
-#	define FUTURE_LOG_INFO(message, ...)
-#	define FUTURE_LOG_DEBUG(message, ...)
-#	define FUTURE_LOG_WARNING(message, ...)
-#	define FUTURE_LOG_ERROR(message, ...)	futureLogFunction(FutureMessageSeverness::MESSAGE_ERROR, WFILE, __LINE__, message, __VA_ARGS__);
+#	define FUTURE_LOG_VERBOSE(...)
+#	define FUTURE_LOG_INFO(...)
+#	define FUTURE_LOG_DEBUG(...)
+#	define FUTURE_LOG_WARNING(...)
+#	define FUTURE_LOG_ERROR(...)	futureLogFunction(FutureMessageSeverness::MESSAGE_ERROR, WFILE, __LINE__, __VA_ARGS__);
 
 #endif
 

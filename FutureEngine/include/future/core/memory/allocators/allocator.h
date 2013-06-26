@@ -29,6 +29,12 @@
 #define FUTURE_CORE_MEMORY_ALLOCATOR_H
 
 #include <future/core/type/type.h>
+#include <malloc.h>
+
+#if !FUTURE_PLATFORM_WINDOWS
+#	define _aligned_malloc(bytes, align)	memalign(align, bytes)
+#	define _aligned_free(data)				free(data)
+#endif
 
 struct FutureMemoryParam;
 

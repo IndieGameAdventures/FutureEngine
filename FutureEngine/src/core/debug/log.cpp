@@ -7,12 +7,13 @@
 #endif
 
 // default assert to be used unless another function is specified
-static void FutureLogFunctionDefault(u8 severness, string file, u32 line, string message, ...)
+static void FutureLogFunctionDefault(u8 severness, string file, u32 line, ...)
 {
 	va_list val;
-	va_start(val, message);
+	va_start(val, line);
 
 	wchar_t buffer[2048];
+	string message = va_arg(val, string);
 	int count = vswprintf(buffer, FUTURE_ARRAY_LENGTH(buffer), message, val);
 	if(count > FUTURE_ARRAY_LENGTH(buffer) || count < 0)
 	{
@@ -21,7 +22,7 @@ static void FutureLogFunctionDefault(u8 severness, string file, u32 line, string
 
 	va_end(val);
 
-	wchar_t * se;
+	const wchar_t * se;
 	switch(severness)
 	{
 	case FutureMessageSeverness::MESSAGE_VERBOSE:
@@ -47,12 +48,12 @@ static void FutureLogFunctionDefault(u8 severness, string file, u32 line, string
 #if FUTURE_PLATFORM_ANDROID
 	char androidBuffer[2048];
 	char androidFile[256];
-	count = sprintf(androidBuffer, FUTURE_ARRAY_LENGTH(androidBuffer), "%ls: [%ls:%d] %ls", se, file, line, buffer);
+	count = sprintf(androidBuffer, "%ls: [%ls:%d] %ls", se, file, line, buffer);
 	if(count > FUTURE_ARRAY_LENGTH(androidBuffer) || count < 0)
 	{
 		FUTURE_DEBUG_HALT();
 	}
-	count = sprintf(androidFile, FUTURE_ARRAY_LENGTH(androidFile), "%ls", file);
+	count = sprintf(androidFile, "%ls", file);
 	if(count > FUTURE_ARRAY_LENGTH(androidFile) || count < 0)
 	{
 		FUTURE_DEBUG_HALT();
@@ -69,7 +70,7 @@ static void FutureLogFunctionDefault(u8 severness, string file, u32 line, string
 		__android_log_print(ANDROID_LOG_DEBUG, androidFile, androidBuffer);
 		break;
 	case FutureMessageSeverness::MESSAGE_WARNING:
-		__android_log_print(ANDROID_LOG_WARNING, androidFile, androidBuffer);
+		__android_log_print(ANDROID_LOG_WARN, androidFile, androidBuffer);
 		break;
 	case FutureMessageSeverness::MESSAGE_ERROR:
 		__android_log_print(ANDROID_LOG_ERROR, androidFile, androidBuffer);

@@ -58,7 +58,7 @@ public:
 	T & Remove(const T & t);
 
 	// Return the index of the object
-	int IndexOf(const T & t);
+	u32 IndexOf(const T & t);
 
 	// Expands the array until it is large enough to hold the specified number
 	// of elements. The array will most likely be larger than this.

@@ -42,7 +42,7 @@
 #define FUTURE_ENDIAN_LITTLE 1
 #define FUTURE_ENDIAN_BIG	0
 
-#if defined(_ANDROID) || defined(_OUYA)
+#if defined(_ANDROID) || defined(_OUYA) || defined(__ANDROID__) || defined(__android__)
 #	undef  FUTURE_PLATFORM_ANDROID
 #	define FUTURE_PLATFORM_ANDROID 1
 #	if defined(_OUYA)
@@ -55,11 +55,11 @@
 #	define FUTURE_PLATFORM_LINUX 1
 #	define FUTURE_USES_PTHREAD
 #elif defined(__APPLE__) || defined(Macintosh) || defined(macintosh)
-    #include "TargetConditionals.h"
-    #if TARGET_OS_IPHONE   
+#	include "TargetConditionals.h"
+#	if TARGET_OS_IPHONE   
 #		undef  FUTURE_PLATFORM_IPHONE
 #		define FUTURE_PLATFORM_IPHONE 1
-    #elif TARGET_IPHONE_SIMULATOR
+#	elif TARGET_IPHONE_SIMULATOR
 #		undef  FUTURE_PLATFORM_IPHONE
 #		define FUTURE_PLATFORM_IPHONE 1
 #		define FUTURE_IPHONE_SIMULATOR
@@ -88,7 +88,7 @@
 #endif
 
 
-#if defined(__i386__) || defined(_M_IX86) || defined(_M_AMD64) || defined(_M_IA64) ||| defined(_M_X64)
+#if defined(__i386__) || defined(_M_IX86) || defined(_M_AMD64) || defined(_M_IA64) || defined(_M_X64)
 #	if defined(_M_IX86_FP)
 #		if _M_IX86_FP != 0 && _M_IX86_FP != 1
 #			define FUTURE_USES_SSE

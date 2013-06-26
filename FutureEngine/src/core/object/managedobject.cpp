@@ -25,9 +25,13 @@
 #include <future/core/memory/memory.h>
 #include <future/core/object/pointer/proxy.h>
 #include <future/core/object/managedobject.h>
+#include <future/core/object/singleton.h>
 
 FuturePoolAllocator *	FutureProxyBase::ms_poolAllocator = NULL;
 u32						FutureProxyBase::ms_proxyCount = 0;
+
+template<class CLASS>
+CLASS * FutureSingleton<CLASS>::ms_instance;
 
 FutureManagedObject::FutureManagedObject() 
 : m_proxy(NULL)

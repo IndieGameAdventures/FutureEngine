@@ -24,6 +24,11 @@
 */
 #include <future/core/utils/string.h>
 #include <string.h>
+#include <wchar.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+#pragma warning(disable:4996)
 
 wchar_t * FutureString::WideFromChar(const char * str)
 {
@@ -141,13 +146,13 @@ FutureString& FutureString::ToLowercase(bool createNew)
 		return *this;
 	}
 }
-FutureString& FutureString::ToUppercase() const
+FutureString FutureString::ToUppercase() const
 {
 	FutureString str = m_string;
 	return str.ToUppercase();
 }
 
-FutureString& FutureString::ToLowercase() const
+FutureString FutureString::ToLowercase() const
 {
 	FutureString str = m_string;
 	return str.ToLowercase();
@@ -155,7 +160,7 @@ FutureString& FutureString::ToLowercase() const
 
 u32 FutureString::Compare(const FutureString & str) const
 {
-	return wcsicmp(WideString(), str.WideString());
+	return wcscmp(WideString(), str.WideString());
 }
 
 bool FutureString::EndsWith(const FutureString & str) const
@@ -235,7 +240,7 @@ u32	 FutureString::IndexOf(const FutureString & str) const
 
 u32 FutureString::LastIndexOf(const FutureString & str) const
 {
-	for(u32 i = Length() - str.Length(); i >= 0; --i)
+	for(s32 i = Length() - str.Length(); i >= 0; --i)
 	{
 		if(CharAt(i) == str.CharAt(0))
 		{
@@ -257,7 +262,7 @@ u32 FutureString::LastIndexOf(const FutureString & str) const
 }
 
 
-FutureString & FutureString::Replace(const FutureString & find, const FutureString & replace) const
+FutureString FutureString::Replace(const FutureString & find, const FutureString & replace) const
 {
 	if(find.Length() == 0)
 	{
@@ -274,11 +279,11 @@ FutureString & FutureString::Replace(const FutureString & find, const FutureStri
 	{
 		factor *= 2;
 	}
-	u32 maxLength = (Length() * factor) + 1;
+	u32 maxLength = (u32)(Length() * factor) + 2;
 	wchar_t * buffer = new wchar_t[maxLength];
 	u32 bufferIndex = 0;
 
-	for(u32 i = Length() - find.Length(); i >= 0; --i)
+	for(s32 i = Length() - find.Length(); i >= 0 && bufferIndex < (maxLength - 1); --i)
 	{
 		if(CharAt(i) == find.CharAt(0))
 		{
@@ -312,11 +317,14 @@ FutureString & FutureString::Replace(const FutureString & find, const FutureStri
 			++bufferIndex;
 		}
 	}
+	buffer[bufferIndex] = 0;
+	FutureString newStr(buffer);
+	return newStr;
 }
 
 void FutureString::Split(const FutureString & str, FutureArray<FutureString> * a) const
 {
-	FUTURE_ASSERT(str.Length > 0 && a);
+	FUTURE_ASSERT(str.Length() > 0 && a);
 	u32 i = IndexOf(str);
 	if(i >= 0)
 	{
@@ -329,7 +337,7 @@ void FutureString::Split(const FutureString & str, FutureArray<FutureString> * a
 	}
 }
 
-FutureString & FutureString::SubString(u32 start, u32 count) const
+FutureString FutureString::SubString(u32 start, u32 count) const
 {
 	FUTURE_ASSERT(start >= 0 && start < Length() && start + count <= Length() && count != 0);
 
@@ -341,7 +349,7 @@ FutureString & FutureString::SubString(u32 start, u32 count) const
 	return strNew;
 }
 
-FutureString & FutureString::Concat(const FutureString & str) const
+FutureString FutureString::Concat(const FutureString & str) const
 {
 	FutureString strNew;
 	strNew = wcscat(m_string, str.WideString());
@@ -422,7 +430,7 @@ void FutureString::ForceSize(u32 size)
 {
 	if(size < m_length)
 	{
-		*(m_string + size) = NULL;
+		*(m_string + size) = 0;
 		m_length = size;
 	}
 }

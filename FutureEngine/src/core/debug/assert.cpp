@@ -3,13 +3,14 @@
 #include <wchar.h>
 
 // default assert to be used unless another function is specified
-static void FutureAssertDefault(string file, u32 line, string message, ...)
+static void FutureAssertDefault(string file, u32 line, ...)
 {
 	va_list val;
-	va_start(val, message);
+	va_start(val, line);
 
 	wchar_t buffer[2048];
-	int count = vswprintf_s(buffer, FUTURE_ARRAY_LENGTH(buffer), message, val);
+	string message = va_arg(val, string);
+	int count = vswprintf(buffer, FUTURE_ARRAY_LENGTH(buffer), message, val);
 	if(count > FUTURE_ARRAY_LENGTH(buffer) || count < 0)
 	{
 		FUTURE_DEBUG_HALT();
@@ -21,12 +22,13 @@ static void FutureAssertDefault(string file, u32 line, string message, ...)
 	FUTURE_DEBUG_HALT();
 }
 
-static void FutureAssertCritDefault(string file, u32 line, s32 errorCode, string message, ...)
+static void FutureAssertCritDefault(string file, u32 line, s32 errorCode, ...)
 {
 	va_list val;
-	va_start(val, message);
+	va_start(val, errorCode);
 
 	wchar_t buffer[2048];
+	string message = va_arg(val, string);
 	int count = vswprintf(buffer, FUTURE_ARRAY_LENGTH(buffer), message, val);
 	if(count > FUTURE_ARRAY_LENGTH(buffer) || count < 0)
 	{

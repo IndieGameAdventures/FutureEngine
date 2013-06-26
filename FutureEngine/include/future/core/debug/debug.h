@@ -29,7 +29,12 @@
 #include <future\core\type\type.h>
 
 #if FUTURE_DEBUG || FUTURE_PROFILE
-#	define FUTURE_DEBUG_HALT()	__debugbreak()
+#	if FUTURE_PLATFORM_WINDOWS
+#		define FUTURE_DEBUG_HALT()	__debugbreak()
+#	else
+#		include <signal.h>
+#		define FUTURE_DEBUG_HALT() raise(SIGTRAP)
+#	endif
 #else
 #	define FUTURE_DEBUG_HALT()
 #endif

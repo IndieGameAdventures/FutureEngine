@@ -39,8 +39,8 @@
 // if failed it calls g_pFnAssert to handle showing the error
 // assert is not reported in release builds but assert_crit is
 
-typedef void (*FutureAssertFunction)(string file, u32 line, string messageFormat, ...);
-typedef void (*FutureAssertCritFunction)(string file, u32 line, s32 errorNum, string messageFormat, ...);
+typedef void (*FutureAssertFunction)(string file, u32 line, ...);
+typedef void (*FutureAssertCritFunction)(string file, u32 line, s32 errorNum, ...);
 
 extern FutureAssertFunction futureAssertFunction;
 extern FutureAssertCritFunction futureAssertCritFunction;
@@ -51,14 +51,14 @@ void FutureSetAssertCritFunction(FutureAssertCritFunction assertCritFunction);
 
 #if FUTURE_DEBUG || FUTURE_PROFILE
 #	define FUTURE_ASSERT(check)						if(!(check)){ futureAssertFunction(WFILE, __LINE__, WIDEN(TOSTRING(check))); }
-#	define FUTURE_ASSERT_MSG(check, message, ...)	if(!(check)){ futureAssertFunction(WFILE, __LINE__, message, __VA_ARGS__); }
+#	define FUTURE_ASSERT_MSG(check, ...)	if(!(check)){ futureAssertFunction(WFILE, __LINE__, __VA_ARGS__); }
 #else
 #	define FUTURE_ASSERT(check)
-#	define FUTURE_ASSERT_MSG(check, message, ... )
+#	define FUTURE_ASSERT_MSG(check, ...)
 #endif
 
 #define FUTURE_ASSERT_CRIT(check, errorCode)					if(!(check)) { futureAssertCritFunction(WFILE, __LINE__, errorCode, WIDEN(TOSTRING(check))); }
-#define FUTURE_ASSERT_CRIT_MSG(check, errorCode, message, ...)	if(!(check)) { futureAssertCritFunction(WFILE, __LINE__, errorCode, message, __VA_ARGS__); }
+#define FUTURE_ASSERT_CRIT_MSG(check, errorCode, ...)	if(!(check)) { futureAssertCritFunction(WFILE, __LINE__, errorCode, __VA_ARGS__); }
 
 #endif
 

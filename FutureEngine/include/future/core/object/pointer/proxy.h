@@ -33,7 +33,7 @@
 #include <future/core/object/threadsafeobject.h>
 #include <future/core/memory/allocators/poolallocator.h>
 
-class FutureManaged;
+class FutureManagedObject;
 class FutureSmartPointerBase;
 
 //useful to have a non-templated base

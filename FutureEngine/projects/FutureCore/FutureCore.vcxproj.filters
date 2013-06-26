@@ -37,6 +37,12 @@
     <Filter Include="Thread\Job">
       <UniqueIdentifier>{7cc5a635-6966-4984-a508-61839f16d63f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\Containers">
+      <UniqueIdentifier>{f06078c3-424d-4837-b566-d022c5ee431b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\String">
+      <UniqueIdentifier>{b8667b84-004b-4e74-8660-daeee401a977}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\future\core\memory\tracker\memorytracker.h">
@@ -52,9 +58,6 @@
       <Filter>Type</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\future\core\debug\debug.h">
-      <Filter>Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\core\debug\error\assert.h">
       <Filter>Debug</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\future\core\debug\log.h">
@@ -102,9 +105,6 @@
     <ClInclude Include="..\..\include\future\core\thread\thread\thread.h">
       <Filter>Thread\thread</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\core\thread\thread\posix_thread.h">
-      <Filter>Thread\thread</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\future\core\thread\thread\win_thread.h">
       <Filter>Thread\thread</Filter>
     </ClInclude>
@@ -134,6 +134,15 @@
     </ClInclude>
     <ClInclude Include="..\..\include\future\core\tests\threadpooltests.hpp">
       <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\utils\container\array.h">
+      <Filter>Utils\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\utils\string.h">
+      <Filter>Utils\String</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\debug\assert.h">
+      <Filter>Debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +176,6 @@
     <ClCompile Include="..\..\src\core\memory\allocators\stackallocator.cpp">
       <Filter>Memory\allocators</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\core\thread\thread\posix_thread.cpp">
-      <Filter>Thread\thread</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\core\thread\thread\thread.cpp">
       <Filter>Thread\thread</Filter>
     </ClCompile>
@@ -191,6 +197,9 @@
     <ClCompile Include="..\..\src\core\thread\thread\workerthread.cpp">
       <Filter>Thread\thread</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\core\utils\string.cpp">
+      <Filter>Utils\String</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\future\core\object\pointer\proxy.inl">
@@ -198,6 +207,9 @@
     </None>
     <None Include="..\..\include\future\core\object\pointer\smartpointer.inl">
       <Filter>Objects\Pointers</Filter>
+    </None>
+    <None Include="..\..\include\future\core\utils\container\array.inl">
+      <Filter>Utils\Containers</Filter>
     </None>
   </ItemGroup>
 </Project>

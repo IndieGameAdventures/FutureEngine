@@ -31,6 +31,11 @@
 
 #include <future/core/object/managedobject.h>
 
+#if FUTURE_ENABLE_MULTITHREADED && defined(FUTURE_USES_PTHREAD)
+#	include <unistd.h>
+#	define Sleep(milli) usleep(milli * 1000)
+#endif
+
 class IFutureThread : public FutureManagedObject
 {
 public:

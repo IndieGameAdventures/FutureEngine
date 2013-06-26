@@ -53,7 +53,7 @@ FutureCriticalSection::~FutureCriticalSection()
 #if FUTURE_PLATFORM_WINDOWS
 	DeleteCriticalSection(&m_mutex);
 #elif defined(FUTURE_USES_PTHREAD)
-	pthread_mutex_destroy(&m_Mutex);
+	pthread_mutex_destroy(&m_mutex);
 #endif
 }
 	
@@ -65,7 +65,7 @@ void FutureCriticalSection::Lock()
 #if FUTURE_PLATFORM_WINDOWS
 	EnterCriticalSection(&m_mutex);
 #elif defined(FUTURE_USES_PTHREAD)
-	pthread_mutex_lock(&m_Mutex);
+	pthread_mutex_lock(&m_mutex);
 #endif
 }
 	
@@ -77,7 +77,7 @@ void FutureCriticalSection::Unlock()
 #if FUTURE_PLATFORM_WINDOWS
 	LeaveCriticalSection(&m_mutex);
 #elif defined(FUTURE_USES_PTHREAD)
-	pthread_mutex_unlock(&m_Mutex);
+	pthread_mutex_unlock(&m_mutex);
 #endif
 }
 	
@@ -90,7 +90,7 @@ bool FutureCriticalSection::TryLock()
 #if FUTURE_PLATFORM_WINDOWS
 	return TryEnterCriticalSection(&m_mutex) == 1;
 #elif defined(FUTURE_USES_PTHREAD)
-	return pthread_mutex_trylock(&m_Mutex) == 0;
+	return pthread_mutex_trylock(&m_mutex) == 0;
 #endif
 }
 

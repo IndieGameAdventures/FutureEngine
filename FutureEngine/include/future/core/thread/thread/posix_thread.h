@@ -61,6 +61,5 @@ protected:
 	pthread_t m_thread;
 };
 
-extern FutureStrongPointer<IFutureThread>	FutureCreateThread();
 
 #endif

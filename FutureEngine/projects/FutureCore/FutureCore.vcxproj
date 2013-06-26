@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Android Debug|Win32">
+      <Configuration>Android Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -20,6 +24,12 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Android Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
@@ -45,6 +55,9 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Android Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -53,6 +66,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)bin\$(Version)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)tmp\$(Configuration)\</IntDir>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Android Debug|Win32'">
     <OutDir>$(SolutionDir)bin\$(Version)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)tmp\$(Configuration)\</IntDir>
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -68,6 +86,18 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Android Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
@@ -112,8 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\future\core\debug\assert.h" />
     <ClInclude Include="..\..\include\future\core\debug\debug.h" />
-    <ClInclude Include="..\..\include\future\core\debug\error\assert.h" />
     <ClInclude Include="..\..\include\future\core\debug\log.h" />
     <ClInclude Include="..\..\include\future\core\memory\allocators\allocator.h" />
     <ClInclude Include="..\..\include\future\core\memory\allocators\heapallocator.h" />
@@ -137,12 +167,13 @@
     <ClInclude Include="..\..\include\future\core\thread\pool\job.h" />
     <ClInclude Include="..\..\include\future\core\thread\pool\threadpool.h" />
     <ClInclude Include="..\..\include\future\core\thread\thread\null_thread.h" />
-    <ClInclude Include="..\..\include\future\core\thread\thread\posix_thread.h" />
     <ClInclude Include="..\..\include\future\core\thread\thread\thread.h" />
     <ClInclude Include="..\..\include\future\core\thread\thread\win_thread.h" />
     <ClInclude Include="..\..\include\future\core\thread\thread\workerthread.h" />
     <ClInclude Include="..\..\include\future\core\type\platform.h" />
     <ClInclude Include="..\..\include\future\core\type\type.h" />
+    <ClInclude Include="..\..\include\future\core\utils\container\array.h" />
+    <ClInclude Include="..\..\include\future\core\utils\string.h" />
     <ClInclude Include="..\..\include\future\core\utils\timer\timer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -159,15 +190,16 @@
     <ClCompile Include="..\..\src\core\thread\pool\job.cpp" />
     <ClCompile Include="..\..\src\core\thread\pool\threadpool.cpp" />
     <ClCompile Include="..\..\src\core\thread\thread\null_thread.cpp" />
-    <ClCompile Include="..\..\src\core\thread\thread\posix_thread.cpp" />
     <ClCompile Include="..\..\src\core\thread\thread\thread.cpp" />
     <ClCompile Include="..\..\src\core\thread\thread\win_thread.cpp" />
     <ClCompile Include="..\..\src\core\thread\thread\workerthread.cpp" />
+    <ClCompile Include="..\..\src\core\utils\string.cpp" />
     <ClCompile Include="..\..\src\core\utils\timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\include\future\core\object\pointer\proxy.inl" />
     <None Include="..\..\include\future\core\object\pointer\smartpointer.inl" />
+    <None Include="..\..\include\future\core\utils\container\array.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

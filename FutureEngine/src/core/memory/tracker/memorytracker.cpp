@@ -31,6 +31,8 @@
 #include <future/core/memory/memorystatistics.h>
 #include <future/core/memory/tracker/memorytracker.h>
 #include <future/core/utils/timer/timer.h>
+
+#include <wchar.h>
 	
 FutureMemoryTracker * FutureMemoryTracker::instance;
 
