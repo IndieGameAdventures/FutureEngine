@@ -30,30 +30,30 @@
 
 enum FutureSystemMessage
 {
-	Message_None,
-	Message_WindowCreated,
-	Message_WindowDestroyed,
-	Message_WindowsResized,
+	FutureSystemMessage_None,
+	FutureSystemMessage_WindowCreated,
+	FutureSystemMessage_WindowDestroyed,
+	FutureSystemMessage_WindowsResized,
 	
-	Message_ForceRedraw,
-	Message_ContentRectChanged,
+	FutureSystemMessage_ForceRedraw,
+	FutureSystemMessage_ContentRectChanged,
 
-	Message_FocusGained,
-	Message_FocusLost,
+	FutureSystemMessage_FocusGained,
+	FutureSystemMessage_FocusLost,
 
-    Message_ConfigChanged,
+    FutureSystemMessage_ConfigChanged,
 
-	Message_LowMemory,
+	FutureSystemMessage_LowMemory,
 
-	Message_AppStart,
-	Message_AppStop,
-	Message_AppPause,
-	Message_AppResume,
-	Message_AppDestroy,
+	FutureSystemMessage_AppStart,
+	FutureSystemMessage_AppStop,
+	FutureSystemMessage_AppPause,
+	FutureSystemMessage_AppResume,
+	FutureSystemMessage_AppDestroy,
 
-	Message_SaveState,
+	FutureSystemMessage_SaveState,
 
-	Message_Max,
+	FutureSystemMessage_Max,
 };
 
 

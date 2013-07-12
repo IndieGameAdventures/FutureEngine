@@ -144,6 +144,12 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\future\math\type\vec4.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\include\future\math\type\vec4\vec4_altivec.inl" />
+    <None Include="..\..\include\future\math\type\vec4\vec4_float.inl" />
+    <None Include="..\..\include\future\math\type\vec4\vec4_neon.inl" />
+    <None Include="..\..\include\future\math\type\vec4\vec4_sse.inl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

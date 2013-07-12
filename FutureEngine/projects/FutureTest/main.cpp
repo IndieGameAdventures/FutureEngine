@@ -23,6 +23,7 @@
 #include <future/core/tests/memorysystemtests.hpp>
 #include <future/core/tests/threadtests.hpp>
 #include <future/core/tests/threadpooltests.hpp>
+#include <future/math/type/vec4.h>
 
 void FutureMain()
 {

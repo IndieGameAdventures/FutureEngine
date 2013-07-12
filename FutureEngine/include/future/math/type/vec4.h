@@ -85,26 +85,48 @@ public:
 	// {a[i], a[i], a[i], a[i]}
 	FutureVec4Float Replicate(u8 i);
 
-	f32				Get(u32 i);
+	FutureVec4Float	Get(u32 i);
+	f32				GetAsFloat(u32 i); //! Expensive!
 	void			GetAll(f32 * values);
-	FutureVec4Float GetAsVector(u32 i);
-
-	void			Set(u32 i, f32 value);
+	
+	void			Set(u32 i, FutureVec4Float value);
 	void			Set(f32 x, f32 y, f32 z, f32 w);
 	void			Set(FutureVec4Float vec);
 	void			SetAll(f32 value);
 
 	void			Clear();
+	
+#if defined(FUTURE_USES_SSE)
+#	include <immintrin.h>
+#	include <xmmintrin.h>
+
+	FutureVec4Float operator=(__m128 vec)
+	{
+		m_vec = vec;
+		return *this;
+	}
+
+	FutureVec4Float(__m128 vec)
+	{
+		m_vec = vec;
+	}
+	__declspec(align(16)) __m128	m_vec;
+#elif defined(FUTURE_USES_NEON)
+#	include <future/math/type/vec4/vec4_neon.inl>
+#elif defined(FUTURE_USES_ALIVEC)
+#	include <future/math/type/vec4/vec4_altivec.inl>
+#else
+#	include <future/math/type/vec4/vec4_float.inl>
 };
 
 #if defined(FUTURE_USES_SSE)
-//#	include <future/math/type/vec4/vec4_sse.h>
+#	include <future/math/type/vec4/vec4_sse.inl>
 #elif defined(FUTURE_USES_NEON)
-#	include <future/math/type/vec4/vec4_neon.h>
+#	include <future/math/type/vec4/vec4_neon.inl>
 #elif defined(FUTURE_USES_ALIVEC)
-#	include <future/math/type/vec4/vec4_altivec.h>
+#	include <future/math/type/vec4/vec4_altivec.inl>
 #else
-#	include <future/math/type/vec4/vec4_float.h>
+#	include <future/math/type/vec4/vec4_float.inl>
 #endif
 
 #endif

@@ -10,4 +10,18 @@
       <Filter>Types</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\include\future\math\type\vec4\vec4_altivec.inl">
+      <Filter>Types</Filter>
+    </None>
+    <None Include="..\..\include\future\math\type\vec4\vec4_float.inl">
+      <Filter>Types</Filter>
+    </None>
+    <None Include="..\..\include\future\math\type\vec4\vec4_neon.inl">
+      <Filter>Types</Filter>
+    </None>
+    <None Include="..\..\include\future\math\type\vec4\vec4_sse.inl">
+      <Filter>Types</Filter>
+    </None>
+  </ItemGroup>
 </Project>
