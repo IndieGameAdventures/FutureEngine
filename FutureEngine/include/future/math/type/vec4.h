@@ -26,107 +26,16 @@
 #ifndef FUTURE_MATH_VEC4_H
 #define FUTURE_MATH_VEC4_H
 
-#include <future/core/type/type.h>
-#include <future/core/object/threadsafeobject.h>
-
-class FutureVec4Float
-{
-public:
-
-	FutureVec4Float();
-	FutureVec4Float(f32 set);
-	FutureVec4Float(f32 x, f32 y, f32 z, f32 w);
-
-	// {a0 [op] b0, a1 [op] b1, a2 [op] b2, a3 [op] b3}
-	FutureVec4Float	Add(FutureVec4Float vec);
-	FutureVec4Float	Subtract(FutureVec4Float vec);
-	FutureVec4Float	Multiply(FutureVec4Float vec);
-	FutureVec4Float	Divide(FutureVec4Float vec);
-
-	FutureVec4Float And(FutureVec4Float vec);
-	FutureVec4Float Or(FutureVec4Float vec);
-	FutureVec4Float XOr(FutureVec4Float vec);
-
-	FutureVec4Float Min(FutureVec4Float vec);
-	FutureVec4Float Max(FutureVec4Float vec);
-	FutureVec4Float Clamp(FutureVec4Float min, FutureVec4Float max);
-	
-	// Complex vector functions
-	FutureVec4Float	MultiplyAndAdd(FutureVec4Float mul, FutureVec4Float add);
-	FutureVec4Float Cross(FutureVec4Float vec);
-	FutureVec4Float	Dot(FutureVec4Float vec);
-	FutureVec4Float	MatrixMultiply(FutureVec4Float row0, FutureVec4Float row1, FutureVec4Float row2, FutureVec4Float row3);
-
-	// {[op] a0, [op] a1, [op] a2, [op] a3}
-	FutureVec4Float	Negate();
-	FutureVec4Float Reciprocal();
-	FutureVec4Float SquareRoot();
-	FutureVec4Float ReciprocalSquareRoot();
-
-	
-	// {a0 [op] b0, a1 [op] b1, a2 [op] b2, a3 [op] b3}
-	FutureVec4Float	CompareLessThan(FutureVec4Float vec);
-	FutureVec4Float	CompareLessThanOrEqual(FutureVec4Float vec);
-	FutureVec4Float	CompareGreaterThan(FutureVec4Float vec);
-	FutureVec4Float	CompareGreaterThanOrEqual(FutureVec4Float vec);
-	FutureVec4Float	CompareEqual(FutureVec4Float vec);
-	FutureVec4Float	CompareNotEqual(FutureVec4Float vec);
-	
-	// {a1, a2, a3, a0}
-	FutureVec4Float	RotateLeft(u32 amount);
-	// {a3, a0, a1, a2}
-	FutureVec4Float	RotateRight(u32 amount);
-	// {b0, a0, a1, a2}
-	FutureVec4Float Move(FutureVec4Float a, FutureVec4Float b);
-	// {a3, a2, a1, a0}
-	FutureVec4Float Reverse();
-	// {a[x], a[y], a[z], a[w]}
-	FutureVec4Float	Shuffle(u8 x, u8 y, u8 z, u8 w);
-	// {a[i], a[i], a[i], a[i]}
-	FutureVec4Float Replicate(u8 i);
-
-	FutureVec4Float	Get(u32 i);
-	f32				GetAsFloat(u32 i); //! Expensive!
-	void			GetAll(f32 * values);
-	
-	void			Set(u32 i, FutureVec4Float value);
-	void			Set(f32 x, f32 y, f32 z, f32 w);
-	void			Set(FutureVec4Float vec);
-	void			SetAll(f32 value);
-
-	void			Clear();
-	
-#if defined(FUTURE_USES_SSE)
-#	include <immintrin.h>
-#	include <xmmintrin.h>
-
-	FutureVec4Float operator=(__m128 vec)
-	{
-		m_vec = vec;
-		return *this;
-	}
-
-	FutureVec4Float(__m128 vec)
-	{
-		m_vec = vec;
-	}
-	__declspec(align(16)) __m128	m_vec;
-#elif defined(FUTURE_USES_NEON)
-#	include <future/math/type/vec4/vec4_neon.inl>
-#elif defined(FUTURE_USES_ALIVEC)
-#	include <future/math/type/vec4/vec4_altivec.inl>
-#else
-#	include <future/math/type/vec4/vec4_float.inl>
-};
+#include <future/core/type/platform.h>
 
 #if defined(FUTURE_USES_SSE)
-#	include <future/math/type/vec4/vec4_sse.inl>
+#	include <future/math/type/vec4/vec4_sse.h>
 #elif defined(FUTURE_USES_NEON)
-#	include <future/math/type/vec4/vec4_neon.inl>
+#	include <future/math/type/vec4/vec4_neon.h>
 #elif defined(FUTURE_USES_ALIVEC)
-#	include <future/math/type/vec4/vec4_altivec.inl>
+#	include <future/math/type/vec4/vec4_altivec.h>
 #else
-#	include <future/math/type/vec4/vec4_float.inl>
+#	include <future/math/type/vec4/vec4_float.h>
 #endif
 
 #endif
