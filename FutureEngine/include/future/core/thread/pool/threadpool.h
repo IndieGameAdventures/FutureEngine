@@ -43,10 +43,31 @@
 // TODO: add multiple job queues so threads don't have to wait on each other to get a new job
 class FutureWorkerThread;
 
-class FutureThreadPool : public FutureThreadSafeObject, public FutureSingleton<FutureThreadPool>
+class FutureThreadPool : public FutureThreadSafeObject
 {
+private:
+	static FutureThreadPool * ms_instance;
+
 public:
 	FUTURE_DECLARE_MEMORY_OPERATORS(FutureThreadPool);
+
+	inline static FutureThreadPool* GetInstance()
+	{
+		return ms_instance;
+	}
+
+	inline static void CreateInstance()
+	{
+		FUTURE_ASSERT(ms_instance == NULL);
+		ms_instance = new FutureThreadPool();
+	}
+
+	inline static void DestroyInstance()
+	{
+		FUTURE_ASSERT(ms_instance != NULL);
+		delete ms_instance;
+		ms_instance = NULL;
+	}
 
 	// Returns the id of the newly added job
 	u32					AddJob(FutureThreadJob * job);

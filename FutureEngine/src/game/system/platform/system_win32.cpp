@@ -41,7 +41,7 @@ FutureSystemMessage FutureGameSystemGetNextMessage()
 	if(PeekMessage(&futureWinMSG, NULL, NULL, NULL, PM_REMOVE))
 	{
 	}
-	return FutureSystemMessage::Message_None;
+	return FutureSystemMessage::FutureSystemMessage_None;
 }
 
 void FutureGameSystemProcessMessage()

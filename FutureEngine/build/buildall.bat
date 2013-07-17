@@ -7,7 +7,7 @@
 ::devenv vs9/all.sln /rebuild "Release"
 ::IF ERRORLEVEL 1 GOTO L_ERROR
 
-for %%p in (WIN32,LINUX,ANDROID) do (
+for %%p in (WIN32) do (
 		make PLATFORM=%%p clean
 		if ERRORLEVEL 1 goto err
 		make PLATFORM=%%p debug

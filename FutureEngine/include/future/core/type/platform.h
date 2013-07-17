@@ -70,7 +70,7 @@
 #		error Found an unsupported Apple product!
 #	endif
 #	define FUTURE_USES_PTHREAD
-#elif defined(_WIN32)
+#elif defined(_WIN32) || defined(_WINDOWS)
 #	undef FUTURE_PLATFORM_WINDOWS
 #	define FUTURE_PLATFORM_WINDOWS 1
 #	if defined(_WINDOWS_8_METRO)

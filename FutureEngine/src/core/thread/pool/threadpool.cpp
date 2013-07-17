@@ -33,6 +33,8 @@
 #include <future/core/thread/thread/workerthread.h>
 #include <future/core/utils/timer/timer.h>
 
+FutureThreadPool * FutureThreadPool::ms_instance = NULL;
+
 FutureThreadPool::FutureThreadPool()
 	: m_jobs(NULL)
 #if FUTURE_ENABLE_MULTITHREADED
@@ -43,7 +45,10 @@ FutureThreadPool::FutureThreadPool()
 	  m_threadTime(0.f),
 	  m_jobTime(0.f)
 #endif
-{}
+{		
+	FUTURE_ASSERT(ms_instance == NULL);
+	ms_instance = this;
+}
 
 FutureThreadPool::~FutureThreadPool()
 {
@@ -57,6 +62,7 @@ FutureThreadPool::~FutureThreadPool()
 		thread = next;
 	}
 #endif
+	ms_instance = NULL;
 }
 
 // Returns the id of the newly added job

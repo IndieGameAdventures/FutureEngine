@@ -30,9 +30,6 @@
 FuturePoolAllocator *	FutureProxyBase::ms_poolAllocator = NULL;
 u32						FutureProxyBase::ms_proxyCount = 0;
 
-template<class CLASS>
-CLASS * FutureSingleton<CLASS>::ms_instance;
-
 FutureManagedObject::FutureManagedObject() 
 : m_proxy(NULL)
 {}

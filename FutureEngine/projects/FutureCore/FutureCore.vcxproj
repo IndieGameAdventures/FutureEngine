@@ -158,6 +158,9 @@
     <ClInclude Include="..\..\include\future\core\object\pointer\proxy.h" />
     <ClInclude Include="..\..\include\future\core\object\pointer\smartpointer.h" />
     <ClInclude Include="..\..\include\future\core\object\singleton.h" />
+    <ClInclude Include="..\..\include\future\core\system\graphics\graphicssystem.h" />
+    <ClInclude Include="..\..\include\future\core\system\system.h" />
+    <ClInclude Include="..\..\include\future\core\system\systemcontroller.h" />
     <ClInclude Include="..\..\include\future\core\tests\debugtests.hpp" />
     <ClInclude Include="..\..\include\future\core\tests\allocatortests.hpp" />
     <ClInclude Include="..\..\include\future\core\tests\memorysystemtests.hpp" />

@@ -43,6 +43,12 @@
     <Filter Include="Utils\String">
       <UniqueIdentifier>{b8667b84-004b-4e74-8660-daeee401a977}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{1a6e1d56-29d4-4bad-b2db-159e4a2715d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Graphics">
+      <UniqueIdentifier>{75ff8676-e8f5-45a5-ade5-ae356e467fc0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\future\core\memory\tracker\memorytracker.h">
@@ -143,6 +149,15 @@
     </ClInclude>
     <ClInclude Include="..\..\include\future\core\debug\assert.h">
       <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\system\system.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\system\systemcontroller.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\system\graphics\graphicssystem.h">
+      <Filter>System\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
