@@ -3,3 +3,4 @@ FutureEngine/tmp/
 *.opensdf
 objs/
 *Fake*.so
+*.DS_Store
