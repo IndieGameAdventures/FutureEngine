@@ -27,7 +27,7 @@
 #ifndef FUTURE_CORE_DEBUG_ASSERT_H
 #define FUTURE_CORE_DEBUG_ASSERT_H
 
-#include <future\core\type\type.h>
+#include <future/core/type/type.h>
 
 //#include <stdio.h>
 //#include <wchar.h>

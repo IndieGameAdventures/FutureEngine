@@ -26,7 +26,7 @@
 #ifndef FUTURE_CORE_DEBUG_H
 #define FUTURE_CORE_DEBUG_H
 
-#include <future\core\type\type.h>
+#include <future/core/type/type.h>
 
 #if FUTURE_DEBUG || FUTURE_PROFILE
 #	if FUTURE_PLATFORM_WINDOWS
@@ -39,7 +39,7 @@
 #	define FUTURE_DEBUG_HALT()
 #endif
 
-#include <future\core\debug\assert.h>
-#include <future\core\debug\log.h>
+#include <future/core/debug/assert.h>
+#include <future/core/debug/log.h>
 
 #endif // coin_core_debug_h

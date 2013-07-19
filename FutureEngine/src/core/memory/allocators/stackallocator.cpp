@@ -75,17 +75,17 @@ void * FutureStackAllocator::Alloc(u32 bytes)
 
 	Stack * stack = m_stacks;
 
-	if((m_stackSize - ((u32)stack->m_position - (u32)stack->m_data)) < bytes)
+	if((m_stackSize - ((size_t)stack->m_position - (size_t)stack->m_data)) < bytes)
 	{
 		FUTURE_LOG_INFO(L"Stack is full, expanding");
 		AddStack();
 		stack = m_stacks;
 	}
 
-	FUTURE_ASSERT(stack && (m_stackSize - ((u32)stack->m_position - (u32)stack->m_data)) >= bytes);
+	FUTURE_ASSERT(stack && (m_stackSize - ((size_t)stack->m_position - (size_t)stack->m_data)) >= bytes);
 
 	void * data = stack->m_position;
-	stack->m_position = (void*)((u32)stack->m_position + bytes);
+	stack->m_position = (void*)((size_t)stack->m_position + bytes);
 	Block * block = (Block*)m_poolAllocator->Alloc(sizeof(Block));
 	block->m_size = bytes;
 	block->m_next = stack->m_blocks;
@@ -96,13 +96,13 @@ void * FutureStackAllocator::Alloc(u32 bytes)
 	if(m_usingHeaders)
 	{
 		FutureAllocHeader * header = reinterpret_cast<FutureAllocHeader *>(data);
-		header->m_allocatorData = (u32)block;
+		header->m_allocatorData = (size_t)block;
 		return data;
 	}
 	else
 	{
-		u32 * header = (u32*)data;
-		*header = (u32)block;
+		size_t * header = (size_t*)data;
+		*header = (size_t)block;
 		return (void*)(header + 1);
 	}
 }
@@ -133,7 +133,7 @@ void FutureStackAllocator::Free(void * p)
 		{
 			if(!m_usingHeaders && m_align >= 4)
 			{
-				stack->m_data = (void*)((u32)stack->m_data - (m_align - 4));
+				stack->m_data = (void*)((size_t)stack->m_data - (m_align - 4));
 			}
 			_aligned_free(stack->m_data);
 		}
@@ -147,7 +147,7 @@ void FutureStackAllocator::Free(void * p)
 	m_criticalSection.Lock();
 	Stack * stack = m_stacks;
 
-	stack->m_position = (void *)((u32)stack->m_position - block->m_size);
+	stack->m_position = (void *)((size_t)stack->m_position - block->m_size);
 	stack->m_blocks = block->m_next;
 	m_poolAllocator->Free(block);
 	
@@ -178,7 +178,7 @@ void FutureStackAllocator::Release()
 		{
 			if(!m_usingHeaders && m_align >= 4)
 			{
-				stack->m_data = (void*)((u32)stack->m_data - (m_align - 4));
+				stack->m_data = (void*)((size_t)stack->m_data - (m_align - 4));
 			}
 			_aligned_free(stack->m_data);
 		}
@@ -202,7 +202,7 @@ void FutureStackAllocator::AddStack()
 
 	if(!m_usingHeaders && m_align >= 4)
 	{
-		stack->m_data = (void*)((u32)stack->m_data + (m_align - 4));
+		stack->m_data = (void*)((size_t)stack->m_data + (m_align - 4));
 	}
 	stack->m_position = stack->m_data;
 }

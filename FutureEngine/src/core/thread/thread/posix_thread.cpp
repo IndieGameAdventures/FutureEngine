@@ -30,7 +30,11 @@
 #include <future/core/thread/thread/posix_thread.h>
 #include <future/core/utils/timer/timer.h>
 #include <unistd.h>
-#include <asm-generic/errno-base.h>
+#include <errno.h>
+
+#if FUTURE_PLATFORM_ANDROID
+#   include <asm-generic/errno-base.h>
+#endif
 
 void * FutureThread::RunThreadInternal(void * param)
 {

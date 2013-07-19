@@ -74,8 +74,8 @@ public:
 	bool		Contains(const FutureString & str) const;
 
 	// returns the index of the given string or -1 if it doesn't exist
-	u32			IndexOf(const FutureString & str) const;
-	u32			LastIndexOf(const FutureString & str) const;
+	s32			IndexOf(const FutureString & str) const;
+	s32			LastIndexOf(const FutureString & str) const;
 
 	// finds all occurrences of the given string and returns a new string using replace in those locations
 	FutureString	Replace(const FutureString & find, const FutureString & replace) const;

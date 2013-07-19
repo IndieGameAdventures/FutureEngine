@@ -1,0 +1,913 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		30FC763C179739B40032A219 /* assert.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC75FF179739B40032A219 /* assert.h */; };
+		30FC763D179739B40032A219 /* debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7600179739B40032A219 /* debug.h */; };
+		30FC763E179739B40032A219 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7601179739B40032A219 /* log.h */; };
+		30FC763F179739B40032A219 /* allocator.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7604179739B40032A219 /* allocator.h */; };
+		30FC7640179739B40032A219 /* heapallocator.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7605179739B40032A219 /* heapallocator.h */; };
+		30FC7641179739B40032A219 /* mallocallocator.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7606179739B40032A219 /* mallocallocator.h */; };
+		30FC7642179739B40032A219 /* poolallocator.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7607179739B40032A219 /* poolallocator.h */; };
+		30FC7643179739B40032A219 /* stackallocator.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7608179739B40032A219 /* stackallocator.h */; };
+		30FC7644179739B40032A219 /* memory.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7609179739B40032A219 /* memory.h */; };
+		30FC7645179739B40032A219 /* memoryStatistics.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC760A179739B40032A219 /* memoryStatistics.h */; };
+		30FC7646179739B40032A219 /* memorytracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC760C179739B40032A219 /* memorytracker.h */; };
+		30FC7647179739B40032A219 /* managedobject.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC760E179739B40032A219 /* managedobject.h */; };
+		30FC7648179739B40032A219 /* proxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7610179739B40032A219 /* proxy.h */; };
+		30FC7649179739B40032A219 /* smartpointer.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7612179739B40032A219 /* smartpointer.h */; };
+		30FC764A179739B40032A219 /* singleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7614179739B40032A219 /* singleton.h */; };
+		30FC764B179739B40032A219 /* threadsafeobject.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7615179739B40032A219 /* threadsafeobject.h */; };
+		30FC7653179739B40032A219 /* allocatortests.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7620179739B40032A219 /* allocatortests.hpp */; };
+		30FC7654179739B40032A219 /* debugtests.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7621179739B40032A219 /* debugtests.hpp */; };
+		30FC7655179739B40032A219 /* memorysystemnotrackingtests.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7622179739B40032A219 /* memorysystemnotrackingtests.h */; };
+		30FC7656179739B40032A219 /* memorysystemtests.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7623179739B40032A219 /* memorysystemtests.hpp */; };
+		30FC7657179739B40032A219 /* threadpooltests.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7624179739B40032A219 /* threadpooltests.hpp */; };
+		30FC7658179739B40032A219 /* threadtests.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7625179739B40032A219 /* threadtests.hpp */; };
+		30FC7659179739B40032A219 /* criticalsection.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7628179739B40032A219 /* criticalsection.h */; };
+		30FC765A179739B40032A219 /* job.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC762A179739B40032A219 /* job.h */; };
+		30FC765B179739B40032A219 /* threadpool.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC762B179739B40032A219 /* threadpool.h */; };
+		30FC765C179739B40032A219 /* null_thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC762D179739B40032A219 /* null_thread.h */; };
+		30FC765D179739B40032A219 /* posix_thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC762E179739B40032A219 /* posix_thread.h */; };
+		30FC765E179739B40032A219 /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC762F179739B40032A219 /* thread.h */; };
+		30FC7660179739B40032A219 /* workerthread.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7631179739B40032A219 /* workerthread.h */; };
+		30FC7663179739B40032A219 /* array.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7637179739B40032A219 /* array.h */; };
+		30FC7664179739B40032A219 /* string.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7639179739B40032A219 /* string.h */; };
+		30FC7665179739B40032A219 /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC763B179739B40032A219 /* timer.h */; };
+		30FC768417973A090032A219 /* assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766717973A090032A219 /* assert.cpp */; };
+		30FC768517973A090032A219 /* debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766817973A090032A219 /* debug.cpp */; };
+		30FC768617973A090032A219 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766917973A090032A219 /* log.cpp */; };
+		30FC768717973A090032A219 /* heapallocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766C17973A090032A219 /* heapallocator.cpp */; };
+		30FC768817973A090032A219 /* mallocallocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766D17973A090032A219 /* mallocallocator.cpp */; };
+		30FC768917973A090032A219 /* poolallocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766E17973A090032A219 /* poolallocator.cpp */; };
+		30FC768A17973A090032A219 /* stackallocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766F17973A090032A219 /* stackallocator.cpp */; };
+		30FC768B17973A090032A219 /* memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767017973A090032A219 /* memory.cpp */; };
+		30FC768C17973A090032A219 /* memorytracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767217973A090032A219 /* memorytracker.cpp */; };
+		30FC768D17973A090032A219 /* managedobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767417973A090032A219 /* managedobject.cpp */; };
+		30FC768E17973A090032A219 /* criticalsection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767717973A090032A219 /* criticalsection.cpp */; };
+		30FC768F17973A090032A219 /* job.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767917973A090032A219 /* job.cpp */; };
+		30FC769017973A090032A219 /* threadpool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767A17973A090032A219 /* threadpool.cpp */; };
+		30FC769117973A090032A219 /* null_thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767C17973A090032A219 /* null_thread.cpp */; };
+		30FC769217973A090032A219 /* posix_thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767D17973A090032A219 /* posix_thread.cpp */; };
+		30FC769317973A090032A219 /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767E17973A090032A219 /* thread.cpp */; };
+		30FC769517973A090032A219 /* workerthread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC768017973A090032A219 /* workerthread.cpp */; };
+		30FC769617973A090032A219 /* string.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC768217973A090032A219 /* string.cpp */; };
+		30FC769717973A090032A219 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC768317973A090032A219 /* timer.cpp */; };
+		30FC76A017989A4F0032A219 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FC769F17989A4F0032A219 /* Foundation.framework */; };
+		30FC76A517989A4F0032A219 /* FutureCoreIos.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 30FC76A417989A4F0032A219 /* FutureCoreIos.h */; };
+		30FC76A717989A4F0032A219 /* FutureCoreIos.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FC76A617989A4F0032A219 /* FutureCoreIos.m */; };
+		30FC76AF17989A4F0032A219 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FC76AE17989A4F0032A219 /* SenTestingKit.framework */; };
+		30FC76B117989A4F0032A219 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FC76B017989A4F0032A219 /* UIKit.framework */; };
+		30FC76B217989A4F0032A219 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FC769F17989A4F0032A219 /* Foundation.framework */; };
+		30FC76BB17989A4F0032A219 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30FC76B917989A4F0032A219 /* InfoPlist.strings */; };
+		30FC76BE17989A4F0032A219 /* FutureCoreIosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FC76BD17989A4F0032A219 /* FutureCoreIosTests.m */; };
+		30FC76C517989BFE0032A219 /* assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766717973A090032A219 /* assert.cpp */; };
+		30FC76C617989BFE0032A219 /* debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766817973A090032A219 /* debug.cpp */; };
+		30FC76C717989BFE0032A219 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766917973A090032A219 /* log.cpp */; };
+		30FC76C817989BFE0032A219 /* memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767017973A090032A219 /* memory.cpp */; };
+		30FC76C917989BFE0032A219 /* heapallocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766C17973A090032A219 /* heapallocator.cpp */; };
+		30FC76CA17989BFE0032A219 /* mallocallocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766D17973A090032A219 /* mallocallocator.cpp */; };
+		30FC76CB17989BFE0032A219 /* poolallocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766E17973A090032A219 /* poolallocator.cpp */; };
+		30FC76CC17989BFE0032A219 /* stackallocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766F17973A090032A219 /* stackallocator.cpp */; };
+		30FC76CD17989BFE0032A219 /* memorytracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767217973A090032A219 /* memorytracker.cpp */; };
+		30FC76CE17989BFE0032A219 /* managedobject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767417973A090032A219 /* managedobject.cpp */; };
+		30FC76CF17989BFE0032A219 /* criticalsection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767717973A090032A219 /* criticalsection.cpp */; };
+		30FC76D017989BFE0032A219 /* job.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767917973A090032A219 /* job.cpp */; };
+		30FC76D117989BFE0032A219 /* threadpool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767A17973A090032A219 /* threadpool.cpp */; };
+		30FC76D217989BFE0032A219 /* null_thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767C17973A090032A219 /* null_thread.cpp */; };
+		30FC76D317989BFE0032A219 /* posix_thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767D17973A090032A219 /* posix_thread.cpp */; };
+		30FC76D417989BFE0032A219 /* workerthread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC768017973A090032A219 /* workerthread.cpp */; };
+		30FC76D517989BFE0032A219 /* string.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC768217973A090032A219 /* string.cpp */; };
+		30FC76D617989BFE0032A219 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC768317973A090032A219 /* timer.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		30FC76B317989A4F0032A219 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30FC75EF179738AC0032A219 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 30FC769C17989A4E0032A219;
+			remoteInfo = FutureCoreIos;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		30FC769B17989A4E0032A219 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				30FC76A517989A4F0032A219 /* FutureCoreIos.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		30FC75F7179738AC0032A219 /* libFutureCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFutureCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		30FC75FF179739B40032A219 /* assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assert.h; sourceTree = "<group>"; };
+		30FC7600179739B40032A219 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = debug.h; path = ../../include/future/core/debug/debug.h; sourceTree = SOURCE_ROOT; };
+		30FC7601179739B40032A219 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
+		30FC7604179739B40032A219 /* allocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = allocator.h; sourceTree = "<group>"; };
+		30FC7605179739B40032A219 /* heapallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = heapallocator.h; sourceTree = "<group>"; };
+		30FC7606179739B40032A219 /* mallocallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mallocallocator.h; sourceTree = "<group>"; };
+		30FC7607179739B40032A219 /* poolallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = poolallocator.h; sourceTree = "<group>"; };
+		30FC7608179739B40032A219 /* stackallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stackallocator.h; sourceTree = "<group>"; };
+		30FC7609179739B40032A219 /* memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memory.h; sourceTree = "<group>"; };
+		30FC760A179739B40032A219 /* memoryStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memoryStatistics.h; sourceTree = "<group>"; };
+		30FC760C179739B40032A219 /* memorytracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memorytracker.h; sourceTree = "<group>"; };
+		30FC760E179739B40032A219 /* managedobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = managedobject.h; sourceTree = "<group>"; };
+		30FC7610179739B40032A219 /* proxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = proxy.h; sourceTree = "<group>"; };
+		30FC7611179739B40032A219 /* proxy.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = proxy.inl; sourceTree = "<group>"; };
+		30FC7612179739B40032A219 /* smartpointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smartpointer.h; sourceTree = "<group>"; };
+		30FC7613179739B40032A219 /* smartpointer.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = smartpointer.inl; sourceTree = "<group>"; };
+		30FC7614179739B40032A219 /* singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = singleton.h; sourceTree = "<group>"; };
+		30FC7615179739B40032A219 /* threadsafeobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threadsafeobject.h; sourceTree = "<group>"; };
+		30FC7620179739B40032A219 /* allocatortests.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = allocatortests.hpp; sourceTree = "<group>"; };
+		30FC7621179739B40032A219 /* debugtests.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = debugtests.hpp; sourceTree = "<group>"; };
+		30FC7622179739B40032A219 /* memorysystemnotrackingtests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memorysystemnotrackingtests.h; sourceTree = "<group>"; };
+		30FC7623179739B40032A219 /* memorysystemtests.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = memorysystemtests.hpp; sourceTree = "<group>"; };
+		30FC7624179739B40032A219 /* threadpooltests.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = threadpooltests.hpp; sourceTree = "<group>"; };
+		30FC7625179739B40032A219 /* threadtests.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = threadtests.hpp; sourceTree = "<group>"; };
+		30FC7628179739B40032A219 /* criticalsection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = criticalsection.h; sourceTree = "<group>"; };
+		30FC762A179739B40032A219 /* job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = job.h; sourceTree = "<group>"; };
+		30FC762B179739B40032A219 /* threadpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threadpool.h; sourceTree = "<group>"; };
+		30FC762D179739B40032A219 /* null_thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = null_thread.h; sourceTree = "<group>"; };
+		30FC762E179739B40032A219 /* posix_thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = posix_thread.h; sourceTree = "<group>"; };
+		30FC762F179739B40032A219 /* thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thread.h; sourceTree = "<group>"; };
+		30FC7631179739B40032A219 /* workerthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = workerthread.h; sourceTree = "<group>"; };
+		30FC7637179739B40032A219 /* array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = array.h; sourceTree = "<group>"; };
+		30FC7638179739B40032A219 /* array.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = array.inl; sourceTree = "<group>"; };
+		30FC7639179739B40032A219 /* string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string.h; sourceTree = "<group>"; };
+		30FC763B179739B40032A219 /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
+		30FC766717973A090032A219 /* assert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = assert.cpp; path = ../../../../src/core/debug/assert.cpp; sourceTree = "<group>"; };
+		30FC766817973A090032A219 /* debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = debug.cpp; path = ../../../../src/core/debug/debug.cpp; sourceTree = "<group>"; };
+		30FC766917973A090032A219 /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = log.cpp; path = ../../../../src/core/debug/log.cpp; sourceTree = "<group>"; };
+		30FC766C17973A090032A219 /* heapallocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = heapallocator.cpp; path = ../../../../../src/core/memory/allocators/heapallocator.cpp; sourceTree = "<group>"; };
+		30FC766D17973A090032A219 /* mallocallocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mallocallocator.cpp; path = ../../../../../src/core/memory/allocators/mallocallocator.cpp; sourceTree = "<group>"; };
+		30FC766E17973A090032A219 /* poolallocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = poolallocator.cpp; path = ../../../../../src/core/memory/allocators/poolallocator.cpp; sourceTree = "<group>"; };
+		30FC766F17973A090032A219 /* stackallocator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stackallocator.cpp; path = ../../../../../src/core/memory/allocators/stackallocator.cpp; sourceTree = "<group>"; };
+		30FC767017973A090032A219 /* memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = memory.cpp; path = ../../../../src/core/memory/memory.cpp; sourceTree = "<group>"; };
+		30FC767217973A090032A219 /* memorytracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = memorytracker.cpp; path = ../../../../../src/core/memory/tracker/memorytracker.cpp; sourceTree = "<group>"; };
+		30FC767417973A090032A219 /* managedobject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = managedobject.cpp; path = ../../../../src/core/object/managedobject.cpp; sourceTree = "<group>"; };
+		30FC767717973A090032A219 /* criticalsection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = criticalsection.cpp; path = ../../../../../src/core/thread/criticalsection/criticalsection.cpp; sourceTree = "<group>"; };
+		30FC767917973A090032A219 /* job.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = job.cpp; path = ../../../../../src/core/thread/pool/job.cpp; sourceTree = "<group>"; };
+		30FC767A17973A090032A219 /* threadpool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = threadpool.cpp; path = ../../../../../src/core/thread/pool/threadpool.cpp; sourceTree = "<group>"; };
+		30FC767C17973A090032A219 /* null_thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = null_thread.cpp; path = ../../../../../src/core/thread/thread/null_thread.cpp; sourceTree = "<group>"; };
+		30FC767D17973A090032A219 /* posix_thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = posix_thread.cpp; path = ../../../../../src/core/thread/thread/posix_thread.cpp; sourceTree = "<group>"; };
+		30FC767E17973A090032A219 /* thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thread.cpp; path = ../../../../../src/core/thread/thread/thread.cpp; sourceTree = "<group>"; };
+		30FC768017973A090032A219 /* workerthread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = workerthread.cpp; path = ../../../../../src/core/thread/thread/workerthread.cpp; sourceTree = "<group>"; };
+		30FC768217973A090032A219 /* string.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = string.cpp; path = ../../../../src/core/utils/string.cpp; sourceTree = "<group>"; };
+		30FC768317973A090032A219 /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timer.cpp; path = ../../../../src/core/utils/timer.cpp; sourceTree = "<group>"; };
+		30FC769817988C890032A219 /* type */ = {isa = PBXFileReference; lastKnownFileType = folder; name = type; path = ../../include/future/core/type; sourceTree = "<group>"; };
+		30FC769D17989A4F0032A219 /* libFutureCoreIos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFutureCoreIos.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		30FC769F17989A4F0032A219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		30FC76A317989A4F0032A219 /* FutureCoreIos-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FutureCoreIos-Prefix.pch"; sourceTree = "<group>"; };
+		30FC76A417989A4F0032A219 /* FutureCoreIos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FutureCoreIos.h; sourceTree = "<group>"; };
+		30FC76A617989A4F0032A219 /* FutureCoreIos.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FutureCoreIos.m; sourceTree = "<group>"; };
+		30FC76AD17989A4F0032A219 /* FutureCoreIosTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FutureCoreIosTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		30FC76AE17989A4F0032A219 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		30FC76B017989A4F0032A219 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		30FC76B817989A4F0032A219 /* FutureCoreIosTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FutureCoreIosTests-Info.plist"; sourceTree = "<group>"; };
+		30FC76BA17989A4F0032A219 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		30FC76BC17989A4F0032A219 /* FutureCoreIosTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FutureCoreIosTests.h; sourceTree = "<group>"; };
+		30FC76BD17989A4F0032A219 /* FutureCoreIosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FutureCoreIosTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		30FC75F4179738AC0032A219 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30FC769A17989A4E0032A219 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30FC76A017989A4F0032A219 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30FC76A917989A4F0032A219 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30FC76AF17989A4F0032A219 /* SenTestingKit.framework in Frameworks */,
+				30FC76B117989A4F0032A219 /* UIKit.framework in Frameworks */,
+				30FC76B217989A4F0032A219 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		30FC75EE179738AC0032A219 = {
+			isa = PBXGroup;
+			children = (
+				30FC769817988C890032A219 /* type */,
+				30FC75FE179739B40032A219 /* debug */,
+				30FC7602179739B40032A219 /* memory */,
+				30FC760D179739B40032A219 /* object */,
+				30FC761F179739B40032A219 /* tests */,
+				30FC7626179739B40032A219 /* thread */,
+				30FC7635179739B40032A219 /* utils */,
+				30FC76A117989A4F0032A219 /* FutureCoreIos */,
+				30FC76B617989A4F0032A219 /* FutureCoreIosTests */,
+				30FC769E17989A4F0032A219 /* Frameworks */,
+				30FC75F8179738AC0032A219 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		30FC75F8179738AC0032A219 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				30FC75F7179738AC0032A219 /* libFutureCore.a */,
+				30FC769D17989A4F0032A219 /* libFutureCoreIos.a */,
+				30FC76AD17989A4F0032A219 /* FutureCoreIosTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		30FC75FE179739B40032A219 /* debug */ = {
+			isa = PBXGroup;
+			children = (
+				30FC766717973A090032A219 /* assert.cpp */,
+				30FC766817973A090032A219 /* debug.cpp */,
+				30FC766917973A090032A219 /* log.cpp */,
+				30FC75FF179739B40032A219 /* assert.h */,
+				30FC7600179739B40032A219 /* debug.h */,
+				30FC7601179739B40032A219 /* log.h */,
+			);
+			name = debug;
+			path = ../../include/future/core/debug;
+			sourceTree = "<group>";
+		};
+		30FC7602179739B40032A219 /* memory */ = {
+			isa = PBXGroup;
+			children = (
+				30FC767017973A090032A219 /* memory.cpp */,
+				30FC7603179739B40032A219 /* allocators */,
+				30FC7609179739B40032A219 /* memory.h */,
+				30FC760A179739B40032A219 /* memoryStatistics.h */,
+				30FC760B179739B40032A219 /* tracker */,
+			);
+			name = memory;
+			path = ../../include/future/core/memory;
+			sourceTree = "<group>";
+		};
+		30FC7603179739B40032A219 /* allocators */ = {
+			isa = PBXGroup;
+			children = (
+				30FC766C17973A090032A219 /* heapallocator.cpp */,
+				30FC766D17973A090032A219 /* mallocallocator.cpp */,
+				30FC766E17973A090032A219 /* poolallocator.cpp */,
+				30FC766F17973A090032A219 /* stackallocator.cpp */,
+				30FC7604179739B40032A219 /* allocator.h */,
+				30FC7605179739B40032A219 /* heapallocator.h */,
+				30FC7606179739B40032A219 /* mallocallocator.h */,
+				30FC7607179739B40032A219 /* poolallocator.h */,
+				30FC7608179739B40032A219 /* stackallocator.h */,
+			);
+			path = allocators;
+			sourceTree = "<group>";
+		};
+		30FC760B179739B40032A219 /* tracker */ = {
+			isa = PBXGroup;
+			children = (
+				30FC767217973A090032A219 /* memorytracker.cpp */,
+				30FC760C179739B40032A219 /* memorytracker.h */,
+			);
+			path = tracker;
+			sourceTree = "<group>";
+		};
+		30FC760D179739B40032A219 /* object */ = {
+			isa = PBXGroup;
+			children = (
+				30FC767417973A090032A219 /* managedobject.cpp */,
+				30FC760E179739B40032A219 /* managedobject.h */,
+				30FC760F179739B40032A219 /* pointer */,
+				30FC7614179739B40032A219 /* singleton.h */,
+				30FC7615179739B40032A219 /* threadsafeobject.h */,
+			);
+			name = object;
+			path = ../../include/future/core/object;
+			sourceTree = "<group>";
+		};
+		30FC760F179739B40032A219 /* pointer */ = {
+			isa = PBXGroup;
+			children = (
+				30FC7610179739B40032A219 /* proxy.h */,
+				30FC7611179739B40032A219 /* proxy.inl */,
+				30FC7612179739B40032A219 /* smartpointer.h */,
+				30FC7613179739B40032A219 /* smartpointer.inl */,
+			);
+			path = pointer;
+			sourceTree = "<group>";
+		};
+		30FC761F179739B40032A219 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				30FC7620179739B40032A219 /* allocatortests.hpp */,
+				30FC7621179739B40032A219 /* debugtests.hpp */,
+				30FC7622179739B40032A219 /* memorysystemnotrackingtests.h */,
+				30FC7623179739B40032A219 /* memorysystemtests.hpp */,
+				30FC7624179739B40032A219 /* threadpooltests.hpp */,
+				30FC7625179739B40032A219 /* threadtests.hpp */,
+			);
+			name = tests;
+			path = ../../include/future/core/tests;
+			sourceTree = "<group>";
+		};
+		30FC7626179739B40032A219 /* thread */ = {
+			isa = PBXGroup;
+			children = (
+				30FC7627179739B40032A219 /* criticalsection */,
+				30FC7629179739B40032A219 /* pool */,
+				30FC762C179739B40032A219 /* thread */,
+			);
+			name = thread;
+			path = ../../include/future/core/thread;
+			sourceTree = "<group>";
+		};
+		30FC7627179739B40032A219 /* criticalsection */ = {
+			isa = PBXGroup;
+			children = (
+				30FC767717973A090032A219 /* criticalsection.cpp */,
+				30FC7628179739B40032A219 /* criticalsection.h */,
+			);
+			path = criticalsection;
+			sourceTree = "<group>";
+		};
+		30FC7629179739B40032A219 /* pool */ = {
+			isa = PBXGroup;
+			children = (
+				30FC767917973A090032A219 /* job.cpp */,
+				30FC767A17973A090032A219 /* threadpool.cpp */,
+				30FC762A179739B40032A219 /* job.h */,
+				30FC762B179739B40032A219 /* threadpool.h */,
+			);
+			path = pool;
+			sourceTree = "<group>";
+		};
+		30FC762C179739B40032A219 /* thread */ = {
+			isa = PBXGroup;
+			children = (
+				30FC767C17973A090032A219 /* null_thread.cpp */,
+				30FC767D17973A090032A219 /* posix_thread.cpp */,
+				30FC767E17973A090032A219 /* thread.cpp */,
+				30FC768017973A090032A219 /* workerthread.cpp */,
+				30FC762D179739B40032A219 /* null_thread.h */,
+				30FC762E179739B40032A219 /* posix_thread.h */,
+				30FC762F179739B40032A219 /* thread.h */,
+				30FC7631179739B40032A219 /* workerthread.h */,
+			);
+			path = thread;
+			sourceTree = "<group>";
+		};
+		30FC7635179739B40032A219 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				30FC768217973A090032A219 /* string.cpp */,
+				30FC768317973A090032A219 /* timer.cpp */,
+				30FC7636179739B40032A219 /* container */,
+				30FC7639179739B40032A219 /* string.h */,
+				30FC763A179739B40032A219 /* timer */,
+			);
+			name = utils;
+			path = ../../include/future/core/utils;
+			sourceTree = "<group>";
+		};
+		30FC7636179739B40032A219 /* container */ = {
+			isa = PBXGroup;
+			children = (
+				30FC7637179739B40032A219 /* array.h */,
+				30FC7638179739B40032A219 /* array.inl */,
+			);
+			path = container;
+			sourceTree = "<group>";
+		};
+		30FC763A179739B40032A219 /* timer */ = {
+			isa = PBXGroup;
+			children = (
+				30FC763B179739B40032A219 /* timer.h */,
+			);
+			path = timer;
+			sourceTree = "<group>";
+		};
+		30FC769E17989A4F0032A219 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30FC769F17989A4F0032A219 /* Foundation.framework */,
+				30FC76AE17989A4F0032A219 /* SenTestingKit.framework */,
+				30FC76B017989A4F0032A219 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30FC76A117989A4F0032A219 /* FutureCoreIos */ = {
+			isa = PBXGroup;
+			children = (
+				30FC76A417989A4F0032A219 /* FutureCoreIos.h */,
+				30FC76A617989A4F0032A219 /* FutureCoreIos.m */,
+				30FC76A217989A4F0032A219 /* Supporting Files */,
+			);
+			path = FutureCoreIos;
+			sourceTree = "<group>";
+		};
+		30FC76A217989A4F0032A219 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				30FC76A317989A4F0032A219 /* FutureCoreIos-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		30FC76B617989A4F0032A219 /* FutureCoreIosTests */ = {
+			isa = PBXGroup;
+			children = (
+				30FC76BC17989A4F0032A219 /* FutureCoreIosTests.h */,
+				30FC76BD17989A4F0032A219 /* FutureCoreIosTests.m */,
+				30FC76B717989A4F0032A219 /* Supporting Files */,
+			);
+			path = FutureCoreIosTests;
+			sourceTree = "<group>";
+		};
+		30FC76B717989A4F0032A219 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				30FC76B817989A4F0032A219 /* FutureCoreIosTests-Info.plist */,
+				30FC76B917989A4F0032A219 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		30FC75F5179738AC0032A219 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30FC763C179739B40032A219 /* assert.h in Headers */,
+				30FC763D179739B40032A219 /* debug.h in Headers */,
+				30FC763E179739B40032A219 /* log.h in Headers */,
+				30FC763F179739B40032A219 /* allocator.h in Headers */,
+				30FC7640179739B40032A219 /* heapallocator.h in Headers */,
+				30FC7641179739B40032A219 /* mallocallocator.h in Headers */,
+				30FC7642179739B40032A219 /* poolallocator.h in Headers */,
+				30FC7643179739B40032A219 /* stackallocator.h in Headers */,
+				30FC7644179739B40032A219 /* memory.h in Headers */,
+				30FC7645179739B40032A219 /* memoryStatistics.h in Headers */,
+				30FC7646179739B40032A219 /* memorytracker.h in Headers */,
+				30FC7647179739B40032A219 /* managedobject.h in Headers */,
+				30FC7648179739B40032A219 /* proxy.h in Headers */,
+				30FC7649179739B40032A219 /* smartpointer.h in Headers */,
+				30FC764A179739B40032A219 /* singleton.h in Headers */,
+				30FC764B179739B40032A219 /* threadsafeobject.h in Headers */,
+				30FC7653179739B40032A219 /* allocatortests.hpp in Headers */,
+				30FC7654179739B40032A219 /* debugtests.hpp in Headers */,
+				30FC7655179739B40032A219 /* memorysystemnotrackingtests.h in Headers */,
+				30FC7656179739B40032A219 /* memorysystemtests.hpp in Headers */,
+				30FC7657179739B40032A219 /* threadpooltests.hpp in Headers */,
+				30FC7658179739B40032A219 /* threadtests.hpp in Headers */,
+				30FC7659179739B40032A219 /* criticalsection.h in Headers */,
+				30FC765A179739B40032A219 /* job.h in Headers */,
+				30FC765B179739B40032A219 /* threadpool.h in Headers */,
+				30FC765C179739B40032A219 /* null_thread.h in Headers */,
+				30FC765D179739B40032A219 /* posix_thread.h in Headers */,
+				30FC765E179739B40032A219 /* thread.h in Headers */,
+				30FC7660179739B40032A219 /* workerthread.h in Headers */,
+				30FC7663179739B40032A219 /* array.h in Headers */,
+				30FC7664179739B40032A219 /* string.h in Headers */,
+				30FC7665179739B40032A219 /* timer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		30FC75F6179738AC0032A219 /* FutureCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30FC75FB179738AC0032A219 /* Build configuration list for PBXNativeTarget "FutureCore" */;
+			buildPhases = (
+				30FC75F3179738AC0032A219 /* Sources */,
+				30FC75F4179738AC0032A219 /* Frameworks */,
+				30FC75F5179738AC0032A219 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FutureCore;
+			productName = FutureCore;
+			productReference = 30FC75F7179738AC0032A219 /* libFutureCore.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		30FC769C17989A4E0032A219 /* FutureCoreIos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30FC76BF17989A4F0032A219 /* Build configuration list for PBXNativeTarget "FutureCoreIos" */;
+			buildPhases = (
+				30FC769917989A4E0032A219 /* Sources */,
+				30FC769A17989A4E0032A219 /* Frameworks */,
+				30FC769B17989A4E0032A219 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FutureCoreIos;
+			productName = FutureCoreIos;
+			productReference = 30FC769D17989A4F0032A219 /* libFutureCoreIos.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		30FC76AC17989A4F0032A219 /* FutureCoreIosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30FC76C217989A4F0032A219 /* Build configuration list for PBXNativeTarget "FutureCoreIosTests" */;
+			buildPhases = (
+				30FC76A817989A4F0032A219 /* Sources */,
+				30FC76A917989A4F0032A219 /* Frameworks */,
+				30FC76AA17989A4F0032A219 /* Resources */,
+				30FC76AB17989A4F0032A219 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				30FC76B417989A4F0032A219 /* PBXTargetDependency */,
+			);
+			name = FutureCoreIosTests;
+			productName = FutureCoreIosTests;
+			productReference = 30FC76AD17989A4F0032A219 /* FutureCoreIosTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		30FC75EF179738AC0032A219 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Future Man Studios";
+			};
+			buildConfigurationList = 30FC75F2179738AC0032A219 /* Build configuration list for PBXProject "FutureCore" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 30FC75EE179738AC0032A219;
+			productRefGroup = 30FC75F8179738AC0032A219 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				30FC75F6179738AC0032A219 /* FutureCore */,
+				30FC769C17989A4E0032A219 /* FutureCoreIos */,
+				30FC76AC17989A4F0032A219 /* FutureCoreIosTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		30FC76AA17989A4F0032A219 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30FC76BB17989A4F0032A219 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		30FC76AB17989A4F0032A219 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		30FC75F3179738AC0032A219 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30FC768417973A090032A219 /* assert.cpp in Sources */,
+				30FC768517973A090032A219 /* debug.cpp in Sources */,
+				30FC768617973A090032A219 /* log.cpp in Sources */,
+				30FC768717973A090032A219 /* heapallocator.cpp in Sources */,
+				30FC768817973A090032A219 /* mallocallocator.cpp in Sources */,
+				30FC768917973A090032A219 /* poolallocator.cpp in Sources */,
+				30FC768A17973A090032A219 /* stackallocator.cpp in Sources */,
+				30FC768B17973A090032A219 /* memory.cpp in Sources */,
+				30FC768C17973A090032A219 /* memorytracker.cpp in Sources */,
+				30FC768D17973A090032A219 /* managedobject.cpp in Sources */,
+				30FC768E17973A090032A219 /* criticalsection.cpp in Sources */,
+				30FC768F17973A090032A219 /* job.cpp in Sources */,
+				30FC769017973A090032A219 /* threadpool.cpp in Sources */,
+				30FC769117973A090032A219 /* null_thread.cpp in Sources */,
+				30FC769217973A090032A219 /* posix_thread.cpp in Sources */,
+				30FC769317973A090032A219 /* thread.cpp in Sources */,
+				30FC769517973A090032A219 /* workerthread.cpp in Sources */,
+				30FC769617973A090032A219 /* string.cpp in Sources */,
+				30FC769717973A090032A219 /* timer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30FC769917989A4E0032A219 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30FC76C517989BFE0032A219 /* assert.cpp in Sources */,
+				30FC76C617989BFE0032A219 /* debug.cpp in Sources */,
+				30FC76C717989BFE0032A219 /* log.cpp in Sources */,
+				30FC76C817989BFE0032A219 /* memory.cpp in Sources */,
+				30FC76C917989BFE0032A219 /* heapallocator.cpp in Sources */,
+				30FC76CA17989BFE0032A219 /* mallocallocator.cpp in Sources */,
+				30FC76CB17989BFE0032A219 /* poolallocator.cpp in Sources */,
+				30FC76CC17989BFE0032A219 /* stackallocator.cpp in Sources */,
+				30FC76CD17989BFE0032A219 /* memorytracker.cpp in Sources */,
+				30FC76CE17989BFE0032A219 /* managedobject.cpp in Sources */,
+				30FC76CF17989BFE0032A219 /* criticalsection.cpp in Sources */,
+				30FC76D017989BFE0032A219 /* job.cpp in Sources */,
+				30FC76D117989BFE0032A219 /* threadpool.cpp in Sources */,
+				30FC76D217989BFE0032A219 /* null_thread.cpp in Sources */,
+				30FC76D317989BFE0032A219 /* posix_thread.cpp in Sources */,
+				30FC76D417989BFE0032A219 /* workerthread.cpp in Sources */,
+				30FC76D517989BFE0032A219 /* string.cpp in Sources */,
+				30FC76D617989BFE0032A219 /* timer.cpp in Sources */,
+				30FC76A717989A4F0032A219 /* FutureCoreIos.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30FC76A817989A4F0032A219 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30FC76BE17989A4F0032A219 /* FutureCoreIosTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		30FC76B417989A4F0032A219 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 30FC769C17989A4E0032A219 /* FutureCoreIos */;
+			targetProxy = 30FC76B317989A4F0032A219 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		30FC76B917989A4F0032A219 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30FC76BA17989A4F0032A219 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		30FC75F9179738AC0032A219 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = "./../../bin/ios/$(PROJECT_NAME).dst";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"_DEBUG=1",
+					"_MAC=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_USE_STANDARD_INCLUDE_SEARCHING = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../include/",
+					/usr/include/malloc,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OBJROOT = ./../../tmp/ios;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+				SYMROOT = ./../../bin/ios;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../include/ /usr/include/malloc";
+			};
+			name = Debug;
+		};
+		30FC75FA179738AC0032A219 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DSTROOT = "./../../bin/ios/$(PROJECT_NAME).dst";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_USE_STANDARD_INCLUDE_SEARCHING = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../include/",
+					/usr/include/malloc,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OBJROOT = ./../../tmp/ios;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+				SYMROOT = ./../../bin/ios;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../include/ /usr/include/malloc";
+			};
+			name = Release;
+		};
+		30FC75FC179738AC0032A219 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../include/";
+			};
+			name = Debug;
+		};
+		30FC75FD179738AC0032A219 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../include/";
+			};
+			name = Release;
+		};
+		30FC76C017989A4F0032A219 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/FutureCoreIos.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FutureCoreIos/FutureCoreIos-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		30FC76C117989A4F0032A219 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/FutureCoreIos.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FutureCoreIos/FutureCoreIos-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		30FC76C317989A4F0032A219 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FutureCoreIos/FutureCoreIos-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "FutureCoreIosTests/FutureCoreIosTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		30FC76C417989A4F0032A219 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FutureCoreIos/FutureCoreIos-Prefix.pch";
+				INFOPLIST_FILE = "FutureCoreIosTests/FutureCoreIosTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		30FC75F2179738AC0032A219 /* Build configuration list for PBXProject "FutureCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30FC75F9179738AC0032A219 /* Debug */,
+				30FC75FA179738AC0032A219 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30FC75FB179738AC0032A219 /* Build configuration list for PBXNativeTarget "FutureCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30FC75FC179738AC0032A219 /* Debug */,
+				30FC75FD179738AC0032A219 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30FC76BF17989A4F0032A219 /* Build configuration list for PBXNativeTarget "FutureCoreIos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30FC76C017989A4F0032A219 /* Debug */,
+				30FC76C117989A4F0032A219 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30FC76C217989A4F0032A219 /* Build configuration list for PBXNativeTarget "FutureCoreIosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30FC76C317989A4F0032A219 /* Debug */,
+				30FC76C417989A4F0032A219 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 30FC75EF179738AC0032A219 /* Project object */;
+}

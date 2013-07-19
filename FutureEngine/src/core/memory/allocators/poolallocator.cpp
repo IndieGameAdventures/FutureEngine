@@ -55,7 +55,7 @@ FuturePoolAllocator::FuturePoolAllocator(u8 align, u8 poolSize, u32 numPools, bo
 	}
 	else
 	{
-		m_poolSize = poolSize + (accountForHeaders ? FutureMemory::HeaderSize() : 4);
+		m_poolSize = poolSize + (u32)(accountForHeaders ? FutureMemory::HeaderSize() : 4);
 	}
 
 	if(m_groupSize > FUTURE_MAX_POOL_GROUP_SIZE)
@@ -189,17 +189,17 @@ void FuturePoolAllocator::AddPoolGroup()
 		if(m_usingHeaders)
 		{
 			FutureAllocHeader * header = reinterpret_cast<FutureAllocHeader *>(data);
-			header->m_allocatorData = (u32)pools;
+			header->m_allocatorData = (size_t)pools;
 			pools->m_data = data;
 		}
 		else
 		{
-			u32 * header = (u32*)data;
-			*header = (u32)pools;
+			size_t * header = (size_t*)data;
+			*header = (size_t)pools;
 			pools->m_data = (void*)(header + 1);
 		}
 		++pools;
-		data = (void*)((u32)data + m_poolSize);
+		data = (void*)((size_t)data + m_poolSize);
 	}
 
 	Lock();

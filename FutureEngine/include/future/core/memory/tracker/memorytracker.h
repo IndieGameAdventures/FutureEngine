@@ -48,7 +48,7 @@ class IFutureAllocator;
 struct FutureAllocHeader
 {
 	IFutureAllocator *	m_allocator;
-	u32					m_allocatorData;
+	size_t				m_allocatorData;
 
 	u16 				m_bytes;
 
@@ -68,7 +68,7 @@ struct FutureAllocHeader
 struct FutureAllocHeader
 {
 	IFutureAllocator *	m_allocator;
-	u32					m_allocatorData;
+	size_t				m_allocatorData;
 };
 #endif
 

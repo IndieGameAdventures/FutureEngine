@@ -21,6 +21,8 @@
 /*
 *	Implementation of FutureMemory
 */
+#include <stdlib.h>
+#include <string.h>
 
 #include <future/core/debug/debug.h>
 
@@ -61,7 +63,7 @@ public:
 	void					Free(void * p );
 	void *					ReAlloc(void * p, FutureMemoryParam memParam);
 
-	u32						BytesForAllocation(FutureMemoryParam memParam);
+	size_t					BytesForAllocation(FutureMemoryParam memParam);
 	void					AddAllocator(IFutureAllocator * allocator);
 	IFutureAllocator *		GetAllocator(int i);
 
@@ -84,7 +86,7 @@ MemorySystem * memory;
 /*******************************************************************/
 // FutureMemory implementation
 
-static u32 futureHeaderSize = 0;
+static size_t futureHeaderSize = 0;
 void FutureMemory::CreateMemory(u8 globalAlign)
 {
 	FUTURE_ASSERT(memory == NULL);
@@ -128,7 +130,7 @@ void * FutureMemory::ReAlloc(void * p, FutureMemoryParam memParam)
 {
 	return memory->ReAlloc(p, memParam);
 }
-u32	FutureMemory::BytesForAllocation(FutureMemoryParam memParam)
+size_t	FutureMemory::BytesForAllocation(FutureMemoryParam memParam)
 {
 	return memory->BytesForAllocation(memParam);
 }
@@ -136,7 +138,7 @@ void FutureMemory::AddAllocator(IFutureAllocator * allocator)
 {
 	memory->AddAllocator(allocator);
 }
-IFutureAllocator * FutureMemory::GetAllocator(int i)
+IFutureAllocator * FutureMemory::GetAllocator(u32 i)
 {
 	return memory->GetAllocator(i);
 }
@@ -162,15 +164,15 @@ u8 FutureMemory::GetGlobalAlignment()
 }
 
 
-inline u32 FutureMemory::HeaderSize()
+size_t FutureMemory::HeaderSize()
 {
 	return futureHeaderSize; 
 }
 
 inline static void * DataFromHeader(FutureAllocHeader * header)
-	{ return (void *)(reinterpret_cast< u32 >(header) + FutureMemory::HeaderSize()); }
+	{ return (void *)(reinterpret_cast<size_t>(header) + FutureMemory::HeaderSize()); }
 inline static FutureAllocHeader * HeaderFromData(void * p)
-	{ return reinterpret_cast<FutureAllocHeader *>(reinterpret_cast<u32>(p) - FutureMemory::HeaderSize()); }
+	{ return reinterpret_cast<FutureAllocHeader *>(reinterpret_cast<size_t>(p) - FutureMemory::HeaderSize()); }
 
 
 /*******************************************************************/
@@ -185,7 +187,7 @@ void * MemorySystem::Alloc(FutureMemoryParam memParam)
 	f32 time = FutureTimer::CurrentTime();
 #endif
 	IFutureAllocator * allocator = GetBestAllocator(memParam); // get the best allocator
-	void * p = allocator->Alloc(BytesForAllocation(memParam)); // allocate enough bytes for the header
+	void * p = allocator->Alloc((u32)BytesForAllocation(memParam)); // allocate enough bytes for the header
 	FutureAllocHeader * header = reinterpret_cast<FutureAllocHeader *>(p);
 	header->m_allocator = allocator;
 #if FUTURE_TRACK_MEMORY
@@ -209,7 +211,7 @@ void * MemorySystem::ReAlloc(void * p, FutureMemoryParam memParam)
 	f32 time = FutureTimer::CurrentTime();
 #endif
 	IFutureAllocator * allocator = GetBestAllocator(memParam);
-	void * data = allocator->Alloc(BytesForAllocation(memParam));
+	void * data = allocator->Alloc((u32)BytesForAllocation(memParam));
 	FutureAllocHeader * header = reinterpret_cast<FutureAllocHeader *>(data);
 	memcpy(DataFromHeader(header), p, memParam.m_bytes);
 	header->m_allocator = allocator;
@@ -341,7 +343,7 @@ MemorySystem::~MemorySystem()
 /*******************************************************************/
 // Memory Tracker tracking functions
 
-inline u32 MemorySystem::BytesForAllocation(FutureMemoryParam memParam)
+inline size_t MemorySystem::BytesForAllocation(FutureMemoryParam memParam)
 {
 	if (memParam.m_bytes == 0)
 	{

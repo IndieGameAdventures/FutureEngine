@@ -103,7 +103,7 @@ void FutureMemoryTracker::Track(FutureMemoryParam memParam, FutureAllocHeader * 
 	header->m_bytes = memParam.m_bytes;
 	header->m_type = memParam.m_type;
 	header->m_file = wcsrchr(memParam.m_file, '\\' );
-	header->m_file = (string)((u32)header->m_file + sizeof(wchar_t));
+	header->m_file = (string)((size_t)header->m_file + sizeof(wchar_t));
 	header->m_line = memParam.m_line;
 	SetChecksum(header);
 		
@@ -188,7 +188,7 @@ void FutureMemoryTracker::VerifyAllocations()
 void FutureMemoryTracker::SetChecksum(FutureAllocHeader * header)
 {
 #if FUTURE_TRACK_MEMORY
-	header->m_checkSum = FUTURE_CHECKSUM ^ reinterpret_cast<u32>(header) ^ header->m_bytes;
+	header->m_checkSum = FUTURE_CHECKSUM ^ (u32)reinterpret_cast<size_t>(header) ^ header->m_bytes;
 #endif
 }
 
@@ -197,7 +197,7 @@ void FutureMemoryTracker::VerifyChecksum(FutureAllocHeader * header)
 {
 #if FUTURE_TRACK_MEMORY
 	// NOTE: If this assert fires, then memory is corrupt or some else weird is happening.
-	FUTURE_ASSERT_CRIT(header->m_checkSum == (FUTURE_CHECKSUM ^ reinterpret_cast<u32>(header) ^ header->m_bytes), 9899);
+	FUTURE_ASSERT_CRIT(header->m_checkSum == (FUTURE_CHECKSUM ^ reinterpret_cast<size_t>(header) ^ header->m_bytes), 9899);
 #endif
 }
 
@@ -257,7 +257,7 @@ void FutureMemoryTracker::LogAllocations()
 
 	FutureMemoryStatistics stats = GetStatistics();
 	u32 allocations = 0;
-	f32 time = FutureTimer::CurrentTime();
+	//f32 time = FutureTimer::CurrentTime();
 	for(FutureAllocHeader * header = m_headerRoot.m_next; header != NULL; header = header->m_next)
 	{
 		++allocations;

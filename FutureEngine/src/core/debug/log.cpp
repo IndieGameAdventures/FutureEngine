@@ -43,7 +43,7 @@ static void FutureLogFunctionDefault(u8 severness, string file, u32 line, ...)
 	}
 
 	file = wcsrchr(file, '\\' );
-	file = (string)((u32)file + sizeof(wchar_t));
+	file = (string)((size_t)file + sizeof(wchar_t));
 
 #if FUTURE_PLATFORM_ANDROID
 	char androidBuffer[2048];
@@ -77,7 +77,7 @@ static void FutureLogFunctionDefault(u8 severness, string file, u32 line, ...)
 		break;
 	}
 #else
-	wprintf_s(L"%ls: [%ls:%d] %ls\n", se, file, line, buffer);
+	wprintf(L"%ls: [%ls:%d] %ls\n", se, file, line, buffer);
 #endif
 }
 

@@ -135,7 +135,7 @@ void * FutureHeapAllocator::Alloc(u32 bytes)
 	else
 	{
 		block->m_size -= bytes;
-		block->m_data = (void*)((u32)block->m_data + bytes);
+		block->m_data = (void*)((size_t)block->m_data + bytes);
 	}
 
 	m_criticalSection.Unlock();
@@ -149,7 +149,7 @@ void * FutureHeapAllocator::Alloc(u32 bytes)
 	}
 	else
 	{
-		u32 * header = (u32*)data;
+		size_t * header = (size_t*)data;
 		*header = bytes;
 		return (void*)(header + 1);
 	}
@@ -161,14 +161,14 @@ void FutureHeapAllocator::Free(void * p)
 	Heap * heap = m_heaps;
 	for( ;heap; heap = heap->m_next)
 	{
-		if((u32)p >= (u32)heap->m_data && (u32)p < (u32)heap->m_data + m_heapSize)
+		if((size_t)p >= (size_t)heap->m_data && (size_t)p < (size_t)heap->m_data + m_heapSize)
 		{
 			break;
 		}
 	}
 	FUTURE_ASSERT_MSG(heap, L"Attempting to free a block that does not belong to this heap");
 	
-	u32 size = 0;
+	size_t size = 0;
 	if(m_usingHeaders)
 	{
 		FutureAllocHeader * header = reinterpret_cast<FutureAllocHeader *>(p);
@@ -176,7 +176,7 @@ void FutureHeapAllocator::Free(void * p)
 	}
 	else
 	{
-		u32 * header = ((u32*)p) - 1;
+		size_t * header = ((size_t*)p) - 1;
 		size = *header;
 		p = (void*)header;
 	}
@@ -189,13 +189,13 @@ void FutureHeapAllocator::Free(void * p)
 		for(Block * checkBlock = heap->m_freeBlocks; checkBlock && !found; checkBlock = checkBlock->m_next)
 		{
 			// checkBlock is before this one
-			if((u32)checkBlock->m_data + checkBlock->m_size == (u32)p)
+			if((size_t)checkBlock->m_data + checkBlock->m_size == (size_t)p)
 			{
 				checkBlock->m_size += size;
 				found = true;
 			}
 			// checkBlock is directly after this block
-			else if((u32)p + size == (u32)checkBlock->m_data)
+			else if((size_t)p + size == (size_t)checkBlock->m_data)
 			{
 				checkBlock->m_size += size;
 				checkBlock->m_data = p;
@@ -209,7 +209,7 @@ void FutureHeapAllocator::Free(void * p)
 		// we couldn't add this to another block so make a new one
 		Block * block = (Block*)m_poolAllocator->Alloc(sizeof(Block));
 		block->m_data = p;
-		block->m_size = size;
+		block->m_size = (u32)size;
 		block->m_next = heap->m_freeBlocks;
 		heap->m_freeBlocks = block;
 	}
@@ -241,7 +241,7 @@ void FutureHeapAllocator::Release()
 		{
 			if(!m_usingHeaders && m_align >= 4)
 			{
-				heap->m_data = (void*)((u32)heap->m_data - (m_align - 4));
+				heap->m_data = (void*)((size_t)heap->m_data - (m_align - 4));
 			}
 			_aligned_free(heap->m_data);
 		}
@@ -264,7 +264,7 @@ void FutureHeapAllocator::AddHeap()
 
 	if(!m_usingHeaders && m_align >= 4)
 	{
-		heap->m_data = (void*)((u32)heap->m_data + (m_align - 4));
+		heap->m_data = (void*)((size_t)heap->m_data + (m_align - 4));
 	}
 
 	Block * block = (Block*)m_poolAllocator->Alloc(sizeof(Block));

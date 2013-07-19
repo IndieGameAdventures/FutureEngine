@@ -29,10 +29,16 @@
 #define FUTURE_CORE_MEMORY_ALLOCATOR_H
 
 #include <future/core/type/type.h>
+
+#include <stdlib.h>
 #include <malloc.h>
 
-#if !FUTURE_PLATFORM_WINDOWS
+#if FUTURE_PLATFORM_LINUX || FUTURE_PLATFORM_ANDROID
 #	define _aligned_malloc(bytes, align)	memalign(align, bytes)
+#	define _aligned_free(data)				free(data)
+#elif FUTURE_PLATFORM_MAC || FUTURE_PLATFORM_IPHONE
+    // Mac is already 16 bit aligned so we don't need to change it
+#	define _aligned_malloc(bytes, align)	(align <= 16 ? malloc(bytes) : NULL)
 #	define _aligned_free(data)				free(data)
 #endif
 
@@ -41,6 +47,8 @@ struct FutureMemoryParam;
 class IFutureAllocator
 {
 public:
+    virtual ~IFutureAllocator(){};
+    
 	virtual void *	Alloc(u32 bytes) = 0;
 	virtual void	Free(void * p) = 0;
 

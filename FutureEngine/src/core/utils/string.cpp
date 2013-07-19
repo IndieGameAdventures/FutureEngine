@@ -22,7 +22,7 @@
 *	Implementation of FutureString
 *
 */
-#include <future/core/utils/string.h>
+#include <future/core/utils/futurestring.h>
 #include <string.h>
 #include <wchar.h>
 #include <stdlib.h>
@@ -165,11 +165,11 @@ u32 FutureString::Compare(const FutureString & str) const
 
 bool FutureString::EndsWith(const FutureString & str) const
 {
-	u32 i = Length() - 1;
-	u32 j = str.Length() - 1;
+	s32 i = Length() - 1;
+	s32 j = str.Length() - 1;
 	for(; i >= 0 && j >= 0; --i, --j)
 	{
-		if(CharAt(i) != str.CharAt(j))
+		if(CharAt((u32)i) != str.CharAt((u32)j))
 		{
 			return false;
 		}
@@ -215,7 +215,7 @@ bool FutureString::Contains(const FutureString & str) const
 	return false;
 }
 
-u32	 FutureString::IndexOf(const FutureString & str) const
+s32	 FutureString::IndexOf(const FutureString & str) const
 {
 	for(u32 i = 0; i < Length() - str.Length(); ++i)
 	{
@@ -231,23 +231,23 @@ u32	 FutureString::IndexOf(const FutureString & str) const
 			}
 			if(k == str.Length())
 			{
-				return i;
+				return (s32)i;
 			}
 		}
 	}
 	return -1;
 }
 
-u32 FutureString::LastIndexOf(const FutureString & str) const
+s32 FutureString::LastIndexOf(const FutureString & str) const
 {
 	for(s32 i = Length() - str.Length(); i >= 0; --i)
 	{
-		if(CharAt(i) == str.CharAt(0))
+		if(CharAt((u32)i) == str.CharAt(0))
 		{
 			u32 k = 1;
-			for(u32 j = i + 1; j < Length() && k < str.Length(); ++j, ++k)
+			for(s32 j = i + 1; j < Length() && k < str.Length(); ++j, ++k)
 			{
-				if(CharAt(j) != str.CharAt(k))
+				if(CharAt((u32)j) != str.CharAt(k))
 				{
 					break;
 				}
@@ -285,10 +285,10 @@ FutureString FutureString::Replace(const FutureString & find, const FutureString
 
 	for(s32 i = Length() - find.Length(); i >= 0 && bufferIndex < (maxLength - 1); --i)
 	{
-		if(CharAt(i) == find.CharAt(0))
+		if(CharAt((u32)i) == find.CharAt(0))
 		{
 			u32 k = 1;
-			u32 j = i + 1;
+			u32 j = (u32)i + 1;
 			for(; j < Length() && k < find.Length(); ++j, ++k)
 			{
 				if(CharAt(j) != find.CharAt(k))
@@ -303,17 +303,17 @@ FutureString FutureString::Replace(const FutureString & find, const FutureString
 					buffer[bufferIndex] = replace.CharAt(j);
 					++bufferIndex;
 				}
-				i = j;
+				i = (s32)j;
 			}
 			else
 			{
-				buffer[bufferIndex] = CharAt(i);
+				buffer[bufferIndex] = CharAt((u32)i);
 				++bufferIndex;
 			}
 		}
 		else
 		{
-			buffer[bufferIndex] = CharAt(i);
+			buffer[bufferIndex] = CharAt((u32)i);
 			++bufferIndex;
 		}
 	}
@@ -325,14 +325,14 @@ FutureString FutureString::Replace(const FutureString & find, const FutureString
 void FutureString::Split(const FutureString & str, FutureArray<FutureString> * a) const
 {
 	FUTURE_ASSERT(str.Length() > 0 && a);
-	u32 i = IndexOf(str);
+	s32 i = IndexOf(str);
 	if(i >= 0)
 	{
 		if(i > 0)
 		{
-			a->Add(SubString(0, i));
+			a->Add(SubString(0, (u32)i));
 		}
-		FutureString rest = SubString(i + str.Length());
+		FutureString rest = SubString((u32)i + str.Length());
 		rest.Split(str, a);
 	}
 }
@@ -372,7 +372,7 @@ FutureString & FutureString::operator=(const wchar_t * str)
 	size_t size = wcslen(str) + 1;
 	m_string = new wchar_t[size];
 	wcscpy(m_string, str);
-	m_length = size - 1;
+	m_length = (u32)size - 1;
 	return *this;
 }
 
@@ -390,7 +390,7 @@ FutureString & FutureString::operator=(const FutureString & str)
 	size_t size = str.m_length + 1;
 	m_string = new wchar_t[size];
 	wcscpy(m_string, str.m_string);
-	m_length = size - 1;
+	m_length = (u32)size - 1;
 	return *this;
 }
 
@@ -423,7 +423,7 @@ wchar_t * FutureString::Writable()
 
 void FutureString::UpdateSize()
 {
-	m_length = wcslen(m_string);
+	m_length = (u32)wcslen(m_string);
 }
 
 void FutureString::ForceSize(u32 size)

@@ -40,6 +40,7 @@ class FutureSmartPointerBase;
 class FutureProxyBase
 {
 public:
+    virtual ~FutureProxyBase(){}
 	virtual void PrintReferences() = 0;
 
 protected:

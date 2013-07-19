@@ -73,13 +73,13 @@ public:
 	static u8		GetGlobalAlignment();
 
 	// The total bytes needed for an allocation
-	static u32		BytesForAllocation(FutureMemoryParam memParam);
+	static size_t	BytesForAllocation(FutureMemoryParam memParam);
 
 	// Allocators can be added but cannot be removed as they may be needed
 	// to free memory. The allocator with the lowest priority that returns
 	// true for ShouldAllocate will be used for each allocation.
 	static void					AddAllocator(IFutureAllocator * allocator);
-	static IFutureAllocator *	GetAllocator(int i);
+	static IFutureAllocator *	GetAllocator(u32 i);
 
 	// Debugging functions, can be called from non debug/profile builds but will do nothing
 	static FutureMemoryStatistics	GetStatistics();
@@ -91,7 +91,7 @@ public:
 	/*******************************************************************/
 	// helper functions
 
-	static u32 HeaderSize(); // return the size of the header added to each allocation in bytes
+	static size_t HeaderSize(); // return the size of the header added to each allocation in bytes
 };
 
 
@@ -100,7 +100,7 @@ public:
 #if FUTURE_TRACK_MEMORY
 struct FutureMemoryParam
 {	
-	FutureMemoryParam(u32 bytes, string type = 0, string file = 0, u32 line = 0, IFutureAllocator * allocator = 0)
+	FutureMemoryParam(size_t bytes, string type = 0, string file = 0, u32 line = 0, IFutureAllocator * allocator = 0)
 		: m_bytes(bytes),
 		  m_type(type),
 		  m_file(file),
@@ -108,7 +108,7 @@ struct FutureMemoryParam
 		  m_allocator(allocator)
 	{ ; }
 
-	u32 	m_bytes;	// bytes needed in allocation
+	size_t 	m_bytes;	// bytes needed in allocation
 	string	m_type;		// the type of object being allocated
 	string 	m_file;		// file allocation was requested from
 	u32		m_line;		// file line on which allocation was requested
@@ -126,11 +126,11 @@ struct FutureMemoryParam
 #else
 struct FutureMemoryParam
 {	
-	FutureMemoryParam(u32 bytes)
+	FutureMemoryParam(size_t bytes)
 		: m_bytes(bytes)
 	{ ; }
 
-	u32 	m_bytes;	// bytes needed in allocation
+	size_t 	m_bytes;	// bytes needed in allocation
 };
 
 // returns a pointer to the new allocation
@@ -142,7 +142,7 @@ struct FutureMemoryParam
 
 #endif
 
-#define FUTURE_CREATE(type)					(FUTURE_ALLOC(sizeof(type), WIDEN(STRINGIFY(type))))
+#define FUTURE_CREATE(type)					(FUTURE_ALLOC((size_t)sizeof(type), WIDEN(STRINGIFY(type))))
 
 #define FUTURE_DECLARE_MEMORY_OPERATORS(type)						\
 public:																\
