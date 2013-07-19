@@ -4,3 +4,10 @@ FutureEngine/tmp/
 objs/
 *Fake*.so
 *.DS_Store
+xcuserdata/
+*.xcuserstate
+
+FutureEngine/projects/FutureCore/FutureCore.xcodeproj/xcuserdata/
+FutureEngine/projects/FutureCore/FutureCore.xcodeproj/project.xcworkspace/xcuserdata/
+
+FutureEngine/projects/FutureCore/FutureCore.xcodeproj/xcuserdata/

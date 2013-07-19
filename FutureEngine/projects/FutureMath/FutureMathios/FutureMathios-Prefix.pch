@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'FutureMathios' target in the 'FutureMathios' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif

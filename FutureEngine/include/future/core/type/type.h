@@ -28,6 +28,7 @@
 #define FUTURE_CORE_TYPE_H
 
 #include <future/core/type/platform.h>
+#include <wchar.h>
 
 #ifndef FUTURE_PRIMITIVE_DEFINITIONS
 

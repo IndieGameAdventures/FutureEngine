@@ -1,0 +1,414 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		30FC77291799D80F0032A219 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FC77281799D80F0032A219 /* Foundation.framework */; };
+		30FC772E1799D80F0032A219 /* FutureMathios.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 30FC772D1799D80F0032A219 /* FutureMathios.h */; };
+		30FC77301799D80F0032A219 /* FutureMathios.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FC772F1799D80F0032A219 /* FutureMathios.m */; };
+		30FC77531799E6C10032A219 /* scalar.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC77441799E6C10032A219 /* scalar.h */; };
+		30FC77541799E6C10032A219 /* vec4_altivec.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC77471799E6C10032A219 /* vec4_altivec.h */; };
+		30FC77551799E6C10032A219 /* vec4_float.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC77491799E6C10032A219 /* vec4_float.h */; };
+		30FC77561799E6C10032A219 /* vec4_neon.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC774B1799E6C10032A219 /* vec4_neon.h */; };
+		30FC77571799E6C10032A219 /* vec4_sse.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC774D1799E6C10032A219 /* vec4_sse.h */; };
+		30FC77581799E6C10032A219 /* vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC774F1799E6C10032A219 /* vec4.h */; };
+		30FC77591799E6C10032A219 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC77501799E6C10032A219 /* vector.h */; };
+		30FC775A1799E6C10032A219 /* vector3.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC77521799E6C10032A219 /* vector3.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		30FC77241799D80F0032A219 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				30FC772E1799D80F0032A219 /* FutureMathios.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		30FC77151799D7E30032A219 /* FutureMath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = FutureMath.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		30FC77261799D80F0032A219 /* FutureMathios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = FutureMathios.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		30FC77281799D80F0032A219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		30FC772C1799D80F0032A219 /* FutureMathios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FutureMathios-Prefix.pch"; sourceTree = "<group>"; };
+		30FC772D1799D80F0032A219 /* FutureMathios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FutureMathios.h; sourceTree = "<group>"; };
+		30FC772F1799D80F0032A219 /* FutureMathios.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FutureMathios.m; sourceTree = "<group>"; };
+		30FC77441799E6C10032A219 /* scalar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scalar.h; path = ../../include/future/math/scalar.h; sourceTree = "<group>"; };
+		30FC77471799E6C10032A219 /* vec4_altivec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vec4_altivec.h; sourceTree = "<group>"; };
+		30FC77481799E6C10032A219 /* vec4_altivec.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vec4_altivec.inl; sourceTree = "<group>"; };
+		30FC77491799E6C10032A219 /* vec4_float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vec4_float.h; sourceTree = "<group>"; };
+		30FC774A1799E6C10032A219 /* vec4_float.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vec4_float.inl; sourceTree = "<group>"; };
+		30FC774B1799E6C10032A219 /* vec4_neon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vec4_neon.h; sourceTree = "<group>"; };
+		30FC774C1799E6C10032A219 /* vec4_neon.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vec4_neon.inl; sourceTree = "<group>"; };
+		30FC774D1799E6C10032A219 /* vec4_sse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vec4_sse.h; sourceTree = "<group>"; };
+		30FC774E1799E6C10032A219 /* vec4_sse.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vec4_sse.inl; sourceTree = "<group>"; };
+		30FC774F1799E6C10032A219 /* vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vec4.h; sourceTree = "<group>"; };
+		30FC77501799E6C10032A219 /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector.h; path = ../../include/future/math/vector.h; sourceTree = "<group>"; };
+		30FC77521799E6C10032A219 /* vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector3.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		30FC77121799D7E30032A219 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30FC77231799D80F0032A219 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30FC77291799D80F0032A219 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		30FC770C1799D7E30032A219 = {
+			isa = PBXGroup;
+			children = (
+				30FC77441799E6C10032A219 /* scalar.h */,
+				30FC77451799E6C10032A219 /* type */,
+				30FC77501799E6C10032A219 /* vector.h */,
+				30FC77511799E6C10032A219 /* vectors */,
+				30FC772A1799D80F0032A219 /* FutureMathios */,
+				30FC77271799D80F0032A219 /* Frameworks */,
+				30FC77161799D7E30032A219 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		30FC77161799D7E30032A219 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				30FC77151799D7E30032A219 /* FutureMath.a */,
+				30FC77261799D80F0032A219 /* FutureMathios.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		30FC77271799D80F0032A219 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30FC77281799D80F0032A219 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30FC772A1799D80F0032A219 /* FutureMathios */ = {
+			isa = PBXGroup;
+			children = (
+				30FC772D1799D80F0032A219 /* FutureMathios.h */,
+				30FC772F1799D80F0032A219 /* FutureMathios.m */,
+				30FC772B1799D80F0032A219 /* Supporting Files */,
+			);
+			path = FutureMathios;
+			sourceTree = "<group>";
+		};
+		30FC772B1799D80F0032A219 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				30FC772C1799D80F0032A219 /* FutureMathios-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		30FC77451799E6C10032A219 /* type */ = {
+			isa = PBXGroup;
+			children = (
+				30FC77461799E6C10032A219 /* vec4 */,
+				30FC774F1799E6C10032A219 /* vec4.h */,
+			);
+			name = type;
+			path = ../../include/future/math/type;
+			sourceTree = "<group>";
+		};
+		30FC77461799E6C10032A219 /* vec4 */ = {
+			isa = PBXGroup;
+			children = (
+				30FC77471799E6C10032A219 /* vec4_altivec.h */,
+				30FC77481799E6C10032A219 /* vec4_altivec.inl */,
+				30FC77491799E6C10032A219 /* vec4_float.h */,
+				30FC774A1799E6C10032A219 /* vec4_float.inl */,
+				30FC774B1799E6C10032A219 /* vec4_neon.h */,
+				30FC774C1799E6C10032A219 /* vec4_neon.inl */,
+				30FC774D1799E6C10032A219 /* vec4_sse.h */,
+				30FC774E1799E6C10032A219 /* vec4_sse.inl */,
+			);
+			path = vec4;
+			sourceTree = "<group>";
+		};
+		30FC77511799E6C10032A219 /* vectors */ = {
+			isa = PBXGroup;
+			children = (
+				30FC77521799E6C10032A219 /* vector3.h */,
+			);
+			name = vectors;
+			path = ../../include/future/math/vectors;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		30FC77131799D7E30032A219 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30FC77531799E6C10032A219 /* scalar.h in Headers */,
+				30FC77541799E6C10032A219 /* vec4_altivec.h in Headers */,
+				30FC77551799E6C10032A219 /* vec4_float.h in Headers */,
+				30FC77561799E6C10032A219 /* vec4_neon.h in Headers */,
+				30FC77571799E6C10032A219 /* vec4_sse.h in Headers */,
+				30FC77581799E6C10032A219 /* vec4.h in Headers */,
+				30FC77591799E6C10032A219 /* vector.h in Headers */,
+				30FC775A1799E6C10032A219 /* vector3.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		30FC77141799D7E30032A219 /* FutureMath */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30FC77191799D7E30032A219 /* Build configuration list for PBXNativeTarget "FutureMath" */;
+			buildPhases = (
+				30FC77111799D7E30032A219 /* Sources */,
+				30FC77121799D7E30032A219 /* Frameworks */,
+				30FC77131799D7E30032A219 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FutureMath;
+			productName = FutureMath;
+			productReference = 30FC77151799D7E30032A219 /* FutureMath.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		30FC77251799D80F0032A219 /* FutureMathios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30FC77311799D80F0032A219 /* Build configuration list for PBXNativeTarget "FutureMathios" */;
+			buildPhases = (
+				30FC77221799D80F0032A219 /* Sources */,
+				30FC77231799D80F0032A219 /* Frameworks */,
+				30FC77241799D80F0032A219 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FutureMathios;
+			productName = FutureMathios;
+			productReference = 30FC77261799D80F0032A219 /* FutureMathios.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		30FC770D1799D7E30032A219 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Future Man Studios";
+			};
+			buildConfigurationList = 30FC77101799D7E30032A219 /* Build configuration list for PBXProject "FutureMath" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 30FC770C1799D7E30032A219;
+			productRefGroup = 30FC77161799D7E30032A219 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				30FC77141799D7E30032A219 /* FutureMath */,
+				30FC77251799D80F0032A219 /* FutureMathios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		30FC77111799D7E30032A219 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30FC77221799D80F0032A219 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30FC77301799D80F0032A219 /* FutureMathios.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		30FC77171799D7E30032A219 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_DEBUG=1",
+					"_MAC=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../include/",
+					/usr/include/malloc,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OBJROOT = ./../../tmp/ios;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SYMROOT = ./../../bin/ios;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../include/ /usr/include/malloc";
+			};
+			name = Debug;
+		};
+		30FC77181799D7E30032A219 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../include/",
+					/usr/include/malloc,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OBJROOT = ./../../tmp/ios;
+				SDKROOT = macosx;
+				SYMROOT = ./../../bin/ios;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../include/ /usr/include/malloc";
+			};
+			name = Release;
+		};
+		30FC771A1799D7E30032A219 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		30FC771B1799D7E30032A219 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		30FC77321799D80F0032A219 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/FutureMathios.dst;
+				EXECUTABLE_PREFIX = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FutureMathios/FutureMathios-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		30FC77331799D80F0032A219 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/FutureMathios.dst;
+				EXECUTABLE_PREFIX = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FutureMathios/FutureMathios-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		30FC77101799D7E30032A219 /* Build configuration list for PBXProject "FutureMath" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30FC77171799D7E30032A219 /* Debug */,
+				30FC77181799D7E30032A219 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30FC77191799D7E30032A219 /* Build configuration list for PBXNativeTarget "FutureMath" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30FC771A1799D7E30032A219 /* Debug */,
+				30FC771B1799D7E30032A219 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30FC77311799D80F0032A219 /* Build configuration list for PBXNativeTarget "FutureMathios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30FC77321799D80F0032A219 /* Debug */,
+				30FC77331799D80F0032A219 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 30FC770D1799D7E30032A219 /* Project object */;
+}

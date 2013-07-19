@@ -29,8 +29,8 @@
 
 #include <future/core/type/type.h>
 
-//#include <stdio.h>
-//#include <wchar.h>
+#include <stdio.h>
+#include <wchar.h>
 
 #ifndef FUTURE_ASSERT_DEFINE
 #define FUTURE_ASSERT_DEFINE
@@ -65,9 +65,9 @@ void FutureSetAssertCritFunction(FutureAssertCritFunction assertCritFunction);
 #ifndef FUTURE_STATIC_ASSERT_DEFINE
 #define FUTURE_STATIC_ASSERT_DEFINE
 
-template<bool x> struct FUTURE_STATIC_ASSERTION_FAILURE;
-template<> struct FUTURE_STATIC_ASSERTION_FAILURE<true>{ enum{unused = 0}; };
-template<s32 x> struct future_static_assert_test{};
+//template<bool x> struct FUTURE_STATIC_ASSERTION_FAILURE;
+//template<> struct FUTURE_STATIC_ASSERTION_FAILURE<true>{ enum{unused = 0}; };
+//template<int x> struct future_static_assert_test{};
 
 // asserts at compile time instead of runtime
 #define FUTURE_CASSERT(check) 	typedef future_static_assert_test<sizeof(FUTURE_STATIC_ASSERTION_FAILURE<(bool)(check)>)> future_static_assert_typedef

@@ -1,0 +1,259 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		30FC77011799D70F0032A219 /* FutureEngine */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 30FC77021799D70F0032A219 /* Build configuration list for PBXAggregateTarget "FutureEngine" */;
+			buildPhases = (
+			);
+			dependencies = (
+				30FC77081799D7300032A219 /* PBXTargetDependency */,
+				30FC77061799D72C0032A219 /* PBXTargetDependency */,
+				30FC775C1799E6F80032A219 /* PBXTargetDependency */,
+				30FC775E1799E6FB0032A219 /* PBXTargetDependency */,
+			);
+			name = FutureEngine;
+			productName = FutureEngine;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXContainerItemProxy section */
+		30FC76FC1799D6220032A219 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30FC76F61799D6210032A219 /* FutureCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 30FC75F7179738AC0032A219;
+			remoteInfo = FutureCore;
+		};
+		30FC76FE1799D6220032A219 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30FC76F61799D6210032A219 /* FutureCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 30FC769D17989A4F0032A219;
+			remoteInfo = FutureCoreIos;
+		};
+		30FC77051799D72C0032A219 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30FC76F61799D6210032A219 /* FutureCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 30FC75F6179738AC0032A219;
+			remoteInfo = FutureCore;
+		};
+		30FC77071799D7300032A219 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30FC76F61799D6210032A219 /* FutureCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 30FC769C17989A4E0032A219;
+			remoteInfo = FutureCoreIos;
+		};
+		30FC77401799E1DD0032A219 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30FC773B1799E1DD0032A219 /* FutureMath.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 30FC77151799D7E30032A219;
+			remoteInfo = FutureMath;
+		};
+		30FC77421799E1DD0032A219 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30FC773B1799E1DD0032A219 /* FutureMath.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 30FC77261799D80F0032A219;
+			remoteInfo = FutureMathios;
+		};
+		30FC775B1799E6F80032A219 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30FC773B1799E1DD0032A219 /* FutureMath.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 30FC77141799D7E30032A219;
+			remoteInfo = FutureMath;
+		};
+		30FC775D1799E6FB0032A219 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30FC773B1799E1DD0032A219 /* FutureMath.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 30FC77251799D80F0032A219;
+			remoteInfo = FutureMathios;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		30FC76F61799D6210032A219 /* FutureCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FutureCore.xcodeproj; path = projects/FutureCore/FutureCore.xcodeproj; sourceTree = "<group>"; };
+		30FC773B1799E1DD0032A219 /* FutureMath.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FutureMath.xcodeproj; path = projects/FutureMath/FutureMath.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		30FC76EE1799D5DB0032A219 = {
+			isa = PBXGroup;
+			children = (
+				30FC76F61799D6210032A219 /* FutureCore.xcodeproj */,
+				30FC773B1799E1DD0032A219 /* FutureMath.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		30FC76F71799D6210032A219 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				30FC76FD1799D6220032A219 /* FutureCore.a */,
+				30FC76FF1799D6220032A219 /* FutureCoreIos.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		30FC773C1799E1DD0032A219 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				30FC77411799E1DD0032A219 /* libFutureMath.a */,
+				30FC77431799E1DD0032A219 /* libFutureMathios.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		30FC76EF1799D5DB0032A219 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
+			buildConfigurationList = 30FC76F21799D5DB0032A219 /* Build configuration list for PBXProject "FutureEngine" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 30FC76EE1799D5DB0032A219;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 30FC76F71799D6210032A219 /* Products */;
+					ProjectRef = 30FC76F61799D6210032A219 /* FutureCore.xcodeproj */;
+				},
+				{
+					ProductGroup = 30FC773C1799E1DD0032A219 /* Products */;
+					ProjectRef = 30FC773B1799E1DD0032A219 /* FutureMath.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				30FC77011799D70F0032A219 /* FutureEngine */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		30FC76FD1799D6220032A219 /* FutureCore.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = FutureCore.a;
+			remoteRef = 30FC76FC1799D6220032A219 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		30FC76FF1799D6220032A219 /* FutureCoreIos.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = FutureCoreIos.a;
+			remoteRef = 30FC76FE1799D6220032A219 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		30FC77411799E1DD0032A219 /* libFutureMath.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFutureMath.a;
+			remoteRef = 30FC77401799E1DD0032A219 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		30FC77431799E1DD0032A219 /* libFutureMathios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFutureMathios.a;
+			remoteRef = 30FC77421799E1DD0032A219 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXTargetDependency section */
+		30FC77061799D72C0032A219 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FutureCore;
+			targetProxy = 30FC77051799D72C0032A219 /* PBXContainerItemProxy */;
+		};
+		30FC77081799D7300032A219 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FutureCoreIos;
+			targetProxy = 30FC77071799D7300032A219 /* PBXContainerItemProxy */;
+		};
+		30FC775C1799E6F80032A219 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FutureMath;
+			targetProxy = 30FC775B1799E6F80032A219 /* PBXContainerItemProxy */;
+		};
+		30FC775E1799E6FB0032A219 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FutureMathios;
+			targetProxy = 30FC775D1799E6FB0032A219 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		30FC76F31799D5DB0032A219 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		30FC76F41799D5DB0032A219 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		30FC77031799D70F0032A219 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OBJROOT = ./tmp/ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = ./bin/ios;
+			};
+			name = Debug;
+		};
+		30FC77041799D70F0032A219 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OBJROOT = ./tmp/ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = ./bin/ios;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		30FC76F21799D5DB0032A219 /* Build configuration list for PBXProject "FutureEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30FC76F31799D5DB0032A219 /* Debug */,
+				30FC76F41799D5DB0032A219 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30FC77021799D70F0032A219 /* Build configuration list for PBXAggregateTarget "FutureEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30FC77031799D70F0032A219 /* Debug */,
+				30FC77041799D70F0032A219 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 30FC76EF1799D5DB0032A219 /* Project object */;
+}

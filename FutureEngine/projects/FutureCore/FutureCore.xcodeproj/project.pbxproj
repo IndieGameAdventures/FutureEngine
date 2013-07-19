@@ -59,13 +59,6 @@
 		30FC769617973A090032A219 /* string.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC768217973A090032A219 /* string.cpp */; };
 		30FC769717973A090032A219 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC768317973A090032A219 /* timer.cpp */; };
 		30FC76A017989A4F0032A219 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FC769F17989A4F0032A219 /* Foundation.framework */; };
-		30FC76A517989A4F0032A219 /* FutureCoreIos.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 30FC76A417989A4F0032A219 /* FutureCoreIos.h */; };
-		30FC76A717989A4F0032A219 /* FutureCoreIos.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FC76A617989A4F0032A219 /* FutureCoreIos.m */; };
-		30FC76AF17989A4F0032A219 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FC76AE17989A4F0032A219 /* SenTestingKit.framework */; };
-		30FC76B117989A4F0032A219 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FC76B017989A4F0032A219 /* UIKit.framework */; };
-		30FC76B217989A4F0032A219 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FC769F17989A4F0032A219 /* Foundation.framework */; };
-		30FC76BB17989A4F0032A219 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30FC76B917989A4F0032A219 /* InfoPlist.strings */; };
-		30FC76BE17989A4F0032A219 /* FutureCoreIosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FC76BD17989A4F0032A219 /* FutureCoreIosTests.m */; };
 		30FC76C517989BFE0032A219 /* assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766717973A090032A219 /* assert.cpp */; };
 		30FC76C617989BFE0032A219 /* debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766817973A090032A219 /* debug.cpp */; };
 		30FC76C717989BFE0032A219 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766917973A090032A219 /* log.cpp */; };
@@ -84,17 +77,11 @@
 		30FC76D417989BFE0032A219 /* workerthread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC768017973A090032A219 /* workerthread.cpp */; };
 		30FC76D517989BFE0032A219 /* string.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC768217973A090032A219 /* string.cpp */; };
 		30FC76D617989BFE0032A219 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC768317973A090032A219 /* timer.cpp */; };
+		30FC76D71799D4380032A219 /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC767E17973A090032A219 /* thread.cpp */; };
+		30FC77381799D8460032A219 /* FutureCoreIos-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 30FC77351799D8460032A219 /* FutureCoreIos-Prefix.pch */; };
+		30FC77391799D8460032A219 /* FutureCoreIos.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC77361799D8460032A219 /* FutureCoreIos.h */; };
+		30FC773A1799D8460032A219 /* FutureCoreIos.m in Sources */ = {isa = PBXBuildFile; fileRef = 30FC77371799D8460032A219 /* FutureCoreIos.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		30FC76B317989A4F0032A219 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 30FC75EF179738AC0032A219 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 30FC769C17989A4E0032A219;
-			remoteInfo = FutureCoreIos;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		30FC769B17989A4E0032A219 /* CopyFiles */ = {
@@ -103,14 +90,13 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				30FC76A517989A4F0032A219 /* FutureCoreIos.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		30FC75F7179738AC0032A219 /* libFutureCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFutureCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		30FC75F7179738AC0032A219 /* FutureCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = FutureCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FC75FF179739B40032A219 /* assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assert.h; sourceTree = "<group>"; };
 		30FC7600179739B40032A219 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = debug.h; path = ../../include/future/core/debug/debug.h; sourceTree = SOURCE_ROOT; };
 		30FC7601179739B40032A219 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
@@ -166,18 +152,13 @@
 		30FC768217973A090032A219 /* string.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = string.cpp; path = ../../../../src/core/utils/string.cpp; sourceTree = "<group>"; };
 		30FC768317973A090032A219 /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timer.cpp; path = ../../../../src/core/utils/timer.cpp; sourceTree = "<group>"; };
 		30FC769817988C890032A219 /* type */ = {isa = PBXFileReference; lastKnownFileType = folder; name = type; path = ../../include/future/core/type; sourceTree = "<group>"; };
-		30FC769D17989A4F0032A219 /* libFutureCoreIos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFutureCoreIos.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		30FC769D17989A4F0032A219 /* FutureCoreIos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = FutureCoreIos.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FC769F17989A4F0032A219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		30FC76A317989A4F0032A219 /* FutureCoreIos-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FutureCoreIos-Prefix.pch"; sourceTree = "<group>"; };
-		30FC76A417989A4F0032A219 /* FutureCoreIos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FutureCoreIos.h; sourceTree = "<group>"; };
-		30FC76A617989A4F0032A219 /* FutureCoreIos.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FutureCoreIos.m; sourceTree = "<group>"; };
-		30FC76AD17989A4F0032A219 /* FutureCoreIosTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FutureCoreIosTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FC76AE17989A4F0032A219 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		30FC76B017989A4F0032A219 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		30FC76B817989A4F0032A219 /* FutureCoreIosTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FutureCoreIosTests-Info.plist"; sourceTree = "<group>"; };
-		30FC76BA17989A4F0032A219 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		30FC76BC17989A4F0032A219 /* FutureCoreIosTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FutureCoreIosTests.h; sourceTree = "<group>"; };
-		30FC76BD17989A4F0032A219 /* FutureCoreIosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FutureCoreIosTests.m; sourceTree = "<group>"; };
+		30FC77351799D8460032A219 /* FutureCoreIos-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FutureCoreIos-Prefix.pch"; sourceTree = "<group>"; };
+		30FC77361799D8460032A219 /* FutureCoreIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FutureCoreIos.h; sourceTree = "<group>"; };
+		30FC77371799D8460032A219 /* FutureCoreIos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FutureCoreIos.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,22 +177,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		30FC76A917989A4F0032A219 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				30FC76AF17989A4F0032A219 /* SenTestingKit.framework in Frameworks */,
-				30FC76B117989A4F0032A219 /* UIKit.framework in Frameworks */,
-				30FC76B217989A4F0032A219 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		30FC75EE179738AC0032A219 = {
 			isa = PBXGroup;
 			children = (
+				30FC77341799D8460032A219 /* FutureCoreIos */,
 				30FC769817988C890032A219 /* type */,
 				30FC75FE179739B40032A219 /* debug */,
 				30FC7602179739B40032A219 /* memory */,
@@ -219,8 +191,6 @@
 				30FC761F179739B40032A219 /* tests */,
 				30FC7626179739B40032A219 /* thread */,
 				30FC7635179739B40032A219 /* utils */,
-				30FC76A117989A4F0032A219 /* FutureCoreIos */,
-				30FC76B617989A4F0032A219 /* FutureCoreIosTests */,
 				30FC769E17989A4F0032A219 /* Frameworks */,
 				30FC75F8179738AC0032A219 /* Products */,
 			);
@@ -229,9 +199,8 @@
 		30FC75F8179738AC0032A219 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				30FC75F7179738AC0032A219 /* libFutureCore.a */,
-				30FC769D17989A4F0032A219 /* libFutureCoreIos.a */,
-				30FC76AD17989A4F0032A219 /* FutureCoreIosTests.octest */,
+				30FC75F7179738AC0032A219 /* FutureCore.a */,
+				30FC769D17989A4F0032A219 /* FutureCoreIos.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -412,41 +381,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		30FC76A117989A4F0032A219 /* FutureCoreIos */ = {
+		30FC77341799D8460032A219 /* FutureCoreIos */ = {
 			isa = PBXGroup;
 			children = (
-				30FC76A417989A4F0032A219 /* FutureCoreIos.h */,
-				30FC76A617989A4F0032A219 /* FutureCoreIos.m */,
-				30FC76A217989A4F0032A219 /* Supporting Files */,
+				30FC77351799D8460032A219 /* FutureCoreIos-Prefix.pch */,
+				30FC77361799D8460032A219 /* FutureCoreIos.h */,
+				30FC77371799D8460032A219 /* FutureCoreIos.m */,
 			);
-			path = FutureCoreIos;
-			sourceTree = "<group>";
-		};
-		30FC76A217989A4F0032A219 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				30FC76A317989A4F0032A219 /* FutureCoreIos-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		30FC76B617989A4F0032A219 /* FutureCoreIosTests */ = {
-			isa = PBXGroup;
-			children = (
-				30FC76BC17989A4F0032A219 /* FutureCoreIosTests.h */,
-				30FC76BD17989A4F0032A219 /* FutureCoreIosTests.m */,
-				30FC76B717989A4F0032A219 /* Supporting Files */,
-			);
-			path = FutureCoreIosTests;
-			sourceTree = "<group>";
-		};
-		30FC76B717989A4F0032A219 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				30FC76B817989A4F0032A219 /* FutureCoreIosTests-Info.plist */,
-				30FC76B917989A4F0032A219 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
+			name = FutureCoreIos;
+			path = FutureCoreios;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -488,6 +431,8 @@
 				30FC7663179739B40032A219 /* array.h in Headers */,
 				30FC7664179739B40032A219 /* string.h in Headers */,
 				30FC7665179739B40032A219 /* timer.h in Headers */,
+				30FC77381799D8460032A219 /* FutureCoreIos-Prefix.pch in Headers */,
+				30FC77391799D8460032A219 /* FutureCoreIos.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,7 +453,7 @@
 			);
 			name = FutureCore;
 			productName = FutureCore;
-			productReference = 30FC75F7179738AC0032A219 /* libFutureCore.a */;
+			productReference = 30FC75F7179738AC0032A219 /* FutureCore.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		30FC769C17989A4E0032A219 /* FutureCoreIos */ = {
@@ -525,27 +470,8 @@
 			);
 			name = FutureCoreIos;
 			productName = FutureCoreIos;
-			productReference = 30FC769D17989A4F0032A219 /* libFutureCoreIos.a */;
+			productReference = 30FC769D17989A4F0032A219 /* FutureCoreIos.a */;
 			productType = "com.apple.product-type.library.static";
-		};
-		30FC76AC17989A4F0032A219 /* FutureCoreIosTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 30FC76C217989A4F0032A219 /* Build configuration list for PBXNativeTarget "FutureCoreIosTests" */;
-			buildPhases = (
-				30FC76A817989A4F0032A219 /* Sources */,
-				30FC76A917989A4F0032A219 /* Frameworks */,
-				30FC76AA17989A4F0032A219 /* Resources */,
-				30FC76AB17989A4F0032A219 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				30FC76B417989A4F0032A219 /* PBXTargetDependency */,
-			);
-			name = FutureCoreIosTests;
-			productName = FutureCoreIosTests;
-			productReference = 30FC76AD17989A4F0032A219 /* FutureCoreIosTests.octest */;
-			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -570,37 +496,9 @@
 			targets = (
 				30FC75F6179738AC0032A219 /* FutureCore */,
 				30FC769C17989A4E0032A219 /* FutureCoreIos */,
-				30FC76AC17989A4F0032A219 /* FutureCoreIosTests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		30FC76AA17989A4F0032A219 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				30FC76BB17989A4F0032A219 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		30FC76AB17989A4F0032A219 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		30FC75F3179738AC0032A219 /* Sources */ = {
@@ -626,6 +524,7 @@
 				30FC769517973A090032A219 /* workerthread.cpp in Sources */,
 				30FC769617973A090032A219 /* string.cpp in Sources */,
 				30FC769717973A090032A219 /* timer.cpp in Sources */,
+				30FC773A1799D8460032A219 /* FutureCoreIos.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,43 +545,16 @@
 				30FC76CF17989BFE0032A219 /* criticalsection.cpp in Sources */,
 				30FC76D017989BFE0032A219 /* job.cpp in Sources */,
 				30FC76D117989BFE0032A219 /* threadpool.cpp in Sources */,
+				30FC76D71799D4380032A219 /* thread.cpp in Sources */,
 				30FC76D217989BFE0032A219 /* null_thread.cpp in Sources */,
 				30FC76D317989BFE0032A219 /* posix_thread.cpp in Sources */,
 				30FC76D417989BFE0032A219 /* workerthread.cpp in Sources */,
 				30FC76D517989BFE0032A219 /* string.cpp in Sources */,
 				30FC76D617989BFE0032A219 /* timer.cpp in Sources */,
-				30FC76A717989A4F0032A219 /* FutureCoreIos.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		30FC76A817989A4F0032A219 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				30FC76BE17989A4F0032A219 /* FutureCoreIosTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		30FC76B417989A4F0032A219 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 30FC769C17989A4E0032A219 /* FutureCoreIos */;
-			targetProxy = 30FC76B317989A4F0032A219 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		30FC76B917989A4F0032A219 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				30FC76BA17989A4F0032A219 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		30FC75F9179738AC0032A219 /* Debug */ = {
@@ -775,7 +647,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_PREFIX = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../include/";
 			};
@@ -785,7 +657,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_PREFIX = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../include/";
 			};
@@ -796,12 +668,14 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/FutureCoreIos.dst;
+				EXECUTABLE_PREFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FutureCoreIos/FutureCoreIos-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -815,56 +689,19 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/FutureCoreIos.dst;
+				EXECUTABLE_PREFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FutureCoreIos/FutureCoreIos-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		30FC76C317989A4F0032A219 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FutureCoreIos/FutureCoreIos-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "FutureCoreIosTests/FutureCoreIosTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		30FC76C417989A4F0032A219 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FutureCoreIos/FutureCoreIos-Prefix.pch";
-				INFOPLIST_FILE = "FutureCoreIosTests/FutureCoreIosTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -894,15 +731,6 @@
 			buildConfigurations = (
 				30FC76C017989A4F0032A219 /* Debug */,
 				30FC76C117989A4F0032A219 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		30FC76C217989A4F0032A219 /* Build configuration list for PBXNativeTarget "FutureCoreIosTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				30FC76C317989A4F0032A219 /* Debug */,
-				30FC76C417989A4F0032A219 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
