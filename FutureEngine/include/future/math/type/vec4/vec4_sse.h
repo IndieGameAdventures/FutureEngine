@@ -44,6 +44,7 @@ typedef const FutureVec4Float & FutureVec4FloatArg;
 #define	FutureVec4Subtract(a, b) _mm_sub_ps(a, b)
 #define	FutureVec4Multiply(a, b) _mm_mul_ps(a, b)
 #define	FutureVec4Divide(a, b) _mm_div_ps(a, b)
+#define	FutureVec4Modulus(a, b) _mm_mod_ps(a, b)
 
 #define	FutureVec4And(a, b) _mm_and_ps(a, b)
 #define	FutureVec4Or(a, b) _mm_or_ps(a, b)
@@ -101,7 +102,10 @@ inline void FutureVec4Transpose(FutureVec4Float & row0, FutureVec4Float & row1, 
 #define	FutureVec4CompareGreaterThanOrEqual(a, b) _mm_cmpge_ps(a, b)
 #define	FutureVec4CompareEqual(a, b) _mm_cmpeq_ps(a, b)
 #define	FutureVec4CompareNotEqual(a, b) _mm_cmpneq_ps(a, b)
-	
+
+#define FutureVec4CompareResult(result) _mm_movemask_epi8((__m128i)(result))
+
+
 // {a1, a2, a3, a0}
 #define	FutureVec4RotateLeft(vec, amount) \
 	(((amount) % 4) ? (_mm_shuffle_ps(vec, vec, _MM_SHUFFLE((7 - amount) % 4, (6 - amount) % 4, (5 - amount) % 4, (4 - amount) % 4))) : vec)
@@ -145,10 +149,10 @@ inline f32 FutureVec4GetAsFloat(FutureVec4FloatArg vec, u32 i)
 #define	FutureVec4GetAll(vec, values) _mm_store_ps(values, m_vec)
 	
 #define	FutureVec4Set(vec, i, value) _mm_move_ss(FutureVec4RotateRight(vec, i), value)
-#define	FutureVec4Setall(vec, value) _mm_set1_ps
+#define	FutureVec4SetAll(vec, value) vec = _mm_set1_ps(value)
 
 #define FutureVec4CreateOne(value) _mm_set1_ps(value)
 #define	FutureVec4CreateVec(x, y, z, w) _mm_setr_ps(x, w, z, w)
-#define	FutureVec4CreateEmpty(vec) _mm_setzero_ps()
+#define	FutureVec4CreateEmpty() _mm_setzero_ps()
 
 #endif

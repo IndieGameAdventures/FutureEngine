@@ -17,7 +17,6 @@
 		30FC77571799E6C10032A219 /* vec4_sse.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC774D1799E6C10032A219 /* vec4_sse.h */; };
 		30FC77581799E6C10032A219 /* vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC774F1799E6C10032A219 /* vec4.h */; };
 		30FC77591799E6C10032A219 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC77501799E6C10032A219 /* vector.h */; };
-		30FC775A1799E6C10032A219 /* vector3.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC77521799E6C10032A219 /* vector3.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,8 +49,11 @@
 		30FC774D1799E6C10032A219 /* vec4_sse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vec4_sse.h; sourceTree = "<group>"; };
 		30FC774E1799E6C10032A219 /* vec4_sse.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vec4_sse.inl; sourceTree = "<group>"; };
 		30FC774F1799E6C10032A219 /* vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vec4.h; sourceTree = "<group>"; };
-		30FC77501799E6C10032A219 /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector.h; path = ../../include/future/math/vector.h; sourceTree = "<group>"; };
-		30FC77521799E6C10032A219 /* vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector3.h; sourceTree = "<group>"; };
+		30FC77501799E6C10032A219 /* vector.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = vector.h; path = ../../include/future/math/vector.h; sourceTree = "<group>"; };
+		30FC775F1799F63A0032A219 /* scalar.inl */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = scalar.inl; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		30FC77601799F63A0032A219 /* vector2.inl */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = vector2.inl; sourceTree = "<group>"; };
+		30FC77611799F63A0032A219 /* vector3.inl */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = vector3.inl; sourceTree = "<group>"; };
+		30FC77621799F63A0032A219 /* vector4.inl */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = vector4.inl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,7 +151,10 @@
 		30FC77511799E6C10032A219 /* vectors */ = {
 			isa = PBXGroup;
 			children = (
-				30FC77521799E6C10032A219 /* vector3.h */,
+				30FC775F1799F63A0032A219 /* scalar.inl */,
+				30FC77601799F63A0032A219 /* vector2.inl */,
+				30FC77611799F63A0032A219 /* vector3.inl */,
+				30FC77621799F63A0032A219 /* vector4.inl */,
 			);
 			name = vectors;
 			path = ../../include/future/math/vectors;
@@ -169,7 +174,6 @@
 				30FC77571799E6C10032A219 /* vec4_sse.h in Headers */,
 				30FC77581799E6C10032A219 /* vec4.h in Headers */,
 				30FC77591799E6C10032A219 /* vector.h in Headers */,
-				30FC775A1799E6C10032A219 /* vector3.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
