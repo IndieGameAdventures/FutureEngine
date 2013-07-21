@@ -24,8 +24,8 @@
 *	itself as a vec4 internally so it can be make use of SIMD if avaliable.
 */
 
-#ifndef _FUTURE_MATH_SCALAR_H_
-#define _FUTURE_MATH_SCALAR_H_
+#ifndef FUTURE_MATH_SCALAR_H
+#define FUTURE_MATH_SCALAR_H
 
 #include <future/math/type/vec4.h>
 
@@ -49,7 +49,6 @@ public:
 	inline FutureScalar	Subtract(FutureVec4Float vec) const;
 	inline FutureScalar	Multiply(FutureVec4Float vec) const;
 	inline FutureScalar	Divide(FutureVec4Float vec) const;
-	inline FutureScalar	Modulus(FutureVec4Float vec) const;
 
 	inline FutureScalar	And(FutureVec4Float vec) const;
 	inline FutureScalar	Or(FutureVec4Float vec) const;
@@ -64,7 +63,6 @@ public:
 	inline FutureScalar	SubtractAndSave(FutureVec4Float vec);
 	inline FutureScalar	MultiplyAndSave(FutureVec4Float vec);
 	inline FutureScalar	DivideAndSave(FutureVec4Float vec);
-	inline FutureScalar	ModulusAndSave(FutureVec4Float vec);
 
 	inline FutureScalar	AndAndSave(FutureVec4Float vec);
 	inline FutureScalar	OrAndSave(FutureVec4Float vec);
@@ -80,7 +78,6 @@ public:
 	inline FutureScalar	Subtract(FutureScalarArg vec) const;
 	inline FutureScalar	Multiply(FutureScalarArg vec) const;
 	inline FutureScalar	Divide(FutureScalarArg vec) const;
-	inline FutureScalar	Modulus(FutureScalarArg vec) const;
 
 	inline FutureScalar	And(FutureScalarArg vec) const;
 	inline FutureScalar	Or(FutureScalarArg vec) const;
@@ -95,7 +92,6 @@ public:
 	inline FutureScalar	SubtractAndSave(FutureScalarArg vec);
 	inline FutureScalar	MultiplyAndSave(FutureScalarArg vec);
 	inline FutureScalar	DivideAndSave(FutureScalarArg vec);
-	inline FutureScalar	ModulusAndSave(FutureScalarArg vec) const;
 
 	inline FutureScalar	AndAndSave(FutureScalarArg vec);
 	inline FutureScalar	OrAndSave(FutureScalarArg vec);
@@ -108,7 +104,8 @@ public:
 
 
 	/*****************Unary Operations***********************************/
-
+	
+	inline FutureScalar	Abs() const;
 	inline FutureScalar	Complement() const;
 	inline FutureScalar	Negate() const;
 	inline FutureScalar	Increment() const;
@@ -116,7 +113,9 @@ public:
 	inline FutureScalar	Reciprocal() const;
 	inline FutureScalar	SquareRoot() const;
 	inline FutureScalar	ReciprocalSquareRoot() const;
-
+	inline FutureScalar Lerp(FutureScalarArg to, FutureScalarArg u) const;
+	
+	inline FutureScalar	AbsAndSave();
 	inline FutureScalar	ComplementAndSave();
 	inline FutureScalar	NegateAndSave();
 	inline FutureScalar	IncrementAndSave();
@@ -124,6 +123,7 @@ public:
 	inline FutureScalar	ReciprocalAndSave();
 	inline FutureScalar	SquareRootAndSave();
 	inline FutureScalar	ReciprocalSquareRootAndSave();
+	inline FutureScalar LerpAndSave(FutureScalarArg to, FutureScalarArg u);
 
 
 	inline FutureScalar	MultiplyAndAdd(FutureScalarArg mul, FutureScalarArg add) const;
@@ -149,7 +149,6 @@ public:
 	inline FutureScalar	operator-(FutureVec4Float vec) const;
 	inline FutureScalar	operator*(FutureVec4Float vec) const;
 	inline FutureScalar	operator/(FutureVec4Float vec) const;
-	inline FutureScalar	operator%(FutureVec4Float vec) const;
 
 	inline FutureScalar	operator&(FutureVec4Float vec) const;
 	inline FutureScalar	operator|(FutureVec4Float vec) const;
@@ -159,7 +158,6 @@ public:
 	inline FutureScalar	operator-=(FutureVec4Float vec);
 	inline FutureScalar	operator*=(FutureVec4Float vec);
 	inline FutureScalar	operator/=(FutureVec4Float vec);
-	inline FutureScalar	operator%=(FutureVec4Float vec);
 
 	inline FutureScalar	operator&=(FutureVec4Float vec);
 	inline FutureScalar	operator|=(FutureVec4Float vec);
@@ -170,7 +168,6 @@ public:
 	inline FutureScalar	operator-(FutureScalarArg vec) const;
 	inline FutureScalar	operator*(FutureScalarArg vec) const;
 	inline FutureScalar	operator/(FutureScalarArg vec) const;
-	inline FutureScalar	operator%(FutureScalarArg vec) const;
 
 	inline FutureScalar	operator&(FutureScalarArg vec) const;
 	inline FutureScalar	operator|(FutureScalarArg vec) const;
@@ -180,7 +177,6 @@ public:
 	inline FutureScalar	operator-=(FutureScalarArg vec);
 	inline FutureScalar	operator*=(FutureScalarArg vec);
 	inline FutureScalar	operator/=(FutureScalarArg vec);
-	inline FutureScalar	operator%=(FutureScalarArg vec);
 
 	inline FutureScalar	operator&=(FutureScalarArg vec);
 	inline FutureScalar	operator|=(FutureScalarArg vec);
@@ -222,10 +218,10 @@ public:
 
 	/********************* Casting ****************/
 
-	inline f32				operator f32() const;
-	inline u32				operator u32() const;
-	inline FutureVec4Float	operator FutureVec4Float() const;
-	inline bool				operator bool() const;
+	inline operator f32() const;
+	inline operator u32() const;
+	inline operator FutureVec4Float() const;
+	inline operator bool() const;
 
 
 
@@ -234,7 +230,7 @@ public:
 	inline string			ToString() const;
 	inline FutureScalar		SetFromString(string str);
 
-	inline string			operator string() const;
+	inline operator string() const;
 
 
 
@@ -242,6 +238,7 @@ public:
 
 	static inline FutureScalar		Parse(string str);
 
+	static const FutureScalar		NEGATIVE_ONE;
 	static const FutureScalar		ZERO;
 	static const FutureScalar		ONE;
 	static const FutureScalar		TWO;
@@ -265,8 +262,7 @@ public:
 	static const FutureScalar		LN10;
 
 protected:
-	__declspec(align) (16) FutureVec4Float m_vec;
+	__declspec(align(16)) FutureVec4Float m_vec;
 };
 
-inline FutureScalar FutureEqual(FutureScalarArg vec0, FutureScalarArg vec1, FutureScalarArg tolerance = FutureScalar::TOLERANCE);
-
+#endif

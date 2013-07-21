@@ -142,13 +142,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\future\math\scalar.h" />
     <ClInclude Include="..\..\include\future\math\type\vec4.h" />
+    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_altivec.h" />
+    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_float.h" />
+    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_neon.h" />
+    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_sse.h" />
+    <ClInclude Include="..\..\include\future\math\vector.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\include\future\math\type\vec4\vec4_altivec.inl" />
-    <None Include="..\..\include\future\math\type\vec4\vec4_float.inl" />
-    <None Include="..\..\include\future\math\type\vec4\vec4_neon.inl" />
-    <None Include="..\..\include\future\math\type\vec4\vec4_sse.inl" />
+    <None Include="..\..\include\future\math\vectors\scalar.inl" />
+    <None Include="..\..\include\future\math\vectors\vector2.inl" />
+    <None Include="..\..\include\future\math\vectors\vector3.inl" />
+    <None Include="..\..\include\future\math\vectors\vector4.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

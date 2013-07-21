@@ -22,14 +22,16 @@
 *	A standard 3 coordinate vector (x, y, z)
 */
 
-#ifndef _FUTURE_MATH_VECTOR_H_
-#define _FUTURE_MATH_VECTOR_H_
+#ifndef FUTURE_MATH_VECTOR_H
+#define FUTURE_MATH_VECTOR_H
 
 #include <future/math/type/vec4.h>
 #include <future/math/scalar.h>
 
-template<COUNT>
+template<int COUNT>
 class FutureTemplateVector;
+
+#define FutureTemplateVectorArg const FutureTemplateVector<COUNT> &
 
 typedef FutureTemplateVector<2> FutureVector2;
 typedef FutureTemplateVector<3> FutureVector3;
@@ -39,7 +41,7 @@ typedef const FutureVector2 & FutureVector2Arg;
 typedef const FutureVector3 & FutureVector3Arg;
 typedef const FutureVector4 & FutureVector4Arg;
 
-template<COUNT>
+template<int COUNT>
 class FutureTemplateVector
 {
 public:
@@ -61,7 +63,6 @@ public:
 	inline FutureTemplateVector<COUNT>	Subtract(FutureVec4Float vec) const;
 	inline FutureTemplateVector<COUNT>	Multiply(FutureVec4Float vec) const;
 	inline FutureTemplateVector<COUNT>	Divide(FutureVec4Float vec) const;
-	inline FutureTemplateVector<COUNT>	Modulus(FutureVec4Float vec) const;
 
 	inline FutureTemplateVector<COUNT>	And(FutureVec4Float vec) const;
 	inline FutureTemplateVector<COUNT>	Or(FutureVec4Float vec) const;
@@ -76,7 +77,6 @@ public:
 	inline FutureTemplateVector<COUNT>	SubtractAndSave(FutureVec4Float vec);
 	inline FutureTemplateVector<COUNT>	MultiplyAndSave(FutureVec4Float vec);
 	inline FutureTemplateVector<COUNT>	DivideAndSave(FutureVec4Float vec);
-	inline FutureTemplateVector<COUNT>	ModulusAndSave(FutureVec4Float vec);
 
 	inline FutureTemplateVector<COUNT>	AndAndSave(FutureVec4Float vec);
 	inline FutureTemplateVector<COUNT>	OrAndSave(FutureVec4Float vec);
@@ -93,7 +93,6 @@ public:
 	inline FutureTemplateVector<COUNT>	Subtract(FutureScalarArg vec) const;
 	inline FutureTemplateVector<COUNT>	Multiply(FutureScalarArg vec) const;
 	inline FutureTemplateVector<COUNT>	Divide(FutureScalarArg vec) const;
-	inline FutureTemplateVector<COUNT>	Modulus(FutureScalarArg vec) const;
 
 	inline FutureTemplateVector<COUNT>	And(FutureScalarArg vec) const;
 	inline FutureTemplateVector<COUNT>	Or(FutureScalarArg vec) const;
@@ -108,7 +107,6 @@ public:
 	inline FutureTemplateVector<COUNT>	SubtractAndSave(FutureScalarArg vec);
 	inline FutureTemplateVector<COUNT>	MultiplyAndSave(FutureScalarArg vec);
 	inline FutureTemplateVector<COUNT>	DivideAndSave(FutureScalarArg vec);
-	inline FutureTemplateVector<COUNT>	ModulusAndSave(FutureScalarArg vec) const;
 
 	inline FutureTemplateVector<COUNT>	AndAndSave(FutureScalarArg vec);
 	inline FutureTemplateVector<COUNT>	OrAndSave(FutureScalarArg vec);
@@ -121,46 +119,44 @@ public:
 
 	/*********************Vector Operations ***************************/
 
-	inline FutureTemplateVector<COUNT>	Add(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	Subtract(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	Multiply(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	Divide(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	Modulus(FutureTemplateVector<COUNT> vec) const;
+	inline FutureTemplateVector<COUNT>	Add(FutureTemplateVectorArg vec) const;
+	inline FutureTemplateVector<COUNT>	Subtract(FutureTemplateVectorArg vec) const;
+	inline FutureTemplateVector<COUNT>	Multiply(FutureTemplateVectorArg vec) const;
+	inline FutureTemplateVector<COUNT>	Divide(FutureTemplateVectorArg vec) const;
 
-	inline FutureTemplateVector<COUNT>	And(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	Or(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	XOr(FutureTemplateVector<COUNT> vec) const;
+	inline FutureTemplateVector<COUNT>	And(FutureTemplateVectorArg vec) const;
+	inline FutureTemplateVector<COUNT>	Or(FutureTemplateVectorArg vec) const;
+	inline FutureTemplateVector<COUNT>	XOr(FutureTemplateVectorArg vec) const;
 
-	inline FutureTemplateVector<COUNT>	Min(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	Max(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	Clamp(FutureTemplateVector<COUNT> min, FutureScalarArg max) const;
+	inline FutureTemplateVector<COUNT>	Min(FutureTemplateVectorArg vec) const;
+	inline FutureTemplateVector<COUNT>	Max(FutureTemplateVectorArg vec) const;
+	inline FutureTemplateVector<COUNT>	Clamp(FutureTemplateVectorArg min, FutureTemplateVectorArg max) const;
 		
 
-	inline FutureTemplateVector<COUNT>	AddAndSave(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	SubtractAndSave(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	MultiplyAndSave(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	DivideAndSave(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	ModulusAndSave(FutureTemplateVector<COUNT> vec) const;
+	inline FutureTemplateVector<COUNT>	AddAndSave(FutureTemplateVectorArg vec);
+	inline FutureTemplateVector<COUNT>	SubtractAndSave(FutureTemplateVectorArg vec);
+	inline FutureTemplateVector<COUNT>	MultiplyAndSave(FutureTemplateVectorArg vec);
+	inline FutureTemplateVector<COUNT>	DivideAndSave(FutureTemplateVectorArg vec);
 
-	inline FutureTemplateVector<COUNT>	AndAndSave(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	OrAndSave(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	XOrAndSave(FutureTemplateVector<COUNT> vec);
+	inline FutureTemplateVector<COUNT>	AndAndSave(FutureTemplateVectorArg vec);
+	inline FutureTemplateVector<COUNT>	OrAndSave(FutureTemplateVectorArg vec);
+	inline FutureTemplateVector<COUNT>	XOrAndSave(FutureTemplateVectorArg vec);
 
-	inline FutureTemplateVector<COUNT>	MinAndSave(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	MaxAndSave(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	ClampAndSave(FutureTemplateVector<COUNT> min, 
-													 FutureTemplateVector<COUNT> max);
+	inline FutureTemplateVector<COUNT>	MinAndSave(FutureTemplateVectorArg vec);
+	inline FutureTemplateVector<COUNT>	MaxAndSave(FutureTemplateVectorArg vec);
+	inline FutureTemplateVector<COUNT>	ClampAndSave(FutureTemplateVectorArg min, 
+													 FutureTemplateVectorArg max);
 
 
-	inline FutureTemplateVector<COUNT>	Cross(FutureTemplateVector<COUNT> vec) const;
-	inline FutureScalar					Dot(FutureTemplateVector<COUNT> vec) const;
-	inline FutureScalar					Projection(FutureTemplateVector<COUNT> vec) const;
+	inline FutureTemplateVector<COUNT>	Cross(FutureTemplateVectorArg vec) const;
+	inline FutureScalar					Dot(FutureTemplateVectorArg vec) const;
+	inline FutureScalar					Projection(FutureTemplateVectorArg vec) const;
 
-	inline FutureScalar					CosAngle(FutureTemplateVector<COUNT> vec) const;
-	inline FutureScalar					Angle(FutureTemplateVector<COUNT> vec) const;
+	inline FutureScalar					CosAngle(FutureTemplateVectorArg vec) const;
 
 
 	/*****************Unary Operations***********************************/
+	inline FutureTemplateVector<COUNT>	Abs() const;
 
 	inline FutureScalar 				Length() const;
 	inline FutureScalar 				LengthSqr() const;
@@ -204,7 +200,6 @@ public:
 	inline FutureTemplateVector<COUNT>	operator-(FutureVec4Float vec) const;
 	inline FutureTemplateVector<COUNT>	operator*(FutureVec4Float vec) const;
 	inline FutureTemplateVector<COUNT>	operator/(FutureVec4Float vec) const;
-	inline FutureTemplateVector<COUNT>	operator%(FutureVec4Float vec) const;
 
 	inline FutureTemplateVector<COUNT>	operator&(FutureVec4Float vec) const;
 	inline FutureTemplateVector<COUNT>	operator|(FutureVec4Float vec) const;
@@ -214,7 +209,6 @@ public:
 	inline FutureTemplateVector<COUNT>	operator-=(FutureVec4Float vec);
 	inline FutureTemplateVector<COUNT>	operator*=(FutureVec4Float vec);
 	inline FutureTemplateVector<COUNT>	operator/=(FutureVec4Float vec);
-	inline FutureTemplateVector<COUNT>	operator%=(FutureVec4Float vec);
 
 	inline FutureTemplateVector<COUNT>	operator&=(FutureVec4Float vec);
 	inline FutureTemplateVector<COUNT>	operator|=(FutureVec4Float vec);
@@ -225,7 +219,6 @@ public:
 	inline FutureTemplateVector<COUNT>	operator-(FutureScalarArg vec) const;
 	inline FutureTemplateVector<COUNT>	operator*(FutureScalarArg vec) const;
 	inline FutureTemplateVector<COUNT>	operator/(FutureScalarArg vec) const;
-	inline FutureTemplateVector<COUNT>	operator%(FutureScalarArg vec) const;
 
 	inline FutureTemplateVector<COUNT>	operator&(FutureScalarArg vec) const;
 	inline FutureTemplateVector<COUNT>	operator|(FutureScalarArg vec) const;
@@ -235,37 +228,29 @@ public:
 	inline FutureTemplateVector<COUNT>	operator-=(FutureScalarArg vec);
 	inline FutureTemplateVector<COUNT>	operator*=(FutureScalarArg vec);
 	inline FutureTemplateVector<COUNT>	operator/=(FutureScalarArg vec);
-	inline FutureTemplateVector<COUNT>	operator%=(FutureScalarArg vec);
 
 	inline FutureTemplateVector<COUNT>	operator&=(FutureScalarArg vec);
 	inline FutureTemplateVector<COUNT>	operator|=(FutureScalarArg vec);
 	inline FutureTemplateVector<COUNT>	operator^=(FutureScalarArg vec);
 	
     
-	inline FutureTemplateVector<COUNT>	operator+(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	operator-(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	operator*(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	operator/(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	operator%(FutureTemplateVector<COUNT> vec) const;
+	inline FutureTemplateVector<COUNT>	operator+(FutureTemplateVectorArg vec) const;
+	inline FutureTemplateVector<COUNT>	operator-(FutureTemplateVectorArg vec) const;
+	inline FutureTemplateVector<COUNT>	operator*(FutureTemplateVectorArg vec) const;
+	inline FutureTemplateVector<COUNT>	operator/(FutureTemplateVectorArg vec) const;
     
-	inline FutureTemplateVector<COUNT>	operator&(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	operator|(FutureTemplateVector<COUNT> vec) const;
-	inline FutureTemplateVector<COUNT>	operator^(FutureTemplateVector<COUNT> vec) const;
+	inline FutureTemplateVector<COUNT>	operator&(FutureTemplateVectorArg vec) const;
+	inline FutureTemplateVector<COUNT>	operator|(FutureTemplateVectorArg vec) const;
+	inline FutureTemplateVector<COUNT>	operator^(FutureTemplateVectorArg vec) const;
     
-	inline FutureTemplateVector<COUNT>	operator+=(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	operator-=(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	operator*=(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	operator/=(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	operator%=(FutureTemplateVector<COUNT> vec);
+	inline FutureTemplateVector<COUNT>	operator+=(FutureTemplateVectorArg vec);
+	inline FutureTemplateVector<COUNT>	operator-=(FutureTemplateVectorArg vec);
+	inline FutureTemplateVector<COUNT>	operator*=(FutureTemplateVectorArg vec);
+	inline FutureTemplateVector<COUNT>	operator/=(FutureTemplateVectorArg vec);
     
-	inline FutureTemplateVector<COUNT>	operator&=(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	operator|=(FutureTemplateVector<COUNT> vec);
-	inline FutureTemplateVector<COUNT>	operator^=(FutureTemplateVector<COUNT> vec);
-
-
-	/********************* Unary ****************/
-
-	inline FutureTemplateVector<COUNT> operator-() const;
+	inline FutureTemplateVector<COUNT>	operator&=(FutureTemplateVectorArg vec);
+	inline FutureTemplateVector<COUNT>	operator|=(FutureTemplateVectorArg vec);
+	inline FutureTemplateVector<COUNT>	operator^=(FutureTemplateVectorArg vec);
 
 
 	/********************* Comparison ****************/
@@ -273,8 +258,8 @@ public:
 	inline bool	operator==(FutureVec4Float vec) const;
 	inline bool	operator!=(FutureVec4Float vec) const;
     
-	inline bool	operator==(FutureTemplateVector<COUNT> vec) const;
-	inline bool	operator!=(FutureTemplateVector<COUNT> vec) const;
+	inline bool	operator==(FutureTemplateVectorArg vec) const;
+	inline bool	operator!=(FutureTemplateVectorArg vec) const;
 
 
 	/********************* Assignment ****************/
@@ -286,25 +271,25 @@ public:
 
 	/********************* Casting ****************/
 
-	inline FutureVec4Float	operator FutureVec4Float() const;
-	inline FutureVector2	operator FutureVector2() const;
-	inline FutureVector3	operator FutureVector3() const;
-	inline FutureVector4	operator FutureVector4() const;
-	inline bool				operator bool() const;
-
+	inline operator FutureVec4Float() const;
+	inline operator FutureVector2() const;
+	inline operator FutureVector3() const;
+	inline operator FutureVector4() const;
+	inline operator bool() const;
 
 
 	/***************** String Operations ***********************************/
 
-	inline string			ToString() const;
-	inline FutureScalar		SetFromString(string str);
+	inline string						ToString() const;
+	inline FutureTemplateVector<COUNT>	SetFromString(string str);
 
-	inline string			operator string() const;
+	inline operator string() const;
 
 	/***************** Static ***********************************/
 
 	static inline FutureTemplateVector<COUNT>		Parse(string str);
-
+	
+	static const FutureTemplateVector<COUNT>		NEGATIVE_ONE;
 	static const FutureTemplateVector<COUNT>		ZERO;
 	static const FutureTemplateVector<COUNT>		ONE;
 
@@ -314,9 +299,9 @@ public:
 	static const FutureTemplateVector<COUNT>		AXIS_W;
 
 protected:
-	__declspec(align) (16) FutureVec4Float m_vec;
+	__declspec(align(16)) FutureVec4Float m_vec;
 };
 
-template<COUNT>
-inline bool FutureEqual(FutureTemplateVector<COUNT> vec0, FutureTemplateVector<COUNT> vec1, FutureScalarArg tolerance = FutureScalar::TOLERANCE);
 
+
+#endif

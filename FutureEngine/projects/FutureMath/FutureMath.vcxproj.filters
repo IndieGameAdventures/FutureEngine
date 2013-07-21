@@ -4,24 +4,41 @@
     <Filter Include="Types">
       <UniqueIdentifier>{52188ea2-da0c-4d11-a8b2-970a582cc7fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vector">
+      <UniqueIdentifier>{87a0f514-435c-4a57-9de0-be7d9b6060b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\future\math\type\vec4.h">
       <Filter>Types</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\future\math\scalar.h" />
+    <ClInclude Include="..\..\include\future\math\vector.h" />
+    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_float.h">
+      <Filter>Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_neon.h">
+      <Filter>Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_sse.h">
+      <Filter>Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_altivec.h">
+      <Filter>Types</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\include\future\math\type\vec4\vec4_altivec.inl">
-      <Filter>Types</Filter>
+    <None Include="..\..\include\future\math\vectors\scalar.inl">
+      <Filter>vector</Filter>
     </None>
-    <None Include="..\..\include\future\math\type\vec4\vec4_float.inl">
-      <Filter>Types</Filter>
+    <None Include="..\..\include\future\math\vectors\vector2.inl">
+      <Filter>vector</Filter>
     </None>
-    <None Include="..\..\include\future\math\type\vec4\vec4_neon.inl">
-      <Filter>Types</Filter>
+    <None Include="..\..\include\future\math\vectors\vector3.inl">
+      <Filter>vector</Filter>
     </None>
-    <None Include="..\..\include\future\math\type\vec4\vec4_sse.inl">
-      <Filter>Types</Filter>
+    <None Include="..\..\include\future\math\vectors\vector4.inl">
+      <Filter>vector</Filter>
     </None>
   </ItemGroup>
 </Project>

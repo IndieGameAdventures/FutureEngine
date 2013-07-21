@@ -38,4 +38,46 @@
 #	include <future/math/type/vec4/vec4_float.h>
 #endif
 
+namespace FutureMathVectorMasksInternal
+{
+	__declspec(align(16)) const unsigned int MASK_ALL[] = 	{ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
+
+	__declspec(align(16)) const unsigned int MASK_YZW[] = 	{ 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF };
+	__declspec(align(16)) const unsigned int MASK_XZW[] = 	{ 0xFFFFFFFF, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF };
+	__declspec(align(16)) const unsigned int MASK_XYW[] = 	{ 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0xFFFFFFFF };	
+	__declspec(align(16)) const unsigned int MASK_XYZ[] = 	{ 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000 };
+
+	__declspec(align(16)) const unsigned int MASK_XY[] = 	{ 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, 0x00000000 };	
+	__declspec(align(16)) const unsigned int MASK_XZ[] = 	{ 0xFFFFFFFF, 0x00000000, 0xFFFFFFFF, 0x00000000 };
+	__declspec(align(16)) const unsigned int MASK_XW[] = 	{ 0xFFFFFFFF, 0x00000000, 0x00000000, 0xFFFFFFFF };
+	__declspec(align(16)) const unsigned int MASK_YZ[] = 	{ 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000 };
+	__declspec(align(16)) const unsigned int MASK_YW[] = 	{ 0x00000000, 0xFFFFFFFF, 0x00000000, 0xFFFFFFFF };
+	__declspec(align(16)) const unsigned int MASK_ZW[] = 	{ 0x00000000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF };
+
+	__declspec(align(16)) const unsigned int MASK_X[] = 	{ 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000 };
+	__declspec(align(16)) const unsigned int MASK_Y[] = 	{ 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000 };
+	__declspec(align(16)) const unsigned int MASK_Z[] = 	{ 0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000000 };
+	__declspec(align(16)) const unsigned int MASK_W[] = 	{ 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF };
+	
+	__declspec(align(16)) const unsigned int MASK_NO_SIGN[] = 	{ 0x8FFFFFFF, 0x8FFFFFFF, 0x8FFFFFFF, 0x8FFFFFFF };
+}
+
+const FutureVec4Float FUTURE_VECTOR_MASK_ALL = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_ALL));
+const FutureVec4Float FUTURE_VECTOR_MASK_XYZ = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_XYZ));
+const FutureVec4Float FUTURE_VECTOR_MASK_XYW = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_XYW));
+const FutureVec4Float FUTURE_VECTOR_MASK_YZW = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_YZW));
+const FutureVec4Float FUTURE_VECTOR_MASK_XZW = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_XZW));
+const FutureVec4Float FUTURE_VECTOR_MASK_XY = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_XY));
+const FutureVec4Float FUTURE_VECTOR_MASK_XZ = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_XZ));
+const FutureVec4Float FUTURE_VECTOR_MASK_XW = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_XW));
+const FutureVec4Float FUTURE_VECTOR_MASK_YZ = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_YZ));
+const FutureVec4Float FUTURE_VECTOR_MASK_YW = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_YW));
+const FutureVec4Float FUTURE_VECTOR_MASK_ZW = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_ZW));
+const FutureVec4Float FUTURE_VECTOR_MASK_X = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_X));
+const FutureVec4Float FUTURE_VECTOR_MASK_Y = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_Y));
+const FutureVec4Float FUTURE_VECTOR_MASK_Z = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_Z));
+const FutureVec4Float FUTURE_VECTOR_MASK_W = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_W));
+
+const FutureVec4Float FUTURE_VECTOR_MASK_NO_SIGN = (*((FutureVec4Float*)&FutureMathVectorMasksInternal::MASK_NO_SIGN));
+
 #endif

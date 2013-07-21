@@ -44,7 +44,6 @@ typedef const FutureVec4Float & FutureVec4FloatArg;
 #define	FutureVec4Subtract(a, b) _mm_sub_ps(a, b)
 #define	FutureVec4Multiply(a, b) _mm_mul_ps(a, b)
 #define	FutureVec4Divide(a, b) _mm_div_ps(a, b)
-#define	FutureVec4Modulus(a, b) _mm_mod_ps(a, b)
 
 #define	FutureVec4And(a, b) _mm_and_ps(a, b)
 #define	FutureVec4Or(a, b) _mm_or_ps(a, b)
@@ -72,6 +71,7 @@ inline FutureVec4Float FutureVec4Dot(FutureVec4FloatArg a, FutureVec4FloatArg b)
 	__m128 sum1 = _mm_shuffle_ps(sum0, sum0, _MM_SHUFFLE(2, 3, 0, 1));
 	return _mm_add_ps(sum0, sum1);
 }
+
 inline FutureVec4Float FutureVec4MatrixMultiply(FutureVec4FloatArg vec, FutureVec4FloatArg row0, FutureVec4FloatArg row1, FutureVec4FloatArg row2, FutureVec4FloatArg row3)
 {
 	__m128 x = _mm_mul_ps(row0, _mm_shuffle_ps(vec, vec, _MM_SHUFFLE(3, 3, 3, 3)));
@@ -88,10 +88,10 @@ inline void FutureVec4Transpose(FutureVec4Float & row0, FutureVec4Float & row1, 
 }
 
 // {[op] a0, [op] a1, [op] a2, [op] a3}
-#define	FutureVec4Negate(vec) _mm_sub_ps(_mm_setzero_ps(), vec);
-#define	FutureVec4Reciprocal(vec) _mm_rcp_ps(vec);
-#define	FutureVec4SquareRoot(vec) _mm_sqrt_ps(vec);
-#define	FutureVec4ReciprocalSquareRoot(vec) _mm_rsqrt_ps(vec);
+#define	FutureVec4Negate(vec) _mm_sub_ps(_mm_setzero_ps(), vec)
+#define	FutureVec4Reciprocal(vec) _mm_rcp_ps(vec)
+#define	FutureVec4SquareRoot(vec) _mm_sqrt_ps(vec)
+#define	FutureVec4ReciprocalSquareRoot(vec) _mm_rsqrt_ps(vec)
 
 
 	
@@ -103,7 +103,7 @@ inline void FutureVec4Transpose(FutureVec4Float & row0, FutureVec4Float & row1, 
 #define	FutureVec4CompareEqual(a, b) _mm_cmpeq_ps(a, b)
 #define	FutureVec4CompareNotEqual(a, b) _mm_cmpneq_ps(a, b)
 
-#define FutureVec4CompareResult(result) _mm_movemask_epi8((__m128i)(result))
+#define FutureVec4CompareResult(result) _mm_movemask_epi8(_mm_castps_si128(result))
 
 
 // {a1, a2, a3, a0}
@@ -114,14 +114,17 @@ inline void FutureVec4Transpose(FutureVec4Float & row0, FutureVec4Float & row1, 
 	(((amount) % 4) ? (_mm_shuffle_ps(vec, vec, _MM_SHUFFLE((amount + 3) % 4,(amount + 2) % 4,(amount + 1) % 4,(amount + 0) % 4))) : vec)
 // {b0, a0, a1, a2}
 #define	FutureVec4Move(a, b) _mm_move_ss(a, b);
-// {a3, a2, a1, a0}
+// {a0, a1, b0, b1}
 #define	FutureVec4Reverse(vec) _mm_shuffle_ps(vec, vec, _MM_SHUFFLE(0, 1, 2, 3))
+// {a[x], a[y], b[z], b[w]}
+#define	FutureVec4Shuffle(a, b, x, y, z, w) _mm_shuffle_ps(a, b, _MM_SHUFFLE(3 - x, 3 - y, 3 - z, 3 - w))
 // {a[x], a[y], a[z], a[w]}
-#define	FutureVec4Shuffle(vec, x, y, z, w) _mm_shuffle_ps(vec, vec, _MM_SHUFFLE(x, y, z, w))
+#define	FutureVec4ShuffleOne(vec, x, y, z, w) _mm_shuffle_ps(vec, vec, _MM_SHUFFLE(3 - x, 3 - y, 3 - z, 3 - w))
 // {a[i], a[i], a[i], a[i]}
-#define	FutureVec4Replicate(vec, i) _mm_shuffle_ps(vec, vec, _MM_SHUFFLE(i, i, i, i))
+#define	FutureVec4Replicate(vec, i) _mm_shuffle_ps(vec, vec, _MM_SHUFFLE(3 - i, 3 - i, 3 - i, 3 - i))
 
 #define	FutureVec4Get(vec, i) FutureVec4Replicate(vec, i)
+
 inline f32 FutureVec4GetAsFloat(FutureVec4FloatArg vec, u32 i)
 {
 	f32 r;

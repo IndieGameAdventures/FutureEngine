@@ -24,9 +24,13 @@
 *	itself as a vec4 internally so it can be make use of SIMD if avaliable.
 */
 
-#ifndef _FUTURE_MATH_SCALAR_H_
+#ifndef FUTURE_MATH_SCALAR_H
 #   error This file should only be included by scalar.h
 #endif
+
+#include <future/math/scalar.h>
+
+#include <wchar.h>
 
 inline FutureScalar::FutureScalar()
 : m_vec(FutureVec4CreateEmpty())
@@ -63,10 +67,6 @@ inline FutureScalar	FutureScalar::Divide(FutureVec4Float vec) const
 {
     return FutureScalar(FutureVec4Divide(m_vec, vec));
 }
-inline FutureScalar	FutureScalar::Modulus(FutureVec4Float vec) const
-{
-    return FutureScalar(FutureVec4Modulus(m_vec, vec));
-}
 
 inline FutureScalar	FutureScalar::And(FutureVec4Float vec) const
 {
@@ -91,64 +91,59 @@ inline FutureScalar	FutureScalar::Max(FutureVec4Float vec) const
 }
 inline FutureScalar	FutureScalar::Clamp(FutureVec4Float min, FutureVec4Float max) const
 {
-    return FutureScalar(FutureVec4Clamp(m_vec, vec));
+    return FutureScalar(FutureVec4Clamp(m_vec, min, max));
 }
 		
 inline FutureScalar	FutureScalar::AddAndSave(FutureVec4Float vec)
 {
-    m_vec = FutureVec4Add(m_vec, vec)
+    m_vec = FutureVec4Add(m_vec, vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::SubtractAndSave(FutureVec4Float vec)
 {
-    m_vec = FutureVec4Subtract(m_vec, vec)
+    m_vec = FutureVec4Subtract(m_vec, vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::MultiplyAndSave(FutureVec4Float vec)
 {
-    m_vec = FutureVec4Multiply(m_vec, vec)
+    m_vec = FutureVec4Multiply(m_vec, vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::DivideAndSave(FutureVec4Float vec)
 {
-    m_vec = FutureVec4Divide(m_vec, vec)
-    return *this;
-}
-inline FutureScalar	FutureScalar::ModulusAndSave(FutureVec4Float vec)
-{
-    m_vec = FutureVec4Modulus(m_vec, vec)
+    m_vec = FutureVec4Divide(m_vec, vec);
     return *this;
 }
 
 inline FutureScalar	FutureScalar::AndAndSave(FutureVec4Float vec)
 {
-    m_vec = FutureVec4And(m_vec, vec)
+    m_vec = FutureVec4And(m_vec, vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::OrAndSave(FutureVec4Float vec)
 {
-    m_vec = FutureVec4Or(m_vec, vec)
+    m_vec = FutureVec4Or(m_vec, vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::XOrAndSave(FutureVec4Float vec)
 {
-    m_vec = FutureVec4XOr(m_vec, vec)
+    m_vec = FutureVec4XOr(m_vec, vec);
     return *this;
 }
 
 inline FutureScalar	FutureScalar::MinAndSave(FutureVec4Float vec)
 {
-    m_vec = FutureVec4Min(m_vec, vec)
+    m_vec = FutureVec4Min(m_vec, vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::MaxAndSave(FutureVec4Float vec)
 {
-    m_vec = FutureVec4Max(m_vec, vec)
+    m_vec = FutureVec4Max(m_vec, vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::ClampAndSave(FutureVec4Float min, FutureVec4Float max)
 {
-    m_vec = FutureVec4Clamp(m_vec, vec)
+    m_vec = FutureVec4Clamp(m_vec, min, max);
     return *this;
 }
 
@@ -168,10 +163,6 @@ inline FutureScalar	FutureScalar::Multiply(FutureScalarArg vec) const
 inline FutureScalar	FutureScalar::Divide(FutureScalarArg vec) const
 {
     return FutureScalar(FutureVec4Divide(m_vec, vec.m_vec));
-}
-inline FutureScalar	FutureScalar::Modulus(FutureScalarArg vec) const
-{
-    return FutureScalar(FutureVec4Modulus(m_vec, vec.m_vec));
 }
 
 inline FutureScalar	FutureScalar::And(FutureScalarArg vec) const
@@ -197,64 +188,58 @@ inline FutureScalar	FutureScalar::Max(FutureScalarArg vec) const
 }
 inline FutureScalar	FutureScalar::Clamp(FutureScalarArg min, FutureScalarArg max) const
 {
-    return FutureScalar(FutureVec4Clamp(m_vec, vec.m_vec));
+    return FutureScalar(FutureVec4Clamp(m_vec, min.m_vec, max.m_vec));
 }
 
 inline FutureScalar	FutureScalar::AddAndSave(FutureScalarArg vec)
 {
-    m_vec = FutureVec4Add(m_vec, vec.m_vec)
+    m_vec = FutureVec4Add(m_vec, vec.m_vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::SubtractAndSave(FutureScalarArg vec)
 {
-    m_vec = FutureVec4Subtract(m_vec, vec.m_vec)
+    m_vec = FutureVec4Subtract(m_vec, vec.m_vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::MultiplyAndSave(FutureScalarArg vec)
 {
-    m_vec = FutureVec4Multiply(m_vec, vec.m_vec)
+    m_vec = FutureVec4Multiply(m_vec, vec.m_vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::DivideAndSave(FutureScalarArg vec)
 {
-    m_vec = FutureVec4Divide(m_vec, vec.m_vec)
+    m_vec = FutureVec4Divide(m_vec, vec.m_vec);
     return *this;
 }
-inline FutureScalar	FutureScalar::ModulusAndSave(FutureScalarArg vec)
-{
-    m_vec = FutureVec4Modulus(m_vec, vec.m_vec)
-    return *this;
-}
-
 inline FutureScalar	FutureScalar::AndAndSave(FutureScalarArg vec)
 {
-    m_vec = FutureVec4And(m_vec, vec.m_vec)
+    m_vec = FutureVec4And(m_vec, vec.m_vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::OrAndSave(FutureScalarArg vec)
 {
-    m_vec = FutureVec4Or(m_vec, vec.m_vec)
+    m_vec = FutureVec4Or(m_vec, vec.m_vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::XOrAndSave(FutureScalarArg vec)
 {
-    m_vec = FutureVec4XOr(m_vec, vec.m_vec)
+    m_vec = FutureVec4XOr(m_vec, vec.m_vec);
     return *this;
 }
 
 inline FutureScalar	FutureScalar::MinAndSave(FutureScalarArg vec)
 {
-    m_vec = FutureVec4Min(m_vec, vec.m_vec)
+    m_vec = FutureVec4Min(m_vec, vec.m_vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::MaxAndSave(FutureScalarArg vec)
 {
-    m_vec = FutureVec4Max(m_vec, vec.m_vec)
+    m_vec = FutureVec4Max(m_vec, vec.m_vec);
     return *this;
 }
 inline FutureScalar	FutureScalar::ClampAndSave(FutureScalarArg min, FutureScalarArg max)
 {
-    m_vec = FutureVec4Clamp(m_vec, vec.m_vec)
+    m_vec = FutureVec4Clamp(m_vec, min.m_vec, max.m_vec);
     return *this;
 }
 
@@ -262,6 +247,10 @@ inline FutureScalar	FutureScalar::ClampAndSave(FutureScalarArg min, FutureScalar
 
 /*****************Unary Operations***********************************/
 
+inline FutureScalar	FutureScalar::Abs() const
+{
+	return And(FUTURE_VECTOR_MASK_NO_SIGN);
+}
 inline FutureScalar	FutureScalar::Complement() const
 {
     return XOr(NEGATIVE_ONE);
@@ -290,7 +279,15 @@ inline FutureScalar	FutureScalar::ReciprocalSquareRoot() const
 {
     return FutureScalar(FutureVec4ReciprocalSquareRoot(m_vec));
 }
+inline FutureScalar	FutureScalar::Lerp(FutureScalarArg to, FutureScalarArg u) const
+{
+    return FutureScalar(FutureVec4Add(m_vec, FutureVec4Multiply(FutureVec4Subtract(to.Vec4(), m_vec), u.Vec4())));
+}
 
+inline FutureScalar	FutureScalar::AbsAndSave()
+{
+	return AndAndSave(FUTURE_VECTOR_MASK_NO_SIGN);
+}
 inline FutureScalar	FutureScalar::ComplementAndSave()
 {
     return XOrAndSave(NEGATIVE_ONE);
@@ -322,6 +319,11 @@ inline FutureScalar	FutureScalar::ReciprocalSquareRootAndSave()
 {
     m_vec = FutureVec4ReciprocalSquareRoot(m_vec);
     return *this;
+}
+inline FutureScalar	FutureScalar::LerpAndSave(FutureScalarArg to, FutureScalarArg u)
+{
+    m_vec = FutureVec4Add(m_vec, FutureVec4Multiply(FutureVec4Subtract(to.Vec4(), m_vec), u.Vec4()));
+	return *this;
 }
 
 inline FutureScalar	FutureScalar::MultiplyAndAdd(FutureScalarArg mul, FutureScalarArg add) const
@@ -376,10 +378,6 @@ inline FutureScalar	FutureScalar::operator/(FutureVec4Float vec) const
 {
     return Divide(vec);
 }
-inline FutureScalar	FutureScalar::operator%(FutureVec4Float vec) const
-{
-    return Modulus(vec);
-}
 
 inline FutureScalar	FutureScalar::operator&(FutureVec4Float vec) const
 {
@@ -409,10 +407,6 @@ inline FutureScalar	FutureScalar::operator*=(FutureVec4Float vec)
 inline FutureScalar	FutureScalar::operator/=(FutureVec4Float vec)
 {
     return DivideAndSave(vec);
-}
-inline FutureScalar	FutureScalar::operator%=(FutureVec4Float vec)
-{
-    return ModulusAndSave(vec);
 }
 
 inline FutureScalar	FutureScalar::operator&=(FutureVec4Float vec)
@@ -445,10 +439,6 @@ inline FutureScalar	FutureScalar::operator/(FutureScalarArg vec) const
 {
     return Divide(vec);
 }
-inline FutureScalar	FutureScalar::operator%(FutureScalarArg vec) const
-{
-    return Modulus(vec);
-}
 
 inline FutureScalar	FutureScalar::operator&(FutureScalarArg vec) const
 {
@@ -479,10 +469,6 @@ inline FutureScalar	FutureScalar::operator/=(FutureScalarArg vec)
 {
     return DivideAndSave(vec);
 }
-inline FutureScalar	FutureScalar::operator%=(FutureScalarArg vec)
-{
-    return ModulusAndSave(vec);
-}
 
 inline FutureScalar	FutureScalar::operator&=(FutureScalarArg vec)
 {
@@ -502,19 +488,19 @@ inline FutureScalar	FutureScalar::operator^=(FutureScalarArg vec)
 
 inline FutureScalar FutureScalar::operator~() const
 {
-    return Complement(vec);
+    return Complement();
 }
 inline FutureScalar FutureScalar::operator-() const
 {
-    return Negate(vec);
+    return Negate();
 }
 inline FutureScalar FutureScalar::operator++()
 {
-    return IncrementAndSave(vec);
+    return IncrementAndSave();
 }
 inline FutureScalar FutureScalar::operator--()
 {
-    return DecrementAndSave(vec);
+    return DecrementAndSave();
 }
 
 
@@ -598,19 +584,19 @@ inline FutureScalar	FutureScalar::operator=(u32 vec)
 
 /********************* Casting ****************/
 
-inline f32				FutureScalar::operator f32() const
+inline FutureScalar::operator f32() const
 {
     return AsFloat();
 }
-inline u32				FutureScalar::operator u32() const
+inline FutureScalar::operator u32() const
 {
     return (u32)AsFloat();
 }
-inline FutureVec4Float	FutureScalar::operator FutureVec4Float() const
+inline FutureScalar::operator FutureVec4Float() const
 {
     return Vec4();
 }
-inline bool				FutureScalar::operator bool() const
+inline FutureScalar::operator bool() const
 {
     return FutureVec4CompareResult(FutureVec4CompareNotEqual(m_vec, ZERO)) == 0xFFFF;
 }
@@ -621,7 +607,7 @@ inline string			FutureScalar::ToString() const
 {
     f32 f = AsFloat();
     wchar_t str[256];
-    wsprintf(str, L"Scalar[%f, %f, %f, %f]", f, f, f, f);
+    swprintf(str, L"Scalar[%f, %f, %f, %f]", f, f, f, f);
     return str;
 }
 inline FutureScalar		FutureScalar::SetFromString(string str)
@@ -629,7 +615,7 @@ inline FutureScalar		FutureScalar::SetFromString(string str)
     return ZERO;
 }
 
-inline string			FutureScalar::operator string() const
+inline FutureScalar::operator string() const
 {
     return ToString();
 }
@@ -637,35 +623,29 @@ inline string			FutureScalar::operator string() const
 
 /***************** Static ***********************************/
 
-static inline FutureScalar		FutureScalar::Parse(string str)
+inline FutureScalar		FutureScalar::Parse(string str)
 {
     return ZERO;
 }
 
-static const FutureScalar		FutureScalar::ZERO = FutureScalar();
-static const FutureScalar		FutureScalar::ONE = FutureScalar(1.f);
-static const FutureScalar		FutureScalar::TWO = FutureScalar(2.f);
-static const FutureScalar		FutureScalar::FOUR = FutureScalar(4.f);
-static const FutureScalar		FutureScalar::HALF = FutureScalar(0.5f);
-static const FutureScalar		FutureScalar::TOLERANCE = FutureScalar(0.00000001f);
+const FutureScalar		FutureScalar::ZERO = FutureScalar();
+const FutureScalar		FutureScalar::ONE = FutureScalar(1.f);
+const FutureScalar		FutureScalar::TWO = FutureScalar(2.f);
+const FutureScalar		FutureScalar::FOUR = FutureScalar(4.f);
+const FutureScalar		FutureScalar::HALF = FutureScalar(0.5f);
+const FutureScalar		FutureScalar::TOLERANCE = FutureScalar(0.00000001f);
 
-static const FutureScalar		FutureScalar::PI = FutureScalar(3.14159265358979f);
-static const FutureScalar		FutureScalar::HALF_PI = FutureScalar(1.5707963267949f);
-static const FutureScalar		FutureScalar::QUARTER_PI = FutureScalar(0.78539816339745f);
-static const FutureScalar		FutureScalar::TWO_PI = FutureScalar(6.28318530717959f);
-static const FutureScalar		FutureScalar::FOUR_PI = FutureScalar(12.5663706143592f);
+const FutureScalar		FutureScalar::PI = FutureScalar(3.14159265358979f);
+const FutureScalar		FutureScalar::HALF_PI = FutureScalar(1.5707963267949f);
+const FutureScalar		FutureScalar::QUARTER_PI = FutureScalar(0.78539816339745f);
+const FutureScalar		FutureScalar::TWO_PI = FutureScalar(6.28318530717959f);
+const FutureScalar		FutureScalar::FOUR_PI = FutureScalar(12.5663706143592f);
 
-static const FutureScalar		FutureScalar::SQRT_TWO = FutureScalar(1.4142135623731f);
-static const FutureScalar		FutureScalar::INVERSE_SQRT_TWO = FutureScalar(0.70710678118655f);
-static const FutureScalar		FutureScalar::E = FutureScalar(2.71828182845904f);
-static const FutureScalar		FutureScalar::LOG2E = FutureScalar(1.44269504088896f);
-static const FutureScalar		FutureScalar::LOG10E = FutureScalar(0.434294481903252f);
-static const FutureScalar		FutureScalar::LN2 = FutureScalar(0.434294481903252f);
-static const FutureScalar		FutureScalar::LN10 = FutureScalar(2.30258509299405f);
-
-
-inline FutureScalar FutureEqual(FutureScalarArg vec0, FutureScalarArg vec1, FutureScalarArg tolerance)
-{
-    return (vec0 - vec1).And(0x8FFFFFFF) <= tolerance;
-}
+const FutureScalar		FutureScalar::SQRT_TWO = FutureScalar(1.4142135623731f);
+const FutureScalar		FutureScalar::INVERSE_SQRT_TWO = FutureScalar(0.70710678118655f);
+const FutureScalar		FutureScalar::E = FutureScalar(2.71828182845904f);
+const FutureScalar		FutureScalar::LOG2E = FutureScalar(1.44269504088896f);
+const FutureScalar		FutureScalar::LOG10E = FutureScalar(0.434294481903252f);
+const FutureScalar		FutureScalar::LN2 = FutureScalar(0.434294481903252f);
+const FutureScalar		FutureScalar::LN10 = FutureScalar(2.30258509299405f);
 
