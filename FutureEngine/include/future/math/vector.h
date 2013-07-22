@@ -178,6 +178,11 @@ public:
     inline FutureScalar     Y() const;
     inline FutureScalar     Z() const;
     inline FutureScalar     W() const;
+	
+	inline FutureScalar     x() const {return X();}
+    inline FutureScalar     y() const {return Y();}
+    inline FutureScalar     z() const {return Z();}
+    inline FutureScalar     w() const {return W();}
     
 	inline void				Set(FutureVector2Arg value);
 	inline void				Set(FutureVector3Arg value);

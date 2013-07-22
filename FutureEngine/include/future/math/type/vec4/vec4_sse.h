@@ -131,16 +131,16 @@ inline f32 FutureVec4GetAsFloat(FutureVec4FloatArg vec, u32 i)
 	switch(i)
 	{
 	case 0:
-		_mm_store1_ps(&r, FutureVec4RotateRight(vec, 0));
+		_mm_store1_ps(&r, FutureVec4RotateRight(vec, 3));
 		break;
 	case 1:
-		_mm_store1_ps(&r, FutureVec4RotateRight(vec, 1));
-		break;
-	case 2:
 		_mm_store1_ps(&r, FutureVec4RotateRight(vec, 2));
 		break;
+	case 2:
+		_mm_store1_ps(&r, FutureVec4RotateRight(vec, 1));
+		break;
 	case 3:
-		_mm_store1_ps(&r, FutureVec4RotateRight(vec, 3));
+		_mm_store1_ps(&r, FutureVec4RotateRight(vec, 0));
 		break;
 	default:
 		r = 0;
