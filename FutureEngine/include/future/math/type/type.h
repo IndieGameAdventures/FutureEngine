@@ -23,19 +23,19 @@
 *	if they are available. If they are not, then these types default to floating point operations.
 */
 
-#ifndef FUTURE_MATH_VEC4_H
-#define FUTURE_MATH_VEC4_H
+#ifndef FUTURE_MATH_TYPE_H
+#define FUTURE_MATH_TYPE_H
 
-#include <future/core/type/platform.h>
+#include <future/core/type/type.h>
 
 #if defined(FUTURE_USES_SSE)
-#	include <future/math/type/vec4/vec4_sse.h>
+#	include <future/math/sse/vec4_sse.h>
 #elif defined(FUTURE_USES_NEON)
-#	include <future/math/type/vec4/vec4_neon.h>
+#	include <future/math/neon/vec4_neon.h>
 #elif defined(FUTURE_USES_ALIVEC)
-#	include <future/math/type/vec4/vec4_altivec.h>
+#	include <future/math/altivec/vec4_altivec.h>
 #else
-#	include <future/math/type/vec4/vec4_float.h>
+#	include <future/math/float/vec4_float.h>
 #endif
 
 namespace FutureMathVectorMasksInternal

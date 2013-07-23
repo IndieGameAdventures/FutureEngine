@@ -166,14 +166,14 @@
 		30FC77411799E1DD0032A219 /* libFutureMath.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libFutureMath.a;
+			path = FutureMath.a;
 			remoteRef = 30FC77401799E1DD0032A219 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		30FC77431799E1DD0032A219 /* libFutureMathios.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libFutureMathios.a;
+			path = FutureMathios.a;
 			remoteRef = 30FC77421799E1DD0032A219 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -252,6 +252,7 @@
 				30FC77041799D70F0032A219 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -27,7 +27,7 @@
 #ifndef FUTURE_MATH_SCALAR_H
 #define FUTURE_MATH_SCALAR_H
 
-#include <future/math/type/vec4.h>
+#include <future/math/type/type.h>
 
 class FutureScalar;
 typedef const FutureScalar & FutureScalarArg;
@@ -124,10 +124,6 @@ public:
 	inline FutureScalar	SquareRootAndSave();
 	inline FutureScalar	ReciprocalSquareRootAndSave();
 	inline FutureScalar LerpAndSave(FutureScalarArg to, FutureScalarArg u);
-
-
-	inline FutureScalar	MultiplyAndAdd(FutureScalarArg mul, FutureScalarArg add) const;
-
 
 
 	/*****************Get/Set Operations***********************************/
@@ -261,8 +257,20 @@ public:
 	static const FutureScalar		LN2;
 	static const FutureScalar		LN10;
 
-protected:
-	__declspec(align(16)) FutureVec4Float m_vec;
+    
+    FUTURE_SCALAR_FLOAT_TYPE    m_vec;
 };
+
+#if FUTURE_PLATFORM_WINDOWS
+#   include <future/math/windows/scalar_win.inl>
+#elif FUTURE_PLATFORM_MAC
+#   include <future/math/mac/scalar_mac.inl>
+#elif FUTURE_PLATFORM_LINUX
+#   include <future/math/linux/scalar_lin.inl>
+#elif FUTURE_PLATFORM_ANDROID
+#   include <future/math/android/scalar_and.inl>
+#else
+#   include <future/math/float/scalar_float.inl>
+#endif
 
 #endif

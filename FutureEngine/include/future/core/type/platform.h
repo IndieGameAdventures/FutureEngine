@@ -57,11 +57,11 @@
 #elif defined(__APPLE__) || defined(Macintosh) || defined(macintosh)
 #	include "TargetConditionals.h"
 #	if TARGET_OS_IPHONE   
-#		undef  FUTURE_PLATFORM_IPHONE
-#		define FUTURE_PLATFORM_IPHONE 1
+#		undef  FUTURE_PLATFORM_IOS
+#		define FUTURE_PLATFORM_IOS 1
 #	elif TARGET_IPHONE_SIMULATOR
-#		undef  FUTURE_PLATFORM_IPHONE
-#		define FUTURE_PLATFORM_IPHONE 1
+#		undef  FUTURE_PLATFORM_IOS
+#		define FUTURE_PLATFORM_IOS 1
 #		define FUTURE_IPHONE_SIMULATOR
 #	elif TARGET_OS_MAC
 #		undef  FUTURE_PLATFORM_MAC
