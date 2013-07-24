@@ -19,8 +19,7 @@
 */
 
 /*
-*	The main game system, this handles start up and shut down of the entire system
-*	
+*	Types, Structs, and Enums used by the graphics system
 */
 
 #ifndef FUTURE_CORE_SYSTEM_GRAPHICS_TYPE_H
@@ -54,17 +53,17 @@ public:
 // so if an object is not part of the FutureRP_Shadows phase, it will not have a shadow
 // the first 16 bits of the enum are used to determine the phase and the second 16 bits
 // can be used to specify priority within a phase
-enum FutureRenderPriority
+enum FutureRenderPhase
 {
-	FutureRP_Shadows				= 0x00010000,
-	FutureRP_Reflection_SkyDome		= 0x00020000,
-	FutureRP_Reflection				= 0x00080000,
-	FutureRP_Normal_SkyDome			= 0x00100000,
-	FutureRP_Normal					= 0x00400000,
-	FutureRP_Water					= 0x00800000,
+	FutureRenderPhase_Shadows				= 0x00010000,
+	FutureRenderPhase_Reflection_SkyDome	= 0x00020000,
+	FutureRenderPhase_Reflection			= 0x00080000,
+	FutureRenderPhase_Normal_SkyDome		= 0x00100000,
+	FutureRenderPhase_Normal				= 0x00400000,
+	FutureRenderPhase_Water					= 0x00800000,
 
-	FutureRP_Max,
-	FutureRP_Nil = -1,
+	FutureRenderPhase_Max,
+	FutureRenderPhase_Nil = -1,
 };
 
 enum FutureVariableType
@@ -86,63 +85,53 @@ enum FutureVariableType
 };
 
 // the first number is the element type and size, the second number is the number of elements 
-// corrosponds 1:1 with DXGI_FORMAT
+// corresponds 1:1 with DXGI_FORMAT
 enum FutureVertexElementType
 {
-	FutureVertexElementType_Typeless32_4	= 1,
 	FutureVertexElementType_F32_4			= 2,
 	FutureVertexElementType_U32_4			= 3,
 	FutureVertexElementType_S32_4			= 4,
 
-	FutureVertexElementType_Typeless32_3	= 5,
 	FutureVertexElementType_F32_3			= 6,
 	FutureVertexElementType_U32_3			= 7,
 	FutureVertexElementType_S32_3			= 8,
 
-	FutureVertexElementType_Typeless16_4	= 9,
 	FutureVertexElementType_F16_4			= 10,
 	FutureVertexElementType_UNORM16_4		= 11,
 	FutureVertexElementType_U16_4			= 12,
 	FutureVertexElementType_SNORM16_4		= 13,
 	FutureVertexElementType_S16_4			= 14,
 
-	FutureVertexElementType_Typeless32_2	= 15,
 	FutureVertexElementType_F32_2			= 16,
 	FutureVertexElementType_U32_2			= 17,
 	FutureVertexElementType_S32_2			= 18,
 
-	FutureVertexElementType_Typeless8_4     = 27,
 	FutureVertexElementType_UNORM8_4		= 28,
 	FutureVertexElementType_U8_4			= 30,
 	FutureVertexElementType_SNORM8_4		= 31,
 	FutureVertexElementType_S8_4			= 32,
 
-	FutureVertexElementType_Typeless16_2    = 33,
 	FutureVertexElementType_F16_2			= 34,
 	FutureVertexElementType_UNORM16_2		= 35,
 	FutureVertexElementType_U16_2			= 36,
 	FutureVertexElementType_SNORM16_2		= 37,
 	FutureVertexElementType_S16_2			= 38,
 
-	FutureVertexElementType_Typeless32_1	= 39,
 	FutureVertexElementType_F32_1			= 40,
 	FutureVertexElementType_U32_1			= 42,
 	FutureVertexElementType_S32_1			= 43,
 
-	FutureVertexElementType_Typeless8_2     = 48,
 	FutureVertexElementType_UNORM8_2		= 49,
 	FutureVertexElementType_U8_2			= 50,
 	FutureVertexElementType_SNORM8_2		= 51,
 	FutureVertexElementType_S8_2			= 52,
 
-	FutureVertexElementType_Typeless16_1    = 53,
 	FutureVertexElementType_F16_1			= 54,
 	FutureVertexElementType_UNORM16_1		= 55,
 	FutureVertexElementType_U16_1			= 57,
 	FutureVertexElementType_SNORM16_1		= 58,
 	FutureVertexElementType_S16_1			= 59,
 
-	FutureVertexElementType_Typeless8_1      = 60,
 	FutureVertexElementType_UNORM8_1		= 61,
 	FutureVertexElementType_U8_1			= 62,
 	FutureVertexElementType_SNORM8_1		= 63,
@@ -161,21 +150,281 @@ struct FutureVertexElement
 // these have parallels in both dx9 and dx10, this just makes it easier
 enum FuturePrimitiveType
 {
-    FuturePT_Triangle_List = 0,
-    FuturePT_Triangle_Strip,
-    FuturePT_Line_List,
-    FuturePT_Line_Strip,
-    FuturePT_Point_List,
-    FuturePT_Triangle_List_Adj,
-    FuturePT_Triangle_Strip_Adj,
-    FuturePT_Line_List_Adj,
-    FuturePT_Line_Strip_Adj,
+    FuturePrimitiveType_Triangle_List = 0,
+    FuturePrimitiveType_Triangle_Strip,
+    FuturePrimitiveType_Line_List,
+    FuturePrimitiveType_Line_Strip,
+    FuturePrimitiveType_Point_List,
+    FuturePrimitiveType_Triangle_List_Adj,
+    FuturePrimitiveType_Triangle_Strip_Adj,
+    FuturePrimitiveType_Line_List_Adj,
+    FuturePrimitiveType_Line_Strip_Adj,
 };
 
 enum FutureIndexType
 {
     FutureIT_16bit = 0,
     FutureIT_32bit,
+};
+
+enum FuturePixelFormat
+{
+	FuturePixelFormat_Unknown		= 0,
+
+	//	128 bit formats
+	FuturePixelFormat_RGBA_F32		= 2,
+	FuturePixelFormat_RGBA_U32		= 3,
+	FuturePixelFormat_RGBA_S32		= 4,
+	
+	// 96 bit formats
+	FuturePixelFormat_RGB_F32		= 6,
+	FuturePixelFormat_RGB_U32		= 7,
+	FuturePixelFormat_RGB_S32		= 8,
+	
+	// 64 bit formats
+	FuturePixelFormat_RGBA_F16		= 10,
+	FuturePixelFormat_RGBA_U16		= 12,
+	FuturePixelFormat_RGBA_S16NORM	= 13,
+	FuturePixelFormat_RGBA_S16		= 14,
+	
+	FuturePixelFormat_RG_F32		= 16,
+	FuturePixelFormat_RG_U32		= 17,
+	FuturePixelFormat_RG_S32		= 18,
+	
+	// 32 bit formats
+	FuturePixelFormat_RG_F16		= 10,
+	FuturePixelFormat_RGB10_A2_U	= 25,
+
+	FuturePixelFormat_RGBA_U8		= 30,
+	FuturePixelFormat_RGBA_S8NORM	= 31,
+	FuturePixelFormat_RGBA_S8		= 32,
+	
+	FuturePixelFormat_RG_F16		= 34,
+	FuturePixelFormat_RG_U16		= 36,
+	FuturePixelFormat_RG_S16NORM	= 37,
+	FuturePixelFormat_RG_S16		= 38,
+	
+	FuturePixelFormat_R_F32			= 41,
+	FuturePixelFormat_R_U32			= 42,
+	FuturePixelFormat_R_S32			= 43,
+
+	// 16 bit formats
+	FuturePixelFormat_RG_U8			= 50,
+	FuturePixelFormat_RG_S8NORM		= 51,
+	FuturePixelFormat_RG_S8			= 52,
+	
+	FuturePixelFormat_R_F16			= 54,
+	FuturePixelFormat_R_U16			= 57,
+	FuturePixelFormat_R_S16NORM		= 58,
+	FuturePixelFormat_R_S16			= 59,
+
+	// 8 bit formats
+	FuturePixelFormat_R_U8			= 62,
+	FuturePixelFormat_R_S8NORM		= 63,
+	FuturePixelFormat_R_S8			= 64,
+};
+
+
+enum FutureHardwareResourceUsage
+{
+	FutureHardwareResourceUsage_Default = 0,
+	FutureHardwareResourceUsage_Locked = 1,
+	FutureHardwareResourceUsage_Dynamic = 2,
+	FutureHardwareResourceUsage_Staging = 3,
+};
+
+struct FutureAdapterInfo
+{
+	string  m_description[128];
+	u32		m_vendorId;
+	u32		m_deviceId;
+	u32		m_subSysId;
+	u32		m_revision;
+	size_t	m_dedicatedVideoMemory;
+	size_t	m_dedicatedSystemMemory;
+	size_t	m_sharedSystemMemory;
+};
+
+struct FutureViewPort
+{
+	f32 m_left;
+	f32 m_right;
+	f32 m_top;
+	f32 m_bottom;
+};
+
+enum FutureComparisonFunction
+{
+	FutureComparisonFunction_Never				= 1,
+	FutureComparisonFunction_LessThan			= 2,
+	FutureComparisonFunction_Equal				= 3,
+	FutureComparisonFunction_LessThanOrEqual	= 4,
+	FutureComparisonFunction_GreaterThan		= 5,
+	FutureComparisonFunction_NotEqual			= 6,
+	FutureComparisonFunction_GreaterThanOrEqual	= 7,
+	FutureComparisonFunction_Always				= 8
+};
+
+enum FutureStencilOperation
+{
+	FutureStencilOperation_Keep			= 1,
+	FutureStencilOperation_Zero			= 2,
+	FutureStencilOperation_Replace		= 3,
+	FutureStencilOperation_Increase		= 4,
+	FutureStencilOperation_Decrease		= 5,
+	FutureStencilOperation_Invert		= 6,
+	FutureStencilOperation_IncreaseWrap = 7,
+	FutureStencilOperation_DecreaseWrap	= 8
+};
+
+struct FutureStencilInfo
+{
+    bool						m_enableStencil;
+    u8                          m_mask;
+    FutureStencilOperation      m_onFail;
+    FutureStencilOperation      m_onFailDepth;
+    FutureStencilOperation      m_onPassBoth;
+    FutureComparisonFunction	m_comparisonFunction;
+};
+
+struct FutureDepthStencilInfo
+{
+	bool						m_enableDepthMap;
+	FutureComparisonFunction	m_comparisonFunction;
+	FutureStencilInfo			m_frontStencil;
+	FutureStencilInfo			m_backStencil;
+};
+
+
+enum FutureScaleMode
+{
+	FutureScaleMode_Undefined,
+	FutureScaleMode_Center,
+	FutureScaleMode_Stretch,
+	FutureScaleMode_AspectStretch
+};
+
+enum FutureCullMode
+{
+	FutureCullMode_None = 1,
+	FutureCullMode_Front = 2,
+	FutureCullMode_Back = 3,
+};
+
+enum FutureBlendFunction
+{
+    FutureBlendFunction_Zero                = 1,
+    FutureBlendFunction_One                 = 2,
+    FutureBlendFunction_Source              = 3,
+    FutureBlendFunction_SourceInverse       = 4,
+    FutureBlendFunction_SourceAlpha         = 5,
+    FutureBlendFunction_SourceInverseAlpha  = 6,
+    FutureBlendFunction_DestAlpha           = 7,
+    FutureBlendFunction_DesteInverseAlpha   = 8,
+    FutureBlendFunction_Dest                = 9,
+    FutureBlendFunction_DestInverse         = 10,
+    FutureBlendFunction_SaturateAlpha       = 11,
+};
+
+enum FutureBlendOperation
+{
+    FutureBlendOperation_Add        = 1,
+    FutureBlendOperation_Subtract   = 2,
+    FutureBlendOperation_ReverseSub = 3,
+    FutureBlendOperation_Min        = 4,
+    FutureBlendOperation_Max        = 5,
+};
+
+enum FutureBlendTarget
+{
+    FutureBlendTarget_Color,
+    FutureBlendTarget_Alpha,
+};
+
+struct FutureBlendInfo
+{
+    FutureBlendFunction     m_sourceFunction;
+    FutureBlendFunction     m_destFunction;
+    FutureBlendOperation    m_blendOperation;
+};
+
+struct FutureRenderTargetInfo
+{
+    bool            m_enableBlending;
+    FutureBlendInfo m_colorBlend;
+    FutureBlendInfo m_alphaBlend;
+};
+
+enum FutureTextureSamplerFilter
+{
+    FutureTextureSamplerFilter_NearestPoint,
+    FutureTextureSamplerFilter_LinearPoint,
+    FutureTextureSamplerFilter_NearestMip_NearestPoint,
+    FutureTextureSamplerFilter_NearestMip_LinearPoint,
+    FutureTextureSamplerFilter_LinearMip_NearestPoint,
+    FutureTextureSamplerFilter_LinearMip_LinearPoint,
+};
+
+enum FutureTextureWrapMode
+{
+    FutureTextureWrapMode_Repeat    = 1,
+    FutureTextureWrapMode_Mirror    = 2,
+    FutureTextureWrapMode_Clamp     = 3,
+    FutureTextureWrapMode_Border    = 4,
+};
+
+struct FutureTextureSamplerInfo
+{
+    f32                             m_minLOD;
+    f32                             m_maxLOD;
+    f32                             m_mipLODBias;
+    
+    FutureTextureSamplerFilter      m_filterMin;
+    FutureTextureSamplerFilter      m_filterMag;
+    
+    FutureTextureWrapMode           m_wrapModeU;
+    FutureTextureWrapMode           m_wrapModeV;
+    FutureTextureWrapMode           m_wrapModeW;
+    
+    FutureComparisonFunction        m_compareFunction;
+};
+
+struct FutureRasterizerInfo
+{
+    bool                        m_wireframe;
+	FutureCullMode              m_cullMode;
+	bool                        m_enableMultisampling;
+};
+
+// Anything that wants to be rendered by the graphics system must extend this class
+class IFutureRenderable
+{
+	FutureRenderable(){};
+	virtual ~FutureRenderable(){};
+
+	virtual bool	ShouldRender() = 0;
+	virtual void	Invalidate() = 0;
+
+	virtual void	Render() = 0;
+
+	virtual u32		RenderPriority() = 0;
+	virtual u32		RenderPhase() = 0;
+};
+
+
+// All objects that may need to be stored in hardware buffers (transferred to the GPU) must extend this
+class IFutureHardwareObject
+{
+	IFutureHardwareObject(){};
+	virtual ~IFutureHardwareObject(){}
+
+	virtual bool	ApplyToHardware() = 0;
+	virtual bool	RemoveFromHardware() = 0;
+	virtual bool	ReapplyToHardware() = 0;
+
+	virtual bool	IsAppliedToHardware() = 0;
+
+	virtual u32		HardwareBufferID() = 0;
 };
 
 #endif

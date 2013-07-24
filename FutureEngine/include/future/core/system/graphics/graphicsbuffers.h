@@ -19,47 +19,41 @@
 */
 
 /*
-*	The main game system, this handles start up and shut down of the entire system
-*	
+*	Hardware and software buffer interfaces used by the graphics system
 */
 
-#ifndef FUTURE_CORE_SYSTEM_GRAPHICS_H
-#define FUTURE_CORE_SYSTEM_GRAPHICS_H
+#ifndef FUTURE_CORE_SYSTEM_GRAPHICS_BUFFERS_H
+#define FUTURE_CORE_SYSTEM_GRAPHICS_BUFFERS_H
 
-#include <future/core/system/system.h>
+#include <future/core/system/graphics/graphicstypes.h>
+#include <future/core/object/managedobject.h>
 
-class IFutureGraphicsSystem : public FutureSystemBase
+struct FutureHardwareBufferInfo
 {
 public:
-	IFutureGraphicsSystem()
-		: FutureSystemBase()
-	{
-		m_needsUpdate = true;
-		m_systemTime = 0;
-		m_systemType = FutureSystemType_Graphics;
-	}
-	
-	virtual void vCreateWindow(u32 width = 640, u32 height = 480, string windowTitle = L"Future Window") = 0;
-
-	// if width and height are 0, the suggested width and height will be used
-	virtual void vCreateDevice(bool p_fWindowed = true, u32 p_nWidth = 0, u32 p_nHeight = 0) = 0;
-
-	// if force is true, this will not check to make sure all settings are valid before creating a new device
-	virtual void CreateDeviceFromSettings(FutureGraphicsSettings * settings, bool force = false ) = 0;
-
-	virtual void FindValidDeviceSettings(FutureGraphicsSettings * out, FutureGraphicsSettings * in ) = 0;
-
-	virtual FutureGraphicsSettings *	GraphicsSettings() = 0; 
-	virtual void *						ProgramInstance() = 0;
-
-	virtual FutureWindowSettings *		WindowSettings() = 0
-	virtual IFutureWindow				Window() = 0;
-
-	virtual bool						HasDevice() = 0;
-	virtual void *						GetDevice() = 0;
-
-	virtual void						AddDeviceCallback(IFutureDeviceCallback * deviceCallback) = 0;
-	virtual void						RemoveDeviceCallback(IFutureDeviceCallback * deviceCallback) = 0;
+    u32                         m_elements;
+	u32							m_size;
+	u32							m_stride;
+    u32                         m_slice;
+	FutureHardwareResourceUsage	m_usage;
 };
+
+
+class IFutureHardwareBuffer : public FutureManagedObject, public IFutureHardwareObject
+{
+    virtual ~IFutureHardwareBuffer();
+    
+	virtual void	GetInfo(FutureHardwareBufferInfo & info) = 0;
+    
+	virtual bool	Map(void ** data) = 0;
+	virtual bool	IsMapped() = 0;
+	virtual void	UnMap() = 0;
+    
+    virtual void    Release() = 0;
+    
+    virtual IFutureHardwareBuffer *   Clone();
+    virtual IFutureHardwareBuffer *   Instance();
+};
+
 
 #endif

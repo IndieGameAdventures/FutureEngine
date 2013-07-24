@@ -34,7 +34,7 @@ enum FutureSystemMessage
 	FutureSystemMessage_None,
 	FutureSystemMessage_WindowCreated,
 	FutureSystemMessage_WindowDestroyed,
-	FutureSystemMessage_WindowsResized,
+	FutureSystemMessage_WindowResized,
 	
 	FutureSystemMessage_ForceRedraw,
 	FutureSystemMessage_ContentRectChanged,

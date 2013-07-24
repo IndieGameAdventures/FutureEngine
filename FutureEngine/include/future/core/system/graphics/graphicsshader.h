@@ -23,28 +23,33 @@
 *	
 */
 
-#ifndef FUTURE_CORE_SYSTEM_GRAPHICS_WINDOW_H
-#define FUTURE_CORE_SYSTEM_GRAPHICS_WINDOW_H
+#ifndef FUTURE_CORE_SYSTEM_GRAPHICS_H
+#define FUTURE_CORE_SYSTEM_GRAPHICS_H
 
-#include <future/core/type/type.h>
+#include <future/core/system/graphics/graphicstypes.h>
+#include <future/core/system/graphics/graphicstexture.h>
+#include <future/core/system/graphics/graphicssettings.h>
+#include <future/core/system/graphics/graphicsbuffers.h>
 
-struct FutureWindowInfo
+enum FutureShaderType
 {
-    u32         m_width;
-    u32         m_height;
-    string      m_name;
-    bool        m_fullScreen;
+    FutureShaderType_Vertex,
+    FutureShaderType_PreTesslation,
+    FutureShaderType_PostTesslation,
+    FutureShaderType_Geometry,
+    FutureShaderType_Pixel,
+    FutureShaderType_Compute,
 };
 
-class IFutureWindow : public FutureManagedObject
+class IFutureShaderEffect : public FutureManagedObject
+{
+    
+};
+
+class IFutureShader : public FutureManagedObject, public IFutureHardwareObject
 {
 public:
-	virtual ~IFutureWindow(){}
-	
-	virtual void CreateWindow(const FutureWindowInfo & info) = 0;
-    virtual void DestroyWindow();
-    
-	virtual void GetInfo(FutureWindowInfo & info) = 0;
+
 };
 
 #endif

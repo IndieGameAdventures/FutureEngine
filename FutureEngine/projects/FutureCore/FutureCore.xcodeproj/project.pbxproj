@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30485E4F179EEEE200254AED /* graphicsbuffers.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E3E179EEEE200254AED /* graphicsbuffers.h */; };
+		30485E50179EEEE200254AED /* graphicsimage.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E3F179EEEE200254AED /* graphicsimage.h */; };
+		30485E54179EEEE200254AED /* graphicssettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E43179EEEE200254AED /* graphicssettings.h */; };
+		30485E55179EEEE200254AED /* graphicsshader.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E44179EEEE200254AED /* graphicsshader.h */; };
+		30485E56179EEEE200254AED /* graphicssystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E45179EEEE200254AED /* graphicssystem.h */; };
+		30485E57179EEEE200254AED /* graphicstexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E46179EEEE200254AED /* graphicstexture.h */; };
+		30485E58179EEEE200254AED /* graphicstypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E47179EEEE200254AED /* graphicstypes.h */; };
+		30485E5A179EEEE200254AED /* graphicswindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E49179EEEE200254AED /* graphicswindow.h */; };
+		30485E5B179EEEE200254AED /* system.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E4A179EEEE200254AED /* system.h */; };
+		30485E5C179EEEE200254AED /* systemcontroller.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E4B179EEEE200254AED /* systemcontroller.h */; };
+		30485E5E179F50B800254AED /* eventdispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E5D179F50B800254AED /* eventdispatcher.h */; };
+		30485E60179F50C600254AED /* event.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E5F179F50C600254AED /* event.h */; };
+		30485E62179F50FD00254AED /* eventdispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30485E61179F50FD00254AED /* eventdispatcher.cpp */; };
+		30485E63179F50FD00254AED /* eventdispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30485E61179F50FD00254AED /* eventdispatcher.cpp */; };
 		30FC763C179739B40032A219 /* assert.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC75FF179739B40032A219 /* assert.h */; };
 		30FC763D179739B40032A219 /* debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7600179739B40032A219 /* debug.h */; };
 		30FC763E179739B40032A219 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7601179739B40032A219 /* log.h */; };
@@ -37,7 +51,7 @@
 		30FC765E179739B40032A219 /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC762F179739B40032A219 /* thread.h */; };
 		30FC7660179739B40032A219 /* workerthread.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7631179739B40032A219 /* workerthread.h */; };
 		30FC7663179739B40032A219 /* array.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7637179739B40032A219 /* array.h */; };
-		30FC7664179739B40032A219 /* string.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7639179739B40032A219 /* string.h */; };
+		30FC7664179739B40032A219 /* futurestring.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7639179739B40032A219 /* futurestring.h */; };
 		30FC7665179739B40032A219 /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC763B179739B40032A219 /* timer.h */; };
 		30FC768417973A090032A219 /* assert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766717973A090032A219 /* assert.cpp */; };
 		30FC768517973A090032A219 /* debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30FC766817973A090032A219 /* debug.cpp */; };
@@ -96,6 +110,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		30485E3E179EEEE200254AED /* graphicsbuffers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphicsbuffers.h; sourceTree = "<group>"; };
+		30485E3F179EEEE200254AED /* graphicsimage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphicsimage.h; sourceTree = "<group>"; };
+		30485E43179EEEE200254AED /* graphicssettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphicssettings.h; sourceTree = "<group>"; };
+		30485E44179EEEE200254AED /* graphicsshader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphicsshader.h; sourceTree = "<group>"; };
+		30485E45179EEEE200254AED /* graphicssystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphicssystem.h; sourceTree = "<group>"; };
+		30485E46179EEEE200254AED /* graphicstexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphicstexture.h; sourceTree = "<group>"; };
+		30485E47179EEEE200254AED /* graphicstypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphicstypes.h; sourceTree = "<group>"; };
+		30485E49179EEEE200254AED /* graphicswindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphicswindow.h; sourceTree = "<group>"; };
+		30485E4A179EEEE200254AED /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
+		30485E4B179EEEE200254AED /* systemcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = systemcontroller.h; sourceTree = "<group>"; };
+		30485E5D179F50B800254AED /* eventdispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventdispatcher.h; sourceTree = "<group>"; };
+		30485E5F179F50C600254AED /* event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = event.h; sourceTree = "<group>"; };
+		30485E61179F50FD00254AED /* eventdispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = eventdispatcher.cpp; path = ../../../../src/core/object/eventdispatcher.cpp; sourceTree = "<group>"; };
 		30FC75F7179738AC0032A219 /* FutureCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = FutureCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FC75FF179739B40032A219 /* assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assert.h; sourceTree = "<group>"; };
 		30FC7600179739B40032A219 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = debug.h; path = ../../include/future/core/debug/debug.h; sourceTree = SOURCE_ROOT; };
@@ -130,7 +157,7 @@
 		30FC7631179739B40032A219 /* workerthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = workerthread.h; sourceTree = "<group>"; };
 		30FC7637179739B40032A219 /* array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = array.h; sourceTree = "<group>"; };
 		30FC7638179739B40032A219 /* array.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = array.inl; sourceTree = "<group>"; };
-		30FC7639179739B40032A219 /* string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string.h; sourceTree = "<group>"; };
+		30FC7639179739B40032A219 /* futurestring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = futurestring.h; sourceTree = "<group>"; };
 		30FC763B179739B40032A219 /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		30FC766717973A090032A219 /* assert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = assert.cpp; path = ../../../../src/core/debug/assert.cpp; sourceTree = "<group>"; };
 		30FC766817973A090032A219 /* debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = debug.cpp; path = ../../../../src/core/debug/debug.cpp; sourceTree = "<group>"; };
@@ -180,9 +207,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		30485E39179EEEE200254AED /* system */ = {
+			isa = PBXGroup;
+			children = (
+				30485E3A179EEEE200254AED /* graphics */,
+				30485E4A179EEEE200254AED /* system.h */,
+				30485E4B179EEEE200254AED /* systemcontroller.h */,
+			);
+			name = system;
+			path = ../../include/future/core/system;
+			sourceTree = "<group>";
+		};
+		30485E3A179EEEE200254AED /* graphics */ = {
+			isa = PBXGroup;
+			children = (
+				30485E3E179EEEE200254AED /* graphicsbuffers.h */,
+				30485E3F179EEEE200254AED /* graphicsimage.h */,
+				30485E43179EEEE200254AED /* graphicssettings.h */,
+				30485E44179EEEE200254AED /* graphicsshader.h */,
+				30485E45179EEEE200254AED /* graphicssystem.h */,
+				30485E46179EEEE200254AED /* graphicstexture.h */,
+				30485E47179EEEE200254AED /* graphicstypes.h */,
+				30485E49179EEEE200254AED /* graphicswindow.h */,
+			);
+			path = graphics;
+			sourceTree = "<group>";
+		};
 		30FC75EE179738AC0032A219 = {
 			isa = PBXGroup;
 			children = (
+				30485E39179EEEE200254AED /* system */,
 				30FC77341799D8460032A219 /* FutureCoreIos */,
 				30FC769817988C890032A219 /* type */,
 				30FC75FE179739B40032A219 /* debug */,
@@ -260,6 +314,8 @@
 		30FC760D179739B40032A219 /* object */ = {
 			isa = PBXGroup;
 			children = (
+				30485E61179F50FD00254AED /* eventdispatcher.cpp */,
+				30485E5D179F50B800254AED /* eventdispatcher.h */,
 				30FC767417973A090032A219 /* managedobject.cpp */,
 				30FC760E179739B40032A219 /* managedobject.h */,
 				30FC760F179739B40032A219 /* pointer */,
@@ -344,10 +400,11 @@
 		30FC7635179739B40032A219 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				30485E5F179F50C600254AED /* event.h */,
 				30FC768217973A090032A219 /* string.cpp */,
 				30FC768317973A090032A219 /* timer.cpp */,
 				30FC7636179739B40032A219 /* container */,
-				30FC7639179739B40032A219 /* string.h */,
+				30FC7639179739B40032A219 /* futurestring.h */,
 				30FC763A179739B40032A219 /* timer */,
 			);
 			name = utils;
@@ -429,10 +486,22 @@
 				30FC765E179739B40032A219 /* thread.h in Headers */,
 				30FC7660179739B40032A219 /* workerthread.h in Headers */,
 				30FC7663179739B40032A219 /* array.h in Headers */,
-				30FC7664179739B40032A219 /* string.h in Headers */,
+				30FC7664179739B40032A219 /* futurestring.h in Headers */,
 				30FC7665179739B40032A219 /* timer.h in Headers */,
 				30FC77381799D8460032A219 /* FutureCoreIos-Prefix.pch in Headers */,
 				30FC77391799D8460032A219 /* FutureCoreIos.h in Headers */,
+				30485E4F179EEEE200254AED /* graphicsbuffers.h in Headers */,
+				30485E50179EEEE200254AED /* graphicsimage.h in Headers */,
+				30485E54179EEEE200254AED /* graphicssettings.h in Headers */,
+				30485E55179EEEE200254AED /* graphicsshader.h in Headers */,
+				30485E56179EEEE200254AED /* graphicssystem.h in Headers */,
+				30485E57179EEEE200254AED /* graphicstexture.h in Headers */,
+				30485E58179EEEE200254AED /* graphicstypes.h in Headers */,
+				30485E5A179EEEE200254AED /* graphicswindow.h in Headers */,
+				30485E5B179EEEE200254AED /* system.h in Headers */,
+				30485E5C179EEEE200254AED /* systemcontroller.h in Headers */,
+				30485E5E179F50B800254AED /* eventdispatcher.h in Headers */,
+				30485E60179F50C600254AED /* event.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +594,7 @@
 				30FC769617973A090032A219 /* string.cpp in Sources */,
 				30FC769717973A090032A219 /* timer.cpp in Sources */,
 				30FC773A1799D8460032A219 /* FutureCoreIos.m in Sources */,
+				30485E62179F50FD00254AED /* eventdispatcher.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +621,7 @@
 				30FC76D417989BFE0032A219 /* workerthread.cpp in Sources */,
 				30FC76D517989BFE0032A219 /* string.cpp in Sources */,
 				30FC76D617989BFE0032A219 /* timer.cpp in Sources */,
+				30485E63179F50FD00254AED /* eventdispatcher.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,6 +28,10 @@
 
 #include <future/core/system/system.h>
 #include <future/core/system/graphics/graphicstypes.h>
+#include <future/core/system/graphics/graphicstexture.h>
+#include <future/core/system/graphics/graphicsbuffers.h>
+#include <future/core/system/graphics/graphicsshader.h>
+#include <future/core/system/graphics/graphicswindow.h>
 
 class IFutureGraphicsSystem : public FutureSystemBase
 {
@@ -40,27 +44,77 @@ public:
 		m_systemType = FutureSystemType_Graphics;
 	}
 	
-	virtual void CreateWindow(u32 width = 640, u32 height = 480, string windowTitle = L"Future Window") = 0;
 
-	// if width and height are 0, the suggested width and height will be used
-	virtual void CreateDevice(bool windowed = true, u32 p_nWidth = 0, u32 p_nHeight = 0) = 0;
-
-	// if force is true, this will not check to make sure all settings are valid before creating a new device
-	virtual void CreateDeviceFromSettings(FutureGraphicsSettings * settings, bool force = false ) = 0;
-
-	virtual void FindValidDeviceSettings(FutureGraphicsSettings * out, FutureGraphicsSettings * in ) = 0;
+	virtual bool    CreateDevice(IFutureWindow * window, const FutureGraphicsDeviceCreationSettings & settings) = 0;
+    virtual bool    RecreateDevice(IFutureWindow * window, const FutureGraphicsDeviceCreationSettings & settings) = 0;
+    virtual void    DestroyDevice() = 0;
 
 	virtual FutureGraphicsSettings *	GraphicsSettings() = 0; 
 	virtual void *						ProgramInstance() = 0;
 
-	virtual FutureWindowSettings *		WindowSettings() = 0
-	virtual IFutureWindow				Window() = 0;
+	virtual IFutureWindow *				Window() = 0;
 
 	virtual bool						HasDevice() = 0;
 	virtual void *						GetDevice() = 0;
 
 	virtual void						AddDeviceCallback(IFutureDeviceCallback * deviceCallback) = 0;
 	virtual void						RemoveDeviceCallback(IFutureDeviceCallback * deviceCallback) = 0;
+    
+    
+    
+    virtual u32         CreateBlendState(const FutureBlendInfo info) = 0;
+    virtual u32         CreateDepthStencilInfo(const FutureDepthStencilInfo info) = 0;
+    virtual u32         CreateRasterizerInfo(const FutureRasterizerInfo info) = 0;
+    virtual u32         CreateTextureSamplerInfo(const FutureTextureSamplerInfo info) = 0;
+    
+    virtual bool        GetBlendState(const FutureBlendInfo info) = 0;
+    virtual bool        CreateDepthStencilInfo(const FutureDepthStencilInfo info) = 0;
+    virtual bool        CreateRasterizerInfo(const FutureRasterizerInfo info) = 0;
+    virtual bool        CreateTextureSamplerInfo(const FutureTextureSamplerInfo info) = 0;
+    
+    virtual bool        CreateBuffer(const FutureBufferInfo info, IFutureHardwareBuffer ** buffer) = 0;
+    virtual bool        CreateShader(const FutureShaderInfo info, IFutureShader ** shader) = 0;
+    virtual bool        CreateTexture(const FutureTextureInfo info, IFutureTexture ** texture) = 0;
+    virtual bool        CreateMips(IFutureTexture * texture) = 0;
+    
+    virtual bool        IsFeatureSupported(FutureDeviceSupport feature) = 0;
+    virtual u32         GetCapability(FutureDeviceCapabilityType type) = 0;
+    
+    virtual bool        GetViewport(FutureViewport & viewport) = 0;
+    virtual bool        SetViewport(const FutureViewport & viewport) = 0;
+    
+    
+    virtual bool        ClearDepthStencil(IFutureTexture * depthStencil, f32 depthClear = 0.f, u8 stencilClear = 0) = 0;
+    virtual bool        ClearDepthBuffer(IFutureTexture * depthStencil, f32 clearValue = 0.f) = 0;
+    virtual bool        ClearStencil(IFutureTexture * depthStencil, u8 clearValue = 0) = 0;
+    virtual bool        ClearRenderTarget(IFutureTexture * renderTarget) = 0;
+    virtual bool        ClearState() = 0;
+    
+    virtual bool        GetRenderTarget(IFutureTexture ** renderTarget) = 0;
+    virtual bool        SetRenderTarget(IFutureTexture * renderTarget) = 0;
+    
+    virtual bool        GetDepthStencil(IFutureTexture ** depthStencil) = 0;
+    virtual bool        SetDepthStencil(IFutureTexture * depthStencil) = 0;
+    
+    virtual bool        GetShader(FutureShaderType type, IFutureShader ** shader) = 0;
+    
+    virtual bool        SetBlendState(u32 state) = 0
+    virtual bool        SetDepthStencilState(u32 state) = 0
+    virtual bool        SetRasterizerState(u32 state) = 0
+    
+    virtual u32         GetBlendState(u32 state) = 0
+    virtual u32         GetDepthStencilState(u32 state) = 0
+    virtual u32         GetRasterizerState(u32 state) = 0
+    
+    virtual bool        GetVertexBuffer(IFutureHardwareBuffer ** buffer) = 0;
+    virtual bool        GetIndexBuffer(IFutureHardwareBuffer ** buffer) = 0;
+    
+    virtual bool        Render(IFutureHardwareBuffer * vertexBuffer,
+                               IFutureHardwareBuffer * indexBuffer,
+                               FuturePrimitiveType primType) = 0;
+    
+    virtual bool        BeginRender() = 0;
+    virtual bool        EndRender() = 0;
 };
 
 #endif
