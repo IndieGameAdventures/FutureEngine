@@ -39,22 +39,34 @@ public:
 
     typedef bool (*FutureEventListener)(const FutureEvent);
     
-    virtual void    AddEventListener(const char * event, FutureEventListener listener, u32 priority = 0);
-    virtual void    RemoveEventListener(const char * event, FutureEventListener listener, u32 priority = 0);
+    virtual s32     AddEvent(const char * name);
+
+    virtual void    AddEventListener(const char * event, FutureEventListener listener);
+    virtual void    RemoveEventListener(const char * event, FutureEventListener listener);
     
-    virtual void    AddEventListener(u32 event, FutureEventListener listener, u32 priority = 0);
-    virtual void    RemoveEventListener(u32 event, FutureEventListener listener, u32 priority = 0);
+    virtual void    AddEventListener(s32 event, FutureEventListener listener);
+    virtual void    RemoveEventListener(s32 event, FutureEventListener listener);
     
-    virtual u32     GetEventId(const char * event);
+    virtual s32     GetEventId(const char * event);
 
     virtual bool    HasListener(const char * event);
-    virtual bool    HasListener(u32 event);
+    virtual bool    HasListener(s32 event);
 
     virtual void    ClearListeners(const char * event = NULL);
-    virtual void    ClearListeners(u32 = 0);
+    virtual void    ClearListeners(s32 = -1);
 
     virtual void    DispatchEvent(const char * event, void * data = NULL, void * sender = NULL, void * target = NULL);
-    virtual void    DispatchEvent(u32 event, void * data = NULL, void * sender = NULL, void * target = NULL);
+    virtual void    DispatchEvent(s32 event, void * data = NULL, void * sender = NULL, void * target = NULL);
+
+protected:
+
+    struct DispatcherEvent
+    {
+        FutureArray<FutureEventListener>    m_listeners;
+        const char *                        m_name;
+    };
+
+    FutureArray<DispatcherEvent>            m_events;
 };
 
 #endif

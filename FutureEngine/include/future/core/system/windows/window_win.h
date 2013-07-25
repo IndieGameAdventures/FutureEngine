@@ -19,32 +19,45 @@
 */
 
 /*
-*	The main game system, this handles start up and shut down of the entire system
-*	
+*	Window class used by Windows 7 and Windows 8 Desktop
 */
 
-#ifndef FUTURE_CORE_SYSTEM_GRAPHICS_WINDOW_H
-#define FUTURE_CORE_SYSTEM_GRAPHICS_WINDOW_H
+#ifndef FUTURE_CORE_SYSTEM_WINDOW_IMPL_H
+#define FUTURE_CORE_SYSTEM_WINDOW_IMPL_H
 
 #include <future/core/type/type.h>
+#include <future/core/system/window.h>
 
-struct FutureWindowInfo
-{
-    u32         m_width;
-    u32         m_height;
-    string      m_name;
-    bool        m_fullScreen;
-};
+#if !FUTURE_PLATFORM_WINDOWS
+#	error This file should only be included on Windows
+#endif
 
-class IFutureWindow : public FutureManagedObject
+#define WINDOWS_LEAN_AND_MEAN
+#include <windows.h>
+
+class FutureWindow : public IFutureWindow
 {
 public:
-	virtual ~IFutureWindow(){}
+	FutureWindow();
+	virtual ~FutureWindow();
 	
-	virtual void CreateWindow(const FutureWindowInfo & info) = 0;
+	virtual void CreateWindow(const FutureWindowInfo & info);
     virtual void DestroyWindow();
     
-	virtual void GetInfo(FutureWindowInfo & info) = 0;
+	virtual void GetInfo(FutureWindowInfo & info);
+
+	void		SetInstance(HINSTANCE inst);
+	void		SetWindProc(WNDPROC proc);
+
+	HINSTANCE	GetInstance();
+	HWND		GetWindow();
+
+protected:
+
+	FutureWindowInfo	m_info;
+	HINSTANCE			m_instance;
+	HWND				m_window;
+	WNDPROC 			m_proc;
 };
 
 #endif

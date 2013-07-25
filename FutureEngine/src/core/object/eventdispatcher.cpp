@@ -21,26 +21,95 @@
 /*	
 *	Implementation of FutureEventDispatcher
 */
+
 #include <future/core/debug/debug.h>
 
-FutureEventDispatcher();
-virtual ~FutureEventDispatcher();
+FutureEventDispatcher::FutureEventDispatcher()
+	: m_events()
+{}
 
-typedef bool (*FutureEventListener)(const FutureEvent);
+FutureEventDispatcher::~FutureEventDispatcher()
+{
+	for(u32 i = 0; i < m_events.Length(); ++i)
+	{
+		m_events[i].m_listeners.Clear();
+	}
+	m_events.Clear();
+}
 
-virtual void    AddEventListener(const char * event, FutureEventListener listener, u32 priority = 0);
-virtual void    RemoveEventListener(const char * event, FutureEventListener listener, u32 priority = 0);
 
-virtual void    AddEventListener(u32 event, FutureEventListener listener, u32 priority = 0);
-virtual void    RemoveEventListener(u32 event, FutureEventListener listener, u32 priority = 0);
+void    FutureEventDispatcher::AddEventListener(const char * event, FutureEventListener listener)
+{
+	AddEventListener(GetEventId(event), listener);
+}
 
-virtual u32     GetEventId(const char * event);
+void    FutureEventDispatcher::RemoveEventListener(const char * event, FutureEventListener listener)
+{
+	RemoveEventListener(GetEventId(event), listener);
+}
 
-virtual bool    HasListener(const char * event);
-virtual bool    HasListener(u32 event);
+void    FutureEventDispatcher::AddEventListener(s32 event, FutureEventListener listener)
+{
+	m_events[event].m_listeners.Add(listener);
+}
+void    FutureEventDispatcher::RemoveEventListener(s32 event, FutureEventListener listener)
+{
+	m_events[event].m_listeners.Remove(listener);
+}
 
-virtual void    ClearListeners(const char * event = NULL);
-virtual void    ClearListeners(u32 = 0);
+s32     FutureEventDispatcher::AddEvent(const char * event)
+{
+	DispatchEvent e = DispatchEvent();
+	e.m_name = strcpy(event);
+	m_events.Add(e);
+	return m_events.Length();
+}
+s32     FutureEventDispatcher::GetEventId(const char * event)
+{
+	for(s32 i = 0; i < m_events.Length(); ++i)
+	{
+		if(strcmp(m_events[i].m_name, event) == 0)
+		{
+			return i;
+		}
+	}
+	return AddEvent(event);
+}
 
-virtual void    DispatchEvent(const char * event, void * data = NULL, void * sender = NULL, void * target = NULL);
-virtual void    DispatchEvent(u32 event, void * data = NULL, void * sender = NULL, void * target = NULL);
+bool   	FutureEventDispatcher::HasListener(const char * event)
+{
+	return HasListener(GetEventId(event));
+}
+bool    FutureEventDispatcher::HasListener(s32 event)
+{
+	return m_events[event].m_listeners.Length() > 0;
+}
+
+void    FutureEventDispatcher::ClearListeners(const char * event)
+{
+	ClearListeners(GetEventId(event));
+}
+void    FutureEventDispatcher::ClearListeners(s32 event)
+{
+	m_events[event].m_listeners.Clear();
+}
+
+void    FutureEventDispatcher::DispatchEvent(const char * event, void * data, void * sender, void * target)
+{
+	DispatchEvent(GetEventId(event), data, sender, target);
+}
+void    FutureEventDispatcher::DispatchEvent(s32 event, void * data, void * sender, void * target)
+{
+	FutureEvent e = FutureEvent();
+	e.m_name = strcpy(m_events[event].m_name;
+    e.m_id = event;
+    e.m_time = FutureTimer::CurrentTime();
+    e.m_data = m_data;
+    e.m_sender = (sender != NULL ? sender : this);
+    e.m_target = target;
+
+    for(s32 i = 0; i < m_events[event].m_listeners.Length(); ++i)
+    {
+    	m_events[event].m_listeners[i](e);
+    }
+}
