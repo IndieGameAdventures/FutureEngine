@@ -142,6 +142,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\future\graphics\directx\dxbuffers.h" />
+    <ClInclude Include="..\..\include\future\graphics\directx\dximage.h" />
+    <ClInclude Include="..\..\include\future\graphics\directx\dxsettings.h" />
+    <ClInclude Include="..\..\include\future\graphics\directx\dxshader.h" />
+    <ClInclude Include="..\..\include\future\graphics\directx\dxsystem.h" />
+    <ClInclude Include="..\..\include\future\graphics\directx\dxtexture.h" />
+    <ClInclude Include="..\..\include\future\graphics\directx\dxtypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
