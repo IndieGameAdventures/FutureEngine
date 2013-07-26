@@ -27,51 +27,71 @@
 #define FUTURE_CORE_SYSTEM_H
 
 #include <future/core/type/type.h>
+#include <future/core/object/managedobject.h>
 
 class FutureSystemController;
 
 enum FutureSystemType
 {
-	FutureSystemType_AI,
-	FutureSystemType_Animation,
-	FutureSystemType_Game,
-	FutureSystemType_Graphics,
 	FutureSystemType_Network,
-	FutureSystemType_Particles,
+	FutureSystemType_AI,
 	FutureSystemType_Physics,
+	FutureSystemType_Animation,
+	FutureSystemType_Particles,
+	FutureSystemType_Graphics,
 	FutureSystemType_Sound,
+	FutureSystemType_Game,
 
 	FutureSystemType_Custom,
 
 	FutureSystemType_Max,
 };
 
-class FutureSystemBase
+class FutureSystemBase : public FutureManagedObject
 {
 public:
 	FutureSystemBase();
 	virtual ~FutureSystemBase();
 	
-	virtual void		SetNeedsUpdate(bool update);
+	virtual void		SetNeedsPreSync(bool needs);
+	virtual bool		GetNeedsPreSync();
+
+	virtual void		SetNeedsUpdate(bool needs);
 	virtual bool		GetNeedsUpdate();
+
+	virtual void		SetNeedsPostSync(bool needs);
+	virtual bool		GetNeedsPostSync();
 
 	FutureSystemType	GetSystemType();
 	bool				IsSystemActive();
+	bool				IsSystemInSync();
+	bool				IsSystemRunning();
+
+	void				PreSyncSystem();
+	void				UpdateSystem();
+	void				PostSyncSystem();
 
 protected:
 	friend class FutureSystemController;
 
-	void			UpdateSystem(f32 time);
 
-	virtual void	StartSystem();
-	virtual void	ShutdownSystem();
+	virtual void		StartSystem();
+	virtual void		ShutdownSystem();
 	
-	virtual void	OnUpdateSystem(f32 time);
+	virtual void		OnPreSyncSystem(f32 deltaTime) = 0;
+	virtual void		OnUpdateSystem(f32 deltaTime) = 0;
+	virtual void		OnPostSyncSystem(f32 deltaTime) = 0;
 
+	bool				m_needsPreSync;
 	bool				m_needsUpdate;
+	bool				m_needsPostSync;
+
 	f32					m_systemTime;
 	FutureSystemType	m_systemType;
+
+	bool				m_isSystemInSync;
 	bool				m_isSystemActive;
+	bool				m_isSystemRunning;
 };
 
 #endif

@@ -99,8 +99,9 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>FutureCore.lib;FutureGame.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <EntryPointSymbol>main</EntryPointSymbol>
+      <AdditionalDependencies>FutureCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>WinMain</EntryPointSymbol>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Android Debug|Win32'">

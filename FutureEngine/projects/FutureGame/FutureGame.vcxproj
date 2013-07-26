@@ -149,13 +149,6 @@
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\include\future\game\system\system.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\src\game\system\platform\system_win32.cpp" />
-    <ClCompile Include="..\..\src\game\system\system.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

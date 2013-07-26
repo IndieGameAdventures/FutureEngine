@@ -62,8 +62,13 @@ protected:
 
     struct DispatcherEvent
     {
+		DispatcherEvent()
+			: m_listeners(),
+			  m_name(NULL)
+		{}
+
         FutureArray<FutureEventListener>    m_listeners;
-        const char *                        m_name;
+        char *			                    m_name;
     };
 
     FutureArray<DispatcherEvent>            m_events;

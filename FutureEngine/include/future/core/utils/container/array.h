@@ -85,11 +85,11 @@ public:
 	// Adds the given element p_c times to the end of the array
 	void Fill(const T & t, u32 count);
 
+	FutureArray(const FutureArray & a);
+	void operator=(const FutureArray & a);
+
 protected:
 
-	// Arrays do not support direct assignment.
-	FutureArray(const FutureArray & a);
-	void operator=( const FutureArray & a);
 	
 	void AddNoLock(const T & t);
 	void EnsureSizeNoLock(u32 count);

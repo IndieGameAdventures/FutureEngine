@@ -29,75 +29,45 @@
 #include <future/core/system/system.h>
 #include <future/core/utils/container/array.h>
 
-enum FutureSystemMessage
-{
-	FutureSystemMessage_None,
-	FutureSystemMessage_WindowCreated,
-	FutureSystemMessage_WindowDestroyed,
-	FutureSystemMessage_WindowResized,
-	
-	FutureSystemMessage_ForceRedraw,
-	FutureSystemMessage_ContentRectChanged,
-
-	FutureSystemMessage_FocusGained,
-	FutureSystemMessage_FocusLost,
-
-    FutureSystemMessage_ConfigChanged,
-
-	FutureSystemMessage_LowMemory,
-
-	FutureSystemMessage_AppStart,
-	FutureSystemMessage_AppStop,
-	FutureSystemMessage_AppPause,
-	FutureSystemMessage_AppResume,
-	FutureSystemMessage_AppDestroy,
-
-	FutureSystemMessage_SaveState,
-
-	FutureSystemMessage_Max,
-};
-
-
 class FutureSystemController
 {
-public:
-	inline static FutureSystemController* GetInstance()
-	{
-		return ms_instance;
-	}
-
-	static void CreateInstance()
-	{
-		FUTURE_ASSERT(ms_instance == NULL);
-		ms_instance = new FutureSystemController();
-	}
-
-	static void DestroyInstance()
-	{
-		FUTURE_ASSERT(ms_instance != NULL);
-		delete ms_instance;
-		ms_instance = NULL;
-	}
-
 public:
 
 	void	Initialize();
 	void	Shutdown();
 
-	void	RunMainLoop();
+	void	PreSynchronizeAll();
+	void	PreSynchronizeOne(FutureSystemType type);
+	void	PreSynchronizeCore();
+	void	PreSynchronizeCustom();
+
+	void	UpdateAll();
+	void	UpdateOne(FutureSystemType type);
+	void	UpdateCore();
+	void	UpdateCustom();
+
+	void	PostSynchronizeAll();
+	void	PostSynchronizeOne(FutureSystemType type);
+	void	PostSynchronizeCore();
+	void	PostSynchronizeCustom();
 
 	void	SetCoreSystem(FutureSystemType type, FutureSystemBase * system);
+	bool	HasCoreSystem(FutureSystemType);
+
+	u32		NumCustomSystems();
 	void	AddCustomSystem(FutureSystemBase * system);
 
 protected:
+	friend class FutureApplication;
+
 	FutureSystemController();
 	~FutureSystemController();
 
-	static FutureSystemController * ms_instance;
+	FutureSystemBase *				m_systems[FutureSystemType_Max];
+	FutureArray<FutureSystemBase*>	m_customSystems;
 
-	FutureSystemBase m_systems[FutureSystemType_Max];
+	bool							m_isInitialized;
 };
 
-extern void FutureMain();
 
 #endif

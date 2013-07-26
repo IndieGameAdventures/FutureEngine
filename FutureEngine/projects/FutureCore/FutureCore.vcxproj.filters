@@ -49,6 +49,9 @@
     <Filter Include="System\Graphics">
       <UniqueIdentifier>{75ff8676-e8f5-45a5-ade5-ae356e467fc0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="System\Windows">
+      <UniqueIdentifier>{d9edefaa-6868-4f72-a3a1-13e10fe6a1fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\future\core\memory\tracker\memorytracker.h">
@@ -159,6 +162,39 @@
     <ClInclude Include="..\..\include\future\core\system\graphics\graphicssystem.h">
       <Filter>System\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\future\core\object\eventdispatcher.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\system\window.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\system\application.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\system\graphics\graphicsshader.h">
+      <Filter>System\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\system\graphics\graphicstexture.h">
+      <Filter>System\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\system\graphics\graphicstypes.h">
+      <Filter>System\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\system\graphics\graphicsbuffers.h">
+      <Filter>System\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\system\graphics\graphicsimage.h">
+      <Filter>System\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\system\graphics\graphicssettings.h">
+      <Filter>System\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\system\windows\application_win.h">
+      <Filter>System\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\system\windows\window_win.h">
+      <Filter>System\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\core\memory\tracker\memorytracker.cpp">
@@ -214,6 +250,24 @@
     </ClCompile>
     <ClCompile Include="..\..\src\core\utils\string.cpp">
       <Filter>Utils\String</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\object\eventdispatcher.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\system\system.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\system\systemcontroller.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\system\windows\application_win.cpp">
+      <Filter>System\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\system\windows\window_win.cpp">
+      <Filter>System\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\core\system\application.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

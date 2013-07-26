@@ -41,8 +41,8 @@ public:
 	FutureWindow();
 	virtual ~FutureWindow();
 	
-	virtual void CreateWindow(const FutureWindowInfo & info);
-    virtual void DestroyWindow();
+	virtual void Create(const FutureWindowInfo & info);
+    virtual void Destroy();
     
 	virtual void GetInfo(FutureWindowInfo & info);
 

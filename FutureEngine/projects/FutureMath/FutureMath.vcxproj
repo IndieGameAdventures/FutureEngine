@@ -18,6 +18,48 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\future\math\altivec\common_altivec.h" />
+    <ClInclude Include="..\..\include\future\math\altivec\vec4_altivec.h" />
+    <ClInclude Include="..\..\include\future\math\common.h" />
+    <ClInclude Include="..\..\include\future\math\float\common_float.h" />
+    <ClInclude Include="..\..\include\future\math\float\vec4_float.h" />
+    <ClInclude Include="..\..\include\future\math\matrix.h" />
+    <ClInclude Include="..\..\include\future\math\neon\common_neon.h" />
+    <ClInclude Include="..\..\include\future\math\neon\vec4_neon.h" />
+    <ClInclude Include="..\..\include\future\math\quat.h" />
+    <ClInclude Include="..\..\include\future\math\scalar.h" />
+    <ClInclude Include="..\..\include\future\math\sse\common_sse.h" />
+    <ClInclude Include="..\..\include\future\math\sse\vec4_sse.h" />
+    <ClInclude Include="..\..\include\future\math\type\type.h" />
+    <ClInclude Include="..\..\include\future\math\vector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\include\future\math\altivec\matrix_altivec.inl" />
+    <None Include="..\..\include\future\math\altivec\quat_altivec.inl" />
+    <None Include="..\..\include\future\math\altivec\scalar_altivec.inl" />
+    <None Include="..\..\include\future\math\altivec\vector2_altivec.inl" />
+    <None Include="..\..\include\future\math\altivec\vector3_altivec.inl" />
+    <None Include="..\..\include\future\math\altivec\vector4_altivec.inl" />
+    <None Include="..\..\include\future\math\float\matrix_float.inl" />
+    <None Include="..\..\include\future\math\float\quat_float.inl" />
+    <None Include="..\..\include\future\math\float\scalar_float.inl" />
+    <None Include="..\..\include\future\math\float\vector2_float.inl" />
+    <None Include="..\..\include\future\math\float\vector3_float.inl" />
+    <None Include="..\..\include\future\math\float\vector4_float.inl" />
+    <None Include="..\..\include\future\math\neon\matrix_neon.inl" />
+    <None Include="..\..\include\future\math\neon\quat_neon.inl" />
+    <None Include="..\..\include\future\math\neon\scalar_neon.inl" />
+    <None Include="..\..\include\future\math\neon\vector2_neon.inl" />
+    <None Include="..\..\include\future\math\neon\vector3_neon.inl" />
+    <None Include="..\..\include\future\math\neon\vector4_neon.inl" />
+    <None Include="..\..\include\future\math\sse\matrix_sse.inl" />
+    <None Include="..\..\include\future\math\sse\quat_sse.inl" />
+    <None Include="..\..\include\future\math\sse\scalar_sse.inl" />
+    <None Include="..\..\include\future\math\sse\vector2_sse.inl" />
+    <None Include="..\..\include\future\math\sse\vector3_sse.inl" />
+    <None Include="..\..\include\future\math\sse\vector4_sse.inl" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{32421905-B1E4-4EBA-92CA-A1133782D316}</ProjectGuid>
     <RootNamespace>FutureCore</RootNamespace>
@@ -141,21 +183,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\include\future\math\scalar.h" />
-    <ClInclude Include="..\..\include\future\math\type\vec4.h" />
-    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_altivec.h" />
-    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_float.h" />
-    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_neon.h" />
-    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_sse.h" />
-    <ClInclude Include="..\..\include\future\math\vector.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\include\future\math\vectors\scalar.inl" />
-    <None Include="..\..\include\future\math\vectors\vector2.inl" />
-    <None Include="..\..\include\future\math\vectors\vector3.inl" />
-    <None Include="..\..\include\future\math\vectors\vector4.inl" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

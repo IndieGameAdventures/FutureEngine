@@ -24,7 +24,7 @@
 */
 
 
-#include <future/core/system/windows/window.h>
+#include <future/core/system/windows/window_win.h>
 
 FutureWindow::FutureWindow()
 	: m_info(),
@@ -35,10 +35,10 @@ FutureWindow::FutureWindow()
 
 FutureWindow::~FutureWindow()
 {
-	DestroyWindow();
+	Destroy();
 }
 
-void FutureWindow::CreateWindow(const FutureWindowInfo & info)
+void FutureWindow::Create(const FutureWindowInfo & info)
 {
 	FUTURE_ASSERT(!m_window);
 	
@@ -62,23 +62,26 @@ void FutureWindow::CreateWindow(const FutureWindowInfo & info)
     wcex.lpszClassName  = "FutureWindowClassEX";
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
 
-    FUTURE_ASSERT_CRIT(RegisterClassEx(&wcex));
+    FUTURE_ASSERT_CRIT(RegisterClassEx(&wcex), 4869);
+
+	RECT rect = {0, 0, m_info.m_width, m_info.m_height};
+	AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
 
    	m_window = CreateWindow(
         "FutureWindowClassEX",
         m_info.m_name, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT,
-        m_info.m_width, m_info.m_height,
+        rect.right - rect.left, rect.bottom - rect.top,
         NULL, NULL, m_instance, NULL
     );
 
-    FUTURE_ASSERT_CRIT(m_window);
+    FUTURE_ASSERT_CRIT(m_window, 4879);
 
     ShowWindow(m_window, SW_SHOW);
     UpdateWindow(m_window);
 }
 
-void FutureWindow::DestroyWindow()
+void FutureWindow::Destroy()
 {
 	if(m_window)
 	{

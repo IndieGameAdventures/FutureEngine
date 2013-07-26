@@ -19,33 +19,40 @@
 */
 
 /*
-*	Entry point on windows machines
+*	The main game system, this handles start up and shut down of the entire engine
 */
 
-#include <future/core/type/type.h>
-#include <future/game/system/system.h>
+#include <future/core/debug/debug.h>
+#include <future/core/system/window.h>
+#include <future/core/system/application.h>
 
-#include <Windows.h>
-
-
-int main(char ** args)
+void FutureApplication::Initialize()
 {
-	FutureMain();
-    return 0;//futureWinMSG.wParam;
+	FUTURE_ASSERT(m_systemController);
+	m_systemController->Initialize();
 }
 
-MSG futureWinMSG;
-
-FutureSystemMessage FutureGameSystemGetNextMessage()
+void FutureApplication::Shutdown()
 {
-	if(PeekMessage(&futureWinMSG, NULL, NULL, NULL, PM_REMOVE))
-	{
-	}
-	return FutureSystemMessage::FutureSystemMessage_None;
+	FUTURE_ASSERT(m_systemController);
+	m_systemController->Shutdown();
 }
 
-void FutureGameSystemProcessMessage()
+
+FutureSystemController * FutureApplication::GetSystemController()
 {
-	TranslateMessage( &futureWinMSG );
-	DispatchMessage( &futureWinMSG );
+	return m_systemController;
+}
+
+
+FutureApplication::FutureApplication()
+{
+	ms_instance = this;
+	m_systemController = new FutureSystemController();
+}
+
+FutureApplication::~FutureApplication()
+{
+	delete m_systemController;
+	m_systemController = NULL;
 }

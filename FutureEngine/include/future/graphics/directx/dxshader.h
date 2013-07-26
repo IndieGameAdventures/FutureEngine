@@ -23,51 +23,33 @@
 *	
 */
 
-#ifndef FUTURE_GAME_SYSTEM_H
-#define FUTURE_GAME_SYSTEM_H
+#ifndef FUTURE_CORE_SYSTEM_GRAPHICS_H
+#define FUTURE_CORE_SYSTEM_GRAPHICS_H
 
-#include <future/core/type/type.h>
+#include <future/core/system/graphics/graphicstypes.h>
+#include <future/core/system/graphics/graphicstexture.h>
+#include <future/core/system/graphics/graphicssettings.h>
+#include <future/core/system/graphics/graphicsbuffers.h>
 
-enum FutureSystemMessage
+enum FutureShaderType
 {
-	FutureSystemMessage_None,
-	FutureSystemMessage_WindowCreated,
-	FutureSystemMessage_WindowDestroyed,
-	FutureSystemMessage_WindowsResized,
-	
-	FutureSystemMessage_ForceRedraw,
-	FutureSystemMessage_ContentRectChanged,
-
-	FutureSystemMessage_FocusGained,
-	FutureSystemMessage_FocusLost,
-
-    FutureSystemMessage_ConfigChanged,
-
-	FutureSystemMessage_LowMemory,
-
-	FutureSystemMessage_AppStart,
-	FutureSystemMessage_AppStop,
-	FutureSystemMessage_AppPause,
-	FutureSystemMessage_AppResume,
-	FutureSystemMessage_AppDestroy,
-
-	FutureSystemMessage_SaveState,
-
-	FutureSystemMessage_Max,
+    FutureShaderType_Vertex,
+    FutureShaderType_PreTesslation,
+    FutureShaderType_PostTesslation,
+    FutureShaderType_Geometry,
+    FutureShaderType_Pixel,
+    FutureShaderType_Compute,
 };
 
+class IFutureShaderEffect : public FutureManagedObject
+{
+    
+};
 
-class FutureGameSystem
+class IFutureShader : public FutureManagedObject, public IFutureHardwareObject
 {
 public:
-	static void StartUpAllSystems();
-	static void ShutDownAllSystems();
 
-protected:
-	FutureGameSystem(){};
-	~FutureGameSystem(){};
 };
-
-extern void FutureMain();
 
 #endif

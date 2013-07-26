@@ -23,6 +23,9 @@
 */
 
 #include <future/core/debug/debug.h>
+#include <future/core/object/eventdispatcher.h>
+#include <future/core/utils/futurestring.h>
+#include <future/core/utils/timer/timer.h>
 
 FutureEventDispatcher::FutureEventDispatcher()
 	: m_events()
@@ -30,7 +33,7 @@ FutureEventDispatcher::FutureEventDispatcher()
 
 FutureEventDispatcher::~FutureEventDispatcher()
 {
-	for(u32 i = 0; i < m_events.Length(); ++i)
+	for(u32 i = 0; i < m_events.Size(); ++i)
 	{
 		m_events[i].m_listeners.Clear();
 	}
@@ -59,14 +62,16 @@ void    FutureEventDispatcher::RemoveEventListener(s32 event, FutureEventListene
 
 s32     FutureEventDispatcher::AddEvent(const char * event)
 {
-	DispatchEvent e = DispatchEvent();
-	e.m_name = strcpy(event);
+	DispatcherEvent e = DispatcherEvent();
+	size_t size = strlen(event) + 1;
+	e.m_name = new char[size];
+	FUTURE_ASSERT(strcpy_s(e.m_name, size, event) != size_t(-1));
 	m_events.Add(e);
-	return m_events.Length();
+	return m_events.Size();
 }
 s32     FutureEventDispatcher::GetEventId(const char * event)
 {
-	for(s32 i = 0; i < m_events.Length(); ++i)
+	for(u32 i = 0; i < m_events.Size(); ++i)
 	{
 		if(strcmp(m_events[i].m_name, event) == 0)
 		{
@@ -82,7 +87,7 @@ bool   	FutureEventDispatcher::HasListener(const char * event)
 }
 bool    FutureEventDispatcher::HasListener(s32 event)
 {
-	return m_events[event].m_listeners.Length() > 0;
+	return m_events[event].m_listeners.Size() > 0;
 }
 
 void    FutureEventDispatcher::ClearListeners(const char * event)
@@ -101,14 +106,14 @@ void    FutureEventDispatcher::DispatchEvent(const char * event, void * data, vo
 void    FutureEventDispatcher::DispatchEvent(s32 event, void * data, void * sender, void * target)
 {
 	FutureEvent e = FutureEvent();
-	e.m_name = strcpy(m_events[event].m_name;
+	e.m_name = FutureString::WideFromChar(m_events[event].m_name);
     e.m_id = event;
     e.m_time = FutureTimer::CurrentTime();
-    e.m_data = m_data;
+    e.m_data = data;
     e.m_sender = (sender != NULL ? sender : this);
     e.m_target = target;
 
-    for(s32 i = 0; i < m_events[event].m_listeners.Length(); ++i)
+    for(u32 i = 0; i < m_events[event].m_listeners.Size(); ++i)
     {
     	m_events[event].m_listeners[i](e);
     }

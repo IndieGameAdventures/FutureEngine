@@ -1,44 +1,128 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Types">
-      <UniqueIdentifier>{52188ea2-da0c-4d11-a8b2-970a582cc7fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="vector">
-      <UniqueIdentifier>{87a0f514-435c-4a57-9de0-be7d9b6060b3}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\include\future\math\type\vec4.h">
-      <Filter>Types</Filter>
-    </ClInclude>
+    <ClInclude Include="..\..\include\future\math\quat.h" />
     <ClInclude Include="..\..\include\future\math\scalar.h" />
     <ClInclude Include="..\..\include\future\math\vector.h" />
-    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_float.h">
-      <Filter>Types</Filter>
+    <ClInclude Include="..\..\include\future\math\common.h" />
+    <ClInclude Include="..\..\include\future\math\matrix.h" />
+    <ClInclude Include="..\..\include\future\math\type\type.h">
+      <Filter>Type</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_neon.h">
-      <Filter>Types</Filter>
+    <ClInclude Include="..\..\include\future\math\sse\vec4_sse.h">
+      <Filter>SSE</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_sse.h">
-      <Filter>Types</Filter>
+    <ClInclude Include="..\..\include\future\math\sse\common_sse.h">
+      <Filter>SSE</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\math\type\vec4\vec4_altivec.h">
-      <Filter>Types</Filter>
+    <ClInclude Include="..\..\include\future\math\neon\vec4_neon.h">
+      <Filter>Neon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\math\neon\common_neon.h">
+      <Filter>Neon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\math\float\vec4_float.h">
+      <Filter>Float</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\math\float\common_float.h">
+      <Filter>Float</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\math\altivec\vec4_altivec.h">
+      <Filter>Altivec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\math\altivec\common_altivec.h">
+      <Filter>Altivec</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\include\future\math\vectors\scalar.inl">
-      <Filter>vector</Filter>
+    <Filter Include="SSE">
+      <UniqueIdentifier>{a944ff1b-c9bb-44bd-8cf4-8183dd36f1d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Float">
+      <UniqueIdentifier>{37d30032-2879-4c5d-a85d-25159da77c9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Neon">
+      <UniqueIdentifier>{bbf2a39d-2db8-41d4-93f5-1f46d4a84ca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Altivec">
+      <UniqueIdentifier>{3f019cf6-a71e-4fcf-a11b-9c9f355f53fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Type">
+      <UniqueIdentifier>{227ee2be-b4c6-4125-b22d-c9a49267dfd6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\include\future\math\sse\matrix_sse.inl">
+      <Filter>SSE</Filter>
     </None>
-    <None Include="..\..\include\future\math\vectors\vector2.inl">
-      <Filter>vector</Filter>
+    <None Include="..\..\include\future\math\sse\quat_sse.inl">
+      <Filter>SSE</Filter>
     </None>
-    <None Include="..\..\include\future\math\vectors\vector3.inl">
-      <Filter>vector</Filter>
+    <None Include="..\..\include\future\math\sse\scalar_sse.inl">
+      <Filter>SSE</Filter>
     </None>
-    <None Include="..\..\include\future\math\vectors\vector4.inl">
-      <Filter>vector</Filter>
+    <None Include="..\..\include\future\math\sse\vector2_sse.inl">
+      <Filter>SSE</Filter>
+    </None>
+    <None Include="..\..\include\future\math\sse\vector3_sse.inl">
+      <Filter>SSE</Filter>
+    </None>
+    <None Include="..\..\include\future\math\sse\vector4_sse.inl">
+      <Filter>SSE</Filter>
+    </None>
+    <None Include="..\..\include\future\math\neon\scalar_neon.inl">
+      <Filter>Neon</Filter>
+    </None>
+    <None Include="..\..\include\future\math\neon\vector2_neon.inl">
+      <Filter>Neon</Filter>
+    </None>
+    <None Include="..\..\include\future\math\neon\vector3_neon.inl">
+      <Filter>Neon</Filter>
+    </None>
+    <None Include="..\..\include\future\math\neon\vector4_neon.inl">
+      <Filter>Neon</Filter>
+    </None>
+    <None Include="..\..\include\future\math\neon\matrix_neon.inl">
+      <Filter>Neon</Filter>
+    </None>
+    <None Include="..\..\include\future\math\neon\quat_neon.inl">
+      <Filter>Neon</Filter>
+    </None>
+    <None Include="..\..\include\future\math\float\quat_float.inl">
+      <Filter>Float</Filter>
+    </None>
+    <None Include="..\..\include\future\math\float\scalar_float.inl">
+      <Filter>Float</Filter>
+    </None>
+    <None Include="..\..\include\future\math\float\vector2_float.inl">
+      <Filter>Float</Filter>
+    </None>
+    <None Include="..\..\include\future\math\float\vector3_float.inl">
+      <Filter>Float</Filter>
+    </None>
+    <None Include="..\..\include\future\math\float\vector4_float.inl">
+      <Filter>Float</Filter>
+    </None>
+    <None Include="..\..\include\future\math\float\matrix_float.inl">
+      <Filter>Float</Filter>
+    </None>
+    <None Include="..\..\include\future\math\altivec\quat_altivec.inl">
+      <Filter>Altivec</Filter>
+    </None>
+    <None Include="..\..\include\future\math\altivec\scalar_altivec.inl">
+      <Filter>Altivec</Filter>
+    </None>
+    <None Include="..\..\include\future\math\altivec\vector2_altivec.inl">
+      <Filter>Altivec</Filter>
+    </None>
+    <None Include="..\..\include\future\math\altivec\vector3_altivec.inl">
+      <Filter>Altivec</Filter>
+    </None>
+    <None Include="..\..\include\future\math\altivec\vector4_altivec.inl">
+      <Filter>Altivec</Filter>
+    </None>
+    <None Include="..\..\include\future\math\altivec\matrix_altivec.inl">
+      <Filter>Altivec</Filter>
     </None>
   </ItemGroup>
 </Project>

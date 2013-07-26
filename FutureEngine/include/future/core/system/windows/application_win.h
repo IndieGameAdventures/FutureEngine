@@ -19,23 +19,43 @@
 */
 
 /*
-*	Linux entry point
+*	Application class used by Windows 7 and Windows 8 Desktop
 */
 
+#ifndef FUTURE_CORE_SYSTEM_APPLICATION_IMPL_H
+#define FUTURE_CORE_SYSTEM_APPLICATION_IMPL_H
+
 #include <future/core/type/type.h>
-#include <future/game/system/system.h>
+#include <future/core/system/windows/window_win.h>
+#include <future/core/system/application.h>
 
-int main(char ** args)
-{
-	FutureMain();
-    return 0;
-}
+#if !FUTURE_PLATFORM_WINDOWS
+#	error This file should only be included on Windows
+#endif
 
-FutureSystemMessage FutureGameSystemGetNextMessage()
-{
-	return FutureSystemMessage::Message_None;
-}
+#define WINDOWS_LEAN_AND_MEAN
+#include <windows.h>
 
-void FutureGameSystemProcessMessage()
+class FutureApplicationImpl : public FutureApplication
 {
-}
+public:
+	static void CreateInstance(HINSTANCE inst);
+	static void DestroyInstance();
+
+	FutureApplicationImpl(HINSTANCE inst);
+	virtual ~FutureApplicationImpl();
+	
+	virtual void	Initialize();
+	virtual void	Shutdown();
+
+	virtual void	RunMainLoop();
+
+protected:
+
+	FutureWindow *	m_window;
+	HINSTANCE		m_instance;
+	MSG				m_msg;
+	bool			m_running;
+};
+
+#endif

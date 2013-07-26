@@ -23,20 +23,21 @@
 *	
 */
 
-#ifndef FUTURE_CORE_SYSTEM_GRAPHICS_WINDOW_H
-#define FUTURE_CORE_SYSTEM_GRAPHICS_WINDOW_H
+#ifndef FUTURE_CORE_SYSTEM_WINDOW_H
+#define FUTURE_CORE_SYSTEM_WINDOW_H
 
 #include <future/core/type/type.h>
+#include <future/core/object/managedobject.h>
 
 struct FutureWindowInfo
 {
-    u32         m_width;
-    u32         m_height;
-    string      m_name;
-    bool        m_fullScreen;
+    u32				m_width;
+    u32				m_height;
+    const char *	m_name;
+    bool			m_fullScreen;
 
-    f32			m_dpiX;
-    f32			m_dpiY;
+    f32				m_dpiX;
+    f32				m_dpiY;
 };
 
 class IFutureWindow : public FutureManagedObject
@@ -44,8 +45,8 @@ class IFutureWindow : public FutureManagedObject
 public:
 	virtual ~IFutureWindow(){}
 	
-	virtual void CreateWindow(const FutureWindowInfo & info) = 0;
-    virtual void DestroyWindow();
+	virtual void Create(const FutureWindowInfo & info) = 0;
+    virtual void Destroy() = 0;
     
 	virtual void GetInfo(FutureWindowInfo & info) = 0;
 };

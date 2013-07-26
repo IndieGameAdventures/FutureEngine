@@ -43,6 +43,21 @@ FutureArray<T>::~FutureArray()
 		FUTURE_FREE(m_a);
 	}
 }
+template<typename T>
+FutureArray<T>::FutureArray(const FutureArray & a)
+: m_a(NULL),
+  m_size(0),
+  m_allocated(0)
+{
+	AddMultiple(a.m_a, a.Size());
+}
+	
+template<typename T>
+void FutureArray<T>::operator=(const FutureArray & a)
+{
+	Clear();
+	AddMultiple(a.m_a, a.Size());
+}
 
 template<typename T>
 inline T & FutureArray<T>::operator[](u32 i)

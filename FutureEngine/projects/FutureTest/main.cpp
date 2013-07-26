@@ -23,7 +23,9 @@
 #include <future/core/tests/memorysystemtests.hpp>
 #include <future/core/tests/threadtests.hpp>
 #include <future/core/tests/threadpooltests.hpp>
-#include <future/math/type/vec4.h>
+//#include <future/math/vector.h>
+
+#include <future/core/system/application.h>
 
 void FutureMain()
 {
@@ -39,5 +41,7 @@ void FutureMain()
 
 	//FutureThreadTests::TestThreads();
 
-	FutureThreadPoolTests::TestThreadPool();
+	//FutureThreadPoolTests::TestThreadPool();
+
+	FutureApplication::GetInstance()->RunMainLoop();
 }
