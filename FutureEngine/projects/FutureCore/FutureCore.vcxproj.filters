@@ -46,9 +46,6 @@
     <Filter Include="System">
       <UniqueIdentifier>{1a6e1d56-29d4-4bad-b2db-159e4a2715d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="System\Graphics">
-      <UniqueIdentifier>{75ff8676-e8f5-45a5-ade5-ae356e467fc0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="System\Windows">
       <UniqueIdentifier>{d9edefaa-6868-4f72-a3a1-13e10fe6a1fa}</UniqueIdentifier>
     </Filter>
@@ -159,9 +156,6 @@
     <ClInclude Include="..\..\include\future\core\system\systemcontroller.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicssystem.h">
-      <Filter>System\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\future\core\object\eventdispatcher.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -171,29 +165,17 @@
     <ClInclude Include="..\..\include\future\core\system\application.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicsshader.h">
-      <Filter>System\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicstexture.h">
-      <Filter>System\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicstypes.h">
-      <Filter>System\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicsbuffers.h">
-      <Filter>System\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicsimage.h">
-      <Filter>System\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicssettings.h">
-      <Filter>System\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\future\core\system\windows\application_win.h">
       <Filter>System\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\future\core\system\windows\window_win.h">
       <Filter>System\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\object\clonable.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\core\type\language.h">
+      <Filter>Type</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

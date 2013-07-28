@@ -26,9 +26,8 @@
 #define FUTURE_GRAPHICS_DIRECTX_TEXTURE_H
 
 #include <future/core/object/managedobject.h>
-#include <future/core/system/graphics/graphicstypes.h>
-#include <future/core/system/graphics/graphicsimage.h>
-#include <future/core/system/graphics/graphicstexture.h>
+#include <future/graphics/type/texture.h>
+#include <future/graphics/directx/dxtexture.h>
 
 #ifndef FUTURE_PLATFORM_WINDOWS
 #	error This file must only be included on Windows platforms
@@ -37,6 +36,7 @@
 class FutureDXTexture : public IFutureTexture
 {
 public:
+
 	FutureDXTexture();
 	virtual ~FutureDXTexture();
 
@@ -60,9 +60,28 @@ public:
 
 	virtual void				GetInfo(FutureTextureInfo & info);
 
+
+	virtual bool				ApplyToHardware();
+	virtual bool				RemoveFromHardware();
+	virtual bool				ReapplyToHardware();
+
+	virtual bool				IsAppliedToHardware();
+
+	virtual void				DeviceLost();
+	virtual void				DeviceFound();
+	virtual void				DevicePreReset();
+	virtual void				DeviceReset();
+	virtual void				DevicePreChange();
+	virtual void				DeviceChange();
+
 protected:
+	friend class FutureDXGraphicsSystem;
 
+	ID3D11Texture2D *			m_texture;
+	ID3D11ShaderResourceView *	m_SRView;
+	ID3D11RenderTargetView *	m_RTView;
+	ID3D11DepthStencilView *	m_DSView;
 
+	FutureTextureInfo			m_info;
 };
-
 #endif

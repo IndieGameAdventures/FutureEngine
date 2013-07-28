@@ -29,6 +29,7 @@
 #include <future/core/system/systemcontroller.h>
 #include <future/core/utils/container/array.h>
 #include <future/core/object/eventdispatcher.h>
+#include <future/core/system/window.h>
 
 enum FutureApplicationEventType
 {
@@ -147,7 +148,7 @@ public:
 	virtual void						RunMainLoop() = 0;
 
 	virtual FutureSystemController *	GetSystemController();
-
+	virtual IFutureWindow *				GetWindow() = 0;
 
 protected:
 	friend class FutureApplicationImpl;

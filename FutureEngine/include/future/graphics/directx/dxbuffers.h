@@ -22,11 +22,12 @@
 *	Hardware and software buffer interfaces used by the graphics system
 */
 
-#ifndef FUTURE_CORE_SYSTEM_GRAPHICS_BUFFERS_H
-#define FUTURE_CORE_SYSTEM_GRAPHICS_BUFFERS_H
+#ifndef FUTURE_GRAPHICS_DIRECTX_BUFFERS_H
+#define FUTURE_GRAPHICS_DIRECTX_BUFFERS_H
 
-#include <future/core/system/graphics/graphicstypes.h>
-#include <future/core/object/managedobject.h>
+#include <future/graphics/type/type.h>
+#include <future/graphics/type/buffers.h>
+#include <future/graphics/directx/dxtype.h>
 
 struct FutureHardwareBufferInfo
 {
@@ -38,21 +39,39 @@ public:
 	FutureHardwareResourceUsage	m_usage;
 };
 
-
-class IFutureHardwareBuffer : public FutureManagedObject, public IFutureHardwareObject
+struct FutureInitialBufferData
 {
-    virtual ~IFutureHardwareBuffer();
+	void *					m_initialData;
+	u32						m_size;
+	u32						m_initialStride;
+	u32						m_initialSlice;
+};
+
+
+class FutureDXHardwareBuffer : public IFutureHardwareBuffer
+{
+public:
+	FUTURE_DECLARE_MEMORY_OPERATORS(FutureDXHardwareBuffer);
+
+	FutureDXHardwareBuffer();
+	virtual ~FutureDXHardwareBuffer();
     
-	virtual void	GetInfo(FutureHardwareBufferInfo & info) = 0;
+	virtual void	GetInfo(FutureHardwareBufferInfo & info);
     
-	virtual bool	Map(void ** data) = 0;
-	virtual bool	IsMapped() = 0;
-	virtual void	UnMap() = 0;
+	virtual bool	Map(void ** data);
+	virtual bool	IsMapped();
+	virtual void	UnMap();
     
-    virtual void    Release() = 0;
+    virtual void    Release();
     
     virtual IFutureHardwareBuffer *   Clone();
     virtual IFutureHardwareBuffer *   Instance();
+
+protected:
+	friend class FutureDXSystem;
+
+	ID3D11Buffer  *				m_buffer;
+	FutureHardwareBufferInfo	m_info;
 };
 
 

@@ -153,6 +153,7 @@
     <ClInclude Include="..\..\include\future\core\memory\memory.h" />
     <ClInclude Include="..\..\include\future\core\memory\memoryStatistics.h" />
     <ClInclude Include="..\..\include\future\core\memory\tracker\memorytracker.h" />
+    <ClInclude Include="..\..\include\future\core\object\clonable.h" />
     <ClInclude Include="..\..\include\future\core\object\eventdispatcher.h" />
     <ClInclude Include="..\..\include\future\core\object\managedobject.h" />
     <ClInclude Include="..\..\include\future\core\object\threadsafeobject.h" />
@@ -160,13 +161,6 @@
     <ClInclude Include="..\..\include\future\core\object\pointer\smartpointer.h" />
     <ClInclude Include="..\..\include\future\core\object\singleton.h" />
     <ClInclude Include="..\..\include\future\core\system\application.h" />
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicsbuffers.h" />
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicsimage.h" />
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicssettings.h" />
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicsshader.h" />
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicssystem.h" />
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicstexture.h" />
-    <ClInclude Include="..\..\include\future\core\system\graphics\graphicstypes.h" />
     <ClInclude Include="..\..\include\future\core\system\system.h" />
     <ClInclude Include="..\..\include\future\core\system\systemcontroller.h" />
     <ClInclude Include="..\..\include\future\core\system\window.h" />
@@ -184,6 +178,7 @@
     <ClInclude Include="..\..\include\future\core\thread\thread\thread.h" />
     <ClInclude Include="..\..\include\future\core\thread\thread\win_thread.h" />
     <ClInclude Include="..\..\include\future\core\thread\thread\workerthread.h" />
+    <ClInclude Include="..\..\include\future\core\type\language.h" />
     <ClInclude Include="..\..\include\future\core\type\platform.h" />
     <ClInclude Include="..\..\include\future\core\type\type.h" />
     <ClInclude Include="..\..\include\future\core\utils\container\array.h" />

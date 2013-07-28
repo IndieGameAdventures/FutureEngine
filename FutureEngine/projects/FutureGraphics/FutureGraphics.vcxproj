@@ -144,11 +144,24 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\future\graphics\directx\dxbuffers.h" />
     <ClInclude Include="..\..\include\future\graphics\directx\dximage.h" />
-    <ClInclude Include="..\..\include\future\graphics\directx\dxsettings.h" />
     <ClInclude Include="..\..\include\future\graphics\directx\dxshader.h" />
     <ClInclude Include="..\..\include\future\graphics\directx\dxsystem.h" />
     <ClInclude Include="..\..\include\future\graphics\directx\dxtexture.h" />
-    <ClInclude Include="..\..\include\future\graphics\directx\dxtypes.h" />
+    <ClInclude Include="..\..\include\future\graphics\directx\dxtype.h" />
+    <ClInclude Include="..\..\include\future\graphics\type\buffers.h" />
+    <ClInclude Include="..\..\include\future\graphics\type\image.h" />
+    <ClInclude Include="..\..\include\future\graphics\type\settings.h" />
+    <ClInclude Include="..\..\include\future\graphics\type\shader.h" />
+    <ClInclude Include="..\..\include\future\graphics\type\system.h" />
+    <ClInclude Include="..\..\include\future\graphics\type\texture.h" />
+    <ClInclude Include="..\..\include\future\graphics\type\type.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\graphics\directx\dxbuffers.cpp" />
+    <ClCompile Include="..\..\src\graphics\directx\dximage.cpp" />
+    <ClCompile Include="..\..\src\graphics\directx\dxshader.cpp" />
+    <ClCompile Include="..\..\src\graphics\directx\dxsystem.cpp" />
+    <ClCompile Include="..\..\src\graphics\directx\dxtexture.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

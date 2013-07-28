@@ -49,7 +49,9 @@ public:
 	virtual void	Shutdown();
 
 	virtual void	RunMainLoop();
-
+	
+	virtual IFutureWindow *	GetWindow()
+	{return m_window;}
 protected:
 
 	FutureWindow *	m_window;

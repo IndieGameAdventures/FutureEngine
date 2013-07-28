@@ -14,13 +14,17 @@
 		30485E56179EEEE200254AED /* graphicssystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E45179EEEE200254AED /* graphicssystem.h */; };
 		30485E57179EEEE200254AED /* graphicstexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E46179EEEE200254AED /* graphicstexture.h */; };
 		30485E58179EEEE200254AED /* graphicstypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E47179EEEE200254AED /* graphicstypes.h */; };
-		30485E5A179EEEE200254AED /* graphicswindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E49179EEEE200254AED /* graphicswindow.h */; };
 		30485E5B179EEEE200254AED /* system.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E4A179EEEE200254AED /* system.h */; };
 		30485E5C179EEEE200254AED /* systemcontroller.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E4B179EEEE200254AED /* systemcontroller.h */; };
 		30485E5E179F50B800254AED /* eventdispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E5D179F50B800254AED /* eventdispatcher.h */; };
 		30485E60179F50C600254AED /* event.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E5F179F50C600254AED /* event.h */; };
 		30485E62179F50FD00254AED /* eventdispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30485E61179F50FD00254AED /* eventdispatcher.cpp */; };
 		30485E63179F50FD00254AED /* eventdispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30485E61179F50FD00254AED /* eventdispatcher.cpp */; };
+		30485E9517A2E51900254AED /* AppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E9217A2E51900254AED /* AppDelegate.h */; };
+		30485E9617A2E51900254AED /* application_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E9317A2E51900254AED /* application_mac.h */; };
+		30485E9717A2E51900254AED /* window_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 30485E9417A2E51900254AED /* window_mac.h */; };
+		30485E9A17A2E95400254AED /* application_mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30485E9817A2E95400254AED /* application_mac.cpp */; };
+		30485E9B17A2E95400254AED /* window_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 30485E9917A2E95400254AED /* window_mac.mm */; };
 		30FC763C179739B40032A219 /* assert.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC75FF179739B40032A219 /* assert.h */; };
 		30FC763D179739B40032A219 /* debug.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7600179739B40032A219 /* debug.h */; };
 		30FC763E179739B40032A219 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 30FC7601179739B40032A219 /* log.h */; };
@@ -117,12 +121,16 @@
 		30485E45179EEEE200254AED /* graphicssystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphicssystem.h; sourceTree = "<group>"; };
 		30485E46179EEEE200254AED /* graphicstexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphicstexture.h; sourceTree = "<group>"; };
 		30485E47179EEEE200254AED /* graphicstypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphicstypes.h; sourceTree = "<group>"; };
-		30485E49179EEEE200254AED /* graphicswindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphicswindow.h; sourceTree = "<group>"; };
 		30485E4A179EEEE200254AED /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
 		30485E4B179EEEE200254AED /* systemcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = systemcontroller.h; sourceTree = "<group>"; };
 		30485E5D179F50B800254AED /* eventdispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eventdispatcher.h; sourceTree = "<group>"; };
 		30485E5F179F50C600254AED /* event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = event.h; sourceTree = "<group>"; };
 		30485E61179F50FD00254AED /* eventdispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = eventdispatcher.cpp; path = ../../../../src/core/object/eventdispatcher.cpp; sourceTree = "<group>"; };
+		30485E9217A2E51900254AED /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		30485E9317A2E51900254AED /* application_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = application_mac.h; sourceTree = "<group>"; };
+		30485E9417A2E51900254AED /* window_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = window_mac.h; sourceTree = "<group>"; };
+		30485E9817A2E95400254AED /* application_mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = application_mac.cpp; path = ../../../../../src/core/system/mac/application_mac.cpp; sourceTree = "<group>"; };
+		30485E9917A2E95400254AED /* window_mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = window_mac.mm; path = ../../../../../src/core/system/mac/window_mac.mm; sourceTree = "<group>"; };
 		30FC75F7179738AC0032A219 /* FutureCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = FutureCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FC75FF179739B40032A219 /* assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assert.h; sourceTree = "<group>"; };
 		30FC7600179739B40032A219 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = debug.h; path = ../../include/future/core/debug/debug.h; sourceTree = SOURCE_ROOT; };
@@ -210,6 +218,7 @@
 		30485E39179EEEE200254AED /* system */ = {
 			isa = PBXGroup;
 			children = (
+				30485E9117A2E51900254AED /* mac */,
 				30485E3A179EEEE200254AED /* graphics */,
 				30485E4A179EEEE200254AED /* system.h */,
 				30485E4B179EEEE200254AED /* systemcontroller.h */,
@@ -228,9 +237,20 @@
 				30485E45179EEEE200254AED /* graphicssystem.h */,
 				30485E46179EEEE200254AED /* graphicstexture.h */,
 				30485E47179EEEE200254AED /* graphicstypes.h */,
-				30485E49179EEEE200254AED /* graphicswindow.h */,
 			);
 			path = graphics;
+			sourceTree = "<group>";
+		};
+		30485E9117A2E51900254AED /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				30485E9817A2E95400254AED /* application_mac.cpp */,
+				30485E9917A2E95400254AED /* window_mac.mm */,
+				30485E9217A2E51900254AED /* AppDelegate.h */,
+				30485E9317A2E51900254AED /* application_mac.h */,
+				30485E9417A2E51900254AED /* window_mac.h */,
+			);
+			path = mac;
 			sourceTree = "<group>";
 		};
 		30FC75EE179738AC0032A219 = {
@@ -497,11 +517,13 @@
 				30485E56179EEEE200254AED /* graphicssystem.h in Headers */,
 				30485E57179EEEE200254AED /* graphicstexture.h in Headers */,
 				30485E58179EEEE200254AED /* graphicstypes.h in Headers */,
-				30485E5A179EEEE200254AED /* graphicswindow.h in Headers */,
 				30485E5B179EEEE200254AED /* system.h in Headers */,
 				30485E5C179EEEE200254AED /* systemcontroller.h in Headers */,
 				30485E5E179F50B800254AED /* eventdispatcher.h in Headers */,
 				30485E60179F50C600254AED /* event.h in Headers */,
+				30485E9517A2E51900254AED /* AppDelegate.h in Headers */,
+				30485E9617A2E51900254AED /* application_mac.h in Headers */,
+				30485E9717A2E51900254AED /* window_mac.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +617,8 @@
 				30FC769717973A090032A219 /* timer.cpp in Sources */,
 				30FC773A1799D8460032A219 /* FutureCoreIos.m in Sources */,
 				30485E62179F50FD00254AED /* eventdispatcher.cpp in Sources */,
+				30485E9A17A2E95400254AED /* application_mac.cpp in Sources */,
+				30485E9B17A2E95400254AED /* window_mac.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

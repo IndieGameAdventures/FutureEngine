@@ -23,30 +23,13 @@
 *	
 */
 
-#ifndef FUTURE_CORE_SYSTEM_GRAPHICS_H
-#define FUTURE_CORE_SYSTEM_GRAPHICS_H
+#ifndef FUTURE_GRAPHICS_DIRECTX_SHADER_H
+#define FUTURE_GRAPHICS_DIRECTX_SHADER_H
 
-#include <future/core/system/graphics/graphicstypes.h>
-#include <future/core/system/graphics/graphicstexture.h>
-#include <future/core/system/graphics/graphicssettings.h>
-#include <future/core/system/graphics/graphicsbuffers.h>
+#include <future/graphics/directx/dxtype.h>
+#include <future/graphics/type/type.h>
 
-enum FutureShaderType
-{
-    FutureShaderType_Vertex,
-    FutureShaderType_PreTesslation,
-    FutureShaderType_PostTesslation,
-    FutureShaderType_Geometry,
-    FutureShaderType_Pixel,
-    FutureShaderType_Compute,
-};
-
-class IFutureShaderEffect : public FutureManagedObject
-{
-    
-};
-
-class IFutureShader : public FutureManagedObject, public IFutureHardwareObject
+class FutureDXShader : public IFutureShader
 {
 public:
 
