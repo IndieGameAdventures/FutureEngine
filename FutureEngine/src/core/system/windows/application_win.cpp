@@ -32,10 +32,12 @@ int WINAPI WinMain (_In_ HINSTANCE hInstance,
 					_In_ int nShowCmd
 					)
 {
+	FutureMemory::CreateMemory();
 	FutureApplicationImpl::CreateInstance(hInstance);
 	FutureMain();
 	FutureApplicationImpl::GetInstance()->Shutdown();
 	FutureApplicationImpl::DestroyInstance();
+	FutureMemory::DestroyMemory();
     return 0;//futureWinMSG.wParam;
 }
 
@@ -70,15 +72,6 @@ FutureApplicationImpl::FutureApplicationImpl(HINSTANCE inst)
 	: FutureApplication(),
 	  m_instance(inst)
 {
-	m_window = new FutureWindow();
-	FutureWindowInfo info;
-	info.m_fullScreen = false;
-	info.m_height = 480;
-	info.m_width = 640;
-	info.m_name = "Future Test Window";
-	m_window->SetInstance(m_instance);
-	m_window->SetWindProc(WndProc);
-	m_window->Create(info);
 }
 
 FutureApplicationImpl::~FutureApplicationImpl()
@@ -91,9 +84,21 @@ FutureApplicationImpl::~FutureApplicationImpl()
 	}
 }
 	
-void	FutureApplicationImpl::Initialize()
+void	FutureApplicationImpl::Initialize(u32 versionCode)
 {
-	FutureApplication::Initialize();
+	FUTURE_ASSERT_MSG(versionCode == FUTURE_VERSION_CODE, L"The Future Engine headers you are using are a different version than the libraries.");
+	
+	m_window = new FutureWindow();
+	FutureWindowInfo info;
+	info.m_fullScreen = false;
+	info.m_height = 480;
+	info.m_width = 640;
+	info.m_name = "Future Test Window";
+	m_window->SetInstance(m_instance);
+	m_window->SetWindProc(WndProc);
+	m_window->Create(info);
+
+	FutureApplication::Initialize(versionCode);
 }
 
 void	FutureApplicationImpl::Shutdown()
@@ -123,3 +128,10 @@ void	FutureApplicationImpl::RunMainLoop()
 	}
 }
 
+#include <future/graphics/directx/dxsystem.h>
+
+void FutureApplicationImpl::CreateDefaultSystems()
+{
+	FutureDXGraphicsSystem * graphics = new FutureDXGraphicsSystem();
+	m_systemController->SetCoreSystem(FutureSystemType_Graphics, graphics);
+}

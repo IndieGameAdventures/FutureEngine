@@ -31,6 +31,12 @@
 #include <future/core/type/language.h>
 #include <wchar.h>
 
+#ifndef FUTURE_VERSION_CODE
+#	define FUTURE_VERSION_MAJOR 1
+#	define FUTURE_VERSION_MINOR 0
+#	define FUTURE_VERSION_CODE (FUTURE_VERSION_MAJOR << 16) | (FUTURE_VERSION_MINOR)
+#endif
+
 #ifndef FUTURE_PRIMITIVE_DEFINITIONS
 
 	typedef unsigned char 		u8;	

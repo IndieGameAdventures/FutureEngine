@@ -29,6 +29,15 @@
 #include <future/core/object/managedobject.h>
 #include <future/core/object/clonable.h>
 
+enum FutureHardwareBufferType
+{
+	FutureHardwareBuffer_VertexBuffer	= 1,
+	FutureHardwareBuffer_IndexBuffer	= 2,
+	FutureHardwareBuffer_ConstantBuffer	= 4,
+	FutureHardwareBuffer_ShaderResource	= 8,
+	FutureHardwareBuffer_StreamOutput	= 10,
+};
+
 struct FutureHardwareBufferInfo
 {
 public:
@@ -37,6 +46,7 @@ public:
 	u32							m_stride;
     u32                         m_slice;
 	FutureHardwareResourceUsage	m_usage;
+	FutureHardwareBufferType	m_type;
 };
 
 struct FutureInitialBufferData
@@ -48,7 +58,7 @@ struct FutureInitialBufferData
 };
 
 
-class IFutureHardwareBuffer : public FutureManagedObject, public IFutureHardwareObject, public FutureClonable<IFutureHardwareBuffer>
+class IFutureHardwareBuffer : public FutureManagedObject, public IFutureHardwareObject, public IFutureDeviceCallback, public FutureClonable<IFutureHardwareBuffer>
 {
 public:
 	FUTURE_DECLARE_MEMORY_OPERATORS(IFutureHardwareBuffer);

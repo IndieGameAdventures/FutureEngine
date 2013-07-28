@@ -47,29 +47,29 @@ public:
     virtual bool    RecreateDevice(IFutureWindow * window, const FutureGraphicsDeviceCreationSettings & settings) = 0;
     virtual void    DestroyDevice() = 0;
 
-	virtual bool						HasDevice() = 0;
-	virtual void *						GetDevice() = 0;
+	virtual bool			HasDevice() = 0;
+	virtual void *			GetDevice() = 0;
 
-	virtual FutureGraphicsSettings *	GraphicsSettings() = 0; 
+	virtual	void			GetGraphicsSettings(FutureGraphicsSettings * settings) = 0; 
    
-	virtual bool						IsFeatureSupported(FutureDeviceSupport feature) = 0;
-	virtual u32							GetDeviceCapability(FutureDeviceCapabilityType feature) = 0;
+	virtual bool			IsFeatureSupported(FutureDeviceSupport feature) = 0;
+	virtual s32				GetDeviceCapability(FutureDeviceCapabilityType feature) = 0;
 
-	virtual IFutureWindow *				Window() = 0;
+	virtual IFutureWindow *	Window() = 0;
 
-	virtual void						AddDeviceCallback(IFutureDeviceCallback * deviceCallback) = 0;
-	virtual void						RemoveDeviceCallback(IFutureDeviceCallback * deviceCallback) = 0;
+	virtual void			AddDeviceCallback(IFutureDeviceCallback * deviceCallback) = 0;
+	virtual void			RemoveDeviceCallback(IFutureDeviceCallback * deviceCallback) = 0;
 
     
-    virtual s32         CreateBlendState(const FutureBlendInfo info) = 0;
+    virtual s32         CreateBlendState(const FutureBlendStateInfo info) = 0;
     virtual s32         CreateDepthStencilState(const FutureDepthStencilInfo info) = 0;
     virtual s32         CreateRasterizerState(const FutureRasterizerInfo info) = 0;
     virtual s32         CreateTextureSamplerState(const FutureTextureSamplerInfo info) = 0;
     
-    virtual bool        GetBlendStateInfo(FutureBlendInfo & info, s32 id) = 0;
-    virtual bool        GetDepthStencilStateInfo(FutureDepthStencilInfo  & info, s32 id) = 0;
-    virtual bool        GetRasterizerStateInfo(FutureRasterizerInfo & info, s32 id) = 0;
-    virtual bool        GetTextureSamplerStateInfo(FutureTextureSamplerInfo & info, s32 id) = 0;
+    virtual bool        GetBlendStateInfo(FutureBlendStateInfo * info, s32 id) = 0;
+    virtual bool        GetDepthStencilStateInfo(FutureDepthStencilInfo  * info, s32 id) = 0;
+    virtual bool        GetRasterizerStateInfo(FutureRasterizerInfo * info, s32 id) = 0;
+    virtual bool        GetTextureSamplerStateInfo(FutureTextureSamplerInfo * info, s32 id) = 0;
     
     virtual bool        CreateBuffer(const FutureHardwareBufferInfo & info, 
 									 const FutureInitialBufferData & data, 
@@ -81,9 +81,6 @@ public:
 									  const FutureInitialTextureData & data,
 									  IFutureTexture ** texture) = 0;
     virtual bool        CreateMips(IFutureTexture * texture) = 0;
-    
-    virtual bool        IsFeatureSupported(FutureDeviceSupport feature) = 0;
-    virtual u32         GetCapability(FutureDeviceCapabilityType type) = 0;
     
     virtual bool        GetViewport(FutureViewport & viewport) = 0;
     virtual bool        SetViewport(const FutureViewport & viewport) = 0;

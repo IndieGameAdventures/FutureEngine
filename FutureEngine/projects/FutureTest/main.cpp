@@ -43,5 +43,7 @@ void FutureMain()
 
 	//FutureThreadPoolTests::TestThreadPool();
 
+	FutureApplication::GetInstance()->CreateDefaultSystems();
+	FutureApplication::GetInstance()->Initialize(FUTURE_VERSION_CODE);
 	FutureApplication::GetInstance()->RunMainLoop();
 }

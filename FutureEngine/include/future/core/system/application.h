@@ -142,10 +142,12 @@ public:
 
 public:
 
-	virtual void						Initialize();
+	virtual void						Initialize(u32 versionCode);
 	virtual void						Shutdown();
 
 	virtual void						RunMainLoop() = 0;
+
+	virtual void						CreateDefaultSystems() = 0;
 
 	virtual FutureSystemController *	GetSystemController();
 	virtual IFutureWindow *				GetWindow() = 0;

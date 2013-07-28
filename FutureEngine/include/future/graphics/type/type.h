@@ -203,10 +203,6 @@ enum FutureTextureSamplerFilter
 {
     FutureTextureSamplerFilter_Nearest,
     FutureTextureSamplerFilter_Linear,
-    FutureTextureSamplerFilter_NearestMip_NearestPoint,
-    FutureTextureSamplerFilter_NearestMip_LinearPoint,
-    FutureTextureSamplerFilter_LinearMip_NearestPoint,
-    FutureTextureSamplerFilter_LinearMip_LinearPoint,
 };
 
 enum FutureTextureWrapMode
@@ -310,6 +306,7 @@ struct FutureBlendInfo
 struct FutureRenderTargetInfo
 {
     bool            m_enableBlending;
+	bool			m_writeColors[4]; // rgba
     FutureBlendInfo m_colorBlend;
     FutureBlendInfo m_alphaBlend;
 
@@ -317,7 +314,9 @@ struct FutureRenderTargetInfo
 		: m_enableBlending(false),
 		  m_colorBlend(),
 		  m_alphaBlend()
-	{}
+	{
+		m_writeColors[0] = m_writeColors[1] = m_writeColors[2] = m_writeColors[3] = true;
+	}
 };
 
 
@@ -325,10 +324,14 @@ struct FutureBlendStateInfo
 {
 	bool						m_enableAlphaToCoverage;
 	FutureRenderTargetInfo		m_renderTargets[8];
+	f32							m_blendFactors[4];
+	u32							m_sampleMask;
 
 	FutureBlendStateInfo()
-		: m_enableAlphaToCoverage(false)
+		: m_enableAlphaToCoverage(false),
+		  m_sampleMask(0xFFFFFFFF)
 	{
+		m_blendFactors[0] = m_blendFactors[1] = m_blendFactors[2] = m_blendFactors[3] = 1.0f;
 		memset(m_renderTargets, 0, sizeof(FutureRenderTargetInfo) * 8);
 		m_renderTargets[0] = FutureRenderTargetInfo();
 	}
@@ -343,6 +346,7 @@ struct FutureTextureSamplerInfo
     
     FutureTextureSamplerFilter      m_filterMin;
     FutureTextureSamplerFilter      m_filterMag;
+	FutureTextureSamplerFilter		m_filterMip;
     
     FutureTextureWrapMode           m_wrapModeU;
     FutureTextureWrapMode           m_wrapModeV;

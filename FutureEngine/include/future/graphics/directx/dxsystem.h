@@ -48,7 +48,7 @@ public:
 	virtual bool						HasDevice();
 	virtual void *						GetDevice();
 
-	virtual const FutureGraphicsSettings *	GraphicsSettings(); 
+	virtual void						GetGraphicsSettings(FutureGraphicsSettings * settings); 
    
 	virtual bool						IsFeatureSupported(FutureDeviceSupport feature);
 	virtual s32							GetDeviceCapability(FutureDeviceCapabilityType feature);
@@ -59,15 +59,15 @@ public:
 	virtual void						RemoveDeviceCallback(IFutureDeviceCallback * deviceCallback);
 
     
-    virtual s32         CreateBlendState(const FutureBlendInfo info);
+    virtual s32         CreateBlendState(const FutureBlendStateInfo info);
     virtual s32         CreateDepthStencilState(const FutureDepthStencilInfo info);
     virtual s32         CreateRasterizerState(const FutureRasterizerInfo info);
     virtual s32         CreateTextureSamplerState(const FutureTextureSamplerInfo info);
     
-    virtual bool        GetBlendStateInfo(FutureBlendInfo & info, s32 id);
-    virtual bool        GetDepthStencilStateInfo(FutureDepthStencilInfo  & info, s32 id);
-    virtual bool        GetRasterizerStateInfo(FutureRasterizerInfo & info, s32 id);
-    virtual bool        GetTextureSamplerStateInfo(FutureTextureSamplerInfo & info, s32 id);
+    virtual bool        GetBlendStateInfo(FutureBlendStateInfo * info, s32 id);
+    virtual bool        GetDepthStencilStateInfo(FutureDepthStencilInfo  * info, s32 id);
+    virtual bool        GetRasterizerStateInfo(FutureRasterizerInfo * info, s32 id);
+    virtual bool        GetTextureSamplerStateInfo(FutureTextureSamplerInfo * info, s32 id);
     
     virtual bool        CreateBuffer(const FutureHardwareBufferInfo & info, 
 									 const FutureInitialBufferData & data, 
@@ -79,9 +79,6 @@ public:
 									  const FutureInitialTextureData & data,
 									  IFutureTexture ** texture);
     virtual bool        CreateMips(IFutureTexture * texture);
-    
-    virtual bool        IsFeatureSupported(FutureDeviceSupport feature);
-    virtual u32         GetCapability(FutureDeviceCapabilityType type);
     
     virtual bool        GetViewport(FutureViewport & viewport);
     virtual bool        SetViewport(const FutureViewport & viewport);

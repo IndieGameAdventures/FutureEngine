@@ -45,10 +45,12 @@ public:
 	FutureApplicationImpl(HINSTANCE inst);
 	virtual ~FutureApplicationImpl();
 	
-	virtual void	Initialize();
+	virtual void	Initialize(u32 versionCode);
 	virtual void	Shutdown();
 
 	virtual void	RunMainLoop();
+
+	virtual void	CreateDefaultSystems();
 	
 	virtual IFutureWindow *	GetWindow()
 	{return m_window;}

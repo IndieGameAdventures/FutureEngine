@@ -29,25 +29,6 @@
 #include <future/graphics/type/buffers.h>
 #include <future/graphics/directx/dxtype.h>
 
-struct FutureHardwareBufferInfo
-{
-public:
-    u32                         m_elements;
-	u32							m_size;
-	u32							m_stride;
-    u32                         m_slice;
-	FutureHardwareResourceUsage	m_usage;
-};
-
-struct FutureInitialBufferData
-{
-	void *					m_initialData;
-	u32						m_size;
-	u32						m_initialStride;
-	u32						m_initialSlice;
-};
-
-
 class FutureDXHardwareBuffer : public IFutureHardwareBuffer
 {
 public:
@@ -66,9 +47,22 @@ public:
     
     virtual IFutureHardwareBuffer *   Clone();
     virtual IFutureHardwareBuffer *   Instance();
+	
+	virtual bool				ApplyToHardware();
+	virtual bool				RemoveFromHardware();
+	virtual bool				ReapplyToHardware();
+
+	virtual bool				IsAppliedToHardware();
+
+	virtual void				DeviceLost();
+	virtual void				DeviceFound();
+	virtual void				DevicePreReset();
+	virtual void				DeviceReset();
+	virtual void				DevicePreChange();
+	virtual void				DeviceChange();
 
 protected:
-	friend class FutureDXSystem;
+	friend class FutureDXGraphicsSystem;
 
 	ID3D11Buffer  *				m_buffer;
 	FutureHardwareBufferInfo	m_info;

@@ -410,15 +410,11 @@ bool    FutureDXGraphicsSystem::CreateDevice(IFutureWindow * window, const Futur
 		{
 			SetDepthStencilState(stencilState);
 		}
-		SetRasterizerState(rasterState);
-
-
-		m_deviceContext->OMSetDepthStencilState(m_depthStencilState, 1);
-
+		SetDepthStencilState(rasterState);
 	}
 }
 
-bool    FutureDXGraphicsSystem::RecreateDevice(IFutureWindow * window, const FutureGraphicsDeviceCreationSettings & settings);\
+bool    FutureDXGraphicsSystem::RecreateDevice(IFutureWindow * window, const FutureGraphicsDeviceCreationSettings & settings)
 {
 
 }
@@ -501,9 +497,9 @@ void *						FutureDXGraphicsSystem::GetDevice()
 	return m_device;
 }
 
-FutureGraphicsSettings *	FutureDXGraphicsSystem::GraphicsSettings();
+void	FutureDXGraphicsSystem::GetGraphicsSettings(FutureGraphicsSettings * settings)
 {
-	return m_settings;
+	memcpy(settings, &m_settings, sizeof(FutureGraphicsSettings));
 }
    
 bool						FutureDXGraphicsSystem::IsFeatureSupported(FutureDeviceSupport feature)
@@ -576,7 +572,7 @@ bool						FutureDXGraphicsSystem::IsFeatureSupported(FutureDeviceSupport feature
 	return false;
 }
 
-u32							FutureDXGraphicsSystem::GetDeviceCapability(FutureDeviceCapabilityType feature)
+s32							FutureDXGraphicsSystem::GetDeviceCapability(FutureDeviceCapabilityType feature)
 {
 	switch(feature)
 	{
@@ -652,13 +648,61 @@ u32							FutureDXGraphicsSystem::GetDeviceCapability(FutureDeviceCapabilityType
 	return 0;
 }
 
-IFutureWindow *				FutureDXGraphicsSystem::Window();
+IFutureWindow *				FutureDXGraphicsSystem::Window()
+{
+	return FutureApplication::GetInstance()->GetWindow();
+}
 
-void						FutureDXGraphicsSystem::AddDeviceCallback(IFutureDeviceCallback * deviceCallback);
-void						FutureDXGraphicsSystem::RemoveDeviceCallback(IFutureDeviceCallback * deviceCallback);
+void						FutureDXGraphicsSystem::AddDeviceCallback(IFutureDeviceCallback * deviceCallback)
+{
+	m_deviceCallbacks.Ensure(deviceCallback);
+}
+void						FutureDXGraphicsSystem::RemoveDeviceCallback(IFutureDeviceCallback * deviceCallback)
+{
+	m_deviceCallbacks.Remove(deviceCallback);
+}
 
     
-s32         FutureDXGraphicsSystem::CreateBlendState(const FutureBlendInfo info);
+s32         FutureDXGraphicsSystem::CreateBlendState(const FutureBlendStateInfo info)
+{
+	D3D11_BLEND_DESC blendDesc;
+	blendDesc.AlphaToCoverageEnable = info.m_enableAlphaToCoverage;
+
+	for(u32 i = 0; i < 8; ++i)
+	{
+		blendDesc.RenderTarget[i].BlendEnable = info.m_renderTargets[i].m_enableBlending;
+		blendDesc.RenderTarget[i].BlendOp = (D3D11_BLEND_OP)info.m_renderTargets[i].m_colorBlend.m_blendOperation;
+		blendDesc.RenderTarget[i].BlendOpAlpha = (D3D11_BLEND_OP)info.m_renderTargets[i].m_alphaBlend.m_blendOperation;
+		blendDesc.RenderTarget[i].DestBlend = (D3D11_BLEND)info.m_renderTargets[i].m_colorBlend.m_destFunction;
+		blendDesc.RenderTarget[i].DestBlendAlpha = (D3D11_BLEND)info.m_renderTargets[i].m_alphaBlend.m_destFunction;
+		blendDesc.RenderTarget[i].SrcBlend = (D3D11_BLEND)info.m_renderTargets[i].m_colorBlend.m_sourceFunction;
+		blendDesc.RenderTarget[i].SrcBlendAlpha = (D3D11_BLEND)info.m_renderTargets[i].m_alphaBlend.m_sourceFunction;
+
+		u8 writeMask = 0;
+		writeMask |= info.m_renderTargets[i].m_writeColors[0] ? D3D11_COLOR_WRITE_ENABLE_RED : 0;
+		writeMask |= info.m_renderTargets[i].m_writeColors[1] ? D3D11_COLOR_WRITE_ENABLE_GREEN : 0;
+		writeMask |= info.m_renderTargets[i].m_writeColors[2] ? D3D11_COLOR_WRITE_ENABLE_BLUE : 0;
+		writeMask |= info.m_renderTargets[i].m_writeColors[3] ? D3D11_COLOR_WRITE_ENABLE_ALPHA : 0;
+
+		blendDesc.RenderTarget[i].RenderTargetWriteMask = writeMask;
+	}
+
+	ID3D11BlendState * state;
+	HRESULT result = m_device->CreateBlendState(&blendDesc, &state);
+	if(FAILED(result))
+	{
+		return -1;
+	}
+
+	FutureBlendStateInfo blend;
+	memcpy(&blend, &info, sizeof(FutureBlendStateInfo));
+	
+	m_blendStates.Add(state);
+	m_blendInfo.Add(blend);
+
+	return m_blendStates.Size() - 1;
+}
+
 s32         FutureDXGraphicsSystem::CreateDepthStencilState(const FutureDepthStencilInfo info)
 {
 	D3D11_DEPTH_STENCIL_DESC stencilDesc;
@@ -713,8 +757,6 @@ s32         FutureDXGraphicsSystem::CreateDepthStencilState(const FutureDepthSte
 
 s32         FutureDXGraphicsSystem::CreateRasterizerState(const FutureRasterizerInfo info)
 {
-
-	//create rasterizer	
 	D3D11_RASTERIZER_DESC rasterDesc;
 	rasterDesc.CullMode = (D3D11_CULL_MODE)info.m_cullMode;
 	rasterDesc.FillMode = info.m_wireframe ? D3D11_FILL_WIREFRAME : D3D11_FILL_SOLID;
@@ -748,26 +790,166 @@ s32         FutureDXGraphicsSystem::CreateRasterizerState(const FutureRasterizer
 	return m_rasterStates.Size() - 1;
 }
 
-s32         FutureDXGraphicsSystem::CreateTextureSamplerState(const FutureTextureSamplerInfo info);
+s32         FutureDXGraphicsSystem::CreateTextureSamplerState(const FutureTextureSamplerInfo info)
+{
+	D3D11_SAMPLER_DESC samplerDesc;
+	samplerDesc.AddressU = (D3D11_TEXTURE_ADDRESS_MODE)info.m_wrapModeU;
+	samplerDesc.AddressV = (D3D11_TEXTURE_ADDRESS_MODE)info.m_wrapModeV;
+	samplerDesc.AddressW = (D3D11_TEXTURE_ADDRESS_MODE)info.m_wrapModeW;
+	samplerDesc.BorderColor[0] = 1.0;
+	samplerDesc.BorderColor[1] = 1.0;
+	samplerDesc.BorderColor[2] = 1.0;
+	samplerDesc.BorderColor[3] = 1.0;
+	samplerDesc.ComparisonFunc = (D3D11_COMPARISON_FUNC)info.m_compareFunction;
+	
+	if(info.m_filterMag == FutureTextureSamplerFilter_Nearest)
+	{
+		if(info.m_filterMin == FutureTextureSamplerFilter_Nearest)
+		{
+			if(info.m_filterMip == FutureTextureSamplerFilter_Nearest)
+			{
+				samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+			}
+			else
+			{
+				samplerDesc.Filter = D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR;
+			}
+		}
+		else
+		{
+			if(info.m_filterMip == FutureTextureSamplerFilter_Nearest)
+			{
+				samplerDesc.Filter = D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT;
+			}
+			else
+			{
+				samplerDesc.Filter = D3D11_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR;
+			}
+		}
+	}
+	else
+	{
+		if(info.m_filterMin == FutureTextureSamplerFilter_Nearest)
+		{
+			if(info.m_filterMip == FutureTextureSamplerFilter_Nearest)
+			{
+				samplerDesc.Filter = D3D11_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT;
+			}
+			else
+			{
+				samplerDesc.Filter = D3D11_FILTER_MIN_POINT_MAG_MIP_LINEAR;
+			}
+		}
+		else
+		{
+			if(info.m_filterMip == FutureTextureSamplerFilter_Nearest)
+			{
+				samplerDesc.Filter = D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT;
+			}
+			else
+			{
+				samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+			}
+		}
+	}
+
+	samplerDesc.MaxAnisotropy = 1;
+	samplerDesc.MaxLOD = info.m_maxLOD;
+	samplerDesc.MinLOD = info.m_minLOD;
+
+	ID3D11SamplerState * state;
+	HRESULT result = m_device->CreateSamplerState(&samplerDesc, &state);
+	if(FAILED(result))
+	{
+		return -1;
+	}
+
+	FutureTextureSamplerInfo blend;
+	memcpy(&blend, &info, sizeof(FutureTextureSamplerInfo));
+	
+	m_samplerStates.Add(state);
+	m_samplerInfo.Add(blend);
+
+	return m_samplerStates.Size() - 1;
+}
     
-bool        FutureDXGraphicsSystem::GetBlendStateInfo(FutureBlendInfo & info, s32 id);
-bool        FutureDXGraphicsSystem::GetDepthStencilStateInfo(FutureDepthStencilInfo  & info, s32 id);
-bool        FutureDXGraphicsSystem::GetRasterizerStateInfo(FutureRasterizerInfo & info, s32 id);
-bool        FutureDXGraphicsSystem::GetTextureSamplerStateInfo(FutureTextureSamplerInfo & info, s32 id);
+bool        FutureDXGraphicsSystem::GetBlendStateInfo(FutureBlendStateInfo * info, s32 id)
+{
+	memcpy(&info, &m_blendInfo[id], sizeof(FutureBlendStateInfo));
+	return true;
+}
+bool        FutureDXGraphicsSystem::GetDepthStencilStateInfo(FutureDepthStencilInfo  * info, s32 id)
+{
+	memcpy(&info, &m_depthStencilInfo[id], sizeof(FutureDepthStencilInfo));
+	return true;
+}
+bool        FutureDXGraphicsSystem::GetRasterizerStateInfo(FutureRasterizerInfo * info, s32 id)
+{
+	memcpy(&info, &m_rasterInfo[id], sizeof(FutureRasterizerInfo));
+	return true;
+}
+bool        FutureDXGraphicsSystem::GetTextureSamplerStateInfo(FutureTextureSamplerInfo * info, s32 id)
+{
+	memcpy(&info, &m_samplerInfo[id], sizeof(FutureTextureSamplerInfo));
+	return true;
+}
     
 bool        FutureDXGraphicsSystem::CreateBuffer(const FutureHardwareBufferInfo & info, 
 									const FutureInitialBufferData & data, 
-									IFutureHardwareBuffer ** buffer);
+									IFutureHardwareBuffer ** buffer)
+{
+	if((info.m_usage == FutureHardwareResourceUsage_Default ||
+		info.m_usage == FutureHardwareResourceUsage_Locked) &&
+		data.m_initialData == NULL)
+	{
+		FUTURE_ASSERT_MSG(false, L"Buffer usage of Default or Locked must provide initial buffer data.");
+	}
+
+	D3D11_BUFFER_DESC bufferDesc;
+	bufferDesc.Usage = (D3D11_USAGE)info.m_usage;
+	bufferDesc.ByteWidth = info.m_size;
+	bufferDesc.BindFlags = info.m_type;
+	if(info.m_usage == FutureHardwareResourceUsage_Dynamic ||
+		info.m_usage == FutureHardwareResourceUsage_Staging)
+	{
+		bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	}
+	bufferDesc.MiscFlags = 0;
+
+	D3D11_SUBRESOURCE_DATA initData;
+	initData.pSysMem = data.m_initialData;
+	initData.SysMemPitch = data.m_initialStride;
+	initData.SysMemSlicePitch = data.m_initialSlice;
+
+	ID3D11Buffer* buf;
+	HRESULT result = m_device->CreateBuffer(&bufferDesc, &initData, &buf);
+	if(FAILED(result))
+	{
+		return false;
+	}
+
+	FutureDXHardwareBuffer * ret = new FutureDXHardwareBuffer();
+	ret->m_buffer = buf;
+	memcpy(&ret->m_info, &info, sizeof(FutureHardwareBufferInfo));
+	*buffer = ret;
+	return true;
+}
+
 bool        FutureDXGraphicsSystem::CreateShader(const FutureShaderInfo & info, 
 									const FutureInitialShaderData & data,
-									IFutureShader ** shader);
+									IFutureShader ** shader)
+{
+}
+
 bool        FutureDXGraphicsSystem::CreateTexture(const FutureTextureInfo info, 
 									const FutureInitialTextureData & data,
 									IFutureTexture ** texture);
-bool        FutureDXGraphicsSystem::CreateMips(IFutureTexture * texture);
-    
-bool        FutureDXGraphicsSystem::IsFeatureSupported(FutureDeviceSupport feature);
-u32         FutureDXGraphicsSystem::GetCapability(FutureDeviceCapabilityType type);
+
+bool        FutureDXGraphicsSystem::CreateMips(IFutureTexture * texture)
+{
+	m_deviceContext->GenerateMips(((FutureDXTexture*)texture)->m_SRView);
+	return true;
+}
     
 bool        FutureDXGraphicsSystem::GetViewport(FutureViewport & viewport)
 {
@@ -799,23 +981,113 @@ bool        FutureDXGraphicsSystem::SetViewport(const FutureViewport & viewport)
 	return true;
 }
     
+bool        FutureDXGraphicsSystem::ClearDepthStencil(IFutureTexture * depthStencil, f32 depthClear = 0.f, u8 stencilClear = 0)
+{
+	m_deviceContext->ClearDepthStencilView(((FutureDXTexture*)depthStencil)->m_DSView, 
+											D3D11_CLEAR_DEPTH || D3D11_CLEAR_STENCIL,
+											depthClear, stencilClear);
+	return true;
+}
+bool        FutureDXGraphicsSystem::ClearDepthBuffer(IFutureTexture * depthStencil, f32 clearValue = 0.f)
+{
+	m_deviceContext->ClearDepthStencilView(((FutureDXTexture*)depthStencil)->m_DSView, 
+											D3D11_CLEAR_DEPTH,
+											clearValue, 0);
+	return true;
+}
+bool        FutureDXGraphicsSystem::ClearStencil(IFutureTexture * depthStencil, u8 clearValue = 0)
+{
+	m_deviceContext->ClearDepthStencilView(((FutureDXTexture*)depthStencil)->m_DSView, 
+											D3D11_CLEAR_STENCIL,
+											0.f, clearValue);
+	return true;
+}
+bool        FutureDXGraphicsSystem::ClearRenderTarget(IFutureTexture * renderTarget)
+{
+	float color[4] = {0.5f, 0.5f, 0.5f, 0.5f};
+	m_deviceContext->ClearRenderTargetView(((FutureDXTexture*)renderTarget)->m_RTView, color);
+	return true;
+}
+bool        FutureDXGraphicsSystem::ClearState()
+{
+	m_deviceContext->ClearState();
+	return true;
+}
     
-bool        FutureDXGraphicsSystem::ClearDepthStencil(IFutureTexture * depthStencil, f32 depthClear = 0.f, u8 stencilClear = 0);
-bool        FutureDXGraphicsSystem::ClearDepthBuffer(IFutureTexture * depthStencil, f32 clearValue = 0.f);
-bool        FutureDXGraphicsSystem::ClearStencil(IFutureTexture * depthStencil, u8 clearValue = 0);
-bool        FutureDXGraphicsSystem::ClearRenderTarget(IFutureTexture * renderTarget);
-bool        FutureDXGraphicsSystem::ClearState();
+bool        FutureDXGraphicsSystem::GetRenderTarget(IFutureTexture ** renderTarget)
+{
+	*renderTarget = m_renderTarget;
+	return true;
+}
+bool        FutureDXGraphicsSystem::SetRenderTarget(IFutureTexture * renderTarget)
+{
+	FutureDXTexture * render = dynamic_cast<FutureDXTexture*>(renderTarget);
+	if(!render)
+	{
+		return false;
+	}
+	if(m_renderTarget == render)
+	{
+		return true;
+	}
+	m_renderTarget = render;
+	m_deviceContext->OMSetRenderTargets(1, &m_renderTarget->m_RTView, m_depthStencil->m_DSView);
+	return true;
+}
     
-bool        FutureDXGraphicsSystem::GetRenderTarget(IFutureTexture ** renderTarget);
-bool        FutureDXGraphicsSystem::SetRenderTarget(IFutureTexture * renderTarget);
-    
-bool        FutureDXGraphicsSystem::GetDepthStencil(IFutureTexture ** depthStencil);
-bool        FutureDXGraphicsSystem::SetDepthStencil(IFutureTexture * depthStencil);
+bool        FutureDXGraphicsSystem::GetDepthStencil(IFutureTexture ** depthStencil)
+{
+	*depthStencil = m_depthStencil;
+	return true;
+}
+bool        FutureDXGraphicsSystem::SetDepthStencil(IFutureTexture * depthStencil)
+{
+	FutureDXTexture * depth = dynamic_cast<FutureDXTexture*>(depthStencil);
+	if(!depth)
+	{
+		return false;
+	}
+	if(m_depthStencil == depth)
+	{
+		return true;
+	}
+	m_depthStencil = depth;
+	m_deviceContext->OMSetRenderTargets(1, &m_renderTarget->m_RTView, m_depthStencil->m_DSView);
+	return true;
+}
     
 bool        FutureDXGraphicsSystem::GetShader(FutureShaderType type, IFutureShader ** shader);
     
-bool        FutureDXGraphicsSystem::SetBlendState(s32 state);
-bool        FutureDXGraphicsSystem::SetDepthStencilState(s32 state);
+bool        FutureDXGraphicsSystem::SetBlendState(s32 state)
+{
+	if(state == m_currentBlendState)
+	{
+		return true;
+	}
+	ID3D11BlendState * blendState = m_blendStates[state];
+	if(!blendState)
+	{
+		return false;
+	}
+	m_deviceContext->OMSetBlendState(blendState, m_blendInfo[state].m_blendFactors, m_blendInfo[state].m_sampleMask);
+	m_currentDepthStencilState = state;
+	return true;
+}
+bool        FutureDXGraphicsSystem::SetDepthStencilState(s32 state)
+{
+	if(state == m_currentDepthStencilState)
+	{
+		return true;
+	}
+	ID3D11DepthStencilState * stencilState = m_depthStencilStates[state];
+	if(!stencilState)
+	{
+		return false;
+	}
+	m_deviceContext->OMSetDepthStencilState(stencilState, 1);
+	m_currentDepthStencilState = state;
+	return true;
+}
 bool        FutureDXGraphicsSystem::SetRasterizerState(s32 state)
 {
 	if(state == m_currentRasterState)
@@ -832,20 +1104,88 @@ bool        FutureDXGraphicsSystem::SetRasterizerState(s32 state)
 	return true;
 }
     
-u32         FutureDXGraphicsSystem::GetBlendState();
-u32         FutureDXGraphicsSystem::GetDepthStencilState();
-u32         FutureDXGraphicsSystem::GetRasterizerState();
+u32         FutureDXGraphicsSystem::GetBlendState()
+{
+	return m_currentBlendState;
+}
+u32         FutureDXGraphicsSystem::GetDepthStencilState()
+{
+	return m_currentDepthStencilState;
+}
+u32         FutureDXGraphicsSystem::GetRasterizerState()
+{
+	return m_currentRasterState;
+}
     
-bool        FutureDXGraphicsSystem::GetVertexBuffer(IFutureHardwareBuffer ** buffer);
-bool        FutureDXGraphicsSystem::GetIndexBuffer(IFutureHardwareBuffer ** buffer);
+bool        FutureDXGraphicsSystem::GetVertexBuffer(IFutureHardwareBuffer ** buffer)
+{
+	*buffer = m_vertexBuffer;
+	return true;
+}
+bool        FutureDXGraphicsSystem::GetIndexBuffer(IFutureHardwareBuffer ** buffer)
+{
+	*buffer = m_indexBuffer;
+	return true;
+}
 
-bool        FutureDXGraphicsSystem::SetVertexBuffer(IFutureHardwareBuffer * buffer);
-bool        FutureDXGraphicsSystem::SetIndexBuffer(IFutureHardwareBuffer * buffer);
-bool		FutureDXGraphicsSystem::SetPrimitiveType(FuturePrimitiveType primType);
+bool        FutureDXGraphicsSystem::SetVertexBuffer(IFutureHardwareBuffer * buffer)
+{
+	if(m_vertexBuffer == buffer)
+	{
+		return true;
+	}
+	if(buffer == NULL || ((FutureDXHardwareBuffer*)buffer)->m_info.m_type & FutureHardwareBuffer_VertexBuffer == 0)
+	{
+		FUTURE_ASSERT_MSG(false, L"You can only send valid vertex buffers to this functions.");
+		return false;
+	}
+	m_vertexBuffer = (FutureDXHardwareBuffer*)buffer;
+	u32 stride = m_vertexBuffer->m_info.m_stride;
+	u32 offset = 0;
+	m_deviceContext->IASetVertexBuffers(0, 1, &m_vertexBuffer->m_buffer, &stride, &offset);
+	return true;
+}
+bool        FutureDXGraphicsSystem::SetIndexBuffer(IFutureHardwareBuffer * buffer)
+{
+	if(m_indexBuffer == buffer)
+	{
+		return true;
+	}
+	if(buffer == NULL || ((FutureDXHardwareBuffer*)buffer)->m_info.m_type & FutureHardwareBuffer_IndexBuffer == 0)
+	{
+		FUTURE_ASSERT_MSG(false, L"You can only send valid index buffers to this functions.");
+		return false;
+	}
+	m_indexBuffer = (FutureDXHardwareBuffer*)buffer;
+	m_deviceContext->IASetIndexBuffer(m_indexBuffer->m_buffer, DXGI_FORMAT_R32_UINT, 0);
+	return true;
+}
+bool		FutureDXGraphicsSystem::SetPrimitiveType(FuturePrimitiveType primType)
+{
+	m_deviceContext->IASetPrimitiveTopology((D3D11_PRIMITIVE_TOPOLOGY)primType);
+	return true;
+}
 
-bool        FutureDXGraphicsSystem::BeginRender();
-bool        FutureDXGraphicsSystem::Render();
-bool        FutureDXGraphicsSystem::EndRender();
+bool        FutureDXGraphicsSystem::BeginRender()
+{
+	return true;
+}
+bool        FutureDXGraphicsSystem::Render()
+{
+	if(m_indexBuffer)
+	{
+		m_deviceContext->DrawIndexed(m_indexBuffer->m_info.m_elements, 0, 0);
+	}
+	else
+	{
+		m_deviceContext->Draw(m_vertexBuffer->m_info.m_elements, 0);
+	}
+}
+bool        FutureDXGraphicsSystem::EndRender()
+{
+	m_swapChain->Present(0, 0);
+	return true;
+}
 
 
 void		FutureDXGraphicsSystem::CallDeviceCreated();
@@ -854,3 +1194,7 @@ void		FutureDXGraphicsSystem::CallDevicePreReset();
 void		FutureDXGraphicsSystem::CallDeviceReset();
 void		FutureDXGraphicsSystem::CallDevicePreChange();
 void		FutureDXGraphicsSystem::CallDeviceChanged();
+
+void		FutureDXGraphicsSystem::OnPreSyncSystem(f32 deltaTime);
+void		FutureDXGraphicsSystem::OnUpdateSystem(f32 deltaTime);
+void		FutureDXGraphicsSystem::OnPostSyncSystem(f32 deltaTime);

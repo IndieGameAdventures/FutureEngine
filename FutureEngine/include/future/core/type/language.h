@@ -56,31 +56,4 @@ enum FutureLanguage
 	FutureLanguage_Max,
 };
 
-
-const char * FutureLanguageCodeReference[] =
-{
-	"zn",
-	"es",
-	"en",
-	"hi",
-	"ar",
-	"pt",
-	"be",
-	"ru",
-	"ja",
-	"de",
-	"id",
-	"vi",
-	"ko",
-	"fr",
-	"tr",
-	"it",
-	"hk",
-	"th",
-	"pl",
-	"ro",
-	"nl",
-};
-
-
 #endif
