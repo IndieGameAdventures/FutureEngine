@@ -6,6 +6,8 @@ objs/
 *.DS_Store
 xcuserdata/
 *.xcuserstate
+*.suo
+*.sdf
 
 FutureEngine/projects/FutureCore/FutureCore.xcodeproj/xcuserdata/
 FutureEngine/projects/FutureCore/FutureCore.xcodeproj/project.xcworkspace/xcuserdata/
