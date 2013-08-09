@@ -58,23 +58,23 @@ struct FutureInitialBufferData
 };
 
 
-class IFutureHardwareBuffer : public FutureManagedObject, public IFutureHardwareObject, public IFutureDeviceCallback, public FutureClonable<IFutureHardwareBuffer>
+class IFutureHardwareBuffer : public FutureManagedObject
 {
 public:
 	FUTURE_DECLARE_MEMORY_OPERATORS(IFutureHardwareBuffer);
 
 	virtual ~IFutureHardwareBuffer(){};
     
-	virtual void	GetInfo(FutureHardwareBufferInfo & info) = 0;
+	virtual FutureHardwareBufferInfo *	GetInfo() = 0;
     
-	virtual bool	Map(void ** data) = 0;
-	virtual bool	IsMapped() = 0;
-	virtual void	UnMap() = 0;
+	virtual bool					Map(void ** data) = 0;
+	virtual bool					IsMapped() = 0;
+	virtual void					UnMap() = 0;
     
-    virtual void    Release() = 0;
+    virtual void					Release() = 0;
     
-    virtual IFutureHardwareBuffer *   Clone() = 0;
-    virtual IFutureHardwareBuffer *   Instance() = 0;
+    virtual IFutureHardwareBuffer * Clone() = 0;
+    virtual IFutureHardwareBuffer * Instance() = 0;
 };
 
 

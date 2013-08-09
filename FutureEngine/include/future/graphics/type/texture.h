@@ -97,15 +97,13 @@ struct FutureInitialTextureData
 };
 
 
-class IFutureTexture :	public FutureManagedObject, 
-						public IFutureHardwareObject, 
-						public IFutureDeviceCallback, 
-						public FutureClonable<IFutureTexture>
+class IFutureTexture :	public FutureManagedObject
 {
 public:
+	FUTURE_DECLARE_MEMORY_OPERATORS(IFutureTexture);
+	virtual ~IFutureTexture(){};
 
     virtual bool                Map(void ** data, u32 subresource = 0) = 0;
-	virtual bool                MapAsImage(IFutureImage ** image, u32 subresource = 0) = 0;
 	virtual bool                IsMapped() = 0;
 	virtual void                UnMap() = 0;
     
@@ -122,7 +120,7 @@ public:
 	virtual IFutureTexture *	Clone() = 0;
 	virtual IFutureTexture *	Instance() = 0;
 
-	virtual void				GetInfo(FutureTextureInfo & info) = 0;
+	virtual const FutureTextureInfo *	GetInfo() = 0;
 
 protected:
 

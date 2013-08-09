@@ -29,40 +29,28 @@
 #include <future/graphics/type/buffers.h>
 #include <future/graphics/directx/dxtype.h>
 
-class FutureDXHardwareBuffer : public IFutureHardwareBuffer
+class FutureHardwareBuffer : public IFutureHardwareBuffer
 {
 public:
-	FUTURE_DECLARE_MEMORY_OPERATORS(FutureDXHardwareBuffer);
+	FUTURE_DECLARE_MEMORY_OPERATORS(FutureHardwareBuffer);
 
-	FutureDXHardwareBuffer();
-	virtual ~FutureDXHardwareBuffer();
+	FutureHardwareBuffer();
+	virtual ~FutureHardwareBuffer();
     
-	virtual void	GetInfo(FutureHardwareBufferInfo & info);
+	virtual FutureHardwareBufferInfo *	GetInfo();
     
-	virtual bool	Map(void ** data);
-	virtual bool	IsMapped();
-	virtual void	UnMap();
+	virtual bool					Map(void ** data);
+	virtual bool					IsMapped();
+	virtual void					UnMap();
     
-    virtual void    Release();
+    virtual void					Release();
     
-    virtual IFutureHardwareBuffer *   Clone();
-    virtual IFutureHardwareBuffer *   Instance();
-	
-	virtual bool				ApplyToHardware();
-	virtual bool				RemoveFromHardware();
-	virtual bool				ReapplyToHardware();
-
-	virtual bool				IsAppliedToHardware();
-
-	virtual void				DeviceLost();
-	virtual void				DeviceFound();
-	virtual void				DevicePreReset();
-	virtual void				DeviceReset();
-	virtual void				DevicePreChange();
-	virtual void				DeviceChange();
+    virtual IFutureHardwareBuffer * Clone();
+    virtual IFutureHardwareBuffer * Instance();
 
 protected:
-	friend class FutureDXGraphicsSystem;
+	friend class FutureGraphicsDevice;
+	friend class FutureShader;
 
 	ID3D11Buffer  *				m_buffer;
 	FutureHardwareBufferInfo	m_info;

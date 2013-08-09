@@ -25,23 +25,22 @@
 #ifndef FUTURE_GRAPHICS_DIRECTX_TEXTURE_H
 #define FUTURE_GRAPHICS_DIRECTX_TEXTURE_H
 
-#include <future/core/object/managedobject.h>
 #include <future/graphics/type/texture.h>
-#include <future/graphics/directx/dxtexture.h>
+#include <future/graphics/image.h>
 
 #ifndef FUTURE_PLATFORM_WINDOWS
 #	error This file must only be included on Windows platforms
 #endif
 
-class FutureDXTexture : public IFutureTexture
+class FutureTexture : public IFutureTexture
 {
 public:
+	FUTURE_DECLARE_MEMORY_OPERATORS(FutureTexture);
 
-	FutureDXTexture();
-	virtual ~FutureDXTexture();
+	FutureTexture();
+	virtual ~FutureTexture();
 
     virtual bool                Map(void ** data, u32 subresource = 0);
-	virtual bool                MapAsImage(IFutureImage ** image, u32 subresource = 0);
 	virtual bool                IsMapped();
 	virtual void                UnMap();
     
@@ -57,25 +56,12 @@ public:
 
 	virtual IFutureTexture *	Clone();
 	virtual IFutureTexture *	Instance();
-
-	virtual void				GetInfo(FutureTextureInfo & info);
-
-
-	virtual bool				ApplyToHardware();
-	virtual bool				RemoveFromHardware();
-	virtual bool				ReapplyToHardware();
-
-	virtual bool				IsAppliedToHardware();
-
-	virtual void				DeviceLost();
-	virtual void				DeviceFound();
-	virtual void				DevicePreReset();
-	virtual void				DeviceReset();
-	virtual void				DevicePreChange();
-	virtual void				DeviceChange();
+	
+	virtual const FutureTextureInfo *	GetInfo();
 
 protected:
-	friend class FutureDXGraphicsSystem;
+	friend class FutureGraphicsDevice;
+	friend class FutureShader;
 
 	ID3D11Texture2D *			m_texture;
 	ID3D11ShaderResourceView *	m_SRView;

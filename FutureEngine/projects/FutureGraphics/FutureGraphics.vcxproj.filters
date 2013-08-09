@@ -12,31 +12,19 @@
     <ClInclude Include="..\..\include\future\graphics\directx\dxshader.h">
       <Filter>DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\graphics\directx\dxsystem.h">
-      <Filter>DirectX</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\future\graphics\directx\dxtexture.h">
       <Filter>DirectX</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\future\graphics\directx\dxbuffers.h">
       <Filter>DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\graphics\directx\dximage.h">
-      <Filter>DirectX</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\future\graphics\type\buffers.h">
-      <Filter>Type</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\graphics\type\image.h">
       <Filter>Type</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\future\graphics\type\settings.h">
       <Filter>Type</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\future\graphics\type\shader.h">
-      <Filter>Type</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\graphics\type\system.h">
       <Filter>Type</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\future\graphics\type\texture.h">
@@ -48,21 +36,26 @@
     <ClInclude Include="..\..\include\future\graphics\directx\dxtype.h">
       <Filter>DirectX</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\type\driver.h">
+      <Filter>Type</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\directx\dxdriver.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\image.h" />
+    <ClInclude Include="..\..\include\future\graphics\system.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\graphics\directx\dxbuffers.cpp">
       <Filter>DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\graphics\directx\dximage.cpp">
-      <Filter>DirectX</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\graphics\directx\dxshader.cpp">
       <Filter>DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\graphics\directx\dxsystem.cpp">
+    <ClCompile Include="..\..\src\graphics\directx\dxtexture.cpp">
       <Filter>DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\graphics\directx\dxtexture.cpp">
+    <ClCompile Include="..\..\src\graphics\directx\dxdriver.cpp">
       <Filter>DirectX</Filter>
     </ClCompile>
   </ItemGroup>

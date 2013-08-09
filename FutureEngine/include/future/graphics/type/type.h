@@ -58,12 +58,6 @@ enum FuturePrimitiveType
     FuturePrimitiveType_Line_Strip_Adj,
 };
 
-enum FutureIndexType
-{
-    FutureIT_16bit = 0,
-    FutureIT_32bit,
-};
-
 enum FutureDataFormat
 {
 	FutureDataFormat_Unknown		= 0,
@@ -213,7 +207,7 @@ enum FutureTextureWrapMode
     FutureTextureWrapMode_Border    = 4,
 };
 
-#define FUTURE_MAX_VERTEX_ELEMENTS 32
+#define FUTURE_MAX_VERTEX_ELEMENTS 16
 
 struct FutureVertexElement
 {
