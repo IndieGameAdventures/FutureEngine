@@ -26,7 +26,7 @@
 #define FUTURE_GRAPHICS_DIRECTX_TEXTURE_H
 
 #include <future/graphics/type/texture.h>
-#include <future/graphics/image.h>
+#include <future/graphics/directx/dxtype.h>
 
 #ifndef FUTURE_PLATFORM_WINDOWS
 #	error This file must only be included on Windows platforms
@@ -44,6 +44,8 @@ public:
 	virtual bool                IsMapped();
 	virtual void                UnMap();
     
+	virtual bool				UpdateSubresource(const FutureInitialTextureData * data, u32 subresource = 0); 
+
     virtual void                Release();
     
 	virtual u32					Height();
@@ -54,7 +56,6 @@ public:
 
 	virtual void				Clear();
 
-	virtual IFutureTexture *	Clone();
 	virtual IFutureTexture *	Instance();
 	
 	virtual const FutureTextureInfo *	GetInfo();
@@ -63,11 +64,21 @@ protected:
 	friend class FutureGraphicsDevice;
 	friend class FutureShader;
 
-	ID3D11Texture2D *			m_texture;
+	union
+	{
+		ID3D11Texture1D *			m_texture1d;
+		ID3D11Texture2D *			m_texture2d;
+		ID3D11Texture3D *			m_texture3d;
+		ID3D11Resource *			m_resource;
+	};
 	ID3D11ShaderResourceView *	m_SRView;
 	ID3D11RenderTargetView *	m_RTView;
 	ID3D11DepthStencilView *	m_DSView;
+	ID3D11DeviceContext *		m_context;
 
 	FutureTextureInfo			m_info;
+
+	bool						m_isLocked;
+	u32							m_mappedResource;
 };
 #endif

@@ -107,6 +107,7 @@ public:
 	virtual bool                IsMapped() = 0;
 	virtual void                UnMap() = 0;
     
+	virtual bool				UpdateSubresource(const FutureInitialTextureData * data, u32 subresource = 0); 
     virtual void                Release() = 0;
     
 	virtual u32					Height() = 0;
@@ -117,7 +118,6 @@ public:
 
 	virtual void				Clear() = 0;
 
-	virtual IFutureTexture *	Clone() = 0;
 	virtual IFutureTexture *	Instance() = 0;
 
 	virtual const FutureTextureInfo *	GetInfo() = 0;
