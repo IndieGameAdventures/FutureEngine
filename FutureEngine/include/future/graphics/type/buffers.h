@@ -34,8 +34,8 @@ enum FutureHardwareBufferType
 	FutureHardwareBuffer_VertexBuffer	= 1,
 	FutureHardwareBuffer_IndexBuffer	= 2,
 	FutureHardwareBuffer_ConstantBuffer	= 4,
-	FutureHardwareBuffer_ShaderResource	= 8,
-	FutureHardwareBuffer_StreamOutput	= 10,
+	//FutureHardwareBuffer_ShaderResource	= 8,
+	//FutureHardwareBuffer_StreamOutput	= 10,
 };
 
 struct FutureHardwareBufferInfo
@@ -49,12 +49,12 @@ public:
 	FutureHardwareBufferType	m_type;
 };
 
-struct FutureInitialBufferData
+struct FutureHardwareBufferData
 {
-	void *					m_initialData;
+	void *					m_data;
 	u32						m_size;
-	u32						m_initialStride;
-	u32						m_initialSlice;
+	u32						m_stride;
+	u32						m_slice;
 };
 
 
@@ -67,14 +67,13 @@ public:
     
 	virtual FutureHardwareBufferInfo *	GetInfo() = 0;
     
-	virtual bool					Map(void ** data) = 0;
+	virtual bool					Map(FutureHardwareBufferData * dataOut) = 0;
 	virtual bool					IsMapped() = 0;
 	virtual void					UnMap() = 0;
     
+	virtual bool					Update(const FutureHardwareBufferData * data) = 0;
+
     virtual void					Release() = 0;
-    
-    virtual IFutureHardwareBuffer * Clone() = 0;
-    virtual IFutureHardwareBuffer * Instance() = 0;
 };
 
 

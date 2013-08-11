@@ -36,14 +36,14 @@
     <ClInclude Include="..\..\include\future\graphics\directx\dxtype.h">
       <Filter>DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\graphics\type\driver.h">
-      <Filter>Type</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\future\graphics\directx\dxdriver.h">
-      <Filter>DirectX</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\future\graphics\image.h" />
     <ClInclude Include="..\..\include\future\graphics\system.h" />
+    <ClInclude Include="..\..\include\future\graphics\directx\dxdevice.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\type\device.h">
+      <Filter>Type</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\graphics\directx\dxbuffers.cpp">
@@ -55,7 +55,7 @@
     <ClCompile Include="..\..\src\graphics\directx\dxtexture.cpp">
       <Filter>DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\graphics\directx\dxdriver.cpp">
+    <ClCompile Include="..\..\src\graphics\directx\dxdevice.cpp">
       <Filter>DirectX</Filter>
     </ClCompile>
   </ItemGroup>

@@ -22,7 +22,7 @@
 *	The main game system, this handles start up and shut down of the entire system
 */
 
-#include <future/graphics/directx/dxdriver.h>
+#include <future/graphics/directx/dxdevice.h>
 #include <future/core/system/windows/window_win.h>
 
 FutureGraphicsDevice::FutureGraphicsDevice()
@@ -337,7 +337,7 @@ bool    FutureGraphicsDevice::CreateDevice(IFutureWindow * window, const FutureG
 	}
 
 	m_renderTarget = new FutureTexture();
-	m_renderTarget->m_texture = m_backBuffer;
+	m_renderTarget->m_texture2d = m_backBuffer;
 	m_renderTarget->m_RTView = renderTarget;
 	m_renderTarget->m_info.m_width = m_settings.m_backBufferWidth;
 	m_renderTarget->m_info.m_height = m_settings.m_backBufferHeight;
@@ -368,8 +368,7 @@ bool    FutureGraphicsDevice::CreateDevice(IFutureWindow * window, const FutureG
 		depthInfo.m_usage = FutureHardwareResourceUsage_Default;
 		depthInfo.m_target = FutureTextureTarget_DepthStencil;
 
-		FutureInitialTextureData initialTextureData;
-		if(!CreateTexture(&depthInfo, &initialTextureData, (IFutureTexture**)&m_depthStencil))
+		if(!CreateTexture(&depthInfo, NULL, (IFutureTexture**)&m_depthStencil))
 		{
 			DestroyDevice();
 			return false;
@@ -581,7 +580,7 @@ s32							FutureGraphicsDevice::GetDeviceCapability(FutureDeviceCapabilityType f
 			return m_settings.m_deviceMajorVersion == 10 ? D3D11_CS_4_X_BUCKET00_MAX_NUM_THREADS_PER_GROUP : D3D11_CS_DISPATCH_MAX_THREAD_GROUPS_PER_DIMENSION;
 		case FutureDeviceCapability_MaxPixelShaderInputComponents:
 			return m_settings.m_deviceMajorVersion == 10 ? D3D10_PS_INPUT_REGISTER_COUNT : D3D11_PS_INPUT_REGISTER_COUNT;
-		case FutureDeviceCapability_MaxPixelShaderUniformComponents:
+		case FutureDeviceCapability_MaxPixelShaderConstantBuffers:
 			return m_settings.m_deviceMajorVersion == 10 ? D3D10_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT : D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT;
 		case FutureDeviceCapability_MaxPixelShaderTextures:
 			return m_settings.m_deviceMajorVersion == 10 ? D3D10_COMMONSHADER_SAMPLER_REGISTER_COUNT : D3D11_COMMONSHADER_SAMPLER_REGISTER_COUNT;
@@ -589,7 +588,7 @@ s32							FutureGraphicsDevice::GetDeviceCapability(FutureDeviceCapabilityType f
 			return m_settings.m_deviceMajorVersion == 10 ? D3D10_GS_INPUT_REGISTER_COUNT : D3D11_GS_INPUT_REGISTER_COUNT;
 		case FutureDeviceCapability_MaxGeometryShaderOutputComponents:
 			return m_settings.m_deviceMajorVersion == 10 ? D3D10_GS_OUTPUT_ELEMENTS : D3D11_GS_OUTPUT_ELEMENTS;
-		case FutureDeviceCapability_MaxGeometryShaderUniformComponents:
+		case FutureDeviceCapability_MaxGeometryShaderConstantBuffers:
 			return m_settings.m_deviceMajorVersion == 10 ? D3D10_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT : D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT;
 		case FutureDeviceCapability_MaxPreTesslationShaderStorageBlocks:
 			return m_settings.m_deviceMajorVersion == 10 ? 0 : D3D11_DS_INPUT_CONTROL_POINT_REGISTER_COUNT;
@@ -599,7 +598,7 @@ s32							FutureGraphicsDevice::GetDeviceCapability(FutureDeviceCapabilityType f
 			return m_settings.m_deviceMajorVersion == 10 ? D3D10_VS_INPUT_REGISTER_COUNT : D3D11_VS_INPUT_REGISTER_COUNT;
 		case FutureDeviceCapability_MaxVertexShaderTextures:
 			return m_settings.m_deviceMajorVersion == 10 ? D3D10_COMMONSHADER_SAMPLER_REGISTER_COUNT : D3D11_COMMONSHADER_SAMPLER_REGISTER_COUNT;
-		case FutureDeviceCapability_MaxVertexShaderUniformComponents:
+		case FutureDeviceCapability_MaxVertexShaderConstantBuffers:
 			return m_settings.m_deviceMajorVersion == 10 ? D3D10_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT : D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT;
 		case FutureDeviceCapability_MaxVertexShaderOutputComponents:
 			return m_settings.m_deviceMajorVersion == 10 ? D3D10_VS_OUTPUT_REGISTER_COUNT : D3D11_VS_OUTPUT_REGISTER_COUNT;
@@ -845,12 +844,12 @@ const FutureTextureSamplerInfo * FutureGraphicsDevice::GetTextureSamplerStateInf
 }
     
 bool FutureGraphicsDevice::CreateBuffer(const FutureHardwareBufferInfo * info, 
-										const FutureInitialBufferData * data, 
+										const FutureHardwareBufferData * data, 
 										IFutureHardwareBuffer ** buffer)
 {
 	if((info->m_usage == FutureHardwareResourceUsage_Default ||
 		info->m_usage == FutureHardwareResourceUsage_Locked) &&
-		data->m_initialData == NULL)
+		data->m_data == NULL)
 	{
 		FUTURE_ASSERT_MSG(false, L"Buffer usage of Default or Locked must provide initial buffer data.");
 	}
@@ -867,9 +866,9 @@ bool FutureGraphicsDevice::CreateBuffer(const FutureHardwareBufferInfo * info,
 	bufferDesc.MiscFlags = 0;
 
 	D3D11_SUBRESOURCE_DATA initData;
-	initData.pSysMem = data->m_initialData;
-	initData.SysMemPitch = data->m_initialStride;
-	initData.SysMemSlicePitch = data->m_initialSlice;
+	initData.pSysMem = data->m_data;
+	initData.SysMemPitch = data->m_stride;
+	initData.SysMemSlicePitch = data->m_slice;
 
 	ID3D11Buffer* buf;
 	HRESULT result = m_device->CreateBuffer(&bufferDesc, &initData, &buf);
@@ -891,15 +890,21 @@ bool FutureGraphicsDevice::CreateShader(const FutureShaderCreationData * info,
 }
 
 bool FutureGraphicsDevice::CreateTexture(const FutureTextureInfo * info, 
-										 const FutureInitialTextureData * data,
+										 const FutureTextureData * data,
 										 IFutureTexture ** texture)
 {
-}
-
-bool FutureGraphicsDevice::CreateMips(IFutureTexture * texture)
-{
-	m_deviceContext->GenerateMips(((FutureTexture*)texture)->m_SRView);
-	return true;
+	FutureTexture * tex = new FutureTexture();
+	bool result = tex->CreateTexture(info, data, m_device, m_deviceContext);
+	if(result)
+	{
+		*texture = tex;
+	}
+	else
+	{
+		tex->Release();
+		delete tex;
+	}
+	return result;
 }
     
 const FutureViewport * FutureGraphicsDevice::GetViewport()

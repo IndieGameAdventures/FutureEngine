@@ -41,8 +41,6 @@ public:
 	virtual FutureShaderType		GetShaderType();
 
     virtual void					Release();
-    
-    virtual IFutureShader *			Instance();
 
 	virtual bool					GetConstantBuffers(u32 startSlot, u32 numBuffers, IFutureHardwareBuffer ** buffersOut);
 	virtual bool					GetTextures(u32 startSlot, u32 numTextures, IFutureTexture ** texturesOut);
@@ -84,6 +82,9 @@ protected:
 	FutureShaderInfo	m_info;
 
 	bool				m_isApplied;
+
+	bool	Create(const FutureShaderCreationData * info, ID3D11DeviceContext * context);
+	bool	CreateInputLayout(const FutureShaderCreationData * info);
 };
 
 #endif

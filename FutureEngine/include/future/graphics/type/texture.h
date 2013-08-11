@@ -38,7 +38,6 @@ enum FutureTextureType
 
 	FutureTextureType_1D_Array,
 	FutureTextureType_2D_Array,
-	FutureTextureType_3D_Array,
 	
 	FutureTextureType_Cube,
 };
@@ -87,13 +86,13 @@ struct FutureTextureInfo
 };
 
 
-struct FutureInitialTextureData
+struct FutureTextureData
 {
-	void *					m_initialData;
-	u32						m_initialWidth;
-	u32						m_initialHeight;
-	u32						m_initialDepth;
-	FutureDataFormat		m_initialFormat;
+	void *					m_data;
+	u32						m_width;
+	u32						m_height;
+	u32						m_depth;
+	FutureDataFormat		m_format;
 };
 
 
@@ -103,11 +102,11 @@ public:
 	FUTURE_DECLARE_MEMORY_OPERATORS(IFutureTexture);
 	virtual ~IFutureTexture(){};
 
-    virtual bool                Map(void ** data, u32 subresource = 0) = 0;
+    virtual bool                Map(FutureTextureData * dataOut, u32 subresource = 0) = 0;
 	virtual bool                IsMapped() = 0;
 	virtual void                UnMap() = 0;
     
-	virtual bool				UpdateSubresource(const FutureInitialTextureData * data, u32 subresource = 0); 
+	virtual bool				UpdateSubresource(const FutureTextureData * data, u32 subresource = 0); 
     virtual void                Release() = 0;
     
 	virtual u32					Height() = 0;
@@ -115,10 +114,6 @@ public:
 	virtual u32					Depth() = 0;
 
 	virtual u8					MipLevels() = 0;
-
-	virtual void				Clear() = 0;
-
-	virtual IFutureTexture *	Instance() = 0;
 
 	virtual const FutureTextureInfo *	GetInfo() = 0;
 

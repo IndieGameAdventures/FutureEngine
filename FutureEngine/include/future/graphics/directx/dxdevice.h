@@ -56,14 +56,13 @@ public:
     virtual const FutureTextureSamplerInfo *	GetTextureSamplerStateInfo(s32 id);
     
 	virtual bool								CreateBuffer(const FutureHardwareBufferInfo * info, 
-															 const FutureInitialBufferData * data, 
+															 const FutureHardwareBufferData * data, 
 															 IFutureHardwareBuffer ** buffer);
     virtual bool								CreateShader(const FutureShaderCreationData * info, 
 															IFutureShader ** shader);
     virtual bool								CreateTexture(const FutureTextureInfo * info, 
-															  const FutureInitialTextureData * data,
+															  const FutureTextureData * data,
 															  IFutureTexture ** texture);
-    virtual bool								CreateMips(IFutureTexture * texture);
     
     virtual const FutureViewport *				GetViewport();
     virtual bool								SetViewport(const FutureViewport * viewport);
@@ -132,7 +131,7 @@ protected:
 	FutureArray<FutureTextureSamplerInfo>	m_samplerInfo;
 	u32										m_currentSamplerState;
 
-	FutureShader	*						m_activeShaders[FutureShaderType_Max];
+	FutureShader *							m_activeShaders[FutureShaderType_Max];
 
 	FutureHardwareBuffer *					m_vertexBuffer;
 	FutureHardwareBuffer *					m_indexBuffer;

@@ -39,14 +39,13 @@ public:
     
 	virtual FutureHardwareBufferInfo *	GetInfo();
     
-	virtual bool					Map(void ** data);
+	virtual bool					Map(FutureHardwareBufferData * dataOut);
 	virtual bool					IsMapped();
 	virtual void					UnMap();
+
+	virtual bool					Update(const FutureHardwareBufferData * data);
     
     virtual void					Release();
-    
-    virtual IFutureHardwareBuffer * Clone();
-    virtual IFutureHardwareBuffer * Instance();
 
 protected:
 	friend class FutureGraphicsDevice;
@@ -54,6 +53,14 @@ protected:
 
 	ID3D11Buffer  *				m_buffer;
 	FutureHardwareBufferInfo	m_info;
+
+	ID3D11DeviceContext *		m_context;
+
+	bool	CreateVertexBuffer(const FutureHardwareBufferInfo * info, const FutureHardwareBufferData * data, ID3D11DeviceContext * context);
+	bool	CreateIndexBuffer(const FutureHardwareBufferInfo * info, const FutureHardwareBufferData * data, ID3D11DeviceContext * context);
+	bool	CreateConstantBuffer(const FutureHardwareBufferInfo * info, const FutureHardwareBufferData * data, ID3D11DeviceContext * context);
+
+	
 };
 
 

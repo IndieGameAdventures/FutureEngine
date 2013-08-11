@@ -91,19 +91,19 @@ enum FutureDeviceCapabilityType
     FutureDeviceCapability_MaxComputeShaderWorkGroupSize,
     
     FutureDeviceCapability_MaxPixelShaderInputComponents,
-    FutureDeviceCapability_MaxPixelShaderUniformComponents,
+    FutureDeviceCapability_MaxPixelShaderConstantBuffers,
     FutureDeviceCapability_MaxPixelShaderTextures,
     
     FutureDeviceCapability_MaxGeometryShaderInputComponents,
     FutureDeviceCapability_MaxGeometryShaderOutputComponents,
-    FutureDeviceCapability_MaxGeometryShaderUniformComponents,
+    FutureDeviceCapability_MaxGeometryShaderConstantBuffers,
     
     FutureDeviceCapability_MaxPreTesslationShaderStorageBlocks,
     FutureDeviceCapability_MaxPostTesslationShaderStorageBlocks,
     
     FutureDeviceCapability_MaxVertexShaderAttributes,
     FutureDeviceCapability_MaxVertexShaderTextures,
-    FutureDeviceCapability_MaxVertexShaderUniformComponents,
+    FutureDeviceCapability_MaxVertexShaderConstantBuffers,
     FutureDeviceCapability_MaxVertexShaderOutputComponents,
     
     FutureDeviceCapability_MaxViewPortWidth,

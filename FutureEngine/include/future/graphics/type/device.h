@@ -55,14 +55,13 @@ public:
     virtual const FutureTextureSamplerInfo *	GetTextureSamplerStateInfo(s32 id) = 0;
     
 	virtual bool								CreateBuffer(const FutureHardwareBufferInfo * info, 
-															 const FutureInitialBufferData * data, 
+															 const FutureHardwareBufferData * data, 
 															 IFutureHardwareBuffer ** buffer) = 0;
     virtual bool								CreateShader(const FutureShaderCreationData * info, 
 															IFutureShader ** shader) = 0;
     virtual bool								CreateTexture(const FutureTextureInfo * info, 
-															  const FutureInitialTextureData * data,
+															  const FutureTextureData * data,
 															  IFutureTexture ** texture) = 0;
-    virtual bool								CreateMips(IFutureTexture * texture) = 0;
     
     virtual const FutureViewport *				GetViewport() = 0;
     virtual bool								SetViewport(const FutureViewport * viewport) = 0;
@@ -80,7 +79,7 @@ public:
     virtual IFutureTexture *					GetDepthStencil() = 0;
     virtual bool								SetDepthStencil(IFutureTexture * depthStencil) = 0;
     
-    virtual bool								SetShader(FutureShaderType type, IFutureShader * shader) = 0;
+    virtual bool								SetShader(IFutureShader * shader) = 0;
     virtual IFutureShader *						GetShader(FutureShaderType type) = 0;
     
     virtual bool								SetBlendState(s32 state) = 0;

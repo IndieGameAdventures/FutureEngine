@@ -31,6 +31,8 @@
 #include <future/graphics/type/settings.h>
 #include <future/graphics/type/buffers.h>
 
+class IFutureGraphicsDevice;
+
 enum FutureShaderType
 {
     FutureShaderType_Vertex,
@@ -71,8 +73,6 @@ public:
 	virtual FutureShaderType		GetShaderType() = 0;
 
     virtual void					Release() = 0;
-    
-    virtual IFutureShader *			Instance() = 0;
 
 	virtual bool					GetConstantBuffers(u32 startSlot, u32 numBuffers, IFutureHardwareBuffer ** buffersOut) = 0;
 	virtual bool					GetTextures(u32 startSlot, u32 numTextures, IFutureTexture ** texturesOut) = 0;
