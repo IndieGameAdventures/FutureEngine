@@ -650,10 +650,12 @@ s32         FutureGraphicsDevice::CreateBlendState(const FutureBlendStateInfo * 
 	FutureBlendStateInfo blend;
 	memcpy(&blend, &info, sizeof(FutureBlendStateInfo));
 	
+	Lock();
 	m_blendStates.Add(state);
 	m_blendInfo.Add(blend);
-
-	return m_blendStates.Size() - 1;
+	u32 id = m_blendStates.Size() - 1;
+	Unlock();
+	return id;
 }
 
 s32         FutureGraphicsDevice::CreateDepthStencilState(const FutureDepthStencilInfo * info)
@@ -702,10 +704,12 @@ s32         FutureGraphicsDevice::CreateDepthStencilState(const FutureDepthStenc
 	stencil.m_backStencil.m_onPassBoth = info->m_backStencil.m_onPassBoth;
 	stencil.m_backStencil.m_comparisonFunction = info->m_backStencil.m_comparisonFunction;
 	
+	Lock();
 	m_depthStencilStates.Add(state);
 	m_depthStencilInfo.Add(stencil);
-
-	return m_rasterStates.Size() - 1;
+	u32 id = m_depthStencilStates.Size() - 1;
+	Unlock();
+	return id;
 }
 
 s32         FutureGraphicsDevice::CreateRasterizerState(const FutureRasterizerInfo * info)
@@ -737,10 +741,12 @@ s32         FutureGraphicsDevice::CreateRasterizerState(const FutureRasterizerIn
 	newInfo.m_enableScissor = info->m_enableScissor;
 	newInfo.m_enableMultisampling = info->m_enableMultisampling;
 
+	Lock();
 	m_rasterStates.Add(rasterState);
 	m_rasterInfo.Add(newInfo);
-
-	return m_rasterStates.Size() - 1;
+	u32 id = m_rasterStates.Size() - 1;
+	Unlock();
+	return id;
 }
 
 s32         FutureGraphicsDevice::CreateTextureSamplerState(const FutureTextureSamplerInfo * info)
@@ -817,13 +823,15 @@ s32         FutureGraphicsDevice::CreateTextureSamplerState(const FutureTextureS
 		return -1;
 	}
 
-	FutureTextureSamplerInfo blend;
-	memcpy(&blend, &info, sizeof(FutureTextureSamplerInfo));
+	FutureTextureSamplerInfo samp;
+	memcpy(&samp, &info, sizeof(FutureTextureSamplerInfo));
 	
+	Lock();
 	m_samplerStates.Add(state);
-	m_samplerInfo.Add(blend);
-
-	return m_samplerStates.Size() - 1;
+	m_samplerInfo.Add(samp);
+	u32 id = m_samplerStates.Size() - 1;
+	Unlock();
+	return id;
 }
     
 const FutureBlendStateInfo * FutureGraphicsDevice::GetBlendStateInfo(s32 id)
@@ -863,6 +871,10 @@ bool FutureGraphicsDevice::CreateBuffer(const FutureHardwareBufferInfo * info,
 	{
 		bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	}
+	if(info->m_usage == FutureHardwareResourceUsage_Staging)
+	{
+		bufferDesc.CPUAccessFlags |= D3D10_CPU_ACCESS_READ;
+	}
 	bufferDesc.MiscFlags = 0;
 
 	D3D11_SUBRESOURCE_DATA initData;
@@ -879,6 +891,7 @@ bool FutureGraphicsDevice::CreateBuffer(const FutureHardwareBufferInfo * info,
 
 	FutureHardwareBuffer * ret = new FutureHardwareBuffer();
 	ret->m_buffer = buf;
+	ret->m_context = m_deviceContext;
 	memcpy(&ret->m_info, &info, sizeof(FutureHardwareBufferInfo));
 	*buffer = ret;
 	return true;
@@ -887,6 +900,18 @@ bool FutureGraphicsDevice::CreateBuffer(const FutureHardwareBufferInfo * info,
 bool FutureGraphicsDevice::CreateShader(const FutureShaderCreationData * info, 
 										IFutureShader ** shader)
 {
+	FutureShader * s = new FutureShader();
+	if(s->Create(info, m_device, m_deviceContext))
+	{
+		*shader = s;
+		return true;
+	}
+	else
+	{
+		s->Release();
+		delete s;
+		return false;
+	}
 }
 
 bool FutureGraphicsDevice::CreateTexture(const FutureTextureInfo * info, 

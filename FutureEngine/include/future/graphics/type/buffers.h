@@ -65,7 +65,7 @@ public:
 
 	virtual ~IFutureHardwareBuffer(){};
     
-	virtual FutureHardwareBufferInfo *	GetInfo() = 0;
+	virtual const FutureHardwareBufferInfo *	GetInfo() = 0;
     
 	virtual bool					Map(FutureHardwareBufferData * dataOut) = 0;
 	virtual bool					IsMapped() = 0;

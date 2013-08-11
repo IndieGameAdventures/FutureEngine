@@ -37,7 +37,7 @@ public:
 	FutureHardwareBuffer();
 	virtual ~FutureHardwareBuffer();
     
-	virtual FutureHardwareBufferInfo *	GetInfo();
+	virtual const FutureHardwareBufferInfo *	GetInfo();
     
 	virtual bool					Map(FutureHardwareBufferData * dataOut);
 	virtual bool					IsMapped();
@@ -55,12 +55,8 @@ protected:
 	FutureHardwareBufferInfo	m_info;
 
 	ID3D11DeviceContext *		m_context;
-
-	bool	CreateVertexBuffer(const FutureHardwareBufferInfo * info, const FutureHardwareBufferData * data, ID3D11DeviceContext * context);
-	bool	CreateIndexBuffer(const FutureHardwareBufferInfo * info, const FutureHardwareBufferData * data, ID3D11DeviceContext * context);
-	bool	CreateConstantBuffer(const FutureHardwareBufferInfo * info, const FutureHardwareBufferData * data, ID3D11DeviceContext * context);
-
 	
+	bool						m_isMapped;
 };
 
 

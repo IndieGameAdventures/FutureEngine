@@ -28,14 +28,14 @@
 
 #include <future/core/system/system.h>
 #include <future/core/system/window.h>
-#include <future/graphics/type/driver.h>
+#include <future/graphics/type/device.h>
 #include <future/graphics/directx/dxtype.h>
 #include <future/graphics/directx/dxtexture.h>
 #include <future/graphics/directx/dxbuffers.h>
 #include <future/graphics/directx/dxshader.h>
 
 
-class FutureGraphicsDevice : public IFutureGraphicsDevice
+class FutureGraphicsDevice : public IFutureGraphicsDevice, public FutureThreadSafeObject
 {
 public:
 

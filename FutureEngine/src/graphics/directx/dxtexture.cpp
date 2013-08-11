@@ -105,7 +105,6 @@ void FutureTexture::Release()
 		m_texture2d = NULL;
 		break;
 	case FutureTextureType_3D:
-	case FutureTextureType_3D_Array:
 		m_texture3d->Release();
 		m_texture3d = NULL;
 		break;

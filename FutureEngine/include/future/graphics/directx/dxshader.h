@@ -77,13 +77,14 @@ protected:
 
 	ID3D11InputLayout *		m_inputLayout;
 	ID3D11DeviceContext *	m_context;
+	ID3D11Device *			m_device;
 
-	FutureShaderType	m_shaderType;
-	FutureShaderInfo	m_info;
+	FutureShaderType		m_shaderType;
+	FutureShaderInfo		m_info;
 
-	bool				m_isApplied;
+	bool					m_isApplied;
 
-	bool	Create(const FutureShaderCreationData * info, ID3D11DeviceContext * context);
+	bool	Create(const FutureShaderCreationData * info, ID3D11Device * device, ID3D11DeviceContext * context);
 	bool	CreateInputLayout(const FutureShaderCreationData * info);
 };
 
