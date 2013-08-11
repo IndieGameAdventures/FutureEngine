@@ -72,9 +72,7 @@ public:
 
     virtual void					Release() = 0;
     
-    virtual IFutureShader *			Clone() = 0;
     virtual IFutureShader *			Instance() = 0;
-
 
 	virtual bool					GetConstantBuffers(u32 startSlot, u32 numBuffers, IFutureHardwareBuffer ** buffersOut) = 0;
 	virtual bool					GetTextures(u32 startSlot, u32 numTextures, IFutureTexture ** texturesOut) = 0;
@@ -84,17 +82,27 @@ public:
 	virtual IFutureTexture *		GetTexture(u32 slot) = 0;
 	virtual u32						GetSamplerState(u32 slot) = 0;
 	
-	virtual bool					SetConstantBuffers(u32 startSlot, u32 numBuffers, IFutureHardwareBuffer ** buffersOut) = 0;
-	virtual bool					SetTextures(u32 startSlot, u32 numTextures, IFutureTexture ** texturesOut) = 0;
-	virtual bool					SetSamplerStates(u32 startSlot, u32 numSamplers, u32 * samplersOut) = 0;
+	virtual bool					SetConstantBuffers(u32 startSlot, u32 numBuffers, IFutureHardwareBuffer ** buffers) = 0;
+	virtual bool					SetTextures(u32 startSlot, u32 numTextures, IFutureTexture ** textures) = 0;
+	virtual bool					SetSamplerStates(u32 startSlot, u32 numSamplers, u32 * samplers) = 0;
 	
-	virtual IFutureHardwareBuffer *	SetConstantBuffer(u32 slot) = 0;
-	virtual IFutureTexture *		SetTexture(u32 slot) = 0;
-	virtual u32						SetSamplerState(u32 slot) = 0;
+	virtual bool					SetConstantBuffer(u32 slot, IFutureHardwareBuffer * buffer) = 0;
+	virtual bool					SetTexture(u32 slot, IFutureTexture * texture) = 0;
+	virtual bool					SetSamplerState(u32 slot, u32 sampler) = 0;
 
 	virtual bool					Apply() = 0;
 	virtual bool					IsApplied() = 0;
 	virtual bool					Remove() = 0;
+
+	IFutureGraphicsDevice *			GetDevice()
+	{
+		return m_device;
+	}
+
+protected:
+	friend class FutureGraphicsDevice;
+
+	IFutureGraphicsDevice *			m_device;
 };
 
 #endif

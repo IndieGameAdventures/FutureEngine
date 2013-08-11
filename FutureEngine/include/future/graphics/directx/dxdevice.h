@@ -105,6 +105,7 @@ public:
 
 protected:
 	friend class FutureGraphicsSystem;
+	friend class FutureShader;
 
 	FutureGraphicsDevice();
 	~FutureGraphicsDevice();

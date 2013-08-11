@@ -34,16 +34,15 @@ class FutureShader : public IFutureShader
 {
 public:
 	FUTURE_DECLARE_MEMORY_OPERATORS(FutureShader);
-	virtual ~FutureShader(){};
+	FutureShader();
+	virtual ~FutureShader();
 
 	virtual const FutureShaderInfo * GetInfo();
 	virtual FutureShaderType		GetShaderType();
 
     virtual void					Release();
     
-    virtual IFutureShader *			Clone();
     virtual IFutureShader *			Instance();
-
 
 	virtual bool					GetConstantBuffers(u32 startSlot, u32 numBuffers, IFutureHardwareBuffer ** buffersOut);
 	virtual bool					GetTextures(u32 startSlot, u32 numTextures, IFutureTexture ** texturesOut);
@@ -53,13 +52,13 @@ public:
 	virtual IFutureTexture *		GetTexture(u32 slot);
 	virtual u32						GetSamplerState(u32 slot);
 	
-	virtual bool					SetConstantBuffers(u32 startSlot, u32 numBuffers, IFutureHardwareBuffer ** buffersOut);
-	virtual bool					SetTextures(u32 startSlot, u32 numTextures, IFutureTexture ** texturesOut);
-	virtual bool					SetSamplerStates(u32 startSlot, u32 numSamplers, u32 * samplersOut);
+	virtual bool					SetConstantBuffers(u32 startSlot, u32 numBuffers, IFutureHardwareBuffer ** buffers);
+	virtual bool					SetTextures(u32 startSlot, u32 numTextures, IFutureTexture ** textures);
+	virtual bool					SetSamplerStates(u32 startSlot, u32 numSamplers, u32 * samplers);
 	
-	virtual IFutureHardwareBuffer *	SetConstantBuffer(u32 slot);
-	virtual IFutureTexture *		SetTexture(u32 slot);
-	virtual u32						SetSamplerState(u32 slot);
+	virtual bool					SetConstantBuffer(u32 slot, IFutureHardwareBuffer * buffer);
+	virtual bool					SetTexture(u32 slot, IFutureTexture * texture);
+	virtual bool					SetSamplerState(u32 slot, u32 sampler);
 
 	virtual bool					Apply();
 	virtual bool					IsApplied();
@@ -78,10 +77,13 @@ protected:
 		ID3D11ComputeShader *	m_computeShader;
 	};
 
-	ID3D11InputLayout *	m_inputLayout;
+	ID3D11InputLayout *		m_inputLayout;
+	ID3D11DeviceContext *	m_context;
 
 	FutureShaderType	m_shaderType;
 	FutureShaderInfo	m_info;
+
+	bool				m_isApplied;
 };
 
 #endif
