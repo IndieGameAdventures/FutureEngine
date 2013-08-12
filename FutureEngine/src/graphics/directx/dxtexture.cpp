@@ -205,7 +205,7 @@ bool FutureTexture::CreateTexture(const FutureTextureInfo * info, const FutureTe
 		FUTURE_LOG_E(L"Failed to specify valid texture type");
 		return false;
 	}
-	if(result)
+	if(!result)
 	{
 		FUTURE_LOG_E(L"Failed to create texture");
 		return false;

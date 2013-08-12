@@ -52,13 +52,15 @@ struct FutureShaderInfo
 
 	FutureShaderType			m_shaderType;
 
-	const FutureInputLayoutInfo	m_inputLayout;
+	FutureInputLayoutInfo		m_inputLayout;
 };
 
 struct FutureShaderCreationData
 {
 	void *					m_shaderByteCode;
 	u32						m_shaderSize;
+	
+	FutureShaderType		m_shaderType;
 
 	FutureInputLayoutInfo	m_inputLayout;
 };

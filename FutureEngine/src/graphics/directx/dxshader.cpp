@@ -451,3 +451,60 @@ bool FutureShader::Remove()
 	m_isApplied = false;
 	return true;
 }
+
+
+bool FutureShader::Create(const FutureShaderCreationData * info, ID3D11Device * device, ID3D11DeviceContext * context)
+{
+	m_device = device;
+	m_context = context;
+
+	HRESULT result;
+	switch(info->m_shaderType)
+	{
+	case FutureShaderType_Vertex:
+		result = m_device->CreateVertexShader(info->m_shaderByteCode, info->m_shaderSize, NULL, &m_vertexShader);
+		break;
+	case FutureShaderType_Pixel:
+		result = m_device->CreatePixelShader(info->m_shaderByteCode, info->m_shaderSize, NULL, &m_pixelShader);
+		break;
+	case FutureShaderType_Geometry:
+		result = m_device->CreateGeometryShader(info->m_shaderByteCode, info->m_shaderSize, NULL, &m_geometryShader);
+		break;
+	case FutureShaderType_PreTesslation:
+		result = m_device->CreateDomainShader(info->m_shaderByteCode, info->m_shaderSize, NULL, &m_domainShader);
+		break;
+	case FutureShaderType_PostTesslation:
+		result = m_device->CreateHullShader(info->m_shaderByteCode, info->m_shaderSize, NULL, &m_hullShader);
+		break;
+	case FutureShaderType_Compute:
+		result = m_device->CreateComputeShader(info->m_shaderByteCode, info->m_shaderSize, NULL, &m_computeShader);
+		break;
+	}
+	if(FAILED(result))
+	{
+		FUTURE_LOG_E(L"Failed to create shader with error code %x", result);
+		return false;
+	}
+
+	if(info->m_shaderType == FutureShaderType_Vertex && info->m_inputLayout.m_numElements > 0)
+	{
+		D3D11_INPUT_ELEMENT_DESC * desc = new D3D11_INPUT_ELEMENT_DESC[info->m_inputLayout.m_numElements];
+		for(u32 i = 0; i < info->m_inputLayout.m_numElements; ++i)
+		{
+			desc[i].AlignedByteOffset = info->m_inputLayout.m_elements[i].m_alignByteOffset;
+			desc[i].Format = FutureTexture::FutureFormatToDXFormat(info->m_inputLayout.m_elements[i].m_type);
+			desc[i].InputSlot = info->m_inputLayout.m_elements[i].m_inputSlot;
+			desc[i].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+			desc[i].SemanticIndex = info->m_inputLayout.m_elements[i].m_sementicIndex;
+			desc[i].SemanticName = info->m_inputLayout.m_elements[i].m_inputSementics;
+		}
+		result = m_device->CreateInputLayout(desc, info->m_inputLayout.m_numElements, info->m_shaderByteCode, info->m_shaderSize, &m_inputLayout);
+		
+		if(FAILED(result))
+		{
+			FUTURE_LOG_E(L"Failed to create shader input layout with error code %x", result);
+			return false;
+		}
+	}
+	return true;
+}

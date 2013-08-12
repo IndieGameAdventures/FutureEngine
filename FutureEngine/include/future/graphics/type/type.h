@@ -212,6 +212,7 @@ enum FutureTextureWrapMode
 struct FutureVertexElement
 {
 	const char *			m_inputSementics;
+	u32						m_sementicIndex;
 	FutureDataFormat		m_type;
 	u32						m_inputSlot;
 	u32						m_alignByteOffset;

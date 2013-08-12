@@ -85,7 +85,6 @@ protected:
 	bool					m_isApplied;
 
 	bool	Create(const FutureShaderCreationData * info, ID3D11Device * device, ID3D11DeviceContext * context);
-	bool	CreateInputLayout(const FutureShaderCreationData * info);
 };
 
 #endif

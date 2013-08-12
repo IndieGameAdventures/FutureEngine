@@ -27,38 +27,38 @@
 
 FutureGraphicsDevice::FutureGraphicsDevice()
 		: m_majorVersion(11),
-		  m_minorVersion(0),
-		  m_factory(NULL),
-		  m_adapter(NULL),
-		  m_swapChain(NULL),
-		  m_device(NULL),
-		  m_deviceContext(NULL),
-		  m_rasterStates(),
-		  m_rasterInfo(),
-		  m_currentRasterState(0),
-		  m_depthStencilStates(),
-		  m_depthStencilInfo(),
-		  m_currentDepthStencilState(0),
-		  m_blendStates(),
-		  m_blendInfo(),
-		  m_currentBlendState(0),
-		  m_samplerStates(),
-		  m_samplerInfo(),
-		  m_currentSamplerState(0),
-		  m_vertexBuffer(NULL),
-		  m_indexBuffer(NULL),
-		  m_primitiveType(FuturePrimitiveType_Triangle_List),
-		  m_depthStencil(NULL),
-		  m_renderTarget(NULL),
-		  m_backBuffer(NULL),
-		  m_usingVersion1(false),
-		  m_usingVersion2(false)
+		m_minorVersion(0),
+		m_factory(NULL),
+		m_adapter(NULL),
+		m_swapChain(NULL),
+		m_device(NULL),
+		m_deviceContext(NULL),
+		m_rasterStates(),
+		m_rasterInfo(),
+		m_currentRasterState(0),
+		m_depthStencilStates(),
+		m_depthStencilInfo(),
+		m_currentDepthStencilState(0),
+		m_blendStates(),
+		m_blendInfo(),
+		m_currentBlendState(0),
+		m_samplerStates(),
+		m_samplerInfo(),
+		m_currentSamplerState(0),
+		m_vertexBuffer(NULL),
+		m_indexBuffer(NULL),
+		m_primitiveType(FuturePrimitiveType_Triangle_List),
+		m_depthStencil(NULL),
+		m_renderTarget(NULL),
+		m_backBuffer(NULL),
+		m_usingVersion1(false),
+		m_usingVersion2(false)
+{
+	for(u32 i = 0; i < FutureShaderType_Max; ++i)
 	{
-		for(u32 i = 0; i < FutureShaderType_Max; ++i)
-		{
-			m_activeShaders[i] = NULL;
-		}
+		m_activeShaders[i] = NULL;
 	}
+}
 
 FutureGraphicsDevice::~FutureGraphicsDevice()
 {
