@@ -7,6 +7,18 @@
     <Filter Include="Type">
       <UniqueIdentifier>{22b34284-ef03-4fc1-bb1c-2ca9caeb9595}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Effect">
+      <UniqueIdentifier>{6976f981-b1f5-4636-9d76-219a74118a4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{cb34a465-0ffe-4380-bc1a-8992d699aa80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{c77e52d3-82fd-4501-a060-85de28dfbc32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{1e1fd38c-c7fc-4275-a1c1-4881be9d0373}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\future\graphics\directx\dxshader.h">
@@ -36,13 +48,65 @@
     <ClInclude Include="..\..\include\future\graphics\directx\dxtype.h">
       <Filter>DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\future\graphics\image.h" />
-    <ClInclude Include="..\..\include\future\graphics\system.h" />
     <ClInclude Include="..\..\include\future\graphics\directx\dxdevice.h">
       <Filter>DirectX</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\future\graphics\type\device.h">
       <Filter>Type</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\system\buffermanager.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\system\effectmanager.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\system\graphicssystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\system\renderlist.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\system\rendermanager.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\system\shadermanager.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\system\texturemanager.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\resources\effectresource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\resources\imageresource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\resources\materialresource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\resources\meshresource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\resources\shaderresource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\objects\graphicscomponent.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\objects\hardwareobject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\objects\renderable.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\effect\effect.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\effect\pass.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\future\graphics\effect\technique.h">
+      <Filter>Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
