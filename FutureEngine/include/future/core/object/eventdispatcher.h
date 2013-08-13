@@ -26,11 +26,11 @@
 #define FUTURE_CORE_OBJECT_EVENT_DISPATCHER_H
 
 #include <future/core/type/type.h>
-#include <future/core/thread/criticalsection/criticalsection.h>
+#include <future/core/objects/threadsafeobject.h>
 #include <future/core/utils/container/array.h>
 #include <future/core/utils/event.h>
 
-class FutureEventDispatcher
+class FutureEventDispatcher : public FutureThreadSafeObject
 {
 public:
 

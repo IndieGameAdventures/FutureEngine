@@ -61,7 +61,7 @@ FutureProxy<MANAGED>::~FutureProxy()
 {
 	// If the proxt was deleted and there are still strong pointers then something
 	// wasn't cleaned up properly
-	FUTURE_ASSERT_MSG(m_numStrong == 0, L"This object still have Strong Pointers, it cannot be deleted");
+	FUTURE_ASSERT_MSG(m_numStrong == 0, "This object still have Strong Pointers, it cannot be deleted");
 	RemoveAllWeakPointers(); // Get rid of the left over weak pointers
 	// if we are managing an object then set it's proxy to NULL
 	if(m_managed) 
@@ -240,7 +240,7 @@ void FutureProxy<MANAGED>::RemoveWeakPointer(FutureSmartPointerBase * pointer)
 		Unlock();
 	}
 		
-	FUTURE_ASSERT_MSG(false, L"This Weak Pointer is not a part of this proxy");
+	FUTURE_ASSERT_MSG(false, "This Weak Pointer is not a part of this proxy");
 }
 
 // Print debug information about this proxy's references
@@ -248,20 +248,20 @@ template<class MANAGED>
 void FutureProxy<MANAGED>::PrintReferences()
 {
 	// Print all the weak pointers
-	FUTURE_LOG_DEBUG( L"\n%u weak pointers", m_numWeak );
-	FUTURE_LOG_DEBUG( L"Printing Weak Pointers" );
+	FUTURE_LOG_DEBUG( "\n%u weak pointers", m_numWeak );
+	FUTURE_LOG_DEBUG( "Printing Weak Pointers" );
 	for(PointerReference * ref = m_weak; ref; ref = ref->m_next )
 	{
 		FUTURE_LOG_DEBUG( L"\t0x%x,", ref->m_pointer );
 	}
 
 	// Print all the strong pointers
-	FUTURE_LOG_DEBUG( L"\n%u strong pointers", m_numStrong );
+	FUTURE_LOG_DEBUG( "\n%u strong pointers", m_numStrong );
 #if FUTURE_TRACK_STRONG_POINTERS
-	FUTURE_LOG_DEBUG( L"Printing Strong Pointers" );
+	FUTURE_LOG_DEBUG( "Printing Strong Pointers" );
 	for(PointerReference * ref = m_strong; ref; ref = ref->m_next )
 	{
-		FUTURE_LOG_DEBUG( L"\t0x%x,", ref->m_pointer );
+		FUTURE_LOG_DEBUG( "\t0x%x,", ref->m_pointer );
 	}
 #endif
 }

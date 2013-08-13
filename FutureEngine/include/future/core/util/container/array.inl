@@ -1,22 +1,19 @@
-/*!
-*	Copyright 2013 by Lucas Stufflebeam mailto:info@indiegameadventures.com
-*
-*	Thank you for taking a look at my code. If you like it, please click
-*	the donation button at the bottom of the sidebar on my blog. Thanks!
-*
-*	Licensed under the Apache License, Version 2.0 (the "License");
-*	you may not use this file except in compliance with the License.
-*	You may obtain a copy of the License at
-*
-*		http://www.apache.org/licenses/LICENSE-2.0
-*
-*	Unless required by applicable law or agreed to in writing, software
-*	distributed under the License is distributed on an "AS IS" BASIS,
-*	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*	See the License for the specific language governing permissions and
-*	limitations under the License.
-*
-*/
+/*
+ *	Copyright 2013 by Lucas Stufflebeam mailto:info@indiegameadventures.com
+ *
+ *	Licensed under the Apache License, Version 2.0 (the "License");
+ *	you may not use this file except in compliance with the License.
+ *	You may obtain a copy of the License at
+ *
+ *		http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *	Unless required by applicable law or agreed to in writing, software
+ *	distributed under the License is distributed on an "AS IS" BASIS,
+ *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *	See the License for the specific language governing permissions and
+ *	limitations under the License.
+ *
+ */
 
 /*
 *	Implementation of FutureArray
@@ -31,6 +28,24 @@ FutureArray<T>::FutureArray()
 }
 
 template<typename T>
+FutureArray<T>::FutureArray(u32 defaultSize)
+: m_a(NULL),
+  m_size(0),
+  m_allocated(0)
+{
+	EnsureSize(defaultSize);
+}
+
+template<typename T>
+FutureArray<T>::FutureArray(const FutureArray & a)
+: m_a(NULL),
+  m_size(0),
+  m_allocated(0)
+{
+	AddMultiple(a.m_a, a.Size());
+}
+
+template<typename T>
 FutureArray<T>::~FutureArray()
 {	
 	for(u32 i = 0; i < m_size; ++i)
@@ -42,14 +57,6 @@ FutureArray<T>::~FutureArray()
 	{
 		FUTURE_FREE(m_a);
 	}
-}
-template<typename T>
-FutureArray<T>::FutureArray(const FutureArray & a)
-: m_a(NULL),
-  m_size(0),
-  m_allocated(0)
-{
-	AddMultiple(a.m_a, a.Size());
 }
 	
 template<typename T>
@@ -115,6 +122,51 @@ void FutureArray< T >::EnsureSize(u32 size)
 {
 	Lock();
 	EnsureSizeNoLock();
+	Unlock();
+}
+
+template<typename T>
+void FutureArray< T >::Shrink()
+{
+	Lock();
+	if(m_allocated == m_size)
+	{
+		Unlock();
+		return;
+	}
+
+	if(m_size == 0)
+	{
+		if(m_a)
+		{
+			FUTURE_FREE(m_a);
+		}
+
+		m_allocated = 0;
+		m_size = 0;
+		m_a = NULL;
+		Unlock();
+		return;
+	}
+
+	m_allocated = m_size;
+
+	u32 bytes = m_allocated * sizeof(T);
+	T * aNew = static_cast<T *>(FUTURE_ALLOC(bytes, "FutureArray"));
+	FUTURE_ASSERT(aNew);
+
+	for(u32 i = 0; i < m_size; ++i)
+	{
+		new (&aNew[i]) T(m_a[i]);
+		m_a[i].~T();
+	}
+
+	if(m_a)
+	{
+		FUTURE_FREE(m_a);
+	}
+
+	m_a = aNew;
 	Unlock();
 }
 
@@ -276,7 +328,7 @@ void FutureArray< T >::EnsureSizeNoLock(u32 size)
 	}
 
 	u32 bytes = m_allocated * sizeof(T);
-	T * aNew = static_cast<T *>(FUTURE_ALLOC(bytes, L"FutureArray"));
+	T * aNew = static_cast<T *>(FUTURE_ALLOC(bytes, "FutureArray"));
 	FUTURE_ASSERT(aNew);
 
 	for(u32 i = 0; i < m_size; ++i)

@@ -39,6 +39,10 @@
 class IFutureThread : public FutureManagedObject
 {
 public:
+	static u64				CurrentThreadId();
+	static IFutureThread *	CreateThread();
+	static void				DestroyThread(IFutureThread * thread);
+
 	enum FutureThreadPriority
 	{
 		FutureThreadPriority_Idle = -15,
@@ -73,7 +77,6 @@ public:
 	bool					IsRunning();
 	bool					IsFinished();
 
-	static u64				CurrentThreadId();
  
 protected:
 
@@ -93,9 +96,6 @@ protected:
 	IFutureThread(const IFutureThread& thread);
 };
 
-extern IFutureThread *	FutureCreateThread();
-extern void				FutureDestroyThread(IFutureThread *);
 
-#define FR_THREAD_ENDED_UNUSUALLY ((FutureResult)-254590)
 
 #endif
