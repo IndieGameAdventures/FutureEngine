@@ -120,11 +120,9 @@ protected:
 	// Much cheaper than using a FutureLinkedList
 	FutureThreadJob *		m_next;
 
-#if FUTURE_PROFILE_THREAD_POOL
 	f32						m_timeAdded;
 	f32						m_timeStarted;
 	f32						m_timeCompleted;
-#endif
 
 private:
 	JobFunction					m_function;

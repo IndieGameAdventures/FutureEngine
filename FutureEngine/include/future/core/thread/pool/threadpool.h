@@ -115,11 +115,9 @@ protected:
 	FutureThreadJob *		m_jobs;
 	u32						m_totalJobs;
 
-#if FUTURE_PROFILE_THREAD_POOL
 	f32						m_threadTime;
 	f32						m_jobTime;
 	f32						m_waitTime;
-#endif
 };
 
 #endif

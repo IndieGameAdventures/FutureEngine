@@ -1,22 +1,19 @@
-/*!
-*	Copyright 2013 by Lucas Stufflebeam mailto:info@indiegameadventures.com
-*
-*	Thank you for taking a look at my code. If you like it, please click
-*	the donation button at the bottom of the sidebar on my blog. Thanks!
-*
-*	Licensed under the Apache License, Version 2.0 (the "License");
-*	you may not use this file except in compliance with the License.
-*	You may obtain a copy of the License at
-*
-*		http://www.apache.org/licenses/LICENSE-2.0
-*
-*	Unless required by applicable law or agreed to in writing, software
-*	distributed under the License is distributed on an "AS IS" BASIS,
-*	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*	See the License for the specific language governing permissions and
-*	limitations under the License.
-*
-*/
+/*
+ *	Copyright 2013 by Lucas Stufflebeam mailto:info@indiegameadventures.com
+ *
+ *	Licensed under the Apache License, Version 2.0 (the "License");
+ *	you may not use this file except in compliance with the License.
+ *	You may obtain a copy of the License at
+ *
+ *		http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *	Unless required by applicable law or agreed to in writing, software
+ *	distributed under the License is distributed on an "AS IS" BASIS,
+ *	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *	See the License for the specific language governing permissions and
+ *	limitations under the License.
+ *
+ */
 
 /*
 *	Implementation of FutureString
@@ -24,69 +21,9 @@
 */
 #include <future/core/utils/futurestring.h>
 #include <string.h>
-#include <wchar.h>
 #include <stdlib.h>
-#include <ctype.h>
 
-#pragma warning(disable:4996)
-
-wchar_t * FutureString::WideFromChar(const char * str)
-{
-	size_t size = strlen(str) + 1;
-	wchar_t * newStr = new wchar_t[size];
-	FUTURE_ASSERT(mbstowcs(newStr, str, size) != size_t(-1));
-	return newStr;
-}
-
-char * FutureString::CharFromWide(const wchar_t * str)
-{
-	size_t size = wcslen(str) + 1;
-	char * newStr = new char[size];
-	FUTURE_ASSERT(wcstombs(newStr, str, size) != size_t(-1));
-	return newStr;
-}
-
-FutureString::FutureString()
-: m_length(0),
-  m_string(NULL)
-{
-}
-
-FutureString::FutureString(const FutureString & str)
-: m_length(0),
-  m_string(NULL)
-{
-	size_t size = wcslen(str.WideString()) + 1;
-	m_string = new wchar_t[size];
-	wcscpy(m_string, str.WideString());
-	UpdateSize();
-}
-
-FutureString::FutureString(const char * a)
-: m_length(0),
-  m_string(NULL)
-{
-	m_string = WideFromChar(a);
-	UpdateSize();
-}
-
-FutureString::FutureString(const wchar_t * str)
-: m_length(0),
-  m_string(NULL)
-{
-	size_t size = wcslen(str) + 1;
-	m_string = new wchar_t[ size ];
-	wcscpy(m_string, str);
-	UpdateSize();
-}
-
-FutureString::~FutureString()
-{
-	FUTURE_SAFE_DELETE(m_string);
-	m_string = NULL;
-	m_length = 0;
-}
-
+/*
 wchar_t FutureString::CharAt(u32 i) const
 {
 	return *(m_string + i);
@@ -356,81 +293,4 @@ FutureString FutureString::Concat(const FutureString & str) const
 	return strNew;
 }
 
-const wchar_t * FutureString::WideString() const
-{
-	return m_string;
-}
-
-const char * FutureString::CharString() const
-{
-	return CharFromWide(m_string);
-}
-
-FutureString & FutureString::operator=(const wchar_t * str)
-{
-	Clear();
-	size_t size = wcslen(str) + 1;
-	m_string = new wchar_t[size];
-	wcscpy(m_string, str);
-	m_length = (u32)size - 1;
-	return *this;
-}
-
-FutureString & FutureString::operator=(const char * str)
-{
-	Clear();
-	m_string = WideFromChar(str);
-	UpdateSize();
-	return *this;
-}
-
-FutureString & FutureString::operator=(const FutureString & str)
-{
-	Clear();
-	size_t size = str.m_length + 1;
-	m_string = new wchar_t[size];
-	wcscpy(m_string, str.m_string);
-	m_length = (u32)size - 1;
-	return *this;
-}
-
-FutureString & FutureString::operator+=(const wchar_t * str)
-{
-	m_string = wcscat(m_string, str);
-	UpdateSize();
-	return *this;
-}
-
-FutureString &  FutureString::operator+=(const char * str)
-{
-	wchar_t * wide = WideFromChar(str);
-	m_string = wcscat(m_string, wide);
-	UpdateSize();
-	return *this;
-}
-
-FutureString & FutureString::operator+=(const FutureString & str)
-{
-	m_string = wcscat(m_string, str.WideString());
-	m_length += str.Length();
-	return *this;
-}
-
-wchar_t * FutureString::Writable()
-{
-	return m_string;
-}
-
-void FutureString::UpdateSize()
-{
-	m_length = (u32)wcslen(m_string);
-}
-
-void FutureString::ForceSize(u32 size)
-{
-	if(size < m_length)
-	{
-		*(m_string + size) = 0;
-		m_length = size;
-	}
-}
+*/

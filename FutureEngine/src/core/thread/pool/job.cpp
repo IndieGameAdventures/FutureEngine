@@ -34,12 +34,10 @@ FutureThreadJob::FutureThreadJob()
 	  m_next(NULL),
 	  m_function(NULL),
 	  m_onFinished(NULL),
-	  m_data(NULL)
-#if FUTURE_PROFILE_THREAD_POOL
-	 ,m_timeAdded(0),
+	  m_data(NULL),
+	  m_timeAdded(0),
 	  m_timeStarted(0),
 	  m_timeCompleted(0)
-#endif
 {}
 
 FutureThreadJob::FutureThreadJob(JobFunction function, void * data, FutureThreadJobPriority priority)
@@ -51,12 +49,10 @@ FutureThreadJob::FutureThreadJob(JobFunction function, void * data, FutureThread
 	  m_next(NULL),
 	  m_function(function),
 	  m_onFinished(NULL),
-	  m_data(data)
-#if FUTURE_PROFILE_THREAD_POOL
-	 ,m_timeAdded(0),
+	  m_data(data),
+	  m_timeAdded(0),
 	  m_timeStarted(0),
 	  m_timeCompleted(0)
-#endif
 {}
 
 FutureThreadJob::FutureThreadJob(const FutureThreadJob& job)
@@ -68,12 +64,10 @@ FutureThreadJob::FutureThreadJob(const FutureThreadJob& job)
 	  m_next(NULL),
 	  m_function(job.m_function),
 	  m_onFinished(job.m_onFinished),
-	  m_data(job.m_data)
-#if FUTURE_PROFILE_THREAD_POOL
-	 ,m_timeAdded(0),
+	  m_data(job.m_data),
+	  m_timeAdded(0),
 	  m_timeStarted(0),
 	  m_timeCompleted(0)
-#endif
 {}
 	
 FutureThreadJob::~FutureThreadJob()

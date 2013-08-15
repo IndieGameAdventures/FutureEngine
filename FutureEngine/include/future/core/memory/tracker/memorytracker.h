@@ -39,35 +39,34 @@ struct FutureMemoryParam;
 struct FutureMemoryStatistics;
 class IFutureAllocator;
 
-#if FUTURE_TRACK_MEMORY
-// this keeps track of all allocations in a linked list style
-// each header is placed directly before the memory it is tracking
-struct FutureAllocHeader
-{
-	IFutureAllocator *	m_allocator;
-	size_t				m_allocatorData;
-
-	u16 				m_bytes;
-
-	const char *		m_type;
-	const char *		m_file;
-	u16 				m_line;
-
-	FutureAllocHeader *	m_next;
-	FutureAllocHeader *	m_previous;
-
-	u32					m_checkSum;
-};
 		
-#else
 // If we aren't tracking memory, we still need to keep track of which
 // allocator was used for this allocation so we can free it properly
 struct FutureAllocHeader
 {
+public:
 	IFutureAllocator *	m_allocator;
 	size_t				m_allocatorData;
 };
-#endif
+
+// this keeps track of all allocations in a linked list style
+// each header is placed directly before the memory it is tracking
+struct FutureAllocHeaderDebug : public FutureAllocHeader
+{
+public:
+	u32							m_headerCheck;
+
+	u32 						m_line;
+	u32 						m_bytes;
+
+	const char *				m_type;
+	const char *				m_file;
+
+	FutureAllocHeaderDebug *	m_next;
+	FutureAllocHeaderDebug *	m_previous;
+
+	u32							m_checkSum;
+};
 
 // Memory Tracker
 class FutureMemoryTracker : public FutureThreadSafeObject
@@ -77,20 +76,20 @@ public:
 	static void 					DestroyInstance();
 	static FutureMemoryTracker * 	GetInstance();
 
-	// Tracking functions do nothing if FUTURE_TRACK_MEMORY is 0 
+	// Tracking functions do nothing if CoreConfig::TrackMemory
 
 	// Functions used for tracking purposes, if data is allocated through a direct
 	// call to malloc or through a system that does not use this allocator, these
 	// functions can be called to track the memory. Make sure that enough memory is
 	// allocated before hand by using BytesForAllocation.
-	void					Track(const FutureMemoryParam & memParam, FutureAllocHeader * header, f32 timeCreated);
+	void					Track(const FutureMemoryParam & memParam, FutureAllocHeaderDebug * header, f32 timeCreated);
 	void					Untrack(FutureAllocHeader * header);
 
 	// Debugging functions, can be called from non debug/profile builds but will do nothing
 	FutureMemoryStatistics	GetStatistics();
 	void					LogStatistics();
 	void					LogAllocations();
-	void					LogAllocation(FutureAllocHeader * header);
+	void					LogAllocation(FutureAllocHeaderDebug * header);
 
 private:
 	FutureMemoryTracker();
@@ -98,21 +97,17 @@ private:
 
 	static FutureMemoryTracker * instance;
 
-#if FUTURE_TRACK_MEMORY
-
 	void	VerifyAllocations();
 
-	void	SetChecksum(FutureAllocHeader * header);
-	void	VerifyChecksum(FutureAllocHeader * header);
+	void	SetChecksum(FutureAllocHeaderDebug * header);
+	void	VerifyChecksum(FutureAllocHeaderDebug * header);
 
-	FutureAllocHeader		m_headerRoot;
-	FutureAllocHeader *		m_headerTail;
+	FutureAllocHeaderDebug		m_headerRoot;
+	FutureAllocHeaderDebug *	m_headerTail;
 
-#endif
-
-	u32						m_totalBytesAllocated;
-	u32						m_totalAllocations;
-	f32						m_totalAllocationTime;
+	u64							m_totalBytesAllocated;
+	u32							m_totalAllocations;
+	f32							m_totalAllocationTime;
 };
 
 #endif

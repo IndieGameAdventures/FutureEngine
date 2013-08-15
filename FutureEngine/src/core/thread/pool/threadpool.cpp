@@ -36,15 +36,13 @@
 FutureThreadPool * FutureThreadPool::ms_instance = NULL;
 
 FutureThreadPool::FutureThreadPool()
-	: m_jobs(NULL)
+	: m_jobs(NULL),
 #if FUTURE_ENABLE_MULTITHREADED
-	,m_threads(NULL)
+	  m_threads(NULL),
 #endif
-#if FUTURE_PROFILE_THREAD_POOL
-	 ,m_totalJobs(0),
+	  m_totalJobs(0),
 	  m_threadTime(0.f),
 	  m_jobTime(0.f)
-#endif
 {		
 	FUTURE_ASSERT(ms_instance == NULL);
 	ms_instance = this;
@@ -77,16 +75,18 @@ u32	FutureThreadPool::AddJob(FutureThreadJob * job)
 #if FUTURE_ENABLE_MULTITHREADED
 	if(!m_threads)
 	{
-		SetNumThreads(1);
+		SetNumThreads(FutureCoreConfig::ThreadPoolThreads());
 	}
 #endif
 
 	Lock();
 	job->Lock();
-#if FUTURE_PROFILE_THREAD_POOL
-	f32 startTime = FutureTimer::CurrentTime();
-	job->m_timeAdded = startTime;
-#endif
+	f32 startTime;
+	if(FutureCoreConfig::ProfileThreadPool())
+	{
+		startTime = FutureTimer::CurrentTime();
+		job->m_timeAdded = startTime;
+	}
 	job->m_state = FutureThreadJob::JobState_ToBeAdded;
 	job->m_id = m_totalJobs;
 	job->Unlock();
@@ -99,10 +99,10 @@ u32	FutureThreadPool::AddJob(FutureThreadJob * job)
 		job->m_next = NULL;
 		job->m_state = FutureThreadJob::JobState_InQueue;
 		job->Unlock();
-#if FUTURE_PROFILE_THREAD_POOL
-		f32 time = FutureTimer::TimeSince(startTime);
-		m_threadTime += time;
-#endif
+		if(FutureCoreConfig::ProfileThreadPool())
+		{
+			m_threadTime += FutureTimer::TimeSince(startTime);
+		}
 		Unlock();
 		return job->m_id;
 	}
@@ -145,10 +145,10 @@ u32	FutureThreadPool::AddJob(FutureThreadJob * job)
 		job->m_state = FutureThreadJob::JobState_InQueue;
 		job->Unlock();
 	}
-#if FUTURE_PROFILE_THREAD_POOL
-	f32 time = FutureTimer::TimeSince(startTime);
-	m_threadTime += time;
-#endif
+	if(FutureCoreConfig::ProfileThreadPool())
+	{
+		m_threadTime += FutureTimer::TimeSince(startTime);
+	}
 	Unlock();
 	return job->m_id;
 }
@@ -243,12 +243,12 @@ void FutureThreadPool::WaitForCompletion(f32 secondsTimeOut)
 		}
 	}
 
-#if FUTURE_PROFILE_THREAD_POOL
-	f32 time = FutureTimer::TimeSince(startTime);
-	Lock();
-	m_threadTime += time;
-	Unlock();
-#endif
+	if(FutureCoreConfig::ProfileThreadPool())
+	{
+		Lock();
+		m_threadTime += FutureTimer::TimeSince(startTime);
+		Unlock();
+	}
 }
 
 void FutureThreadPool::WaitForCompletion(u32 millisTimeOut)
@@ -275,9 +275,11 @@ u32	FutureThreadPool::GetNumThreads()
 void FutureThreadPool::SetNumThreads(u32 threads)
 {
 #if FUTURE_ENABLE_MULTITHREADED
-#if FUTURE_PROFILE_THREAD_POOL
-	f32 startTime = FutureTimer::CurrentTime();
-#endif
+	f32 startTime;
+	if(FutureCoreConfig::ProfileThreadPool())
+	{
+		startTime = FutureTimer::CurrentTime();
+	}
 	u32 count = GetNumThreads();
 	while(count < threads)
 	{
@@ -306,12 +308,12 @@ void FutureThreadPool::SetNumThreads(u32 threads)
 		thread->Release();
 		delete thread;
 	}
-#if FUTURE_PROFILE_THREAD_POOL
-	f32 time = FutureTimer::TimeSince(startTime);
-	Lock();
-	m_threadTime += time;
-	Unlock();
-#endif
+	if(FutureCoreConfig::ProfileThreadPool())
+	{
+		Lock();
+		m_threadTime += FutureTimer::TimeSince(startTime);
+		Unlock();
+	}
 
 #endif
 }
@@ -323,61 +325,59 @@ u32	FutureThreadPool::TotalJobsExecuted()
 }
 f32	FutureThreadPool::AverageWaitTime()
 {
-#if FUTURE_PROFILE_THREAD_POOL
 	return m_waitTime / (f32)m_totalJobs;
-#endif
 }
 f32	FutureThreadPool::TimeOnMainThread()
 {
-#if FUTURE_PROFILE_THREAD_POOL
 	return m_threadTime;
-#endif
 }
 f32	FutureThreadPool::TimeSpentExecutingJobs()
 {
-#if FUTURE_PROFILE_THREAD_POOL
 	return m_jobTime;
-#endif
 }
 
 FutureThreadJob *	FutureThreadPool::GetNextJob()
 {
-#if FUTURE_PROFILE_THREAD_POOL
-	f32 startTime = FutureTimer::CurrentTime();
-#endif
+	if(FutureCoreConfig::ProfileThreadPool())
+	{
+		startTime = FutureTimer::CurrentTime();
+	}
 	Lock();
 	FutureThreadJob * job = m_jobs;
 	if(job)
 	{
 		job->Lock();
-#if FUTURE_PROFILE_THREAD_POOL
-		job->m_timeStarted = startTime;
-		m_waitTime += job->m_timeAdded - job->m_timeStarted;
-#endif
+		if(FutureCoreConfig::ProfileThreadPool())
+		{
+			job->m_timeStarted = startTime;
+			m_waitTime += job->m_timeAdded - job->m_timeStarted;
+		}
 		job->m_state = FutureThreadJob::JobState_Executing;
 		m_jobs = m_jobs->m_next;
 	}
-#if FUTURE_PROFILE_THREAD_POOL
-	f32 time = FutureTimer::TimeSince(startTime);
-	m_threadTime += time;
-#endif
+	if(FutureCoreConfig::ProfileThreadPool())
+	{
+		m_threadTime += FutureTimer::TimeSince(startTime);
+	}
 	Unlock();
 	return job;
 }
 
 void FutureThreadPool::JobFinished(FutureThreadJob * job)
 {
-#if FUTURE_PROFILE_THREAD_POOL
-	f32 startTime = FutureTimer::CurrentTime();
-#endif
+	if(FutureCoreConfig::ProfileThreadPool())
+	{
+		startTime = FutureTimer::CurrentTime();
+	}
 	Lock();
 	if(job)
 	{
 		job->Lock();
-#if FUTURE_PROFILE_THREAD_POOL
-		job->m_timeCompleted = startTime;
-		m_jobTime += job->m_timeStarted - job->m_timeCompleted;
-#endif
+		if(FutureCoreConfig::ProfileThreadPool())
+		{
+			job->m_timeCompleted = startTime;
+			m_jobTime += job->m_timeStarted - job->m_timeCompleted;
+		}
 		job->m_state = FutureThreadJob::JobState_Finished;
 		if(job->m_autoDelete)
 		{
@@ -388,9 +388,9 @@ void FutureThreadPool::JobFinished(FutureThreadJob * job)
 			job->Unlock();
 		}
 	}
-#if FUTURE_PROFILE_THREAD_POOL
-	f32 time = FutureTimer::TimeSince(startTime);
-	m_threadTime += time;
-#endif
+	if(FutureCoreConfig::ProfileThreadPool())
+	{
+		m_threadTime += FutureTimer::TimeSince(startTime);
+	}
 	Unlock();
 }

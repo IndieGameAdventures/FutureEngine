@@ -15,10 +15,6 @@
  *
  */
 
-/*
-*	A logger class that prints out messages of varying severness.
-*/
-
 #ifndef FUTURE_CORE_DEBUG_LOG_H
 #define FUTURE_CORE_DEBUG_LOG_H
 
